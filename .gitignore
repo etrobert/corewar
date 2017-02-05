@@ -16,3 +16,6 @@
 
 #exec files
 exec
+
+#cor files
+*.cor
