@@ -6,7 +6,7 @@ Les deux suivants le second le second \
 Les deux suivants le troisieme. \
 Les deux derniers seront ignores et mis a 00. \
 
-01 Signifie registre \
+01 Signifie registre\n
 11 Signifie adressage indirect \
 10 Signifie adressage direct \
 
