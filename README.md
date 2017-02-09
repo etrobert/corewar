@@ -6,6 +6,7 @@ OCP ou Octet de codage des parametres :
 * Les deux suivants le troisieme.
 * Les deux derniers seront ignores et mis a 00.
 
+Description des deux bits :
 * 01 Signifie registre
 * 11 Signifie adressage indirect
 * 10 Signifie adressage direct
