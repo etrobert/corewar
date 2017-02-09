@@ -1,5 +1,15 @@
 # corewar
 
+OCP ou Octet de codage des parametres :
+Les deux bits les plus a gauche decrivent le premier paramatre
+Les deux suivants le second le second
+Les deux suivants le troisieme.
+Les deux derniers seront ignores et mis a 00.
+
+01 Signifie registre
+11 Signifie adressage indirect
+10 Signifie adressage direct
+
 Le compilateur de reference peut etre trouve a :
 ```
 /sgoinfre/goinfre/corewar/asm
