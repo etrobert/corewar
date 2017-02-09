@@ -6,9 +6,15 @@ OCP ou Octet de codage des parametres :
 * Les deux suivants le troisieme.
 * Les deux derniers seront ignores et mis a 00.
 
+<<<<<<< HEAD
 * 01 Signifie registre
 * 11 Signifie adressage indirect
 * 10 Signifie adressage direct
+=======
+01 Signifie registre\n
+11 Signifie adressage indirect \
+10 Signifie adressage direct \
+>>>>>>> de3a084df2364e33702c2a5dce9cd8f61e06c7da
 
 Le compilateur de reference peut etre trouve a :
 ```
