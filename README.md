@@ -37,6 +37,10 @@ La machine virtuelle de reference peut etre trouvee a
 ```
 
 ## TODO
+Dans quoi stocker les nombres de nombre d'octets fixes ?
+* Dans un type special t\_number comprenant un pointeur sur de la memoire allouee et la taille de lespace ?
+* Dans un tableau de char passe en parametre avec la taille DEFINE ?
+* Dans un type de donne grand sur lequel on fera des modulos ? (int ?) Auquel cas il faudra definir une taille maximum pour lespace. (surement la meilleure solution)
 Faire attention a la taille des ints lors de lecriture
 Faire attention a big/small endian
 ### asm
