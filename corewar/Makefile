@@ -5,7 +5,7 @@ OBJDIR		=	objs
 INCDIR		=	includes
 
 SRCNAM		=	
-INCNAM		= process.h corewar.h
+INCNAM		= process.h corewar.h champion.h
 
 CC			=	clang
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes

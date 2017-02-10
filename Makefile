@@ -3,10 +3,7 @@ GIT			=	README.md Makefile \
 				resources/resources_corewar.pdf resources/corewar.pdf \
 				op/op.h op/op.c mowgli.s
 
-ASMBIN		=	asm/asm
-COREWARBIN	=	corewar/corewar
-
-all: $(ASMBIN) $(COREWARBIN)
+all: asm/asm corewar/corewar
 
 asm/asm:
 	@$(MAKE) -C asm/
