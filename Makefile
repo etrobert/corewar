@@ -1,62 +1,41 @@
-NAME		=	exec
-
-SRCDIR		=	.
-OBJDIR		=	objs
-INCDIR		=	includes
-
-SRCNAM		=	
-INCNAM		=
-
-CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes
-LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
-
 GIT			=	README.md Makefile \
 				resources/asm resources/corewar resources/op.h resources/op.c \
 				resources/resources_corewar.pdf resources/corewar.pdf \
 				op/op.h op/op.c mowgli.s
 
-LIBFTDIR	=	~/work/libft
-LIBFTNAM	=	libft.a
+ASMBIN		=	asm/asm
+COREWARBIN	=	corewar/corewar
 
-SRC			=	$(SRCNAM:%=$(SRCDIR)/%)
-INC			=	$(INCNAM:%=$(INCDIR)/%)
-OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+all: $(ASMBIN) $(COREWARBIN)
 
-all:
-	$(MAKE) -C $(LIBFTDIR)
-	$(MAKE) $(NAME)
+asm/asm:
+	@$(MAKE) -C asm/
 
-$(NAME): $(OBJ)
-	$(CC) -o $@ $^ $(LDFLAGS)
+corewar/corewar:
+	@$(MAKE) -C corewar/
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
-	mkdir -p $(OBJDIR)
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-.PHONY: all git no printf check clean fclean re
+.PHONY: all git no check clean fclean re
 
 git:
-	git add $(SRC) $(INC) $(GIT)
+	@$(MAKE) git -C asm
+	@$(MAKE) git -C corewar
+	git add $(GIT)
 
 no:
-	@echo "Passage de la norminette :"
-	@norminette $(SRC) $(INC)| grep -B1 Error | cat
+	@$(MAKE) no -C asm
+	@$(MAKE) no -C corewar
 
-printf:
-	@echo "Detection des printf :\033[1;31m"
-	@grep printf -r $(SRCDIR) $(INCDIR) | cat
-	@printf "\033[0m"
-
-check: no printf
+check: no
 
 clean:
-	rm -rf $(OBJDIR)
+	@$(MAKE) clean -C asm
+	@$(MAKE) clean -C corewar
 
 fclean: clean
-	rm -rf $(NAME)
+	@$(MAKE) fclean -C asm
+	@$(MAKE) fclean -C corewar
 
 # $(MAKE) needed so that the cleaning is done before starting to create again \
 	# cf make -j 
 re: fclean
-	$(MAKE) all
+	@$(MAKE) all
