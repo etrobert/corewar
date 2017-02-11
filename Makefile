@@ -1,7 +1,7 @@
 GIT			=	README.md Makefile \
 				resources/asm resources/corewar resources/op.h resources/op.c \
 				resources/resources_corewar.pdf resources/corewar.pdf \
-				op/op.h op/op.c mowgli.s
+				op/op.h op/op.c champions/mowgli.s champions/long_name.s
 
 all: asm/asm corewar/corewar
 
@@ -28,7 +28,7 @@ clean:
 	@$(MAKE) clean -C asm
 	@$(MAKE) clean -C corewar
 
-fclean: clean
+fclean:
 	@$(MAKE) fclean -C asm
 	@$(MAKE) fclean -C corewar
 

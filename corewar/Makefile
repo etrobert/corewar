@@ -20,13 +20,17 @@ SRC			=	$(SRCNAM:%=$(SRCDIR)/%)
 INC			=	$(INCNAM:%=$(INCDIR)/%)
 OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-all: $(NAME)
+all:
+	@$(MAKE) -C $(LIBFTDIR)
+	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJ)
+	@$(MAKE) printname
 	@printf "Linking\t\t%s\n" $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
+	@$(MAKE) printname
 	@printf "Compiling\t%s\n"	$@
 	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
@@ -34,25 +38,33 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
 .PHONY: all git no printf check clean fclean re
 
 git:
+	@$(MAKE) printname
 	@echo Adding files to git repository
 	git add $(SRC) $(INC) $(GIT)
 
 no:
+	@$(MAKE) printname
 	@echo "Passage de la norminette :"
 	@norminette $(SRC) $(INC)| grep -B1 Error | cat
 
 printf:
+	@$(MAKE) printname
 	@echo "Detection des printf :\033[1;31m"
 	@grep printf -r $(SRCDIR) $(INCDIR) | cat
 	@printf "\033[0m"
 
 check: no printf
 
+printname:
+	@printf "[%-20s " "$(NAME)]"
+
 clean:
+	@$(MAKE) printname
 	@echo Suppressing obj files
 	@rm -rf $(OBJDIR)
 
 fclean: clean
+	@$(MAKE) printname
 	@echo Suppressing $(NAME)
 	@rm -rf $(NAME)
 
