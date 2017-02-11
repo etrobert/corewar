@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   champion.h                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/10 20:16:13 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/11 18:52:30 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/11 20:42:51 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHAMPION_H
-# define CHAMPION_H
+#include "libft.h"
 
-typedef struct		s_champion
+int main(int argc, char **argv)
 {
-	//TYpe ?
-	size_t			id;
-	char			*name;
-	char			*comment;
-	char			*code;
-}					t_champion;
-
-#endif
+	(void)argc;
+	(void)argv;
+	ft_printf("%#x\n", 0xb);
+	return (0);
+}

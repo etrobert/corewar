@@ -1,11 +1,11 @@
-NAME		=	exec
+NAME		=	corewar
 
-SRCDIR		=	.
+SRCDIR		=	srcs
 OBJDIR		=	objs
 INCDIR		=	includes
 
-SRCNAM		=	
-INCNAM		= process.h corewar.h champion.h
+SRCNAM		=	main.c
+INCNAM		=	process.h corewar.h champion.h
 
 CC			=	clang
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes
@@ -20,7 +20,7 @@ SRC			=	$(SRCNAM:%=$(SRCDIR)/%)
 INC			=	$(INCNAM:%=$(INCDIR)/%)
 OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-all:
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	@printf "Linking\t\t%s\n" $@

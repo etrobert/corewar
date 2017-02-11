@@ -46,6 +46,15 @@ Faire attention a big/small endian
 ### asm
 Compilateur de "Corewar ASM" .s vers du binaire .cor
 Inclus : Essentiellement du parsing
+
+### Header
+
+Meme si la taille du nom donne est inferieure a PROG\_NAME\_LENGTH, PROG\_NAME\_LENGTH octets sont reserves pour l'ecriture du nom. Les octets supplementaires sont mis a 0.
+
+Meme chose pour le commentaire.
+
+Si la taille est trop longue, une erreur de parsing sera affichee : "Champion name too long (Max length 128)"
+
 ### corewar
 Machine virtuelle interpretant les fichiers .cor et les faisant combattre
 Inclus : Affichage
