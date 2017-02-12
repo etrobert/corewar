@@ -1,14 +1,15 @@
-NAME		=	exec
+NAME		=	asm
 
-SRCDIR		=	.
+SRCDIR		=	srcs
 OBJDIR		=	objs
 INCDIR		=	includes
 
-SRCNAM		=	
-INCNAM		=
+SRCNAM		=	asm_main.c
+INCNAM		=	
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes
+CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes	\
+				-I ../resources/
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	Makefile
@@ -21,6 +22,8 @@ INC			=	$(INCNAM:%=$(INCDIR)/%)
 OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all:
+	@$(MAKE) -C $(LIBFTDIR)
+	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJ)
 	@printf "Linking\t\t%s\n" $@
