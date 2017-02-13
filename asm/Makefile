@@ -3,13 +3,14 @@ NAME		=	asm
 SRCDIR		=	srcs
 OBJDIR		=	objs
 INCDIR		=	includes
+OPDIR		=	../op
 
-SRCNAM		=	asm_main.c
-INCNAM		=	
+SRCNAM		=	asm_main.c asm_usage.c
+INCNAM		=	asm_errors.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes	\
-				-I ../resources/
+CFLAGS		=	-Wall -Wextra -Werror -I $(INCDIR) -I $(LIBFTDIR)/includes	\
+				-I $(OPDIR)
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	Makefile
