@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_errors.h                                       :+:      :+:    :+:   */
+/*   asm_open.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 19:46:46 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/13 20:34:21 by mverdier         ###   ########.fr       */
+/*   Created: 2017/02/13 16:49:41 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/13 17:02:43 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_ERRORS_H
-# define ASM_ERRORS_H
+#include <fcntl.h>
 
-# include "libft.h"
+#include "libft.h"
 
-int		asm_usage(int ac, char **av);
+int		asm_open(char *filename)
+{
+	int		fd;
 
-#endif
+	if ((fd = open(filename, O_RDONLY)) < 0)
+	{
+		ft_dprintf(2, "Error while trying to open %s\n", filename);
+		return (0);
+	}
+	return (fd);
+}
