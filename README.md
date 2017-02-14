@@ -1,5 +1,10 @@
 # corewar
 
+Tableau regroupant toutes les infos sur l'encodage :
+```
+https://docs.google.com/spreadsheets/d/1pFwSCne-mh-u5ZLsjZS8VI9QvecYk-gWTyNaPstjpLE/edit#gid=0'
+```
+
 OCP ou Octet de codage des parametres :
 * Les deux bits les plus a gauche decrivent le premier parametre
 * Les deux suivants le second le second
