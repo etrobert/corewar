@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_main.c                                         :+:      :+:    :+:   */
+/*   asm_get_prog_comment.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/14 17:04:38 by mverdier         ###   ########.fr       */
+/*   Created: 2017/02/14 17:03:29 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/14 17:19:56 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		main(int ac, char **av)
+int		asm_get_prog_comment(char *str, t_header *header)
 {
-	int				fd_out;
-	int				fd_in;
-	t_header		*header;
+	int		len;
 
-	if (!asm_usage(ac, av))
-		return (0);
-	if (!(fd_in = asm_open(av[1])) || !(fd_out = asm_create(av[1])))
-		return (-1);
-	if ((header = asm_get_header(fd_in)) == NULL)
-		return (-1);
-	write(fd_out, header, sizeof(*header));
-	close(fd_out);
-	close(fd_in);
-	free(header);
-	return (0);
+	if (ft_strstr(str, COMMENT_CMD_STRING))
+	{
+		if ((len = ft_strrchr(str, '"') - (ft_strchr(str, '"') + 1))
+				> COMMENT_LENGTH)
+		{
+			ft_dprintf(2, "Champion comment too long (Max length %d).\n",
+					COMMENT_LENGTH);
+			return (0);
+		}
+		ft_memmove(header->comment, ft_strchr(str, '"') + 1, len);
+	}
+	return (1);
 }

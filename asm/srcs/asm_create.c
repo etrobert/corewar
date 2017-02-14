@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 16:55:08 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/13 20:34:18 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/14 11:44:19 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		asm_create(char *filename)
 		ft_dprintf(2, "Error while trying to create or open %s\n", filename);
 		return (0);
 	}
+	ft_printf("Writing output program to %s\n", filename);
 	return (fd);
 }

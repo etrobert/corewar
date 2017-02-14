@@ -5,11 +5,12 @@ OBJDIR		=	objs
 INCDIR		=	includes
 OPDIR		=	../op
 
-SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c asm_get_header.c
-INCNAM		=	asm_errors.h asm_open.h
+SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c	\
+				asm_get_header.c asm_get_prog_name.c asm_get_prog_comment.c
+INCNAM		=	asm.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I $(INCDIR) -I $(LIBFTDIR)/includes	\
+CFLAGS		=	-g -Wall -Wextra -Werror -I $(INCDIR) -I $(LIBFTDIR)/includes \
 				-I $(OPDIR)
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
