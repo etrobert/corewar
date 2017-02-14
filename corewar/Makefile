@@ -4,11 +4,11 @@ SRCDIR		=	srcs
 OBJDIR		=	objs
 INCDIR		=	includes
 
-SRCNAM		=	main.c
+SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c
 INCNAM		=	process.h corewar.h champion.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -I$(INCDIR) -I $(LIBFTDIR)/includes -Weverything
+CFLAGS		=	-Wall -Wextra -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	Makefile
