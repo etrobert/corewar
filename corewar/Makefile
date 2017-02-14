@@ -35,7 +35,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
 	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-.PHONY: all git no printf check clean fclean re
+.PHONY: all git no printf check clean fclean re printname
 
 git:
 	@$(MAKE) printname
