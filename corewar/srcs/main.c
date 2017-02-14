@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/14 20:31:00 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/14 20:47:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int main(int argc, char **argv)
 	if (champion_init(champ, 0, 0) < 0)
 	{
 		ft_dprintf(2, "ERROR LOADING FILE\n");
+		champion_delete(champ);
 		return (-1);
 	}
 	print_champion(champ);

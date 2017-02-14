@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.h                                          :+:      :+:    :+:   */
+/*   corewar_new.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/10 16:50:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/14 20:58:22 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/14 21:00:58 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/14 21:05:53 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROCESS_H
-# define PROCESS_H
+#include "corewar.h"
 
-//TODO Choose type
-typedef unsigned long	t_reg_type;
-
-typedef struct	s_process
+t_corewar			*corewar_new(void)
 {
-	t_reg_type	regs[REG_NUMBER];
-	t_reg_type	pc;
-	bool		carry;
-				last_live;
-}				t_process;
+	t_corewar		*cw;
 
-t_process		*process_new(void);
-t_process		*process_cpy(t_process *proc);
-void			process_init(t_process *proc);
-void			process_delete(t_process *proc);
-
-#endif
+	if ((cw = (t_corewar *)(malloc(sizeof(t_corewar)))) == NULL)
+		return (NULL);
+	if (corewar_init(cw) < 0)
+	{
+		corewar_delete(cw);
+		return (NULL);
+	}
+	return (cw);
+}
