@@ -1,7 +1,6 @@
 NAME		=	corewar
 
 SRCDIR		=	srcs
-OBJDIR		=	objs
 INCDIR		=	includes
 
 SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c
@@ -16,9 +15,9 @@ GIT			=	Makefile
 LIBFTDIR	=	~/work/libft
 LIBFTNAM	=	libft.a
 
-SRC			=	$(SRCNAM:%=$(SRCDIR)/%)
+SRC			=	$(SRCNAM:%=$(SRCDIR)/%) ../op/op.c
 INC			=	$(INCNAM:%=$(INCDIR)/%)
-OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJ			=	$(SRC:%.c=%.o)
 
 all:
 	@$(MAKE) -C $(LIBFTDIR)
@@ -32,7 +31,6 @@ $(NAME): $(OBJ)
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
 	@$(MAKE) printname
 	@printf "Compiling\t%s\n"	$@
-	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 .PHONY: all git no printf check clean fclean re printname
@@ -61,7 +59,7 @@ printname:
 clean:
 	@$(MAKE) printname
 	@echo Suppressing obj files
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJ)
 
 fclean: clean
 	@$(MAKE) printname
