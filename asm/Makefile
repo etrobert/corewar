@@ -25,8 +25,8 @@ INC			=	$(INCNAM:%=$(INCDIR)/%)
 OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all:
-	@$(MAKE) -C $(LIBFTDIR)
-	@$(MAKE) $(NAME)
+#	@$(MAKE) -C $(LIBFTDIR)
+#	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJ)
 	@$(MAKE) printname
@@ -39,7 +39,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
 	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-.PHONY: all git no printf check clean fclean re
+.PHONY: all git no printf check clean fclean re printname
 
 git:
 	@$(MAKE) printname
@@ -58,6 +58,9 @@ printf:
 	@printf "\033[0m"
 
 check: no printf
+
+printname:
+	@printf "[%-20s " "$(NAME)]"
 
 clean:
 	@$(MAKE) printname

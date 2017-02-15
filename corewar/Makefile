@@ -8,7 +8,7 @@ SRCNAM		=	main.c
 INCNAM		=	process.h corewar.h champion.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes
+CFLAGS		=	-Wall -Wextra -I$(INCDIR) -I $(LIBFTDIR)/includes -Weverything
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	Makefile
@@ -35,7 +35,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
 	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-.PHONY: all git no printf check clean fclean re
+.PHONY: all git no printf check clean fclean re printname
 
 git:
 	@$(MAKE) printname

@@ -6,12 +6,15 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/02/05 20:50:08 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/15 19:41:54 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OP_H
 # define OP_H
+
+# include <stdbool.h>
+# include <stdlib.h>
 
 /*
 ** Toutes les tailles sont en octets.
@@ -75,5 +78,24 @@ typedef struct		s_header
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
 }					t_header;
+
+/*
+**
+*/
+
+typedef struct		s_op
+{
+	char			*name;
+	//TYpe ?
+	int				nb_params;
+	t_arg_type		params[3];
+	//Type ?
+	int				op_code;
+	//Type ?
+	int				cycles;
+	char			*comment;
+	bool			ocp;
+	bool			small_direct;
+}					t_op;
 
 #endif
