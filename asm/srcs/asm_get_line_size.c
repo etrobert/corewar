@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_errors.h                                       :+:      :+:    :+:   */
+/*   asm_get_line_size.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 19:46:46 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/13 20:34:21 by mverdier         ###   ########.fr       */
+/*   Created: 2017/02/15 18:04:32 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/15 18:06:20 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_ERRORS_H
-# define ASM_ERRORS_H
+#include "asm.h"
 
-# include "libft.h"
-
-int		asm_usage(int ac, char **av);
-
-#endif
+int		asm_get_line_size(char *line)
+{
+	unsigned int	size;
+}
