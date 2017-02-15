@@ -6,13 +6,13 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:03:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/14 17:19:56 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/15 16:22:52 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		asm_get_prog_comment(char *str, t_header *header)
+int		asm_get_prog_comment(char *str, t_header **header)
 {
 	int		len;
 
@@ -25,7 +25,7 @@ int		asm_get_prog_comment(char *str, t_header *header)
 					COMMENT_LENGTH);
 			return (0);
 		}
-		ft_memmove(header->comment, ft_strchr(str, '"') + 1, len);
+		ft_memmove((*header)->comment, ft_strchr(str, '"') + 1, len);
 	}
 	return (1);
 }

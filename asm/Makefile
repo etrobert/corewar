@@ -5,8 +5,9 @@ OBJDIR		=	objs
 INCDIR		=	includes
 OPDIR		=	../op
 
-SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c	\
-				asm_get_header.c asm_get_prog_name.c asm_get_prog_comment.c
+SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c asm_parse.c	\
+				asm_save_file.c asm_get_prog_name.c asm_get_prog_comment.c	\
+				asm_parse_init.c
 INCNAM		=	asm.h
 
 CC			=	clang

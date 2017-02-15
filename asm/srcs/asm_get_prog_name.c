@@ -6,13 +6,13 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:00:04 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/14 17:19:36 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/15 16:22:31 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		asm_get_prog_name(char *str, t_header *header)
+int		asm_get_prog_name(char *str, t_header **header)
 {
 	int			len;
 
@@ -25,7 +25,7 @@ int		asm_get_prog_name(char *str, t_header *header)
 					PROG_NAME_LENGTH);
 			return (0);
 		}
-		ft_memmove(header->prog_name, ft_strchr(str, '"') + 1, len);
+		ft_memmove((*header)->prog_name, ft_strchr(str, '"') + 1, len);
 	}
 	return (1);
 }

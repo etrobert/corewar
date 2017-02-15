@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_main.c                                         :+:      :+:    :+:   */
+/*   asm_save_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/15 17:30:34 by mverdier         ###   ########.fr       */
+/*   Created: 2017/02/15 15:57:05 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/15 16:39:10 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		main(int ac, char **av)
+int		asm_save_file(int fd, t_list **file)
 {
-	t_fd			fd;
-	t_header		*header;
-	t_list			*file;
+	char	*line;
 
-	header = NULL;
-	if (!asm_usage(ac, av))
+	if (((*file) = (t_list*)malloc(sizeof(t_list))) == NULL)
 		return (0);
-	if (!(fd.in = asm_open(av[1])) || !(fd.out = asm_create(av[1])))
-		return (-1);
-	if (!asm_save_file(fd.in, &file))
-		return (-1);
-	if (!asm_parse(&header, file))
-		return (-1);
-	write(fd.out, header, sizeof(*header));
-	close(fd.out);
-	close(fd.in);
-	free(header);
-	return (0);
+	while (get_next_line(fd, &line))
+		if (ft_list_push_back(*file, line) < 0)
+			return (0);
+	return (1);
 }
