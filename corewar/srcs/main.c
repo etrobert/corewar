@@ -6,13 +6,14 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/14 20:47:25 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/15 20:36:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_endian.h"
 #include "champion.h"
+#include "corewar.h"
+#include "print.h"
 
 void	print_bytes(int x)
 {
@@ -44,6 +45,8 @@ void	print_champion(t_champion *champion)
 int main(int argc, char **argv)
 {
 	t_champion	*champ;
+	t_list		*list;
+	t_corewar	*cw;
 
 	(void)argc;
 	(void)argv;
@@ -56,6 +59,11 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 	print_champion(champ);
+	list = ft_list_new();
+	ft_list_push_back(list, champ);
+	cw = corewar_new(list);
+	print_corewar(cw);
+	//corewar_delete(cw);
 	champion_delete(champ);
 	return (0);
 }

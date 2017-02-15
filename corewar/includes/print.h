@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_new.c                                      :+:      :+:    :+:   */
+/*   print.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/14 21:00:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/15 20:37:23 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/15 20:32:45 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#ifndef PRINT_H
+# define PRINT_H
 
-t_corewar			*corewar_new(t_list *champions)
-{
-	t_corewar		*cw;
+# include "corewar.h"
 
-	if ((cw = (t_corewar *)(malloc(sizeof(t_corewar)))) == NULL)
-		return (NULL);
-	if (corewar_init(cw, champions) < 0)
-	{
-		corewar_delete(cw);
-		return (NULL);
-	}
-	return (cw);
-}
+# define PRINT_WIDTH 30
+
+void		print_corewar(t_corewar *cw);
+
+#endif

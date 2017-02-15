@@ -3,8 +3,10 @@ NAME		=	corewar
 SRCDIR		=	srcs
 INCDIR		=	includes
 
-SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c
-INCNAM		=	process.h corewar.h champion.h
+SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
+				process_new.c process_init.c print_corewar.c \
+				corewar_new.c corewar_init.c corewar_delete.c
+INCNAM		=	process.h corewar.h champion.h print.h
 
 CC			=	clang
 CFLAGS		=	-Wall -Wextra -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/

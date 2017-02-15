@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_new.c                                      :+:      :+:    :+:   */
+/*   process_new.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/14 21:00:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/15 20:37:23 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/14 23:53:33 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/15 20:07:28 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "process.h"
 
-t_corewar			*corewar_new(t_list *champions)
+t_process			*process_new(t_reg_type r1, t_reg_type pc)
 {
-	t_corewar		*cw;
+	t_process		*process;
 
-	if ((cw = (t_corewar *)(malloc(sizeof(t_corewar)))) == NULL)
+	if ((process = (t_process *)(malloc(sizeof(t_process)))) == NULL)
 		return (NULL);
-	if (corewar_init(cw, champions) < 0)
-	{
-		corewar_delete(cw);
-		return (NULL);
-	}
-	return (cw);
+	process_init(process, r1, pc);
 }
