@@ -63,3 +63,8 @@ Si la taille est trop longue, une erreur de parsing sera affichee : "Champion na
 ### corewar
 Machine virtuelle interpretant les fichiers .cor et les faisant combattre
 Inclus : Affichage
+
+Lorsquon traite un process :
+- S'il est en attente on decremente lattente
+- Sinon s'il vient de finir son attente on lit les parametres en fonction de lopcode enregistre
+- Sinon s'il a fini son instruction precedente on lit lopcode le stocke et en deduit le temps dattente

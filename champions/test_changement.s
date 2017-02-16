@@ -8,17 +8,16 @@
 #aff:	aff r1
 
 start:	sti r1, %:bis, %1
-		ld %272630272,r2
+		ld %16711680,r2
 bis:	live %1
 fork:	fork %:start
 		live %0
 		sti r1, %:live, %1
 		and r1,%0,r1
-		sti r2,%:fork,%0
+		sti r2,%:fork,%1
 live:
 		live %1
 		zjmp %:live
-
 
 #Ecrire r1 plutloin
 #Incrementer r1

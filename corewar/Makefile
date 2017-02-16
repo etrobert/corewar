@@ -30,7 +30,7 @@ $(NAME): $(OBJ)
 	@printf "Linking\t\t%s\n" $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
+%.o: %.c $(INC)
 	@$(MAKE) printname
 	@printf "Compiling\t%s\n"	$@
 	@$(CC) -o $@ -c $< $(CFLAGS)
