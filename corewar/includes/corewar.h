@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/15 23:36:38 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/17 00:47:00 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "champion.h"
 # include "process.h"
+
+//Push_front lorsquon ajoute un process
 
 typedef struct		s_corewar
 {

@@ -17,7 +17,7 @@ GIT			=	Makefile
 LIBFTDIR	=	~/work/libft
 LIBFTNAM	=	libft.a
 
-SRC			=	$(SRCNAM:%=$(SRCDIR)/%) ../op/op.c
+SRC			=	$(SRCNAM:%=$(SRCDIR)/%) ../op/op.c ../op/get_op_by_name.c ../op/get_op_by_code.c
 INC			=	$(INCNAM:%=$(INCDIR)/%)
 OBJ			=	$(SRC:%.c=%.o)
 
