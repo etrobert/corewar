@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/02/17 11:06:53 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/17 11:18:21 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <stdlib.h>
+# include "libft.h"
 
 /*
 ** Toutes les tailles sont en octets.
@@ -97,6 +98,8 @@ typedef struct		s_op
 	bool			ocp;
 	bool			small_direct;
 }					t_op;
+
+t_op				g_op_tab[17];
 
 t_op				*get_op_by_code(unsigned char op_code);
 t_op				*get_op_by_name(const char *name);
