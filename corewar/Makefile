@@ -4,12 +4,16 @@ SRCDIR		=	srcs
 INCDIR		=	includes
 
 SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
-				process_new.c process_init.c print_corewar.c \
-				corewar_new.c corewar_init.c corewar_delete.c
+				process_new.c process_init.c process_cpy.c process_delete.c \
+				print_corewar.c \
+				corewar_new.c corewar_init.c corewar_delete.c \
+				corewar_play.c corewar_advance.c \
+				corewar_update_process.c corewar_fork.c \
+				apply_nothing.c apply_live.c
 INCNAM		=	process.h corewar.h champion.h print.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/
+CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	Makefile

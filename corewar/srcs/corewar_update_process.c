@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_init.c                                     :+:      :+:    :+:   */
+/*   corewar_update_process.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/15 19:44:33 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 12:35:16 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/17 12:29:18 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/17 12:52:21 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "corewar.h"
 
-void				process_init(t_process *proc)
+void				corewar_update_process(t_corewar *corewar,
+		t_process *process)
 {
-	int				i;
-
-	if (proc == NULL)
-		return ;
-	i = 0;
-	while (i < REG_NUMBER)
-	{
-		proc->regs[i] = 0;
-		++i;
-	}
-	proc->pc = 0;
-	proc->current_op = NULL;
-	proc->to_wait = 0;
+	process->current_op = get_op_by_code(corewar->memory[process->pc]);
+	process->to_wait = process->current_op->cycles;
 }

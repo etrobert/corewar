@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_init.c                                     :+:      :+:    :+:   */
+/*   process_delete.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/15 19:44:33 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 12:35:16 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/17 12:45:15 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/17 12:45:53 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process.h"
 
-void				process_init(t_process *proc)
+void				process_delete(t_process *proc)
 {
-	int				i;
-
-	if (proc == NULL)
-		return ;
-	i = 0;
-	while (i < REG_NUMBER)
-	{
-		proc->regs[i] = 0;
-		++i;
-	}
-	proc->pc = 0;
-	proc->current_op = NULL;
-	proc->to_wait = 0;
+	free(proc);
 }

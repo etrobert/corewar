@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_init.c                                     :+:      :+:    :+:   */
+/*   apply_nothing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/15 19:44:33 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 12:35:16 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/17 11:42:50 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/17 12:23:51 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "corewar.h"
 
-void				process_init(t_process *proc)
+void				apply_nothing(t_corewar *corewar, t_process *process)
 {
-	int				i;
-
-	if (proc == NULL)
-		return ;
-	i = 0;
-	while (i < REG_NUMBER)
-	{
-		proc->regs[i] = 0;
-		++i;
-	}
-	proc->pc = 0;
-	proc->current_op = NULL;
-	proc->to_wait = 0;
+	(void)corewar;
+	process->pc = (process->pc + 1) % MEM_SIZE;
 }

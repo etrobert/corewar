@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_init.c                                     :+:      :+:    :+:   */
+/*   corewar_play.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/15 19:44:33 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 12:35:16 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/17 11:59:47 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/17 12:04:01 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "corewar.h"
 
-void				process_init(t_process *proc)
+t_id_type			corewar_play(t_corewar *corewar)
 {
 	int				i;
 
-	if (proc == NULL)
-		return ;
 	i = 0;
-	while (i < REG_NUMBER)
+	while (i < MEM_SIZE)
 	{
-		proc->regs[i] = 0;
+		corewar_advance(corewar);
 		++i;
 	}
-	proc->pc = 0;
-	proc->current_op = NULL;
-	proc->to_wait = 0;
+	return (0);
 }

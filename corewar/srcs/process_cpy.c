@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_init.c                                     :+:      :+:    :+:   */
+/*   process_cpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/15 19:44:33 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 12:35:16 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/17 12:32:53 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/17 12:41:56 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process.h"
 
-void				process_init(t_process *proc)
+t_process			*process_cpy(t_process *proc)
 {
-	int				i;
+	t_process		*cpy;
 
-	if (proc == NULL)
-		return ;
-	i = 0;
-	while (i < REG_NUMBER)
-	{
-		proc->regs[i] = 0;
-		++i;
-	}
-	proc->pc = 0;
-	proc->current_op = NULL;
-	proc->to_wait = 0;
+	if ((cpy = (t_process *)(ft_memdup(proc, sizeof(t_process)))) == NULL)
+		return (NULL);
+	//Carry stays the same ?
+	return (cpy);
 }

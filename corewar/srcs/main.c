@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/15 20:36:25 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/17 12:46:52 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ void	print_champion(t_champion *champion)
 	ft_printf("\n");
 }
 
+static bool	int_good_size(void)
+{
+	return (sizeof(unsigned int) == 4);
+}
+
 int main(int argc, char **argv)
 {
 	t_champion	*champ;
@@ -51,6 +56,11 @@ int main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 
+	if (!int_good_size())
+	{
+		ft_dprintf(2, "This system is not supported.\n");
+		return (0);
+	}
 	champ = champion_new();
 	if (champion_init(champ, 0, 0) < 0)
 	{
@@ -62,7 +72,18 @@ int main(int argc, char **argv)
 	list = ft_list_new();
 	ft_list_push_back(list, champ);
 	cw = corewar_new(list);
-	print_corewar(cw);
+
+
+		print_corewar(cw);
+	int				i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		corewar_advance(cw);
+		++i;
+	}
+
 	//corewar_delete(cw);
 	champion_delete(champ);
 	return (0);
