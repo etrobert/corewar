@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 12:31:06 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/17 17:15:20 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ void				corewar_advance(t_corewar *corewar);
 ** Internal
 */
 
+void				corewar_update_process_pc(t_corewar *corewar,
+		t_process *proc, int value);
 void				corewar_update_process(t_corewar *corewar,
 		t_process *process);
 int					corewar_fork(t_corewar *corewar,
 		t_process *parent, t_reg_type pc);
 void				apply_nothing(t_corewar *corewar, t_process *process);
 void				apply_live(t_corewar *corewar, t_process *process);
+void				apply_zjmp(t_corewar *corewar, t_process *process);
 
 #endif

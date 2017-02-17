@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 12:49:44 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/17 17:15:06 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void			apply_op(t_corewar *corewar, t_process *process)
 {
 	if (process->current_op->op_code == 1)
 		apply_live(corewar, process);
+	else if (process->current_op->op_code == 9)
+		apply_zjmp(corewar, process);
 	else
 		apply_nothing(corewar, process);
 	//APpliquer l'operation

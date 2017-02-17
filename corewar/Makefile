@@ -9,7 +9,8 @@ SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_play.c corewar_advance.c \
 				corewar_update_process.c corewar_fork.c \
-				apply_nothing.c apply_live.c
+				corewar_update_process_pc.c \
+				apply_nothing.c apply_live.c apply_zjmp.c
 INCNAM		=	process.h corewar.h champion.h print.h
 
 CC			=	clang
