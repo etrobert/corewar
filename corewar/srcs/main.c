@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 13:09:12 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/17 18:50:51 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int main(int argc, char **argv)
 	}
 	//print_champion(champ);
 	list = ft_list_new();
+	ft_list_push_back(list, champ);
 	ft_list_push_back(list, champ);
 	cw = corewar_new(list);
 

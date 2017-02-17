@@ -11,7 +11,7 @@ asm/asm:
 corewar/corewar:
 	@$(MAKE) -C corewar/
 
-.PHONY: all git no check clean fclean re
+.PHONY: all git no check clean fclean re asm/asm corewar/corewar
 
 git:
 	@$(MAKE) git -C asm
