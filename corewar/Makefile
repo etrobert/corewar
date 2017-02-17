@@ -1,14 +1,15 @@
 NAME		=	corewar
 
 SRCDIR		=	srcs
-OBJDIR		=	objs
 INCDIR		=	includes
 
-SRCNAM		=	main.c
-INCNAM		=	process.h corewar.h champion.h
+SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
+				process_new.c process_init.c print_corewar.c \
+				corewar_new.c corewar_init.c corewar_delete.c
+INCNAM		=	process.h corewar.h champion.h print.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -I$(INCDIR) -I $(LIBFTDIR)/includes -Weverything
+CFLAGS		=	-Wall -Wextra -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	Makefile
@@ -16,9 +17,9 @@ GIT			=	Makefile
 LIBFTDIR	=	~/work/libft
 LIBFTNAM	=	libft.a
 
-SRC			=	$(SRCNAM:%=$(SRCDIR)/%)
+SRC			=	$(SRCNAM:%=$(SRCDIR)/%) ../op/op.c
 INC			=	$(INCNAM:%=$(INCDIR)/%)
-OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJ			=	$(SRC:%.c=%.o)
 
 all:
 	@$(MAKE) -C $(LIBFTDIR)
@@ -29,10 +30,9 @@ $(NAME): $(OBJ)
 	@printf "Linking\t\t%s\n" $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
+%.o: %.c $(INC)
 	@$(MAKE) printname
 	@printf "Compiling\t%s\n"	$@
-	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 .PHONY: all git no printf check clean fclean re printname
@@ -61,7 +61,7 @@ printname:
 clean:
 	@$(MAKE) printname
 	@echo Suppressing obj files
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJ)
 
 fclean: clean
 	@$(MAKE) printname
