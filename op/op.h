@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/02/15 19:41:54 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/17 11:06:53 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,22 @@ typedef struct		s_header
 **
 */
 
+typedef unsigned int	t_cycle_type;
+
 typedef struct		s_op
 {
 	char			*name;
 	//TYpe ?
 	int				nb_params;
 	t_arg_type		params[3];
-	//Type ?
-	int				op_code;
-	//Type ?
-	int				cycles;
+	unsigned char	op_code;
+	t_cycle_type	cycles;
 	char			*comment;
 	bool			ocp;
 	bool			small_direct;
 }					t_op;
+
+t_op				*get_op_by_code(unsigned char op_code);
+t_op				*get_op_by_name(const char *name);
 
 #endif
