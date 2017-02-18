@@ -2,4 +2,4 @@
 .comment "the king of the jungle"
 
 start:
-zjmp %-3
+live %0

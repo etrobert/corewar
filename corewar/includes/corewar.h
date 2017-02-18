@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 18:21:18 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/18 21:01:14 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct		s_corewar
 {
-	unsigned char	memory[MEM_SIZE];
+	t_cbuff			*memory;
 	t_list			*process;
 	t_cycle_type	cycle;
 }					t_corewar;

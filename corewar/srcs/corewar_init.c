@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 18:46:41 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/18 21:14:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int			add_fresh_process(t_corewar *corewar,
 static int			load_one_champion(t_corewar *corewar, t_champion *champ,
 		unsigned int pc)
 {
-	//ATTENTION MEMOIRE CIRCULAIRE
-	ft_memmove(corewar->memory + pc, champ->code, champ->header.prog_size);
+	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
+//	ft_memmove(corewar->memory + pc, champ->code, champ->header.prog_size);
 	if (add_fresh_process(corewar, champ->id, pc) == -1)
 		return (-1);
 	return (0);
@@ -65,6 +65,8 @@ int					corewar_init(t_corewar *corewar, t_list *champions)
 	if (corewar == NULL)
 		return (0);
 	if ((corewar->process = ft_list_new()) == NULL)
+		return (-1);
+	if ((corewar->memory = ft_cbuff_new(MEM_SIZE)) == NULL)
 		return (-1);
 
 	if ((ret = load_champions(corewar, champions)) != FT_GOOD)

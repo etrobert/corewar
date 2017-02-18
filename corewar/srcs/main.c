@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 18:50:51 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/18 21:30:15 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ int main(int argc, char **argv)
 		++i;
 	}
 
-	//corewar_delete(cw);
+	print_corewar(cw);
+
+	corewar_delete(cw);
 	champion_delete(champ);
 	return (0);
 }
