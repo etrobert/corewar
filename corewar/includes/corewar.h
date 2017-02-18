@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/18 21:01:14 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/18 23:57:14 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_corewar			*corewar_new(t_list *champions);
 int					corewar_init(t_corewar *corewar, t_list *champions);
 void				corewar_delete(t_corewar *corewar);
 
-// Plays the whole game and returns the winner's id
 t_id_type			corewar_play(t_corewar *corewar);
 
 void				corewar_advance(t_corewar *corewar);

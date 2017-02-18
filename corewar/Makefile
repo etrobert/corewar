@@ -1,5 +1,8 @@
 NAME		=	corewar
 
+COLOR		=	\033[32m
+COLOR_RESET	=	\033[0m
+
 SRCDIR		=	srcs
 INCDIR		=	includes
 
@@ -32,12 +35,12 @@ all:
 
 $(NAME): $(OBJ)
 	@$(MAKE) printname
-	@printf "Linking\t\t%s\n" $@
+	@printf "%-15s%s\n" Linking $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c $(INC)
 	@$(MAKE) printname
-	@printf "Compiling\t%s\n"	$@
+	@printf "%-15s%s\n" Compiling $@ 
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 .PHONY: all git no printf check clean fclean re printname
@@ -61,7 +64,9 @@ printf:
 check: no printf
 
 printname:
-	@printf "[%-20s " "$(NAME)]"
+	@printf "$(COLOR)"
+	@printf "[%-15s " "$(NAME)]"
+	@printf "$(COLOR_RESET)"
 
 clean:
 	@$(MAKE) printname

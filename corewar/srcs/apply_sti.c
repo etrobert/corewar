@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_update_process.c                           :+:      :+:    :+:   */
+/*   apply_sti.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:29:18 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/18 23:56:47 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/19 00:00:49 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/19 00:08:33 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void				corewar_update_process(t_corewar *corewar,
-		t_process *process)
-{
-	unsigned char	op_code;
+//Comparer avec le vrai. Prend il un registre sans se poser de question ou
+//analyse til locp et fait rien parce qerreur ?
 
-	ft_cbuff_read(corewar->memory, &op_code,
-			process->pc, sizeof(unsigned char));
-	process->current_op = get_op_by_code(op_code);
-	process->to_wait = process->current_op->cycles;
+void				apply_sti(t_corewar *corewar, t_process *process)
+{	
+	unsigned char	ocp;
+
+	ft_cbuff_read(corewar->memory, &ocp, process->pc, sizeof(unsigned char));
+	++process->pc;
+
 }

@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: etrobert <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/02/18 23:18:11 by etrobert          #+#    #+#              #
+#    Updated: 2017/02/18 23:18:14 by etrobert         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 GIT			=	README.md Makefile \
 				resources/asm resources/corewar resources/op.h resources/op.c \
 				resources/resources_corewar.pdf resources/corewar.pdf \

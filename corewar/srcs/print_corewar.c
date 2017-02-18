@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/18 21:19:19 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/18 23:58:11 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void				print_corewar(t_corewar *cw)
 			ft_cbuff_read(cw->memory, &byte, j * PRINT_WIDTH + i,
 					sizeof(unsigned char));
 			ft_printf("%.2x ", byte);
-//			ft_printf("%.2x ", cw->memory[j * PRINT_WIDTH + i]);
 			++i;
 		}
 		ft_printf("\n");
