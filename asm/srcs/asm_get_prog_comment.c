@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:03:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/15 16:22:52 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/15 20:28:54 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int		asm_get_prog_comment(char *str, t_header **header)
 		{
 			ft_dprintf(2, "Champion comment too long (Max length %d).\n",
 					COMMENT_LENGTH);
-			return (0);
+			return (MAX_LEN);
 		}
 		ft_memmove((*header)->comment, ft_strchr(str, '"') + 1, len);
+		return (COMMENT);
 	}
-	return (1);
+	return (NOT_COMMENT);
 }

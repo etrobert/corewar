@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/02/15 19:41:54 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/15 20:16:24 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,15 @@ typedef struct		s_header
 typedef struct		s_op
 {
 	char			*name;
-	//TYpe ?
 	int				nb_params;
 	t_arg_type		params[3];
-	//Type ?
 	int				op_code;
-	//Type ?
 	int				cycles;
 	char			*comment;
 	bool			ocp;
 	bool			small_direct;
 }					t_op;
+
+t_op	g_op_tab[17];
 
 #endif

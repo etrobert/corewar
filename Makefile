@@ -32,6 +32,13 @@ fclean:
 	@$(MAKE) fclean -C asm
 	@$(MAKE) fclean -C corewar
 
+cclean:
+	@printf "Suppressing all .cor files\n"
+	@rm -rf *.cor
+	@rm -rf */*.cor
+	@rm -rf */*/*.cor
+	@rm -rf */*/*/*.cor
+
 # $(MAKE) needed so that the cleaning is done before starting to create again \
 	# cf make -j 
 re: fclean

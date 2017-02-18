@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 16:55:08 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/14 11:44:19 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/18 16:11:21 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@
 int		asm_create(char *filename)
 {
 	int		fd;
+	char	*ret;
 
-	filename = ft_strjoin(ft_strrextract(filename, '.'), ".cor");
+	ret = ft_strrextract(filename, '.');
+	filename = ft_strjoin(ret, ".cor");
+	fd = -1;
 	if ((fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC,
 					S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) < 0)
-	{
 		ft_dprintf(2, "Error while trying to create or open %s\n", filename);
-		return (0);
-	}
-	ft_printf("Writing output program to %s\n", filename);
+	else
+		ft_printf("Writing output program to %s\n", filename);
+	free(ret);
+	free(filename);
 	return (fd);
 }

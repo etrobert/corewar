@@ -1,13 +1,13 @@
 NAME		=	asm
 
 SRCDIR		=	srcs
-OBJDIR		=	objs
 INCDIR		=	includes
 OPDIR		=	../op
 
-SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c asm_parse.c	\
-				asm_save_file.c asm_get_prog_name.c asm_get_prog_comment.c	\
-				asm_parse_init.c
+SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c	\
+				asm_get_size.c asm_save_file.c asm_get_prog_name.c	\
+				asm_get_prog_comment.c asm_get_params.c asm_get_bytes.c	\
+				asm_write_bytes.c
 INCNAM		=	asm.h
 
 CC			=	clang
@@ -20,23 +20,22 @@ GIT			=	Makefile
 LIBFTDIR	=	~/work/libft
 LIBFTNAM	=	libft.a
 
-SRC			=	$(SRCNAM:%=$(SRCDIR)/%)
+SRC			=	../op/op.c $(SRCNAM:%=$(SRCDIR)/%)
 INC			=	$(INCNAM:%=$(INCDIR)/%)
-OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJ			=	$(SRC:%.c=%.o)
 
 all:
-#	@$(MAKE) -C $(LIBFTDIR)
-#	@$(MAKE) $(NAME)
+	@$(MAKE) -C $(LIBFTDIR)
+	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJ)
 	@$(MAKE) printname
 	@printf "Linking\t\t%s\n" $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
+%.o: %.c $(INC)
 	@$(MAKE) printname
 	@printf "Compiling\t%s\n"	$@
-	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 .PHONY: all git no printf check clean fclean re printname
@@ -65,15 +64,12 @@ printname:
 clean:
 	@$(MAKE) printname
 	@echo Suppressing obj files
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJ)
 
 fclean: clean
 	@$(MAKE) printname
 	@echo Suppressing $(NAME)
 	@rm -rf $(NAME)
-
-printname:
-	@printf "[%-20s " "$(NAME)]"
 
 # $(MAKE) needed so that the cleaning is done before starting to create again \
 	# cf make -j 

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:00:04 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/15 16:22:31 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/15 20:28:27 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int		asm_get_prog_name(char *str, t_header **header)
 		{
 			ft_dprintf(2, "Champion name too long (Max length %d).\n",
 					PROG_NAME_LENGTH);
-			return (0);
+			return (MAX_LEN);
 		}
 		ft_memmove((*header)->prog_name, ft_strchr(str, '"') + 1, len);
+		return (NAME);
 	}
-	return (1);
+	return (NOT_NAME);
 }
