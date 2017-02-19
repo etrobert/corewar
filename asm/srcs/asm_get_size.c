@@ -6,19 +6,35 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/18 20:17:49 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/19 19:08:22 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int			asm_init_header(t_header **header)
+static int			asm_init_header_and_labels(t_header **header,
+		t_list **labels)
 {
 	if (((*header) = (t_header*)malloc(sizeof(t_header))) == NULL)
 		return (0);
 	ft_bzero(*header, sizeof(t_header));
 	(*header)->magic = ft_uint32_big_endian(COREWAR_EXEC_MAGIC);
 	(*header)->prog_size = 0;
+	if (((*labels) = ft_list_new()) == NULL)
+		return (0);
+	return (1);
+}
+
+static int			asm_new_label(t_list **labels, char *lab_name,
+		unsigned int size)
+{
+	t_labels		*label;
+
+	if ((label = (t_labels*)malloc(sizeof(t_labels))) == NULL)
+		return (0);
+	label->name = ft_strextract(lab_name, LABEL_CHAR);
+	label->position = size;
+	ft_list_push_back(*labels, label);
 	return (1);
 }
 
@@ -26,7 +42,7 @@ static int			asm_get_params_size(char **split, int n, t_op op_tab)
 {
 	int				i;
 	unsigned int	size;
-	
+
 	size = 0;
 	i = 0;
 	while (split[n + i])
@@ -48,7 +64,8 @@ static int			asm_get_params_size(char **split, int n, t_op op_tab)
 	return (size + 1);
 }
 
-static unsigned int	asm_get_line_size(char *line)
+static unsigned int	asm_get_line_size(char *line, t_list **labels,
+		unsigned int prog_size)
 {
 	unsigned int	size;
 	char			**split;
@@ -58,8 +75,12 @@ static unsigned int	asm_get_line_size(char *line)
 	if (!(split = ft_strsplit_str(line, " \t,")))
 		return (0);
 	n = 0;
-	if (split[n] && ft_strchr(split[n], LABEL_CHAR))
+	if (split[n] && split[n][ft_strlen(split[n]) - 1] == LABEL_CHAR)
+	{
+		if (!asm_new_label(labels, split[n], prog_size))
+			return (0);
 		n++;
+	}
 	if (!split[n] || split[n][0] == COMMENT_CHAR || split[n][0] == ';')
 		return (0);
 	i = 0;
@@ -71,16 +92,19 @@ static unsigned int	asm_get_line_size(char *line)
 	return (size);
 }
 
-int					asm_get_size(t_header **header, t_list *file)
+int					asm_get_size(t_header **header, t_list **labels,
+		t_list *file)
 {
 	int				name;
 	int				comment;
 	t_list_it		it;
 	char			*line;
+	unsigned int	size;
 
-	if (!asm_init_header(header))
+	if (!asm_init_header_and_labels(header, labels))
 		return (0);
 	it = ft_list_begin(file);
+	size = 0;
 	while (!ft_list_it_end(file, it))
 	{
 		line = ft_list_it_get(file, it);
@@ -88,9 +112,9 @@ int					asm_get_size(t_header **header, t_list *file)
 				!(comment = asm_get_prog_comment(line, header)))
 			return (0);
 		if (name != NAME && comment != COMMENT)
-			(*header)->prog_size += asm_get_line_size(line);
+			size += asm_get_line_size(line, labels, (*header)->prog_size);
 		ft_list_it_inc(&it);
 	}
-	(*header)->prog_size = ft_uint32_big_endian((*header)->prog_size);
+	(*header)->prog_size = ft_uint32_big_endian(size);
 	return (1);
 }

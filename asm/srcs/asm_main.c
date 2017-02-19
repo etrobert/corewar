@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/18 20:41:25 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/19 21:25:41 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int		main(int ac, char **av)
 {
-	t_fd			fd;
-	t_header		*header;
+	t_fds			fd;
 	t_list			*file;
+	t_header		*header;
+	t_list			*labels;
 	t_list			*instructs;
 
 	if (!asm_usage(ac, av))
@@ -25,9 +26,9 @@ int		main(int ac, char **av)
 		return (-1);
 	if (!asm_save_file(fd.in, &file))
 		return (-1);
-	if (!asm_get_size(&header, file))
+	if (!asm_get_size(&header, &labels, file))
 		return (-1);
-	if (!asm_get_bytes(&instructs, file))
+	if (!asm_get_bytes(&instructs, labels, file))
 		return (-1);
 	if ((fd.out = asm_create(av[1])) < 0)
 		return (-1);

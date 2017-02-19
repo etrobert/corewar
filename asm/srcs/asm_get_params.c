@@ -6,19 +6,22 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:22:53 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/18 20:29:55 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/19 21:27:36 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static void	asm_add_ocp(t_op op_tab, t_bytes **bytes_instruct,
-		unsigned char code)
+static void	asm_add_ocp(t_bytes **bytes_instruct, unsigned char code)
 {
 	t_bytes		*bytes;
+	int			i;
 
 	bytes = *bytes_instruct;
-	if (op_tab.ocp == true)
+	i = 0;
+	while (g_op_tab[i].op_code > 0 && g_op_tab[i].op_code != bytes->op_c)
+		i++;
+	if (g_op_tab[i].ocp == true)
 	{
 		bytes->ocp += code;
 		bytes->ocp <<= 2;
@@ -26,25 +29,27 @@ static void	asm_add_ocp(t_op op_tab, t_bytes **bytes_instruct,
 	}
 }
 
-static void	asm_param_byte_reg(char *param, t_bytes **bytes_instruct,
-		t_op op_tab, int i)
+static void	asm_param_byte_reg(char *param, t_bytes **bytes_instruct, int i)
 {
 	t_bytes		*bytes;
 
 	bytes = *bytes_instruct;
-	asm_add_ocp(op_tab, bytes_instruct, REG_CODE);
+	asm_add_ocp(bytes_instruct, REG_CODE);
 	bytes->param[i].c = ft_atoi(ft_strchr(param, 'r') + 1);
 	bytes->param_size[i] = 1;
 }
 
-static void	asm_param_byte_dir(char *param, t_bytes **bytes_instruct,
-		t_op op_tab, int i)
+static void	asm_param_byte_dir(char *param, t_bytes **bytes_instruct, int i)
 {
 	t_bytes		*bytes;
+	int			j;
 
 	bytes = *bytes_instruct;
-	asm_add_ocp(op_tab, bytes_instruct, DIR_CODE);
-	if (op_tab.small_direct == true)
+	asm_add_ocp(bytes_instruct, DIR_CODE);
+	j = 0;
+	while (g_op_tab[j].op_code > 0 && g_op_tab[j].op_code != bytes->op_c)
+		j++;
+	if (g_op_tab[j].small_direct == true)
 	{
 		bytes->param[i].s =
 			ft_ushort16_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
@@ -58,36 +63,46 @@ static void	asm_param_byte_dir(char *param, t_bytes **bytes_instruct,
 	}
 }
 
-static void	asm_param_byte_ind(char *param, t_bytes **bytes_instruct,
-		t_op op_tab, int i)
+static void	asm_param_byte_ind(char *param, t_bytes **bytes_instruct, int i)
 {
 	t_bytes		*bytes;
 
 	bytes = *bytes_instruct;
-	asm_add_ocp(op_tab, bytes_instruct, IND_CODE);
+	asm_add_ocp(bytes_instruct, IND_CODE);
 	bytes->param[i].s = ft_ushort16_big_endian(ft_atoi(param));
 	bytes->param_size[i] = 2;
 }
 
-void		asm_get_params(char **split, int n, t_op op_tab,
-		t_bytes **bytes_instruct)
+void		asm_get_params(char **split, t_list *bytes_instructs,
+		t_bytes **bytes_instruct, t_list *labels)
 {
-	t_bytes			*bytes;
 	int				i;
-	
-	bytes = *bytes_instruct;
+	int				n;
+	unsigned int	pos;
+	t_labels		*label;
+	t_bytes			*bytes;
+
+	n = 0;
 	i = 0;
+	bytes = *bytes_instruct;
+	pos = asm_get_actual_pos(bytes_instructs);
 	while (split[n + i])
 	{
+		ft_printf("Hey\n");
 		if (split[n + i][0] == COMMENT_CHAR || split[n + i][0] == ';')
 			return ;
-		if (split[n + i][0] == 'r')
-			asm_param_byte_reg(split[n + i], bytes_instruct, op_tab, i);
-		else if (split[n + i][0] == DIRECT_CHAR)
-			asm_param_byte_dir(split[n + i], bytes_instruct, op_tab, i);
-		else
-			asm_param_byte_ind(split[n + i], bytes_instruct, op_tab, i);
+		asm_skip_labels(split[n + i], &n, &i);
+		if (split[n + 1] && split[n + i][0] == 'r')
+			asm_param_byte_reg(split[n + i], bytes_instruct, i);
+		else if (split[n + i] && split[n + i][0] == DIRECT_CHAR)
+			asm_param_byte_dir(split[n + i], bytes_instruct, i);
+		else if (split[n + i])
+			asm_param_byte_ind(split[n + i], bytes_instruct, i);
+		if ((label = asm_is_small_label(split[n + i], *bytes_instruct, labels)))
+			bytes->param[i].s = ft_ushort16_big_endian(label->position - pos);
+		else if ((label = asm_is_big_label(split[n + i], *bytes_instruct,
+						labels)))
+			bytes->param[i].i = ft_uint32_big_endian(label->position - pos);
 		i++;
 	}
-	bytes->op_c = op_tab.op_code;
 }
