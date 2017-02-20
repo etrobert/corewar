@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/19 21:17:39 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/20 20:26:03 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ int					asm_get_bytes(t_list **instructs, t_list *labels,
 void				asm_get_params(char **split, t_list *bytes_instructs,
 		t_bytes **bytes_instruct, t_list *labels);
 void				asm_skip_labels(char *str, int *n, int *i);
-unsigned int		asm_get_actual_pos(t_list *bytes_instructs);
+unsigned int		asm_get_actual_pos(t_list *bytes_instructs, t_bytes *bytes);
 
 t_labels			*asm_is_small_label(char *str, t_bytes *bytes,
-		t_list *labels);
+		t_list *labels, int n);
 t_labels			*asm_is_big_label(char *str, t_bytes *bytes,
-		t_list *labels);
+		t_list *labels, int n);
 
 /*
 **	write in .cor
