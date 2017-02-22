@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 13:25:25 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 14:01:12 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@ static int			add_fresh_process(t_corewar *corewar,
 		t_reg_type pc, t_reg_type r1)
 {
 	t_process		*process;
+	int				ret;
 
 	if ((process = process_new()) == NULL)
 		return (-1);
 	process->pc = pc;
 	process->regs[1] = r1;
-	corewar_add_process(corewar, process);
+	if ((ret = corewar_add_process(corewar, process)) < 0)
+	{
+		process_delete(process);
+		return (ret);
+	}
 	return (0);
 }
 

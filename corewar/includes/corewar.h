@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 13:29:46 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 23:14:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ typedef struct		s_corewar
 	unsigned int	nbr_live;
 }					t_corewar;
 
+typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
+
 t_corewar			*corewar_new(t_list *champions);
 int					corewar_init(t_corewar *corewar, t_list *champions);
 void				corewar_delete(t_corewar *corewar);
 
-t_id_type			corewar_play(t_corewar *corewar);
+int					corewar_play(t_corewar *corewar);
 
-void				corewar_advance(t_corewar *corewar);
+int					corewar_advance(t_corewar *corewar);
 bool				corewar_end(t_corewar *corewar);
 
 /*
@@ -51,7 +53,7 @@ void				corewar_check(t_corewar *corewar);
 void				corewar_update_process(t_corewar *corewar,
 		t_process *process);
 
-void				corewar_add_process(t_corewar *corewar, t_process *process);
+int					corewar_add_process(t_corewar *corewar, t_process *process);
 int					corewar_fork(t_corewar *corewar,
 		t_process *parent, t_reg_type pc);
 void				corewar_kill_process(t_corewar *corewar);

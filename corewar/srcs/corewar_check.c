@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 12:24:22 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 12:24:51 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 13:55:21 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,3 @@ void				corewar_check(t_corewar *corewar)
 	corewar->nbr_live = 0;
 	corewar->last_check = corewar->cycle;
 }
-

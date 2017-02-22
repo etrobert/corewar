@@ -6,32 +6,46 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 12:31:18 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 20:58:08 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void			apply_op(t_corewar *corewar, t_process *process)
+static t_f_cw_op	get_op_func(unsigned char op_code)
 {
-	if (process->current_op->op_code == 0x01)
-		apply_live(corewar, process);
-	else if (process->current_op->op_code == 0x09)
-		apply_zjmp(corewar, process);
-	//	else if (process->current_op->op_code == 0x06)
-	//		apply_and(corewar, process);
-	else
-		apply_nothing(corewar, process);
-	corewar_update_process(corewar, process);
+	static t_f_cw_op	tab[17] = { &apply_nothing,
+		&apply_live,
+		NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+		&apply_zjmp,
+		NULL, NULL,
+		&apply_fork };
+
+	if (op_code >= 17 || tab[op_code] == NULL)
+		return (tab[0]);
+	return (tab[op_code]);
 }
 
-void				corewar_advance(t_corewar *corewar)
+static int			apply_op(t_corewar *corewar, t_process *process)
+{
+	int				ret;
+	t_f_cw_op		func;
+
+	func = get_op_func(process->current_op->op_code);
+	if ((ret = (*func)(corewar, process)) < 0)
+		return (ret);
+	corewar_update_process(corewar, process);
+	return (0);
+}
+
+int					corewar_advance(t_corewar *corewar)
 {
 	t_list_it		it;
 	t_process		*proc;
+	int				ret;
 
 	if (corewar == NULL)
-		return ;
+		return (0);
 	it = ft_list_begin(corewar->process);
 	while (!ft_list_it_end(corewar->process, it))
 	{
@@ -39,10 +53,14 @@ void				corewar_advance(t_corewar *corewar)
 		if (proc->to_wait > 0)
 			--proc->to_wait;
 		else
-			apply_op(corewar, proc);
+		{
+			if ((ret = apply_op(corewar, proc)) < 0)
+				return (ret);
+		}
 		ft_list_it_inc(&it);
 	}
 	++(corewar->cycle);
 	if (corewar->cycle - corewar->last_check >= corewar->cycles_to_die)
 		corewar_check(corewar);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 12:20:04 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 12:44:56 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 14:00:49 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int					corewar_fork(t_corewar *corewar,
 		t_process *parent, t_reg_type pc)
 {
 	t_process		*new_proc;
+	int				ret;
 
 	if (corewar == NULL || parent == NULL)
 		return (0);
@@ -23,11 +24,10 @@ int					corewar_fork(t_corewar *corewar,
 		return (-1);
 	new_proc->pc = pc;
 	//Carry stays the same ?
-	corewar_update_process(corewar, new_proc);
-	if (ft_list_push_front(corewar->process, new_proc) == -1)
+	if ((ret = corewar_add_process(corewar, new_proc)) < 0)
 	{
 		process_delete(new_proc);
-		return (-1);
+		return (ret);
 	}
 	return (0);
 }

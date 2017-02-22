@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 13:35:48 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 13:32:14 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 21:09:02 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int					apply_zjmp(t_corewar *corewar, t_process *process)
 		ft_printf("zjmp a %d\n", (int)(value));
 		corewar_update_process_pc(corewar, process, (int)(value));
 	}
+	else
+		corewar_update_process_pc(corewar, process, 1);
 	return (0);
 }
