@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 23:28:18 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 23:30:34 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int main(int argc, char **argv)
 	if ((champ = champion_new()) == NULL)
 	{
 		ft_dprintf(2, "ERROR CREATING CHAMPION\n");
+		return (-1);
 	}
 	if (champion_init(champ, 0, 0) < 0)
 	{
