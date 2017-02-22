@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 12:14:54 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 23:28:18 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,26 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
+int	play_corewar(t_corewar *corewar)
+{
+	int				ret;
+
+	if (corewar == NULL)
+		return (0);
+	while (!corewar_end(corewar))
+	{
+		ft_printf("\033[2J");
+		ft_printf("cycle : %u ; ", corewar->cycle);
+		ft_printf("process : %d ;", ft_list_size(corewar->process));
+		ft_printf("cycle_to_die : %u\n", corewar->cycles_to_die);
+		print_corewar(corewar);
+		if ((ret = corewar_advance(corewar)) < 0)
+			return (ret);
+		usleep(100000);
+	}
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	t_champion	*champ;
@@ -61,19 +81,21 @@ int main(int argc, char **argv)
 		ft_dprintf(2, "This system is not supported.\n");
 		return (0);
 	}
-	champ = champion_new();
+	if ((champ = champion_new()) == NULL)
+	{
+		ft_dprintf(2, "ERROR CREATING CHAMPION\n");
+	}
 	if (champion_init(champ, 0, 0) < 0)
 	{
 		ft_dprintf(2, "ERROR LOADING FILE\n");
 		champion_delete(champ);
 		return (-1);
 	}
-	//print_champion(champ);
 	list = ft_list_new();
 	ft_list_push_back(list, champ);
 	cw = corewar_new(list);
 
-	corewar_play(cw);
+	play_corewar(cw);
 
 	corewar_delete(cw);
 	champion_delete(champ);

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 23:14:25 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 23:26:16 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
 t_corewar			*corewar_new(t_list *champions);
 int					corewar_init(t_corewar *corewar, t_list *champions);
 void				corewar_delete(t_corewar *corewar);
-
-int					corewar_play(t_corewar *corewar);
 
 int					corewar_advance(t_corewar *corewar);
 bool				corewar_end(t_corewar *corewar);
