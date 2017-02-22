@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_nothing.c                                    :+:      :+:    :+:   */
+/*   corewar_end.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 11:42:50 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 13:31:41 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/21 15:48:01 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/21 18:14:10 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					apply_nothing(t_corewar *corewar, t_process *process)
+bool				corewar_end(t_corewar *corewar)
 {
-	(void)corewar;
-	corewar_update_process_pc(corewar, process, 1);
-	return (0);
+	return (ft_list_empty(corewar->process));
 }

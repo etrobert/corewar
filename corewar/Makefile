@@ -10,10 +10,11 @@ SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
 				print_corewar.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
-				corewar_play.c corewar_advance.c \
+				corewar_play.c corewar_advance.c corewar_end.c \
 				corewar_update_process.c corewar_fork.c \
-				corewar_update_process_pc.c \
-				apply_nothing.c apply_live.c apply_zjmp.c
+				corewar_update_process_pc.c corewar_check.c \
+				corewar_kill_process.c corewar_add_process.c \
+				apply_nothing.c apply_live.c apply_zjmp.c apply_fork.c
 INCNAM		=	process.h corewar.h champion.h print.h
 
 CC			=	clang

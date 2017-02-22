@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 17:15:06 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 12:31:18 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void			apply_op(t_corewar *corewar, t_process *process)
 {
-	if (process->current_op->op_code == 1)
+	if (process->current_op->op_code == 0x01)
 		apply_live(corewar, process);
-	else if (process->current_op->op_code == 9)
+	else if (process->current_op->op_code == 0x09)
 		apply_zjmp(corewar, process);
+	//	else if (process->current_op->op_code == 0x06)
+	//		apply_and(corewar, process);
 	else
 		apply_nothing(corewar, process);
-	//APpliquer l'operation
-	//deplacer a linstruction suivante et set le to_wait
 	corewar_update_process(corewar, process);
 }
 
@@ -42,4 +42,7 @@ void				corewar_advance(t_corewar *corewar)
 			apply_op(corewar, proc);
 		ft_list_it_inc(&it);
 	}
+	++(corewar->cycle);
+	if (corewar->cycle - corewar->last_check >= corewar->cycles_to_die)
+		corewar_check(corewar);
 }

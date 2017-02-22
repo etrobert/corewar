@@ -6,13 +6,13 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 13:35:48 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/18 21:02:17 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 13:32:14 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void				apply_zjmp(t_corewar *corewar, t_process *process)
+int					apply_zjmp(t_corewar *corewar, t_process *process)
 {
 	short			value;
 
@@ -24,4 +24,5 @@ void				apply_zjmp(t_corewar *corewar, t_process *process)
 		ft_printf("zjmp a %d\n", (int)(value));
 		corewar_update_process_pc(corewar, process, (int)(value));
 	}
+	return (0);
 }

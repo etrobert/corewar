@@ -58,7 +58,8 @@ Meme si la taille du nom donne est inferieure a PROG\_NAME\_LENGTH, PROG\_NAME\_
 
 Meme chose pour le commentaire.
 
-Si la taille est trop longue, une erreur de parsing sera affichee : "Champion name too long (Max length 128)"
+Si la taille est trop longue, une erreur de parsing sera affichee :
+"Champion name too long (Max length 128)"
 
 ### corewar
 Machine virtuelle interpretant les fichiers .cor et les faisant combattre
@@ -66,5 +67,8 @@ Inclus : Affichage
 
 Lorsquon traite un process :
 - S'il est en attente on decremente lattente
-- Sinon s'il vient de finir son attente on lit les parametres en fonction de lopcode enregistre
+- Sinon s'il vient de finir son attente on lit les params en fct de lop saved
 - Sinon s'il a fini son instruction precedente on lit lopcode le stocke et en deduit le temps dattente
+
+Verifier lordre des instructions de la boucle principale pour coller a la
+machine de reference.

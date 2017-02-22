@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/18 21:30:15 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 12:14:54 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,9 @@ int main(int argc, char **argv)
 	//print_champion(champ);
 	list = ft_list_new();
 	ft_list_push_back(list, champ);
-	ft_list_push_back(list, champ);
 	cw = corewar_new(list);
 
-
-		print_corewar(cw);
-	int				i;
-
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		corewar_advance(cw);
-		++i;
-	}
-
-	print_corewar(cw);
+	corewar_play(cw);
 
 	corewar_delete(cw);
 	champion_delete(champ);

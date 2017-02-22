@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/18 23:58:59 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 13:25:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static int			add_fresh_process(t_corewar *corewar,
 		return (-1);
 	process->pc = pc;
 	process->regs[1] = r1;
-	corewar_update_process(corewar, process);
-	ft_list_push_front(corewar->process, process);
+	corewar_add_process(corewar, process);
 	return (0);
 }
 
@@ -66,8 +65,12 @@ int					corewar_init(t_corewar *corewar, t_list *champions)
 		return (-1);
 	if ((corewar->memory = ft_cbuff_new(MEM_SIZE)) == NULL)
 		return (-1);
-
 	if ((ret = load_champions(corewar, champions)) != FT_GOOD)
 		return (ret);
+	corewar->cycle = 0;
+	corewar->last_check = 0;
+	corewar->cycles_to_die = CYCLE_TO_DIE;
+	corewar->clear_checks = 0;
+	corewar->nbr_live = 0;
 	return (0);
 }

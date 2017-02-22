@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/18 23:57:14 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/22 13:29:46 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ typedef struct		s_corewar
 	t_cbuff			*memory;
 	t_list			*process;
 	t_cycle_type	cycle;
+	t_cycle_type	last_check;
+	t_cycle_type	cycles_to_die;
+	t_cycle_type	clear_checks;
+	unsigned int	nbr_live;
 }					t_corewar;
 
 t_corewar			*corewar_new(t_list *champions);
@@ -30,6 +34,7 @@ void				corewar_delete(t_corewar *corewar);
 t_id_type			corewar_play(t_corewar *corewar);
 
 void				corewar_advance(t_corewar *corewar);
+bool				corewar_end(t_corewar *corewar);
 
 /*
 ** Internal
@@ -37,12 +42,27 @@ void				corewar_advance(t_corewar *corewar);
 
 void				corewar_update_process_pc(t_corewar *corewar,
 		t_process *proc, int value);
+
+void				corewar_check(t_corewar *corewar);
+/*
+** Reads the op pointed to by process->pc, saves it and
+** sets process wait time accordingly
+*/
 void				corewar_update_process(t_corewar *corewar,
 		t_process *process);
+
+void				corewar_add_process(t_corewar *corewar, t_process *process);
 int					corewar_fork(t_corewar *corewar,
 		t_process *parent, t_reg_type pc);
-void				apply_nothing(t_corewar *corewar, t_process *process);
-void				apply_live(t_corewar *corewar, t_process *process);
-void				apply_zjmp(t_corewar *corewar, t_process *process);
+void				corewar_kill_process(t_corewar *corewar);
+
+/*
+** op functions
+*/
+
+int					apply_nothing(t_corewar *corewar, t_process *process);
+int					apply_live(t_corewar *corewar, t_process *process);
+int					apply_fork(t_corewar *corewar, t_process *process);
+int					apply_zjmp(t_corewar *corewar, t_process *process);
 
 #endif
