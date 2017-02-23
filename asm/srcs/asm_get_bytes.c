@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/22 20:06:00 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/23 16:06:27 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		asm_init_bytes(t_bytes **bytes_struct)
 		return (0);
 	bytes = *bytes_struct;
 	bytes->op_c = 0;
-	bytes->op_c_size = 1;
+	bytes->op_c_size = 0;
 	bytes->ocp = 0;
 	bytes->ocp_size = 0;
 	bytes->param_size[0] = 0;
@@ -36,10 +36,12 @@ static int		asm_get_instruct(char *line, t_asm *m_asm)
 	int			n;
 	t_bytes		*bytes;
 
-	if (!asm_init_bytes(&bytes) || !(split = ft_strsplit_str(line, " \t,")))
+	if (!asm_init_bytes(&bytes))
+		return (0);
+	if (!(split = ft_strsplit_str(line, " \t,")))
 		return (0);
 	n = 0;
-	if (split[n] && ft_strchr(split[n], LABEL_CHAR))
+	if (split[n] && split[n][ft_strlen(split[n]) - 1] == LABEL_CHAR)
 		n++;
 	if (!split[n] || split[n][0] == COMMENT_CHAR || split[n][0] == ';')
 		return (1);
@@ -48,6 +50,7 @@ static int		asm_get_instruct(char *line, t_asm *m_asm)
 		i++;
 	bytes->op_c = g_op_tab[i].op_code;
 	asm_get_params(split, n + 1, &bytes, m_asm);
+	bytes->op_c_size = 1;
 	ft_list_push_back(m_asm->instructs, bytes);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/22 20:06:27 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/23 15:52:58 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-/*
-**	for asm_get_prog_name
-**	and asm_get_prog_comment
-*/
 
 # define NAME			1
 # define COMMENT		1
 # define NOT_NAME		2
 # define NOT_COMMENT	2
 # define MAX_LEN		0
+
+# define SMALL			1
+# define BIG			2
 
 /*
 **	file descriptors structure

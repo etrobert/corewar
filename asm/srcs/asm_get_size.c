@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/22 20:11:08 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/23 15:55:06 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int			asm_get_params_size(char **split, int n, t_op op_tab)
 {
 	int				i;
 	unsigned int	size;
-	
+
 	size = 0;
 	i = 0;
 	while (split[n + i])
@@ -107,8 +107,8 @@ int					asm_get_size(t_asm *m_asm)
 				!(comment = asm_get_prog_comment(line, &(m_asm->header))))
 			return (0);
 		if (name != NAME && comment != COMMENT)
-			(m_asm->header)->prog_size += asm_get_line_size(line, &(m_asm->labels),
-					(m_asm->header)->prog_size);
+			(m_asm->header)->prog_size += asm_get_line_size(line,
+					&(m_asm->labels), (m_asm->header)->prog_size);
 		ft_list_it_inc(&it);
 	}
 	(m_asm->header)->prog_size =
