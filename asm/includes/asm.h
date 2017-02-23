@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/18 20:43:47 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/22 20:06:27 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,38 @@
 **	file descriptors structure
 */
 
-typedef struct	s_fd
+typedef struct		s_fds
 {
-	int			in;
-	int			out;
-}				t_fd;
+	int				in;
+	int				out;
+}					t_fds;
+
+/*
+**	struct to stock labels's relative positions
+*/
+
+typedef struct		s_labels
+{
+	char			*name;
+	unsigned int	position;
+}					t_labels;
 
 /*
 **	union to stock parameters into defferents sizes, for 1, 2 or 4 Bytes.
 */
 
-typedef union	u_params
+typedef union		u_params
 {
 	unsigned char	c;
 	unsigned short	s;
 	unsigned int	i;
-}				t_params;
+}					t_params;
 
 /*
 **	struct to stock all bytes of an instruction
 */
 
-typedef struct	s_bytes
+typedef struct		s_bytes
 {
 	unsigned char	op_c;
 	int				op_c_size;
@@ -63,34 +73,46 @@ typedef struct	s_bytes
 	int				ocp_size;
 	t_params		param[3];
 	int				param_size[3];
-}				t_bytes;
+}					t_bytes;
+
+/*
+**	struct asm to stock ohters usefull structs
+*/
+
+typedef struct		s_asm
+{
+	t_list			*file;
+	t_header		*header;
+	t_list			*labels;
+	t_list			*instructs;
+}					t_asm;
 
 /*
 **	asm init
 */
 
-int				asm_usage(int ac, char **av);
-int				asm_open(char *filename);
-int				asm_create(char *filename);
+int					asm_usage(int ac, char **av);
+int					asm_open(char *filename);
+int					asm_create(char *filename);
 
 /*
 **	read in .s (parsing)
 */
 
-int				asm_save_file(int fd, t_list **file);
+int					asm_save_file(int fd, t_asm *m_asm);
 
-int				asm_get_size(t_header **header, t_list *file);
-int				asm_get_prog_name(char *str, t_header **header);
-int				asm_get_prog_comment(char *str, t_header **header);
+int					asm_get_size(t_asm *m_asm);
+int					asm_get_prog_name(char *str, t_header **header);
+int					asm_get_prog_comment(char *str, t_header **header);
 
-int				asm_get_bytes(t_list **instructs, t_list *file);
-void			asm_get_params(char **split, int n, t_op op_tab,
-		t_bytes **bytes_instruct);
+int					asm_get_bytes(t_asm *m_asm);
+void				asm_get_params(char **split, int n,
+		t_bytes **bytes_instruct, t_asm *m_asm);
 
 /*
 **	write in .cor
 */
 
-void			asm_write_bytes(int fd, t_header *header, t_list *instructs);
+void				asm_write_bytes(int fd, t_asm m_asm);
 
 #endif

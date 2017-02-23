@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:30:00 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/18 20:42:44 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/22 20:07:53 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static void	asm_write_params_bytes(int fd, t_bytes *bytes)
 	}
 }
 
-void		asm_write_bytes(int fd, t_header *header, t_list *instructs)
+void		asm_write_bytes(int fd, t_asm m_asm)
 {
 	t_list_it	it;
 	t_bytes		*bytes;
 
-	it = ft_list_begin(instructs);
-	write(fd, header, sizeof(*header));
-	while (!ft_list_it_end(instructs, it))
+	it = ft_list_begin(m_asm.instructs);
+	write(fd, m_asm.header, sizeof(t_header));
+	while (!ft_list_it_end(m_asm.instructs, it))
 	{
-		bytes = ft_list_it_get(instructs, it);
+		bytes = ft_list_it_get(m_asm.instructs, it);
 		write(fd, &(bytes->op_c), bytes->op_c_size);
 		write(fd, &(bytes->ocp), bytes->ocp_size);
 		asm_write_params_bytes(fd, bytes);

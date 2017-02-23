@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/18 20:32:34 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/22 20:06:00 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		asm_init_bytes(t_bytes **bytes_struct)
 	return (1);
 }
 
-static int		asm_get_instruct(char *line, t_list **instructs)
+static int		asm_get_instruct(char *line, t_asm *m_asm)
 {
 	char		**split;
 	int			i;
@@ -46,25 +46,26 @@ static int		asm_get_instruct(char *line, t_list **instructs)
 	i = 0;
 	while (g_op_tab[i].op_code > 0 && ft_strcmp(split[n], g_op_tab[i].name))
 		i++;
-	asm_get_params(split, n + 1, g_op_tab[i], &bytes);
-	ft_list_push_back(*instructs, bytes);
+	bytes->op_c = g_op_tab[i].op_code;
+	asm_get_params(split, n + 1, &bytes, m_asm);
+	ft_list_push_back(m_asm->instructs, bytes);
 	return (1);
 }
 
-int				asm_get_bytes(t_list **instructs, t_list *file)
+int				asm_get_bytes(t_asm *m_asm)
 {
 	char		*line;
 	t_list_it	it;
 
-	if (!(*instructs = ft_list_new()))
+	if (!(m_asm->instructs = ft_list_new()))
 		return (0);
-	it = ft_list_begin(file);
-	while (!ft_list_it_end(file, it))
+	it = ft_list_begin(m_asm->file);
+	while (!ft_list_it_end(m_asm->file, it))
 	{
-		line = ft_list_it_get(file, it);
+		line = ft_list_it_get(m_asm->file, it);
 		if (!ft_strstr(line, NAME_CMD_STRING) &&
 					!ft_strstr(line, COMMENT_CMD_STRING))
-			if (!asm_get_instruct(line, instructs))
+			if (!asm_get_instruct(line, m_asm))
 				return (0);
 		ft_list_it_inc(&it);
 	}
