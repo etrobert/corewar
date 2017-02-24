@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:50:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/21 16:23:19 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/24 20:32:31 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_process			*process_cpy(t_process *proc);
 void				process_init(t_process *proc);
 void				process_delete(t_process *proc);
 void				process_update_pc(t_process *proc, unsigned int value);
+t_reg_type			process_get_reg(t_process *proc, unsigned char reg);
 
 #endif
