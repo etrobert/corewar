@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/15 21:19:44 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/24 20:15:38 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,20 @@
 
 # include "corewar.h"
 
-# define PRINT_WIDTH 64
+# include <SDL.h>
+# include <SDL_ttf.h>
 
-void		print_corewar(t_corewar *cw);
+# define PRINT_WIDTH	64
+
+typedef struct			s_visu
+{
+	SDL_Surface			*screen;
+	SDL_Surface			*text;
+	TTF_Font			*font;
+	SDL_Color			white;
+	SDL_Rect			pos;
+}						t_visu;
+
+void					print_corewar(t_corewar *cw, t_visu *visu);
 
 #endif

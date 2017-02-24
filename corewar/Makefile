@@ -18,8 +18,8 @@ SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
 INCNAM		=	process.h corewar.h champion.h print.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/
-LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
+CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/ `sdl-config --cflags`
+LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%) `sdl-config --libs` -lSDL_image -lSDL_ttf
 
 GIT			=	Makefile
 

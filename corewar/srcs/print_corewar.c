@@ -6,13 +6,13 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 20:34:53 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/24 18:41:05 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 
-static void			print_line(void)
+/*static void			print_line(void)
 {
 	int				i;
 
@@ -46,19 +46,9 @@ static void			print_color(t_corewar *corewar, unsigned int pos)
 static void			reset_color(void)
 {
 	ft_printf("\033[0m");
-}
+}*/
 
-static void			print_byte(t_corewar *corewar, unsigned int pos)
-{
-	unsigned char	byte;
-
-	print_color(corewar, pos);
-	ft_cbuff_read(corewar->memory, &byte, pos, sizeof(unsigned char));
-	ft_printf("%.2x ", byte);
-	reset_color();
-}
-
-void				print_corewar(t_corewar *cw)
+/*void				old_print_corewar(t_corewar *cw)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -77,4 +67,47 @@ void				print_corewar(t_corewar *cw)
 		++j;
 	}
 	print_line();
+}*/
+
+/*static void			print_infos(t_corewar *corewar, t_visu *visu)
+{
+	char			*ret;
+
+	(void)visu;
+	ft_asprintf(&ret, "cycle : %u", corewar->cycle);
+	free(ret);
+	ft_asprintf(&ret, "process : %d", ft_list_size(corewar->process));
+	free(ret);
+	ft_asprintf(&ret, "cycle_to_die : %u", corewar->cycles_to_die);
+	free(ret);
+}*/
+
+static void			print_byte(t_corewar *corewar, unsigned int pos,
+		t_visu *visu)
+{
+	unsigned char	byte;
+	char			*ret;
+
+	(void)visu;
+	ft_cbuff_read(corewar->memory, &byte, pos, sizeof(unsigned char));
+	ft_asprintf(&ret, "%.2x ", byte);
+	free(ret);
+}
+
+void				print_corewar(t_corewar *cw, t_visu *visu)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	j = 0;
+	while (j * PRINT_WIDTH < MEM_SIZE)
+	{
+		i = 0;
+		while (i < PRINT_WIDTH && j * PRINT_WIDTH + i < MEM_SIZE)
+		{
+			print_byte(cw, j * PRINT_WIDTH + i, visu);
+			i++;
+		}
+		j++;
+	}
 }

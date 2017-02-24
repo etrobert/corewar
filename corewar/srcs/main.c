@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 23:30:34 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/24 20:51:29 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,58 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
+static void	print_init_sdl(t_visu *visu)
+{
+	SDL_Init(SDL_INIT_VIDEO);
+	TTF_Init();
+	visu->screen = SDL_SetVideoMode(1000, 1000, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	SDL_WM_SetCaption("Corewar", NULL);
+	if ((visu->font = TTF_OpenFont("monaco.ttf", 12)) == NULL)
+		ft_printf("font = null");
+	visu->white.r = 255;
+	visu->white.g = 255;
+	visu->white.b = 255;
+	visu->white.unused = 255;
+	visu->text = TTF_RenderText_Blended(visu->font, "Salut\0", visu->white);
+}
+
 int	play_corewar(t_corewar *corewar)
 {
 	int				ret;
+	t_visu			visu;
+	SDL_Event		event;
 
 	if (corewar == NULL)
 		return (0);
+	print_init_sdl(&visu);
+	ft_printf("Coucou?\n");
 	while (!corewar_end(corewar))
 	{
-		ft_printf("\033[2J");
-		ft_printf("cycle : %u ; ", corewar->cycle);
-		ft_printf("process : %d ;", ft_list_size(corewar->process));
-		ft_printf("cycle_to_die : %u\n", corewar->cycles_to_die);
-		print_corewar(corewar);
+		SDL_FillRect(visu.screen, NULL, SDL_MapRGB(visu.screen->format, 30, 30, 30));
+//		SDL_Flip(visu.screen);
+		print_corewar(corewar, &visu);
+		visu.pos.x = 60;
+		visu.pos.y = 370;
+		SDL_BlitSurface(visu.text, NULL, visu.screen, &(visu.pos));
+		SDL_Flip(visu.screen);
+		SDL_WaitEvent(&event);
+		if (event.type == SDL_QUIT)
+		{
+			SDL_Quit();
+			return (0);
+		}
 		if ((ret = corewar_advance(corewar)) < 0)
+		{
+			TTF_CloseFont(visu.font);
+			TTF_Quit();
+			SDL_Quit();
 			return (ret);
-		usleep(100000);
+		}
+//		usleep(100000);
 	}
+	TTF_CloseFont(visu.font);
+	TTF_Quit();
+	SDL_Quit();
 	return (0);
 }
 
