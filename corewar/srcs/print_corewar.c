@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 20:34:53 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/25 14:57:00 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void			print_byte(t_corewar *corewar, unsigned int pos)
 	unsigned char	byte;
 
 	print_color(corewar, pos);
-	ft_cbuff_read(corewar->memory, &byte, pos, sizeof(unsigned char));
+	byte = corewar_get_byte(corewar, pos);
 	ft_printf("%.2x ", byte);
 	reset_color();
 }

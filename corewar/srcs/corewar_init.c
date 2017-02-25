@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 14:01:12 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/25 15:01:15 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int			add_fresh_process(t_corewar *corewar,
 	return (0);
 }
 
-static int			load_one_champion(t_corewar *corewar, t_champion *champ,
-		unsigned int pc)
+static int			load_one_champion(t_corewar *corewar,
+		const t_champion *champ, unsigned int pc)
 {
 	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
 	if (add_fresh_process(corewar, champ->id, pc) == -1)
@@ -39,7 +39,7 @@ static int			load_one_champion(t_corewar *corewar, t_champion *champ,
 	return (0);
 }
 
-static int			load_champions(t_corewar *corewar, t_list *champions)
+static int			load_champions(t_corewar *corewar, const t_list *champions)
 {
 	t_list_it		it;
 	t_champion		*champ;
@@ -60,7 +60,7 @@ static int			load_champions(t_corewar *corewar, t_list *champions)
 	return (FT_GOOD);
 }
 
-int					corewar_init(t_corewar *corewar, t_list *champions)
+int					corewar_init(t_corewar *corewar, const t_list *champions)
 {
 	int				ret;
 

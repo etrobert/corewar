@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_new.c                                      :+:      :+:    :+:   */
+/*   corewar_get_byte.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/14 21:00:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/25 15:00:08 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/25 14:43:22 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/25 15:02:32 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_corewar			*corewar_new(const t_list *champions)
+unsigned char		corewar_get_byte(const t_corewar *corewar, unsigned int pos)
 {
-	t_corewar		*cw;
+	unsigned char	byte;
 
-	if ((cw = (t_corewar *)(malloc(sizeof(t_corewar)))) == NULL)
-		return (NULL);
-	if (corewar_init(cw, champions) < 0)
-	{
-		corewar_delete(cw);
-		return (NULL);
-	}
-	return (cw);
+	ft_cbuff_read(corewar->memory, &byte, pos, sizeof(unsigned char));
+	return (byte);
 }

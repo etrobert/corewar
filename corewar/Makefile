@@ -11,7 +11,7 @@ SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
 				process_get_reg.c \
 				print_corewar.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
-				corewar_advance.c corewar_end.c \
+				corewar_advance.c corewar_end.c corewar_get_byte.c \
 				corewar_update_process.c corewar_fork.c \
 				corewar_update_process_pc.c corewar_check.c \
 				corewar_kill_process.c corewar_add_process.c \
