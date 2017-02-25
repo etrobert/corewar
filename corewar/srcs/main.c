@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/24 20:51:29 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/25 16:01:36 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	print_init_sdl(t_visu *visu)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
-	visu->screen = SDL_SetVideoMode(1000, 1000, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	visu->screen = SDL_SetVideoMode(2560, 1440, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	SDL_WM_SetCaption("Corewar", NULL);
 	if ((visu->font = TTF_OpenFont("monaco.ttf", 12)) == NULL)
 		ft_printf("font = null");
@@ -77,8 +77,8 @@ int	play_corewar(t_corewar *corewar)
 		SDL_FillRect(visu.screen, NULL, SDL_MapRGB(visu.screen->format, 30, 30, 30));
 //		SDL_Flip(visu.screen);
 		print_corewar(corewar, &visu);
-		visu.pos.x = 60;
-		visu.pos.y = 370;
+		visu.pos.x = 50;
+		visu.pos.y = 50;
 		SDL_BlitSurface(visu.text, NULL, visu.screen, &(visu.pos));
 		SDL_Flip(visu.screen);
 		SDL_WaitEvent(&event);
@@ -86,6 +86,14 @@ int	play_corewar(t_corewar *corewar)
 		{
 			SDL_Quit();
 			return (0);
+		}
+		if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.sym == SDLK_ESCAPE)
+			{
+				SDL_Quit();
+				return (0);
+			}
 		}
 		if ((ret = corewar_advance(corewar)) < 0)
 		{
