@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/25 16:01:36 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/25 21:08:09 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ static void	print_init_sdl(t_visu *visu)
 	visu->white.r = 255;
 	visu->white.g = 255;
 	visu->white.b = 255;
-	visu->white.unused = 255;
-	visu->text = TTF_RenderText_Blended(visu->font, "Salut\0", visu->white);
+	visu->black.r = 0;
+	visu->black.g = 0;
+	visu->black.b = 0;
+	visu->text = TTF_RenderText_Blended(visu->font, "Salut", visu->white);
 }
 
 int	play_corewar(t_corewar *corewar)
@@ -71,15 +73,13 @@ int	play_corewar(t_corewar *corewar)
 	if (corewar == NULL)
 		return (0);
 	print_init_sdl(&visu);
-	ft_printf("Coucou?\n");
 	while (!corewar_end(corewar))
 	{
 		SDL_FillRect(visu.screen, NULL, SDL_MapRGB(visu.screen->format, 30, 30, 30));
-//		SDL_Flip(visu.screen);
 		print_corewar(corewar, &visu);
-		visu.pos.x = 50;
-		visu.pos.y = 50;
-		SDL_BlitSurface(visu.text, NULL, visu.screen, &(visu.pos));
+//		visu.pos.x = 50;
+//		visu.pos.y = 50;
+//		SDL_BlitSurface(visu.text, NULL, visu.screen, &(visu.pos));
 		SDL_Flip(visu.screen);
 		SDL_WaitEvent(&event);
 		if (event.type == SDL_QUIT)

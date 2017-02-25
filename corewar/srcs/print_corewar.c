@@ -87,9 +87,9 @@ static void			print_byte(t_corewar *corewar, unsigned int pos,
 	unsigned char	byte;
 	char			*ret;
 
-	(void)visu;
 	byte = corewar_get_byte(corewar, pos);
 	ft_asprintf(&ret, "%.2x ", byte);
+	visu->text = TTF_RenderText_Blended(visu->font, ret, visu->white);
 	free(ret);
 }
 
@@ -98,15 +98,22 @@ void				print_corewar(t_corewar *cw, t_visu *visu)
 	unsigned int	i;
 	unsigned int	j;
 
+	visu->pos.x = 0;
+	visu->pos.y = 0;
 	j = 0;
 	while (j * PRINT_WIDTH < MEM_SIZE)
 	{
 		i = 0;
+		visu->pos.x = 0;
 		while (i < PRINT_WIDTH && j * PRINT_WIDTH + i < MEM_SIZE)
 		{
 			print_byte(cw, j * PRINT_WIDTH + i, visu);
+			SDL_BlitSurface(visu->text, NULL, visu->screen, &(visu->pos));
+//			SDL_Flip(visu->screen);
+			visu->pos.x += 20;
 			i++;
 		}
+		visu->pos.y += 15;
 		j++;
 	}
 }

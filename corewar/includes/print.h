@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/24 20:15:38 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/25 21:08:12 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct			s_visu
 	SDL_Surface			*text;
 	TTF_Font			*font;
 	SDL_Color			white;
+	SDL_Color			black;
 	SDL_Rect			pos;
 }						t_visu;
 
