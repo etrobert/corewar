@@ -5,7 +5,6 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
 /*   Updated: 2017/02/24 18:41:05 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -89,7 +88,7 @@ static void			print_byte(t_corewar *corewar, unsigned int pos,
 	char			*ret;
 
 	(void)visu;
-	ft_cbuff_read(corewar->memory, &byte, pos, sizeof(unsigned char));
+	byte = corewar_get_byte(corewar, pos);
 	ft_asprintf(&ret, "%.2x ", byte);
 	free(ret);
 }

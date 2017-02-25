@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 23:26:16 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/25 15:02:39 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,34 @@ typedef struct		s_corewar
 	unsigned int	nbr_live;
 }					t_corewar;
 
+typedef struct		s_cw_params
+{
+	unsigned int	params[3];
+	unsigned int	offset;
+	unsigned char	ocp;
+}					t_cw_params;
+
 typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
 
-t_corewar			*corewar_new(t_list *champions);
-int					corewar_init(t_corewar *corewar, t_list *champions);
+/*
+** public: =====================================================================
+*/
+
+t_corewar			*corewar_new(const t_list *champions);
+int					corewar_init(t_corewar *corewar, const t_list *champions);
 void				corewar_delete(t_corewar *corewar);
 
 int					corewar_advance(t_corewar *corewar);
-bool				corewar_end(t_corewar *corewar);
+bool				corewar_end(const t_corewar *corewar);
+unsigned char		corewar_get_byte(const t_corewar *corewar,
+		unsigned int pos);
 
 /*
-** Internal
+** private: ====================================================================
 */
+
+t_cw_params			corewar_parse_params(t_corewar *corewar,
+		t_process *process);
 
 void				corewar_update_process_pc(t_corewar *corewar,
 		t_process *proc, int value);
@@ -57,7 +73,7 @@ int					corewar_fork(t_corewar *corewar,
 void				corewar_kill_process(t_corewar *corewar);
 
 /*
-** op functions
+** op functions ================================================================
 */
 
 int					apply_nothing(t_corewar *corewar, t_process *process);

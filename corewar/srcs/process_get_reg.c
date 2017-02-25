@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_new.c                                      :+:      :+:    :+:   */
+/*   process_get_reg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/14 21:00:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/25 15:00:08 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/24 20:31:04 by etrobert          #+#    #+#             */
+/*   Updated: 2017/02/24 20:32:26 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "process.h"
 
-t_corewar			*corewar_new(const t_list *champions)
+t_reg_type			process_get_reg(t_process *proc, unsigned char reg)
 {
-	t_corewar		*cw;
-
-	if ((cw = (t_corewar *)(malloc(sizeof(t_corewar)))) == NULL)
-		return (NULL);
-	if (corewar_init(cw, champions) < 0)
-	{
-		corewar_delete(cw);
-		return (NULL);
-	}
-	return (cw);
+	if (proc == NULL)
+		return (0);
+	if (reg >= REG_NUMBER)
+		return (0);
+	return (proc->regs[reg]);
 }
