@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/23 15:48:20 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/25 16:07:40 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ static int	asm_init_asm(t_asm *m_asm)
 int			main(int ac, char **av)
 {
 	t_fds			fd;
-//	t_list			*file;
-//	t_header		*header;
-//	t_list			*labels;
-//	t_list			*instructs;
 	t_asm			m_asm;
 
 	if (!asm_init_asm(&m_asm))

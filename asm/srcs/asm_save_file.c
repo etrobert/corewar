@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 15:57:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/23 15:47:03 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/25 16:59:20 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		asm_save_file(int fd, t_asm *m_asm)
 
 	if (((m_asm->file) = ft_list_new()) == NULL)
 		return (0);
+	// test gnl == -1
 	while ((ret = get_next_line(fd, &line)))
 		if (ft_list_push_back(m_asm->file, line) < 0)
 			return (0);

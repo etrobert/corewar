@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:00:04 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/22 18:43:40 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/25 17:05:57 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		asm_get_prog_name(char *str, t_header **header)
 {
 	int			len;
 
+	// split au lieu de strstr pour eviter "salut.name ca va"
 	if (ft_strstr(str, NAME_CMD_STRING))
 	{
 		if ((len = ft_strrchr(str, '"') - (ft_strchr(str, '"') + 1))

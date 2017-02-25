@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/23 15:55:06 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/25 17:31:04 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int					asm_get_size(t_asm *m_asm)
 	it = ft_list_begin(m_asm->file);
 	while (!ft_list_it_end(m_asm->file, it))
 	{
-		line = ft_list_it_get(m_asm->file, it);
+		line = (char*)ft_list_it_get(m_asm->file, it);
 		if (!(name = asm_get_prog_name(line, &(m_asm->header))) ||
 				!(comment = asm_get_prog_comment(line, &(m_asm->header))))
 			return (0);

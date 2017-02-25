@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/23 16:06:27 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/25 17:31:39 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				asm_get_bytes(t_asm *m_asm)
 	it = ft_list_begin(m_asm->file);
 	while (!ft_list_it_end(m_asm->file, it))
 	{
-		line = ft_list_it_get(m_asm->file, it);
+		line = (char*)ft_list_it_get(m_asm->file, it);
 		if (!ft_strstr(line, NAME_CMD_STRING) &&
 					!ft_strstr(line, COMMENT_CMD_STRING))
 			if (!asm_get_instruct(line, m_asm))
