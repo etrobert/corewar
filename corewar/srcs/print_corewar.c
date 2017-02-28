@@ -81,9 +81,9 @@ static void			print_byte(t_corewar *corewar, unsigned int pos,
 	unsigned char	byte;
 
 	byte = corewar_get_byte(corewar, pos);
-	wattron(visu->board, COLOR_PAIR(1));
+//	wattron(visu->board, COLOR_PAIR(1));
 	mvwprintw(visu->board, visu->line, visu->col, "%.2x ", byte);
-	wattroff(visu->board, COLOR_PAIR(1));
+//	wattroff(visu->board, COLOR_PAIR(1));
 }
 
 void				print_corewar(t_corewar *cw, t_visu *visu)
