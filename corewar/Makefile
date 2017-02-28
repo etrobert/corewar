@@ -9,7 +9,7 @@ INCDIR		=	includes
 SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
 				process_get_reg.c \
-				print_corewar.c \
+				print_corewar.c play_corewar.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_get_byte.c \
 				corewar_update_process.c corewar_fork.c \
@@ -20,8 +20,8 @@ SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
 INCNAM		=	process.h corewar.h champion.h print.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/ `sdl-config --cflags`
-LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%) `sdl-config --libs` -lSDL_image -lSDL_ttf
+CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/
+LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%) -lncurses
 
 GIT			=	Makefile
 

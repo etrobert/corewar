@@ -6,14 +6,17 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/25 21:08:09 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/28 11:23:52 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "print.h"
 #include "libft.h"
 #include "champion.h"
 #include "corewar.h"
-#include "print.h"
+
+#include <fcntl.h>
+#include <unistd.h>
 
 void	print_bytes(int x)
 {
@@ -47,78 +50,17 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
-static void	print_init_sdl(t_visu *visu)
-{
-	SDL_Init(SDL_INIT_VIDEO);
-	TTF_Init();
-	visu->screen = SDL_SetVideoMode(2560, 1440, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-	SDL_WM_SetCaption("Corewar", NULL);
-	if ((visu->font = TTF_OpenFont("monaco.ttf", 12)) == NULL)
-		ft_printf("font = null");
-	visu->white.r = 255;
-	visu->white.g = 255;
-	visu->white.b = 255;
-	visu->black.r = 0;
-	visu->black.g = 0;
-	visu->black.b = 0;
-	visu->text = TTF_RenderText_Blended(visu->font, "Salut", visu->white);
-}
-
-int	play_corewar(t_corewar *corewar)
-{
-	int				ret;
-	t_visu			visu;
-	SDL_Event		event;
-
-	if (corewar == NULL)
-		return (0);
-	print_init_sdl(&visu);
-	while (!corewar_end(corewar))
-	{
-		SDL_FillRect(visu.screen, NULL, SDL_MapRGB(visu.screen->format, 30, 30, 30));
-		print_corewar(corewar, &visu);
-//		visu.pos.x = 50;
-//		visu.pos.y = 50;
-//		SDL_BlitSurface(visu.text, NULL, visu.screen, &(visu.pos));
-		SDL_Flip(visu.screen);
-		SDL_WaitEvent(&event);
-		if (event.type == SDL_QUIT)
-		{
-			SDL_Quit();
-			return (0);
-		}
-		if (event.type == SDL_KEYDOWN)
-		{
-			if (event.key.keysym.sym == SDLK_ESCAPE)
-			{
-				SDL_Quit();
-				return (0);
-			}
-		}
-		if ((ret = corewar_advance(corewar)) < 0)
-		{
-			TTF_CloseFont(visu.font);
-			TTF_Quit();
-			SDL_Quit();
-			return (ret);
-		}
-//		usleep(100000);
-	}
-	TTF_CloseFont(visu.font);
-	TTF_Quit();
-	SDL_Quit();
-	return (0);
-}
-
 int main(int argc, char **argv)
 {
 	t_champion	*champ;
 	t_list		*list;
 	t_corewar	*cw;
+	int			fd;
 
 	(void)argc;
-	(void)argv;
+//	(void)argv;
 
+	fd = open(argv[1], O_RDONLY);
 	if (!int_good_size())
 	{
 		ft_dprintf(2, "This system is not supported.\n");
@@ -129,7 +71,7 @@ int main(int argc, char **argv)
 		ft_dprintf(2, "ERROR CREATING CHAMPION\n");
 		return (-1);
 	}
-	if (champion_init(champ, 0, 0) < 0)
+	if (champion_init(champ, 0, fd) < 0)
 	{
 		ft_dprintf(2, "ERROR LOADING FILE\n");
 		champion_delete(champ);
@@ -143,5 +85,6 @@ int main(int argc, char **argv)
 
 	corewar_delete(cw);
 	champion_delete(champ);
+	close(fd);
 	return (0);
 }

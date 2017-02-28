@@ -68,29 +68,22 @@ static void			reset_color(void)
 	print_line();
 }*/
 
-/*static void			print_infos(t_corewar *corewar, t_visu *visu)
+static void			print_infos(t_corewar *corewar, t_visu *visu)
 {
-	char			*ret;
-
-	(void)visu;
-	ft_asprintf(&ret, "cycle : %u", corewar->cycle);
-	free(ret);
-	ft_asprintf(&ret, "process : %d", ft_list_size(corewar->process));
-	free(ret);
-	ft_asprintf(&ret, "cycle_to_die : %u", corewar->cycles_to_die);
-	free(ret);
-}*/
+	mvwprintw(visu->infos, 5, 10, "cycle : %u", corewar->cycle);
+	mvwprintw(visu->infos, 10, 10, "process : %d", ft_list_size(corewar->process));
+	mvwprintw(visu->infos, 15, 10, "cycle_to_die : %u", corewar->cycles_to_die);
+}
 
 static void			print_byte(t_corewar *corewar, unsigned int pos,
 		t_visu *visu)
 {
 	unsigned char	byte;
-	char			*ret;
 
 	byte = corewar_get_byte(corewar, pos);
-	ft_asprintf(&ret, "%.2x ", byte);
-	visu->text = TTF_RenderText_Blended(visu->font, ret, visu->white);
-	free(ret);
+	wattron(visu->board, COLOR_PAIR(1));
+	mvwprintw(visu->board, visu->line, visu->col, "%.2x ", byte);
+	wattroff(visu->board, COLOR_PAIR(1));
 }
 
 void				print_corewar(t_corewar *cw, t_visu *visu)
@@ -98,22 +91,20 @@ void				print_corewar(t_corewar *cw, t_visu *visu)
 	unsigned int	i;
 	unsigned int	j;
 
-	visu->pos.x = 0;
-	visu->pos.y = 0;
+	print_infos(cw, visu);
+	visu->line = 1;
 	j = 0;
 	while (j * PRINT_WIDTH < MEM_SIZE)
 	{
+		visu->col = 1;
 		i = 0;
-		visu->pos.x = 0;
 		while (i < PRINT_WIDTH && j * PRINT_WIDTH + i < MEM_SIZE)
 		{
 			print_byte(cw, j * PRINT_WIDTH + i, visu);
-			SDL_BlitSurface(visu->text, NULL, visu->screen, &(visu->pos));
-//			SDL_Flip(visu->screen);
-			visu->pos.x += 20;
 			i++;
+			visu->col += 3;
 		}
-		visu->pos.y += 15;
 		j++;
+		(visu->line)++;
 	}
 }
