@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 23:30:34 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:20:22 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
 	}
 	list = ft_list_new();
 	ft_list_push_back(list, champ);
-	cw = corewar_new(list);
+	cw = corewar_new(list, 0);
 
 	play_corewar(cw);
 

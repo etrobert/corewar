@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 20:58:08 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/25 16:19:39 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int					corewar_advance(t_corewar *corewar)
 	{
 		proc = (t_process *)(ft_list_it_get(corewar->process, it));
 		if (proc->to_wait > 0)
-			--proc->to_wait;
+			--(proc->to_wait);
 		else
 		{
 			if ((ret = apply_op(corewar, proc)) < 0)

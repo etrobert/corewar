@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 16:16:52 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 12:19:28 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:24:06 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void				corewar_kill_process(t_corewar *corewar)
 		process = (t_process *)(ft_list_it_get(corewar->process, it));
 		if (process->last_live <= corewar->last_check)
 		{
-			printf("A process on pc:[%d] died\n", process->pc);
+			ft_dprintf(corewar->fd, "A process on pc:[%d] died\n", process->pc);
 			process_delete(process);
 			ft_list_erase(corewar->process, it);
 		}

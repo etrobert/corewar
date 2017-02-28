@@ -72,3 +72,5 @@ Lorsquon traite un process :
 
 Verifier lordre des instructions de la boucle principale pour coller a la
 machine de reference.
+
+Bug quand fichier non valide

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 12:29:18 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 21:01:26 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:23:29 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,4 @@ void				corewar_update_process(t_corewar *corewar,
 			process->pc, sizeof(unsigned char));
 	process->current_op = get_op_by_code(op_code);
 	process->to_wait = process->current_op->cycles;
-	ft_dprintf(2, "the process on %d is waiting to do %s\n", process->pc,
-			process->current_op->name);
 }
