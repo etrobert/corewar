@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/23 15:52:58 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/02/28 16:30:26 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,11 @@ int					asm_get_prog_comment(char *str, t_header **header);
 int					asm_get_bytes(t_asm *m_asm);
 void				asm_get_params(char **split, int n,
 		t_bytes **bytes_instruct, t_asm *m_asm);
+unsigned int		asm_get_pos(t_list *instructs);
+void				asm_param_byte_label_dir(char *param,
+		t_bytes **bytes_instruct, t_asm *m_asm, int i);
+void				asm_param_byte_label_ind(char *param,
+		t_bytes **bytes_instruct, t_asm *m_asm, int i);
 
 /*
 **	write in .cor
