@@ -74,3 +74,5 @@ Verifier lordre des instructions de la boucle principale pour coller a la
 machine de reference.
 
 Bug quand fichier non valide
+
+Que faire quand on demande doperer sur un registre non existant ?
