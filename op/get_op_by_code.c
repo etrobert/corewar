@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_usage.c                                        :+:      :+:    :+:   */
+/*   get_op_by_code.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 19:27:00 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/28 17:41:03 by mverdier         ###   ########.fr       */
+/*   Created: 2017/02/17 10:57:43 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/01 17:17:29 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "op.h"
 
-int		asm_usage(int ac, char **av)
+t_op				*get_op_by_code(unsigned char op_code)
 {
-	char	*ret;
+	int		i;
 
-	if (ac != 2 || !(ret = ft_strrchr(av[1], '.')) || ft_strcmp(ret, ".s"))
-	{
-		ft_printf("Usage : %s [filename].s\n", av[0]);
-		return (0);
-	}
-	return (1);
+	i = 0;
+	while (g_op_tab[i].op_code != op_code && g_op_tab[i].name != NULL)
+		++i;
+	if (g_op_tab[i].name != NULL)
+		return (g_op_tab + i);
+	return (NULL);
 }

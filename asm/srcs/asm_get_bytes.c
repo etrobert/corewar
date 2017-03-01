@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/25 17:31:39 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/01 17:37:40 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static int		asm_init_bytes(t_bytes **bytes_struct)
 	t_bytes		*bytes;
 
 	if ((*bytes_struct = (t_bytes*)malloc(sizeof(t_bytes))) == NULL)
+	{
+		ft_dprintf(2, "Malloc error\n");
 		return (0);
+	}
 	bytes = *bytes_struct;
 	bytes->op_c = 0;
 	bytes->op_c_size = 0;
@@ -32,26 +35,50 @@ static int		asm_init_bytes(t_bytes **bytes_struct)
 static int		asm_get_instruct(char *line, t_asm *m_asm)
 {
 	char		**split;
-	int			i;
 	int			n;
 	t_bytes		*bytes;
+	t_op		*op_tab;
 
 	if (!asm_init_bytes(&bytes))
 		return (0);
 	if (!(split = ft_strsplit_str(line, " \t,")))
+	{
+		free(bytes);
 		return (0);
+	}
 	n = 0;
+	if (split[n][0] == COMMENT_CHAR || split[n][0] == ';')
+	{
+		asm_free_split(split);
+		free(bytes);
+		return (1);
+	}
 	if (split[n] && split[n][ft_strlen(split[n]) - 1] == LABEL_CHAR)
 		n++;
-	if (!split[n] || split[n][0] == COMMENT_CHAR || split[n][0] == ';')
-		return (1);
-	i = 0;
-	while (g_op_tab[i].op_code > 0 && ft_strcmp(split[n], g_op_tab[i].name))
-		i++;
-	bytes->op_c = g_op_tab[i].op_code;
+	if (!split[n])
+	{
+		asm_free_split(split);
+		free(bytes);
+		return (0);
+	}
+	if ((op_tab = get_op_by_name(split[n])) == NULL)
+	{
+		ft_dprintf(2, "Bad op\n");
+		asm_free_split(split);
+		free(bytes);
+		return (0);
+	}
+	bytes->op_c = op_tab->op_code;
 	asm_get_params(split, n + 1, &bytes, m_asm);
 	bytes->op_c_size = 1;
-	ft_list_push_back(m_asm->instructs, bytes);
+	if (ft_list_push_back(m_asm->instructs, bytes) < 0)
+	{
+		asm_free_split(split);
+		free(bytes);
+		return (0);
+	}
+	asm_free_split(split);
+	free(bytes);
 	return (1);
 }
 

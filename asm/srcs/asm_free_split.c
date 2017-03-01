@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_usage.c                                        :+:      :+:    :+:   */
+/*   asm_free_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 19:27:00 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/28 17:41:03 by mverdier         ###   ########.fr       */
+/*   Created: 2017/02/28 17:21:09 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/28 17:26:52 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "op.h"
+#include "asm.h"
 
-int		asm_usage(int ac, char **av)
+void	asm_free_split(char **split)
 {
-	char	*ret;
+	int		i;
 
-	if (ac != 2 || !(ret = ft_strrchr(av[1], '.')) || ft_strcmp(ret, ".s"))
+	i = 0;
+	while (split[i] != NULL)
 	{
-		ft_printf("Usage : %s [filename].s\n", av[0]);
-		return (0);
+		free(split[i]);
+		i++;
 	}
-	return (1);
+	free(split);
 }

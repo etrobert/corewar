@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/28 16:30:26 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/01 14:49:26 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 # include <fcntl.h>
 # include <unistd.h>
-
 
 # define NAME			1
 # define COMMENT		1
@@ -103,6 +102,8 @@ int					asm_save_file(int fd, t_asm *m_asm);
 int					asm_get_size(t_asm *m_asm);
 int					asm_get_prog_name(char *str, t_header **header);
 int					asm_get_prog_comment(char *str, t_header **header);
+unsigned int		asm_get_line_size(char *line, t_list **labels,
+		unsigned int big_size);
 
 int					asm_get_bytes(t_asm *m_asm);
 void				asm_get_params(char **split, int n,
@@ -118,5 +119,11 @@ void				asm_param_byte_label_ind(char *param,
 */
 
 void				asm_write_bytes(int fd, t_asm m_asm);
+
+/*
+**	free functions
+*/
+
+void				asm_free_split(char **split);
 
 #endif

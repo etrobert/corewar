@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/25 17:31:04 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/01 14:50:43 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,82 +24,13 @@ static int			asm_init_header_and_labels(t_asm *m_asm)
 	return (1);
 }
 
-static int			asm_get_label(char *param, t_list **labels,
-		unsigned int size)
-{
-	t_labels		*label;
-
-	if ((label = (t_labels*)malloc(sizeof(t_labels))) == NULL)
-		return (0);
-	label->name = ft_strextract(param, LABEL_CHAR);
-	label->position = size;
-	ft_list_push_back(*labels, label);
-	return (1);
-}
-
-static int			asm_get_params_size(char **split, int n, t_op op_tab)
-{
-	int				i;
-	unsigned int	size;
-
-	size = 0;
-	i = 0;
-	while (split[n + i])
-	{
-		if (split[n + i][0] == COMMENT_CHAR || split[n + i][0] == ';')
-			return (size);
-		if (split[n + i][0] == 'r')
-			size += 1;
-		else if (split[n + i][0] == DIRECT_CHAR && op_tab.small_direct == true)
-			size += 2;
-		else if (split[n + i][0] == DIRECT_CHAR)
-			size += 4;
-		else
-			size += 2;
-		i++;
-	}
-	if (op_tab.ocp == true)
-		return (size + 2);
-	return (size + 1);
-}
-
-static unsigned int	asm_get_line_size(char *line, t_list **labels,
-		unsigned int big_size)
-{
-	unsigned int	size;
-	char			**split;
-	int				i;
-	int				n;
-
-	if (!(split = ft_strsplit_str(line, " \t,")))
-		return (0);
-	n = 0;
-	if (split[n] && ft_strchr(split[n], LABEL_CHAR))
-	{
-		asm_get_label(split[n], labels, big_size);
-		n++;
-	}
-	if (!split[n] || split[n][0] == COMMENT_CHAR || split[n][0] == ';')
-		return (0);
-	i = 0;
-	while (g_op_tab[i].op_code > 0 && ft_strcmp(split[n], g_op_tab[i].name))
-		i++;
-	if (g_op_tab[i].op_code == 0)
-		return (0);
-	size = asm_get_params_size(split, n + 1, g_op_tab[i]);
-	return (size);
-}
-
-int					asm_get_size(t_asm *m_asm)
+static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 {
 	int				name;
 	int				comment;
-	t_list_it		it;
 	char			*line;
+	unsigned int	ret;
 
-	if (!asm_init_header_and_labels(m_asm))
-		return (0);
-	it = ft_list_begin(m_asm->file);
 	while (!ft_list_it_end(m_asm->file, it))
 	{
 		line = (char*)ft_list_it_get(m_asm->file, it);
@@ -107,10 +38,27 @@ int					asm_get_size(t_asm *m_asm)
 				!(comment = asm_get_prog_comment(line, &(m_asm->header))))
 			return (0);
 		if (name != NAME && comment != COMMENT)
-			(m_asm->header)->prog_size += asm_get_line_size(line,
-					&(m_asm->labels), (m_asm->header)->prog_size);
+		{
+			ret = asm_get_line_size(line, &(m_asm->labels),
+					(m_asm->header)->prog_size);
+			(m_asm->header)->prog_size += ret;
+		}
+		if (ret == (unsigned int)-1)
+			return (0);
 		ft_list_it_inc(&it);
 	}
+	return (1);
+}
+
+int					asm_get_size(t_asm *m_asm)
+{
+	t_list_it		it;
+
+	if (!asm_init_header_and_labels(m_asm))
+		return (0);
+	it = ft_list_begin(m_asm->file);
+	if (!asm_line_loop(m_asm, it))
+		return (0);
 	(m_asm->header)->prog_size =
 		ft_uint32_big_endian((m_asm->header)->prog_size);
 	return (1);

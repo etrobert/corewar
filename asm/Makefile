@@ -6,9 +6,10 @@ OPDIR		=	../op
 
 SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c	\
 				asm_get_size.c asm_save_file.c asm_get_prog_name.c	\
-				asm_get_prog_comment.c asm_get_params.c asm_get_bytes.c	\
+				asm_get_prog_comment.c asm_get_params.c	\
+				asm_get_line_size.c asm_get_bytes.c	\
 				asm_get_pos.c asm_param_byte_label_dir.c	\
-				asm_param_byte_label_ind.c	\
+				asm_param_byte_label_ind.c asm_free_split.c	\
 				asm_write_bytes.c
 INCNAM		=	asm.h
 
@@ -22,7 +23,10 @@ GIT			=	Makefile
 LIBFTDIR	=	~/work/libft
 LIBFTNAM	=	libft.a
 
-SRC			=	../op/op.c $(SRCNAM:%=$(SRCDIR)/%)
+SRC			=	$(SRCNAM:%=$(SRCDIR)/%)	\
+				../op/op.c				\
+				../op/get_op_by_code.c	\
+				../op/get_op_by_name.c
 INC			=	$(INCNAM:%=$(INCDIR)/%)
 OBJ			=	$(SRC:%.c=%.o)
 

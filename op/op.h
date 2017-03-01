@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/02/15 20:16:24 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/01 17:17:43 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <stdlib.h>
+# include "libft.h"
 
 /*
 ** Toutes les tailles sont en octets.
@@ -71,30 +72,32 @@ typedef char	t_arg_type;
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
-typedef struct		s_header
+typedef struct			s_header
 {
 	unsigned int		magic;
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
-}					t_header;
+}						t_header;
 
 /*
 **
 */
 
-typedef struct		s_op
+typedef struct			s_op
 {
-	char			*name;
-	int				nb_params;
-	t_arg_type		params[3];
-	int				op_code;
-	int				cycles;
-	char			*comment;
-	bool			ocp;
-	bool			small_direct;
-}					t_op;
+	char				*name;
+	int					nb_params;
+	t_arg_type			params[3];
+	int					op_code;
+	int					cycles;
+	char				*comment;
+	bool				ocp;
+	bool				small_direct;
+}						t_op;
 
-t_op	g_op_tab[17];
+t_op					g_op_tab[17];
+t_op					*get_op_by_code(unsigned char op_code);
+t_op					*get_op_by_name(const char *name);
 
 #endif
