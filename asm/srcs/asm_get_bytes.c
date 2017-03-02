@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/01 17:37:40 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 16:27:22 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,52 @@ static int		asm_init_bytes(t_bytes **bytes_struct)
 	return (1);
 }
 
+static int		asm_go_to_instruct(char **split, int *n, t_bytes **bytes)
+{
+	if (split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
+	{
+		asm_free_split(split);
+		free(*bytes);
+		return (1);
+	}
+	if (split[*n] && split[*n][ft_strlen(split[*n]) - 1] == LABEL_CHAR)
+		(*n)++;
+	if (!split[*n])
+	{
+		asm_free_split(split);
+		free(*bytes);
+		return (0);
+	}
+	return (2);
+}
+
+static int		asm_get_line(char **split, t_bytes **bytes, t_asm *m_asm)
+{
+	int			n;
+	int			ret;
+	t_op		*op_tab;
+
+	n = 0;
+	if ((ret = asm_go_to_instruct(split, &n, bytes)) < 2)
+		return (ret);
+	if ((op_tab = get_op_by_name(split[n])) == NULL)
+	{
+		ft_dprintf(2, "Bad op\n");
+		asm_free_split(split);
+		free(*bytes);
+		return (0);
+	}
+	(*bytes)->op_c = op_tab->op_code;
+	asm_get_params(split, n + 1, bytes, m_asm);
+	(*bytes)->op_c_size = 1;
+	return (2);
+}
+
 static int		asm_get_instruct(char *line, t_asm *m_asm)
 {
 	char		**split;
-	int			n;
 	t_bytes		*bytes;
-	t_op		*op_tab;
+	int			ret;
 
 	if (!asm_init_bytes(&bytes))
 		return (0);
@@ -46,31 +86,8 @@ static int		asm_get_instruct(char *line, t_asm *m_asm)
 		free(bytes);
 		return (0);
 	}
-	n = 0;
-	if (split[n][0] == COMMENT_CHAR || split[n][0] == ';')
-	{
-		asm_free_split(split);
-		free(bytes);
-		return (1);
-	}
-	if (split[n] && split[n][ft_strlen(split[n]) - 1] == LABEL_CHAR)
-		n++;
-	if (!split[n])
-	{
-		asm_free_split(split);
-		free(bytes);
-		return (0);
-	}
-	if ((op_tab = get_op_by_name(split[n])) == NULL)
-	{
-		ft_dprintf(2, "Bad op\n");
-		asm_free_split(split);
-		free(bytes);
-		return (0);
-	}
-	bytes->op_c = op_tab->op_code;
-	asm_get_params(split, n + 1, &bytes, m_asm);
-	bytes->op_c_size = 1;
+	if ((ret = asm_get_line(split, &bytes, m_asm)) < 2)
+		return (ret);
 	if (ft_list_push_back(m_asm->instructs, bytes) < 0)
 	{
 		asm_free_split(split);
@@ -78,7 +95,6 @@ static int		asm_get_instruct(char *line, t_asm *m_asm)
 		return (0);
 	}
 	asm_free_split(split);
-	free(bytes);
 	return (1);
 }
 
