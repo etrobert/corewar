@@ -1,15 +1,21 @@
 NAME		=	asm
 
 SRCDIR		=	srcs
-OBJDIR		=	objs
 INCDIR		=	includes
+OPDIR		=	../op
 
-SRCNAM		=
-INCNAM		=	
+SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c	\
+				asm_get_size.c asm_save_file.c asm_get_prog_name.c	\
+				asm_get_prog_comment.c asm_get_params.c	\
+				asm_get_line_size.c asm_get_bytes.c	\
+				asm_get_pos.c asm_param_byte_label_dir.c	\
+				asm_param_byte_label_ind.c asm_free_split.c	\
+				asm_write_bytes.c
+INCNAM		=	asm.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes	\
-				-I ../op/
+CFLAGS		=	-g -Wall -Wextra -Werror -I $(INCDIR) -I $(LIBFTDIR)/includes \
+				-I $(OPDIR)
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	Makefile
@@ -17,23 +23,25 @@ GIT			=	Makefile
 LIBFTDIR	=	~/work/libft
 LIBFTNAM	=	libft.a
 
-SRC			=	$(SRCNAM:%=$(SRCDIR)/%)
+SRC			=	$(SRCNAM:%=$(SRCDIR)/%)	\
+				../op/op.c				\
+				../op/get_op_by_code.c	\
+				../op/get_op_by_name.c
 INC			=	$(INCNAM:%=$(INCDIR)/%)
-OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJ			=	$(SRC:%.c=%.o)
 
 all:
-#	@$(MAKE) -C $(LIBFTDIR)
-#	@$(MAKE) $(NAME)
+	@$(MAKE) -C $(LIBFTDIR)
+	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJ)
 	@$(MAKE) printname
 	@printf "Linking\t\t%s\n" $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
+%.o: %.c $(INC)
 	@$(MAKE) printname
 	@printf "Compiling\t%s\n"	$@
-	@mkdir -p $(OBJDIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 .PHONY: all git no printf check clean fclean re printname
@@ -62,7 +70,7 @@ printname:
 clean:
 	@$(MAKE) printname
 	@echo Suppressing obj files
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJ)
 
 fclean: clean
 	@$(MAKE) printname

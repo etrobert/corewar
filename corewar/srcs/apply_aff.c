@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_op_by_code.c                                   :+:      :+:    :+:   */
+/*   apply_aff.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 10:57:43 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/01 19:53:36 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/02 21:13:06 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/02 22:04:13 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "corewar.h"
 
-t_op				*get_op_by_code(unsigned char op_code)
+int					apply_aff(t_corewar *corewar, t_process *process)
 {
-	int		i;
+	t_op_params		params;
+	int				ret;
 
-	i = 0;
-	while (g_op_tab[i].op_code != op_code && g_op_tab[i].name != NULL)
-		++i;
-	return (g_op_tab + i);
+	ft_dprintf(2, "Jaffiche\n");
+	if ((ret = corewar_parse_params(corewar, process, &params)) == 0)
+		ft_dprintf(corewar->fd, "Aff: %c\n", process_get_reg(process,
+					params.params[0].c));
+	corewar_update_process_pc(corewar, process, params.offset);
+	return (0);
 }

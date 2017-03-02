@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_op_by_code.c                                   :+:      :+:    :+:   */
+/*   ocp_get_type.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 10:57:43 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/01 19:53:36 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/02 21:03:35 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/02 21:03:41 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "corewar.h"
 
-t_op				*get_op_by_code(unsigned char op_code)
+char				ocp_get_type(unsigned char ocp, int id)
 {
-	int		i;
-
-	i = 0;
-	while (g_op_tab[i].op_code != op_code && g_op_tab[i].name != NULL)
-		++i;
-	return (g_op_tab + i);
+	return ((ocp >> ((3 - id) * 2)) & 0xff);
 }
+

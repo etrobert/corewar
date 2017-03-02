@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/25 16:19:39 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:02:14 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static t_f_cw_op	get_op_func(unsigned char op_code)
 		NULL, NULL, NULL, NULL, NULL, NULL, NULL,
 		&apply_zjmp,
 		NULL, NULL,
-		&apply_fork };
+		&apply_fork,
+		NULL, NULL, NULL,
+		&apply_aff };
 
 	if (op_code >= 17 || tab[op_code] == NULL)
 		return (tab[0]);

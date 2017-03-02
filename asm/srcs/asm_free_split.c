@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_op_by_code.c                                   :+:      :+:    :+:   */
+/*   asm_free_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 10:57:43 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/01 19:53:36 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/28 17:21:09 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/28 17:26:52 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "asm.h"
 
-t_op				*get_op_by_code(unsigned char op_code)
+void	asm_free_split(char **split)
 {
 	int		i;
 
 	i = 0;
-	while (g_op_tab[i].op_code != op_code && g_op_tab[i].name != NULL)
-		++i;
-	return (g_op_tab + i);
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

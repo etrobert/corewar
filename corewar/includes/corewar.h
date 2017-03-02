@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/28 17:20:59 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/02 22:02:42 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ typedef union		u_param
 	unsigned int	i;
 }					t_param;
 
-typedef struct		s_cw_params
+typedef struct		s_op_params
 {
-	unsigned int	params[3];
+	t_param			params[3];
+//	char			params_code[3];
 	unsigned int	offset;
 	unsigned char	ocp;
-}					t_cw_params;
+	//Ca pue mais necessaire pour get_param
+	t_corewar		*corewar;
+}					t_op_params;
 
 typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
 
@@ -63,8 +66,8 @@ unsigned char		corewar_get_byte(const t_corewar *corewar,
 ** private: ====================================================================
 */
 
-t_cw_params			corewar_parse_params(t_corewar *corewar,
-		t_process *process);
+int					corewar_parse_params(t_corewar *corewar, t_process *process,
+		t_op_params *params);
 
 void				corewar_update_process_pc(t_corewar *corewar,
 		t_process *proc, int value);
@@ -86,9 +89,12 @@ void				corewar_kill_process(t_corewar *corewar);
 ** op functions ================================================================
 */
 
+char				ocp_get_type(unsigned char ocp, int id);
+
 int					apply_nothing(t_corewar *corewar, t_process *process);
 int					apply_live(t_corewar *corewar, t_process *process);
-int					apply_fork(t_corewar *corewar, t_process *process);
 int					apply_zjmp(t_corewar *corewar, t_process *process);
+int					apply_fork(t_corewar *corewar, t_process *process);
+int					apply_aff(t_corewar *corewar, t_process *process);
 
 #endif
