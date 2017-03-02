@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:05:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/01 17:33:38 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 16:57:29 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,5 @@ unsigned int	asm_get_line_size(char *line, t_list **labels,
 	}
 	size = asm_get_params_size(split, n + 1, op_tab);
 	asm_free_split(split);
-//	free(op_tab);
 	return (size);
 }
