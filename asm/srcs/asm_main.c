@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 16:06:55 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 18:46:09 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	asm_close(t_fds fd)
 	return (1);
 }
 
-static int asm_read(t_fds *fd, t_asm *m_asm, char *file)
+static int	asm_read(t_fds *fd, t_asm *m_asm, char *file)
 {
 	if ((fd->in = asm_open(file)) < 0)
 		return (0);

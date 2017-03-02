@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:05:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 16:57:29 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 18:45:11 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,38 @@ static int		asm_get_params_size(char **split, int n, t_op *op_tab)
 	return (size + 1);
 }
 
+static int		asm_go_to_instruct(char **split, int *n, t_list **labels,
+		unsigned int big_size)
+{
+	if (split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
+	{
+		free(split);
+		return (0);
+	}
+	if (split[*n] && split[*n][ft_strlen(split[*n]) - 1] == LABEL_CHAR)
+	{
+		if (!asm_get_label(split[*n], labels, big_size))
+		{
+			asm_free_split(split);
+			return (-1);
+		}
+		(*n)++;
+	}
+	if (!split[*n])
+	{
+		asm_free_split(split);
+		return (-1);
+	}
+	return (1);
+}
+
 unsigned int	asm_get_line_size(char *line, t_list **labels,
 		unsigned int big_size)
 {
 	unsigned int	size;
 	char			**split;
 	int				n;
+	int				ret;
 	t_op			*op_tab;
 
 	if ((split = ft_strsplit_str(line, " \t,")) == NULL)
@@ -68,22 +94,8 @@ unsigned int	asm_get_line_size(char *line, t_list **labels,
 		return (-1);
 	}
 	n = 0;
-	if (split[n][0] == COMMENT_CHAR || split[n][0] == ';')
-		return (0);
-	if (split[n] && ft_strchr(split[n], LABEL_CHAR))
-	{
-		if (!asm_get_label(split[n], labels, big_size))
-		{
-			asm_free_split(split);
-			return (-1);
-		}
-		n++;
-	}
-	if (!split[n])
-	{
-		asm_free_split(split);
-		return (-1);
-	}
+	if ((ret = asm_go_to_instruct(split, &n, labels, big_size)) < 1)
+		return (ret);
 	if ((op_tab = get_op_by_name(split[n])) == NULL)
 	{
 		ft_dprintf(2, "Bad op\n");

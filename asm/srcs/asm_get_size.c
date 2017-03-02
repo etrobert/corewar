@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/01 14:50:43 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 18:55:08 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 static int			asm_init_header_and_labels(t_asm *m_asm)
 {
 	if (((m_asm->header) = (t_header*)malloc(sizeof(t_header))) == NULL)
+	{
+		ft_dprintf(2, "Malloc error\n");
 		return (0);
+	}
 	ft_bzero(m_asm->header, sizeof(t_header));
 	(m_asm->header)->magic = ft_uint32_big_endian(COREWAR_EXEC_MAGIC);
 	(m_asm->header)->prog_size = 0;
 	if ((m_asm->labels = ft_list_new()) == NULL)
+	{
+		ft_dprintf(2, "Malloc error\n");
 		return (0);
+	}
 	return (1);
 }
 
@@ -42,6 +48,12 @@ static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 			ret = asm_get_line_size(line, &(m_asm->labels),
 					(m_asm->header)->prog_size);
 			(m_asm->header)->prog_size += ret;
+			if (((m_asm->header)->prog_size) > CHAMP_MAX_SIZE)
+			{
+				ft_dprintf(2, "Champion is too big (max : %d)\n",
+						CHAMP_MAX_SIZE);
+				return (0);
+			}
 		}
 		if (ret == (unsigned int)-1)
 			return (0);
