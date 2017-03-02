@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:30:00 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 16:14:58 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:07:50 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		asm_write_bytes(int fd, t_asm m_asm)
 	while (!ft_list_it_end(m_asm.instructs, it))
 	{
 		bytes = ft_list_it_get(m_asm.instructs, it);
-		write(fd, &(bytes->op_c), bytes->op_c_size);
+		write(fd, &(bytes->op_tab->op_code), 1);
 		write(fd, &(bytes->ocp), bytes->ocp_size);
 		asm_write_params_bytes(fd, bytes);
 		ft_list_it_inc(&it);

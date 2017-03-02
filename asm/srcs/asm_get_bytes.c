@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 16:27:22 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:09:11 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static int		asm_init_bytes(t_bytes **bytes_struct)
 		return (0);
 	}
 	bytes = *bytes_struct;
-	bytes->op_c = 0;
-	bytes->op_c_size = 0;
 	bytes->ocp = 0;
 	bytes->ocp_size = 0;
 	bytes->param_size[0] = 0;
@@ -55,21 +53,18 @@ static int		asm_get_line(char **split, t_bytes **bytes, t_asm *m_asm)
 {
 	int			n;
 	int			ret;
-	t_op		*op_tab;
 
 	n = 0;
 	if ((ret = asm_go_to_instruct(split, &n, bytes)) < 2)
 		return (ret);
-	if ((op_tab = get_op_by_name(split[n])) == NULL)
+	if (((*bytes)->op_tab = get_op_by_name(split[n])) == NULL)
 	{
 		ft_dprintf(2, "Bad op\n");
 		asm_free_split(split);
 		free(*bytes);
 		return (0);
 	}
-	(*bytes)->op_c = op_tab->op_code;
 	asm_get_params(split, n + 1, bytes, m_asm);
-	(*bytes)->op_c_size = 1;
 	return (2);
 }
 

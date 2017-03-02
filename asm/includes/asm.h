@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/01 14:49:26 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:47:16 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ typedef union		u_params
 
 typedef struct		s_bytes
 {
-	unsigned char	op_c;
-	int				op_c_size;
+	t_op			*op_tab;
 	unsigned char	ocp;
 	int				ocp_size;
 	t_params		param[3];

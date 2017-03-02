@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:16:42 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/28 16:30:29 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:12:47 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ void	asm_param_byte_label_ind(char *param, t_bytes **bytes_instruct,
 {
 	t_list_it		it;
 	t_labels		*label;
-	int				j;
 	unsigned int	pos;
+	t_bytes			*bytes;
 
-	j = 0;
-	while (g_op_tab[j].op_code > 0 && g_op_tab[j].op_code
-			!= (*bytes_instruct)->op_c)
-		j++;
+	bytes = *bytes_instruct;
 	pos = asm_get_pos(m_asm->instructs);
 	it = ft_list_begin(m_asm->labels);
 	while (!ft_list_it_end(m_asm->labels, it))
@@ -31,9 +28,9 @@ void	asm_param_byte_label_ind(char *param, t_bytes **bytes_instruct,
 		label = ft_list_it_get(m_asm->labels, it);
 		if (!strcmp(param, label->name))
 		{
-			(*bytes_instruct)->param[i].s =
+			bytes->param[i].s =
 				ft_ushort16_big_endian(label->position - pos);
-			(*bytes_instruct)->param_size[i] = 2;
+			bytes->param_size[i] = 2;
 		}
 		ft_list_it_inc(&it);
 	}

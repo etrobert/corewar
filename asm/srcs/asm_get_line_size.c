@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:05:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 18:45:11 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:47:11 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ unsigned int	asm_get_line_size(char *line, t_list **labels,
 
 	if ((split = ft_strsplit_str(line, " \t,")) == NULL)
 	{
-		ft_dprintf(2, "Malloc or syntax error (separators)\n");
+		ft_dprintf(2, "Malloc error\n");
 		return (-1);
 	}
 	n = 0;
@@ -98,9 +98,9 @@ unsigned int	asm_get_line_size(char *line, t_list **labels,
 		return (ret);
 	if ((op_tab = get_op_by_name(split[n])) == NULL)
 	{
-		ft_dprintf(2, "Bad op\n");
+		ft_dprintf(2, "Bad op [%s]\n", split[n]);
 		asm_free_split(split);
-		return (0);
+		return (-1);
 	}
 	size = asm_get_params_size(split, n + 1, op_tab);
 	asm_free_split(split);
