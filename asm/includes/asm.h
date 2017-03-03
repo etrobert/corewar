@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 19:47:16 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/03 15:54:57 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int					asm_create(char *filename);
 int					asm_save_file(int fd, t_asm *m_asm);
 
 int					asm_get_size(t_asm *m_asm);
+int					asm_get_params_size(char **split, int n, t_op *op_tab);
 int					asm_get_prog_name(char *str, t_header **header);
 int					asm_get_prog_comment(char *str, t_header **header);
 unsigned int		asm_get_line_size(char *line, t_list **labels,

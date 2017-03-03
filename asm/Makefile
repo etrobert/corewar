@@ -7,7 +7,7 @@ OPDIR		=	../op
 SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c	\
 				asm_get_size.c asm_save_file.c asm_get_prog_name.c	\
 				asm_get_prog_comment.c asm_get_params.c	\
-				asm_get_line_size.c asm_get_bytes.c	\
+				asm_get_line_size.c asm_get_params_size.c asm_get_bytes.c	\
 				asm_get_pos.c asm_param_byte_label_dir.c	\
 				asm_param_byte_label_ind.c asm_free_split.c	\
 				asm_write_bytes.c

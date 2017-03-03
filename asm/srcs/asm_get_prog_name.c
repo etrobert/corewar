@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:00:04 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/01 13:58:55 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/03 15:50:47 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int		asm_get_prog_name(char *str, t_header **header)
 	char		**split;
 
 	split = NULL;
-	if (ft_strchr(str, ' ') && !(split = ft_strsplit(str, ' ')))
+	if ((ft_strchr(str, ' ') || ft_strchr(str, '\t'))
+			&& !(split = ft_strsplit_str(str, " \t")))
 		return (0);
-	else if (!ft_strchr(str, ' '))
+	else if (!ft_strchr(str, ' ') && !ft_strchr(str, '\t'))
 		return (NOT_NAME);
 	if (!ft_strcmp(split[0], NAME_CMD_STRING))
 	{

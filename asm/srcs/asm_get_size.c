@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 19:47:14 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/03 15:33:15 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 		{
 			ret = asm_get_line_size(line, &(m_asm->labels),
 					(m_asm->header)->prog_size);
+			if (ret == (unsigned int)(-1))
+				return (0);
 			(m_asm->header)->prog_size += ret;
 			if (((m_asm->header)->prog_size) > CHAMP_MAX_SIZE)
 			{
@@ -55,8 +57,6 @@ static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 				return (0);
 			}
 		}
-		if (ret == (unsigned int)-1)
-			return (0);
 		ft_list_it_inc(&it);
 	}
 	return (1);

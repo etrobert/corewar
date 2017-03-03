@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:05:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 19:47:11 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/03 15:54:56 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,6 @@ static int		asm_get_label(char *param, t_list **labels,
 	label->position = size;
 	ft_list_push_back(*labels, label);
 	return (1);
-}
-
-static int		asm_get_params_size(char **split, int n, t_op *op_tab)
-{
-	int				i;
-	unsigned int	size;
-
-	size = 0;
-	i = 0;
-	while (split[n + i])
-	{
-		if (split[n + i][0] == COMMENT_CHAR || split[n + i][0] == ';')
-			return (size);
-		if (split[n + i][0] == 'r')
-			size += 1;
-		else if (split[n + i][0] == DIRECT_CHAR && op_tab->small_direct == true)
-			size += 2;
-		else if (split[n + i][0] == DIRECT_CHAR)
-			size += 4;
-		else
-			size += 2;
-		i++;
-	}
-	if (op_tab->ocp == true)
-		return (size + 2);
-	return (size + 1);
 }
 
 static int		asm_go_to_instruct(char **split, int *n, t_list **labels,
@@ -102,7 +76,9 @@ unsigned int	asm_get_line_size(char *line, t_list **labels,
 		asm_free_split(split);
 		return (-1);
 	}
-	size = asm_get_params_size(split, n + 1, op_tab);
+	if ((size = asm_get_params_size(split, n + 1, op_tab))
+			== (unsigned int)(-1))
+		return (-1);
 	asm_free_split(split);
 	return (size);
 }
