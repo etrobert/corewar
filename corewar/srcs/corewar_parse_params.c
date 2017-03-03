@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:37:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/02 21:53:39 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/03 16:31:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,19 @@ int					corewar_parse_params(t_corewar *corewar, t_process *process,
 {
 	int				i;
 	int				ret;
+	int				tmp;
 
 	params->offset = 1;
 	ft_cbuff_read(corewar->memory, &(params->ocp), process->pc + params->offset,
 			sizeof(unsigned char));
 	++(params->offset);
+	ret = 0;
 	i = 0;
 	while (i < process->current_op->nb_params)
 	{
-		if ((ret = corewar_parse_one_param(corewar, process, params, i)) != 0)
-			return (ret);
+		if ((tmp = corewar_parse_one_param(corewar, process, params, i)) != 0)
+			ret = tmp;
 		++i;
 	}
-	return (0);
+	return (ret);
 }
