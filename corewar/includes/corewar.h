@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 22:09:13 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 22:23:32 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,6 @@ typedef struct		s_op_params
 	unsigned int	offset;
 	unsigned char	ocp;
 }					t_op_params;
-
-typedef struct		s_memory
-{
-	void			*ptr;
-	size_t			size;
-}					t_memory;
 
 typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
 
