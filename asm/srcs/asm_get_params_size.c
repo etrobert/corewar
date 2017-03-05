@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 15:16:48 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/03 15:54:58 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 14:11:17 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,21 @@
 
 static int	asm_reg_size(char *param, t_op *op_tab, int i, unsigned int *size)
 {
+	int		reg;
+
+	reg = 0;
 	if (param[0] == 'r')
 	{
+		reg = ft_atoi(param + 1);
 		if (!(op_tab->params[i] & T_REG))
 		{
 			ft_dprintf(2, "Bad param \'%s\' for \'%s\'\n", param,
+					op_tab->name);
+			return (0);
+		}
+		if (reg < 0 || reg > REG_NUMBER)
+		{
+			ft_dprintf(2, "Bad reg number \'%d\' for \'%s\'\n", reg,
 					op_tab->name);
 			return (0);
 		}

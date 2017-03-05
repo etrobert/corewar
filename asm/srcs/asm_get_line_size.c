@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:05:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/03 15:54:56 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 15:14:04 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static int		asm_get_label(char *param, t_list **labels,
 static int		asm_go_to_instruct(char **split, int *n, t_list **labels,
 		unsigned int big_size)
 {
+	int		lab;
+
+	lab = 0;
 	if (split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
 	{
 		free(split);
@@ -38,6 +41,7 @@ static int		asm_go_to_instruct(char **split, int *n, t_list **labels,
 	}
 	if (split[*n] && split[*n][ft_strlen(split[*n]) - 1] == LABEL_CHAR)
 	{
+		lab = 1;
 		if (!asm_get_label(split[*n], labels, big_size))
 		{
 			asm_free_split(split);
@@ -45,9 +49,11 @@ static int		asm_go_to_instruct(char **split, int *n, t_list **labels,
 		}
 		(*n)++;
 	}
-	if (!split[*n])
+	if (!split[*n] || split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
 	{
 		asm_free_split(split);
+		if (lab == 1 || split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
+			return (0);
 		return (-1);
 	}
 	return (1);

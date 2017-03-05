@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/03 15:54:59 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 17:17:21 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	asm_write(t_fds *fd, t_asm m_asm, char *file)
 {
 	if ((fd->out = asm_create(file)) < 0)
 		return (0);
-	asm_write_bytes(fd->out, m_asm);
+	asm_write_bytes(fd->out, m_asm, file);
 	return (1);
 }
 

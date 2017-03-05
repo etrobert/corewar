@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/03 15:54:57 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 17:17:19 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,19 @@ unsigned int		asm_get_line_size(char *line, t_list **labels,
 		unsigned int big_size);
 
 int					asm_get_bytes(t_asm *m_asm);
-void				asm_get_params(char **split, int n,
+int					asm_get_params(char **split, int n,
 		t_bytes **bytes_instruct, t_asm *m_asm);
 unsigned int		asm_get_pos(t_list *instructs);
-void				asm_param_byte_label_dir(char *param,
+int					asm_param_byte_label_dir(char *param,
 		t_bytes **bytes_instruct, t_asm *m_asm, int i);
-void				asm_param_byte_label_ind(char *param,
+int					asm_param_byte_label_ind(char *param,
 		t_bytes **bytes_instruct, t_asm *m_asm, int i);
 
 /*
 **	write in .cor
 */
 
-void				asm_write_bytes(int fd, t_asm m_asm);
+void				asm_write_bytes(int fd, t_asm m_asm, char *filename);
 
 /*
 **	free functions

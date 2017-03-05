@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:30:00 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 19:07:50 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 14:05:37 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,15 @@ static void	asm_write_params_bytes(int fd, t_bytes *bytes)
 	}
 }
 
-void		asm_write_bytes(int fd, t_asm m_asm)
+void		asm_write_bytes(int fd, t_asm m_asm, char *filename)
 {
 	t_list_it	it;
 	t_bytes		*bytes;
+	char		*ret;
 
+	ret = ft_strrextract(filename, '.');
+	filename = ft_strjoin(ret, ".cor");
+	ft_printf("Writing output program to %s\n", filename);
 	it = ft_list_begin(m_asm.instructs);
 	write(fd, m_asm.header, sizeof(t_header));
 	while (!ft_list_it_end(m_asm.instructs, it))
@@ -44,4 +48,6 @@ void		asm_write_bytes(int fd, t_asm m_asm)
 		asm_write_params_bytes(fd, bytes);
 		ft_list_it_inc(&it);
 	}
+	free(ret);
+	free(filename);
 }
