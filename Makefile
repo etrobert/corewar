@@ -6,7 +6,7 @@
 #    By: etrobert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 23:18:11 by etrobert          #+#    #+#              #
-#    Updated: 2017/02/18 23:18:14 by etrobert         ###   ########.fr        #
+#    Updated: 2017/03/04 17:14:33 by etrobert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,22 +43,6 @@ clean:
 fclean:
 	@$(MAKE) fclean -C asm
 	@$(MAKE) fclean -C corewar
-
-cclean:
-	@printf "Suppressing all .cor files\n"
-	@rm -rf *.cor
-	@rm -rf */*.cor
-	@rm -rf */*/*.cor
-	@rm -rf */*/*/*.cor
-	@rm -rf */*/*/*/*.cor
-
-sclean:
-	@printf "Suppressing all .swp files\n"
-	@rm -rf .*.swp
-	@rm -rf */.*.swp
-	@rm -rf */*/.*.swp
-	@rm -rf */*/*/.*.swp
-	@rm -rf */*/*/*/.*.swp
 
 cleansc:
 	@$(MAKE) cclean

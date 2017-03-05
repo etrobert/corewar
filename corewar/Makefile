@@ -11,13 +11,15 @@ SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
 				process_get_reg.c \
 				print_corewar.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
-				corewar_advance.c corewar_end.c corewar_get_byte.c \
+				corewar_advance.c corewar_end.c \
+				corewar_get_byte.c corewar_get_byte_id.c \
 				corewar_update_process.c corewar_fork.c \
 				corewar_update_process_pc.c corewar_check.c \
 				corewar_kill_process.c corewar_add_process.c \
-				corewar_parse_params.c \
-				apply_nothing.c apply_live.c apply_zjmp.c apply_fork.c \
-				apply_aff.c \
+				corewar_write.c \
+				corewar_parse_params.c corewar_extract_param.c \
+				apply_live.c apply_ld.c apply_st.c apply_zjmp.c apply_fork.c \
+				apply_aff.c apply_nothing.c \
 				ocp_get_type.c
 INCNAM		=	process.h corewar.h champion.h print.h
 
@@ -30,7 +32,8 @@ GIT			=	Makefile
 LIBFTDIR	=	~/work/libft
 LIBFTNAM	=	libft.a
 
-SRC			=	$(SRCNAM:%=$(SRCDIR)/%) ../op/op.c ../op/get_op_by_name.c ../op/get_op_by_code.c
+SRC			=	$(SRCNAM:%=$(SRCDIR)/%) ../op/op.c ../op/get_op_by_name.c \
+				../op/get_op_by_code.c
 INC			=	$(INCNAM:%=$(INCDIR)/%)
 OBJ			=	$(SRC:%.c=%.o)
 

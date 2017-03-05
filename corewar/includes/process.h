@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:50:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/25 16:38:26 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:42:45 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct		s_process
 }					t_process;
 
 t_process			*process_new(void);
-t_process			*process_cpy(t_process *proc);
+t_process			*process_cpy(const t_process *proc);
 void				process_init(t_process *proc);
 void				process_delete(t_process *proc);
 void				process_update_pc(t_process *proc, unsigned int value);
-t_reg_type			process_get_reg(t_process *proc, unsigned char reg);
+t_reg_type			process_get_reg(const t_process *proc, unsigned char reg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:37:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 16:31:25 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/03 20:11:11 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void			corewar_parse_ind(t_corewar *corewar, t_process *process,
 {
 	ft_cbuff_read(corewar->memory, &(params->params[id].s),
 			process->pc + params->offset, sizeof(unsigned short));
+	params->params[id].s = ft_ushort16_big_endian(params->params[id].s);
 	params->offset += 2;
 }
 
@@ -35,12 +36,14 @@ static void			corewar_parse_dir(t_corewar *corewar, t_process *process,
 	{
 		ft_cbuff_read(corewar->memory, &(params->params[id].s),
 				process->pc + params->offset, sizeof(unsigned short));
+		params->params[id].s = ft_ushort16_big_endian(params->params[id].s);
 		params->offset += 2;
 	}
 	else
 	{
 		ft_cbuff_read(corewar->memory, &(params->params[id].i),
 				process->pc + params->offset, sizeof(unsigned int));
+		params->params[id].i = ft_uint32_big_endian(params->params[id].i);
 		params->offset += 4;
 	}
 }

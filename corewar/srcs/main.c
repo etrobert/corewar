@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/02 21:56:27 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/04 17:25:00 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-
 	if (!int_good_size())
 	{
 		ft_dprintf(2, "This system is not supported.\n");
@@ -86,7 +85,7 @@ int main(int argc, char **argv)
 		ft_dprintf(2, "ERROR CREATING CHAMPION\n");
 		return (-1);
 	}
-	if (champion_init(champ, 0, 0) < 0)
+	if (champion_init(champ, 1, 0) < 0)
 	{
 		ft_dprintf(2, "ERROR LOADING FILE\n");
 		champion_delete(champ);

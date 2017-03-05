@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 20:16:13 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/25 16:10:18 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/04 14:28:00 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/uio.h>
 
 //TODO Choose type
-typedef unsigned int	t_id_type;
+typedef unsigned char	t_id_type;
 
 typedef struct			s_champion
 {

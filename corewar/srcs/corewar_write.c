@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_cpy.c                                      :+:      :+:    :+:   */
+/*   corewar_write.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:32:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 19:42:38 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/03 22:13:49 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/04 14:31:27 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "corewar.h"
 
-t_process			*process_cpy(const t_process *proc)
+void				corewar_write(t_corewar *corewar, t_memory mem, size_t pos,
+		t_id_type id)
 {
-	t_process		*cpy;
-
-	if ((cpy = (t_process *)(ft_memdup(proc, sizeof(t_process)))) == NULL)
-		return (NULL);
-	//Carry stays the same ?
-	return (cpy);
+	ft_cbuff_write(corewar->memory, mem.ptr, pos, mem.size);
+	ft_cbuff_set(corewar->memory_id, (unsigned char)id, pos, mem.size);
 }

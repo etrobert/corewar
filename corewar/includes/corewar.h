@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/02 22:02:42 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/05 16:01:20 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct		s_corewar
 {
 	t_cbuff			*memory;
+	t_cbuff			*memory_id;
 	t_list			*process;
 	t_cycle_type	cycle;
 	t_cycle_type	last_check;
@@ -38,12 +39,9 @@ typedef union		u_param
 
 typedef struct		s_op_params
 {
-	t_param			params[3];
-//	char			params_code[3];
+	t_param			params[4];
 	unsigned int	offset;
 	unsigned char	ocp;
-	//Ca pue mais necessaire pour get_param
-	t_corewar		*corewar;
 }					t_op_params;
 
 typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
@@ -61,13 +59,23 @@ int					corewar_advance(t_corewar *corewar);
 bool				corewar_end(const t_corewar *corewar);
 unsigned char		corewar_get_byte(const t_corewar *corewar,
 		unsigned int pos);
+t_id_type			corewar_get_byte_id(t_corewar *corewar, unsigned int pos);
 
 /*
 ** private: ====================================================================
 */
 
+/*
+** corewar_parse_params checks if the register given is not correct
+** pour cette fonction tester les reactions quand le code est 00
+*/
+
+void				corewar_write(t_corewar *corewar, t_memory mem, size_t pos,
+		t_id_type id);
 int					corewar_parse_params(t_corewar *corewar, t_process *process,
 		t_op_params *params);
+unsigned int		corewar_extract_param(const t_corewar *corewar,
+		const t_process *process, const t_op_params *params, unsigned char id);
 
 void				corewar_update_process_pc(t_corewar *corewar,
 		t_process *proc, int value);
@@ -93,6 +101,8 @@ char				ocp_get_type(unsigned char ocp, int id);
 
 int					apply_nothing(t_corewar *corewar, t_process *process);
 int					apply_live(t_corewar *corewar, t_process *process);
+int					apply_ld(t_corewar *corewar, t_process *process);
+int					apply_st(t_corewar *corewar, t_process *process);
 int					apply_zjmp(t_corewar *corewar, t_process *process);
 int					apply_fork(t_corewar *corewar, t_process *process);
 int					apply_aff(t_corewar *corewar, t_process *process);
