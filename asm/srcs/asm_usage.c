@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_cpy.c                                      :+:      :+:    :+:   */
+/*   asm_usage.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:32:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 19:42:38 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/12 19:27:00 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/28 17:41:03 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "libft.h"
+#include "op.h"
 
-t_process			*process_cpy(const t_process *proc)
+int		asm_usage(int ac, char **av)
 {
-	t_process		*cpy;
+	char	*ret;
 
-	if ((cpy = (t_process *)(ft_memdup(proc, sizeof(t_process)))) == NULL)
-		return (NULL);
-	//Carry stays the same ?
-	return (cpy);
+	if (ac != 2 || !(ret = ft_strrchr(av[1], '.')) || ft_strcmp(ret, ".s"))
+	{
+		ft_printf("Usage : %s [filename].s\n", av[0]);
+		return (0);
+	}
+	return (1);
 }

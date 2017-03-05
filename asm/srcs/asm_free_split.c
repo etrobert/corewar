@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_cpy.c                                      :+:      :+:    :+:   */
+/*   asm_free_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:32:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 19:42:38 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/28 17:21:09 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/28 17:26:52 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "asm.h"
 
-t_process			*process_cpy(const t_process *proc)
+void	asm_free_split(char **split)
 {
-	t_process		*cpy;
+	int		i;
 
-	if ((cpy = (t_process *)(ft_memdup(proc, sizeof(t_process)))) == NULL)
-		return (NULL);
-	//Carry stays the same ?
-	return (cpy);
+	i = 0;
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

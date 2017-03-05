@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_cpy.c                                      :+:      :+:    :+:   */
+/*   play_events.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:32:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 19:42:38 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/05 20:02:25 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/05 20:04:13 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "print.h"
 
-t_process			*process_cpy(const t_process *proc)
+int		play_events()
 {
-	t_process		*cpy;
+	int		ch;
 
-	if ((cpy = (t_process *)(ft_memdup(proc, sizeof(t_process)))) == NULL)
-		return (NULL);
-	//Carry stays the same ?
-	return (cpy);
+	if ((ch = getch()) == ' ')
+	{
+		while ((ch = getch()) != ' ')
+		{
+		}
+	}
+	else if (ch == 27)
+	{
+		endwin();
+		return (0);
+	}
+	return (1);
 }

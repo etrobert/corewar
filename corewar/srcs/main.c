@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/28 11:23:52 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 19:25:47 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 		ft_dprintf(2, "ERROR CREATING CHAMPION\n");
 		return (-1);
 	}
-	if (champion_init(champ, 0, fd) < 0)
+	if (champion_init(champ, 1, fd) < 0)
 	{
 		ft_dprintf(2, "ERROR LOADING FILE\n");
 		champion_delete(champ);
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 	}
 	list = ft_list_new();
 	ft_list_push_back(list, champ);
-	cw = corewar_new(list);
+	cw = corewar_new(list, 2);
 
 	play_corewar(cw);
 

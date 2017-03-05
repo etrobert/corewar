@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_cpy.c                                      :+:      :+:    :+:   */
+/*   corewar_get_byte_id.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:32:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 19:42:38 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/04 14:26:10 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/04 14:26:13 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "corewar.h"
 
-t_process			*process_cpy(const t_process *proc)
+t_id_type			corewar_get_byte_id(t_corewar *corewar, unsigned int pos)
 {
-	t_process		*cpy;
+	unsigned char	id;
 
-	if ((cpy = (t_process *)(ft_memdup(proc, sizeof(t_process)))) == NULL)
-		return (NULL);
-	//Carry stays the same ?
-	return (cpy);
+	ft_cbuff_read(corewar->memory_id, &id, pos, sizeof(unsigned char));
+	return (id);
 }

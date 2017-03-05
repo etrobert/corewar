@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_cpy.c                                      :+:      :+:    :+:   */
+/*   asm_open.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:32:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 19:42:38 by etrobert         ###   ########.fr       */
+/*   Created: 2017/02/13 16:49:41 by mverdier          #+#    #+#             */
+/*   Updated: 2017/02/18 16:11:32 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include <fcntl.h>
 
-t_process			*process_cpy(const t_process *proc)
+#include "libft.h"
+
+int		asm_open(char *filename)
 {
-	t_process		*cpy;
+	int		fd;
 
-	if ((cpy = (t_process *)(ft_memdup(proc, sizeof(t_process)))) == NULL)
-		return (NULL);
-	//Carry stays the same ?
-	return (cpy);
+	if ((fd = open(filename, O_RDONLY)) < 0)
+	{
+		ft_dprintf(2, "Error while trying to open %s\n", filename);
+		return (-1);
+	}
+	return (fd);
 }

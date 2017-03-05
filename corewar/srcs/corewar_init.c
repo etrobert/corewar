@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/25 21:08:10 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 17:33:45 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@ static int			add_fresh_process(t_corewar *corewar,
 		process_delete(process);
 		return (ret);
 	}
-	return (0);
+	return (FT_GOOD);
 }
 
 static int			load_one_champion(t_corewar *corewar,
 		const t_champion *champ, unsigned int pc)
 {
-	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
+	corewar_write(corewar, (t_memory){champ->code, champ->header.prog_size},
+			pc, champ->id);
+//	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
 	if (add_fresh_process(corewar, champ->id, pc) == -1)
 		return (-1);
-	return (0);
+	corewar->last_living_champ = champ->id;
+	return (FT_GOOD);
 }
 
 static int			load_champions(t_corewar *corewar, const t_list *champions)
@@ -60,7 +63,8 @@ static int			load_champions(t_corewar *corewar, const t_list *champions)
 	return (FT_GOOD);
 }
 
-int					corewar_init(t_corewar *corewar, const t_list *champions)
+int					corewar_init(t_corewar *corewar, const t_list *champions,
+		int fd)
 {
 	int				ret;
 
@@ -70,6 +74,8 @@ int					corewar_init(t_corewar *corewar, const t_list *champions)
 		return (-1);
 	if ((corewar->memory = ft_cbuff_new(MEM_SIZE)) == NULL)
 		return (-1);
+	if ((corewar->memory_id = ft_cbuff_new(MEM_SIZE)) == NULL)
+		return (-1);
 	if ((ret = load_champions(corewar, champions)) != FT_GOOD)
 		return (ret);
 	corewar->cycle = 0;
@@ -77,5 +83,6 @@ int					corewar_init(t_corewar *corewar, const t_list *champions)
 	corewar->cycles_to_die = CYCLE_TO_DIE;
 	corewar->clear_checks = 0;
 	corewar->nbr_live = 0;
-	return (0);
+	corewar->fd = fd;
+	return (FT_GOOD);
 }

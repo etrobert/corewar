@@ -72,3 +72,11 @@ Lorsquon traite un process :
 
 Verifier lordre des instructions de la boucle principale pour coller a la
 machine de reference.
+
+Bug quand fichier non valide
+
+Que faire quand on demande doperer sur un registre non existant ?
+
+Quand une instruction utilise un registre non existant elle est skip mais consomme toujours son tems dattente et ensuite on passe a apres ses instructions
+
+ATTENTION COMPLEXE : Si un processus effectue une instrucion et que dans un meme tour un autre processus ecrit a lendroit du prochain op\_code est ce quon considere lop code quil y avait avant ou apres ?

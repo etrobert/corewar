@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_cpy.c                                      :+:      :+:    :+:   */
+/*   apply_ld.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:32:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 19:42:38 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/03 16:41:20 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/03 19:46:29 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "corewar.h"
 
-t_process			*process_cpy(const t_process *proc)
+int					apply_ld(t_corewar *corewar, t_process *process)
 {
-	t_process		*cpy;
+	t_op_params		params;
 
-	if ((cpy = (t_process *)(ft_memdup(proc, sizeof(t_process)))) == NULL)
-		return (NULL);
-	//Carry stays the same ?
-	return (cpy);
+	if (corewar_parse_params(corewar, process, &params) == 0)
+	{
+		process->regs[params.params[1].c] = corewar_extract_param(corewar,
+				process, &params, 0);
+	}
+	corewar_update_process_pc(corewar, process, params.offset);
+	return (0);
 }

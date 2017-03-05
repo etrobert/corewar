@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:50:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/24 20:32:31 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/03 19:42:45 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PROCESS_H
 
 # include "op.h"
+# include "champion.h"
 
 //TODO Choose type
 typedef unsigned int	t_reg_type;
@@ -26,13 +27,14 @@ typedef struct		s_process
 	t_op			*current_op;
 	t_cycle_type	to_wait;
 	t_cycle_type	last_live;
+	t_id_type		last_living_champ;
 }					t_process;
 
 t_process			*process_new(void);
-t_process			*process_cpy(t_process *proc);
+t_process			*process_cpy(const t_process *proc);
 void				process_init(t_process *proc);
 void				process_delete(t_process *proc);
 void				process_update_pc(t_process *proc, unsigned int value);
-t_reg_type			process_get_reg(t_process *proc, unsigned char reg);
+t_reg_type			process_get_reg(const t_process *proc, unsigned char reg);
 
 #endif
