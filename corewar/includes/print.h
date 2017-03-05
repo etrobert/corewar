@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 20:04:54 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 22:09:14 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct		s_visu
 	WINDOW			*infos;
 	int				line;
 	int				col;
-	unsigned int	pos;
 }					t_visu;
 
 int					play_corewar(t_corewar *corewar);

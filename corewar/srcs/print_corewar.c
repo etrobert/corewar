@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 20:17:51 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/05 22:14:22 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,54 +34,40 @@ static void			print_byte_color(t_corewar *corewar, unsigned int pos)
 	else
 		ft_printf("39");
 }
-
+*/
 //Degueu parcours de la liste de process pour chaque case
-static void			print_color(t_corewar *corewar, unsigned int pos)
+static int			print_process(t_corewar *corewar, unsigned int pos,
+		t_visu *visu, unsigned char byte)
 {
 	t_list_it		it;
+	t_id_type		id;
 	t_process		*process;
 
-	ft_printf("\033[");
-	print_byte_color(corewar, pos);
 	it = ft_list_begin(corewar->process);
 	while (!ft_list_it_end(corewar->process, it))
 	{
 		process = (t_process *)ft_list_it_get(corewar->process, it);
 		if (process->pc == pos)
 		{
-			ft_printf(";100m");
-			return ;
+			if ((id = corewar_get_byte_id(corewar, pos)) != 0)
+			{
+				wattron(visu->board, COLOR_PAIR(id + 4));
+				mvwprintw(visu->board, visu->line, visu->col, "%.2x", byte);
+				wattroff(visu->board, COLOR_PAIR(id + 4));
+				return (1);
+			}
+			else
+			{
+				wattron(visu->board, COLOR_PAIR(9));
+				mvwprintw(visu->board, visu->line, visu->col, "%.2x", byte);
+				wattroff(visu->board, COLOR_PAIR(9));
+				return (1);
+			}
 		}
 		ft_list_it_inc(&it);
 	}
-	ft_printf("m");
+	return (0);
 }
-
-static void			reset_color(void)
-{
-	ft_printf("\033[0m");
-}*/
-
-/*void				old_print_corewar(t_corewar *cw)
-{
-	unsigned int	i;
-	unsigned int	j;
-
-	print_line();
-	j = 0;
-	while (j * PRINT_WIDTH < MEM_SIZE)
-	{
-		i = 0;
-		while (i < PRINT_WIDTH && j * PRINT_WIDTH + i < MEM_SIZE)
-		{
-			print_byte(cw, j * PRINT_WIDTH + i);
-			++i;
-		}
-		ft_printf("\n");
-		++j;
-	}
-	print_line();
-}*/
 
 static void			print_infos(t_corewar *corewar, t_visu *visu)
 {
@@ -98,13 +84,7 @@ static void			print_byte(t_corewar *corewar, unsigned int pos,
 	t_id_type		id;
 
 	byte = corewar_get_byte(corewar, pos);
-	if (pos == visu->pos)
-	{
-		wattron(visu->board, COLOR_PAIR(5));
-		mvwprintw(visu->board, visu->line, visu->col, "%.2x", byte);
-		wattroff(visu->board, COLOR_PAIR(5));
-	}
-	else
+	if (!print_process(corewar, pos, visu, byte))
 	{
 		if ((id = corewar_get_byte_id(corewar, pos)) != 0)
 		{
@@ -114,9 +94,9 @@ static void			print_byte(t_corewar *corewar, unsigned int pos,
 		}
 		else
 		{
-			wattron(visu->board, COLOR_PAIR(6));
+			wattron(visu->board, COLOR_PAIR(10));
 			mvwprintw(visu->board, visu->line, visu->col, "%.2x", byte);
-			wattroff(visu->board, COLOR_PAIR(6));
+			wattroff(visu->board, COLOR_PAIR(10));
 		}
 	}
 }
@@ -142,7 +122,4 @@ void				print_corewar(t_corewar *cw, t_visu *visu)
 		j++;
 		(visu->line)++;
 	}
-	(visu->pos)++;
-	if (visu->pos == MEM_SIZE)
-		visu->pos = 0;
 }
