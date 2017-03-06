@@ -36,12 +36,12 @@ all:
 
 $(NAME): $(OBJ)
 	@$(MAKE) printname
-	@printf "Linking\t\t%s\n" $@
+	@printf "%-15s%s\n" Linking $@
 	@$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c $(INC)
 	@$(MAKE) printname
-	@printf "Compiling\t%s\n"	$@
+	@printf "%-15s%s\n" Compiling $@
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
 .PHONY: all git no printf check clean fclean re printname
@@ -65,7 +65,7 @@ printf:
 check: no printf
 
 printname:
-	@printf "[%-20s " "$(NAME)]"
+	@printf "[%-15s " "$(NAME)]"
 
 clean:
 	@$(MAKE) printname
