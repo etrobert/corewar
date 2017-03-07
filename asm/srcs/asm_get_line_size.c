@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:05:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/05 15:14:04 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:29:50 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int		asm_get_label(char *param, t_list **labels,
 		unsigned int size)
 {
 	t_labels		*label;
+	int				i;
 
 	if ((label = (t_labels*)malloc(sizeof(t_labels))) == NULL)
 	{
@@ -24,6 +25,16 @@ static int		asm_get_label(char *param, t_list **labels,
 	}
 	label->name = ft_strextract(param, LABEL_CHAR);
 	label->position = size;
+	i = 0;
+	while (label->name[i])
+	{
+		if (!ft_strchr(LABEL_CHARS, label->name[i++]))
+		{
+			ft_dprintf(2, "Bad char \'%c\' in label \'%s\'\n",
+					label->name[i - 1], label->name);
+			return (0);
+		}
+	}
 	ft_list_push_back(*labels, label);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 15:16:48 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/05 14:11:17 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:29:52 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	asm_dir_size(char *param, t_op *op_tab, int i, unsigned int *size)
 
 static int	asm_ind_size(char *param, t_op *op_tab, int i, unsigned int *size)
 {
-	if (param[0] != 'r' && param[0] != DIRECT_CHAR)
+	if (ft_str_test_chars(param, &ft_isdigit) != 0)
 	{
 		if (!(op_tab->params[i] & T_IND))
 		{

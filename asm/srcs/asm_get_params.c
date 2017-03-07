@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:22:53 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/05 14:27:24 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:31:40 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ static int		asm_param_byte_dir(char *param, t_bytes **bytes_instruct,
 	else if (bytes->op_tab->small_direct == true)
 	{
 		bytes->param[i].s =
-			ft_ushort16_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
+			ft_short16_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
 		bytes->param_size[i] = 2;
 	}
 	else
 	{
 		bytes->param[i].i =
-			ft_uint32_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
+			ft_int32_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
 		bytes->param_size[i] = 4;
 	}
 	return (1);
@@ -79,7 +79,7 @@ static int		asm_param_byte_ind(char *param, t_bytes **bytes_instruct, int i,
 	}
 	else
 	{
-		bytes->param[i].s = ft_ushort16_big_endian(ft_atoi(param));
+		bytes->param[i].s = ft_short16_big_endian(ft_atoi(param));
 		bytes->param_size[i] = 2;
 	}
 	return (1);

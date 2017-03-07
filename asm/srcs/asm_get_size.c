@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/05 17:18:00 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 16:38:02 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 	while (!ft_list_it_end(m_asm->file, it))
 	{
 		line = (char*)ft_list_it_get(m_asm->file, it);
-		if (!(name = asm_get_prog_name(line, &(m_asm->header))) ||
-				!(comment = asm_get_prog_comment(line, &(m_asm->header))))
+		if (!(name = asm_get_prog_name(line, m_asm, &it)) ||
+				!(comment = asm_get_prog_comment(line, m_asm, &it)))
 			return (0);
 		if (name != NAME && comment != COMMENT)
 		{
@@ -49,6 +49,7 @@ static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 					(m_asm->header)->prog_size);
 			if (ret == (unsigned int)(-1))
 				return (0);
+			ft_printf("%u (%u) | %s\n", (m_asm->header)->prog_size, ret, line);
 			(m_asm->header)->prog_size += ret;
 			if (((m_asm->header)->prog_size) > CHAMP_MAX_SIZE)
 			{
