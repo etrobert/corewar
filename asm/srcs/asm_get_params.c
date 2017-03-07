@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:22:53 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 15:31:40 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 19:10:58 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,11 @@ int			asm_get_params(char **split, int n, t_bytes **bytes_instruct,
 		}
 		else if (!asm_param_byte_ind(split[n + i], bytes_instruct, i, m_asm))
 				return (0);
+		i++;
+	}
+	while ((*bytes_instruct)->op_tab->ocp == true && i < 3)
+	{
+		(*bytes_instruct)->ocp <<= 2;
 		i++;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/06 18:30:18 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 20:35:14 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_fds
 }					t_fds;
 
 /*
-**	struct to stock labels's relative positions
+**	struct to stock labels's relatives positions
 */
 
 typedef struct		s_labels

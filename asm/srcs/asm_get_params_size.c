@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 15:16:48 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 17:40:25 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 20:35:12 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static int	asm_dir_size(char *param, t_op *op_tab, int i, unsigned int *size)
 
 static int	asm_ind_size(char *param, t_op *op_tab, int i, unsigned int *size)
 {
-	if (ft_str_test_chars(param, &ft_isdigit) != 0)
+	if (ft_str_test_chars(param, &ft_isdigit) != 0 ||
+			(param[0] == '-' && ft_str_test_chars(param + 1, &ft_isdigit) != 0))
 	{
 		if (!(op_tab->params[i] & T_IND))
 		{
@@ -72,8 +73,7 @@ static int	asm_ind_size(char *param, t_op *op_tab, int i, unsigned int *size)
 					op_tab->name);
 			return (0);
 		}
-		size += 2;
-		ft_printf("|%s|\n", op_tab->name);
+		(*size) += 2;
 	}
 	return (1);
 }
