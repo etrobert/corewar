@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 12:29:18 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 17:32:23 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 16:00:06 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void				corewar_update_process(t_corewar *corewar,
 			process->pc, sizeof(unsigned char));
 	process->current_op = get_op_by_code(op_code);
 	process->to_wait = process->current_op->cycles;
+	process->new_instr = false;
 }

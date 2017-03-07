@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_init.c                                     :+:      :+:    :+:   */
+/*   corewar_set_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/15 19:44:33 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/07 16:42:27 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/07 17:27:31 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/07 17:28:23 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "corewar.h"
 
-void				process_init(t_process *proc)
+void				corewar_set_fd(t_corewar *corewar, int fd)
 {
-	int				i;
-
-	if (proc == NULL)
+	if (corewar == NULL)
 		return ;
-	i = 0;
-	while (i < REG_NUMBER)
-	{
-		proc->regs[i] = 0;
-		++i;
-	}
-	proc->pc = 0;
-	proc->current_op = NULL;
-	proc->new_instr = true;
-	proc->to_wait = 0;
-	proc->last_live = 0;
+	corewar->fd = fd;
 }
