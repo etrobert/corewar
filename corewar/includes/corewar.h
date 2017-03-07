@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 22:09:13 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/06 18:06:24 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,6 @@ typedef struct		s_op_params
 	unsigned int	offset;
 	unsigned char	ocp;
 }					t_op_params;
-
-typedef struct		s_memory
-{
-	void			*ptr;
-	size_t			size;
-}					t_memory;
 
 typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
 
@@ -109,6 +103,9 @@ int					apply_nothing(t_corewar *corewar, t_process *process);
 int					apply_live(t_corewar *corewar, t_process *process);
 int					apply_ld(t_corewar *corewar, t_process *process);
 int					apply_st(t_corewar *corewar, t_process *process);
+int					apply_and(t_corewar *corewar, t_process *process);
+int					apply_or(t_corewar *corewar, t_process *process);
+int					apply_xor(t_corewar *corewar, t_process *process);
 int					apply_zjmp(t_corewar *corewar, t_process *process);
 int					apply_fork(t_corewar *corewar, t_process *process);
 int					apply_aff(t_corewar *corewar, t_process *process);

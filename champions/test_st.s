@@ -1,19 +1,8 @@
 .name "mowgli"
 .comment "the king of the jungle"
 
-start:
-ld %2147483640,r2
-ld %2147483640,r3
-add r2,r3,r4
-and r1,%2,r1
-#aff r4
-zjmp %:start
-#start:	aff r1
-#l2:     sti r1,%:live,%1
-#		and r1,%0,r1
-#
-#live:   live %1
-#        zjmp %:live
+st	r1,r2
+aff	r2
 
 # Executable compile:
 #

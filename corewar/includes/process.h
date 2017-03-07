@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:50:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 19:42:45 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:57:42 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_process
 	t_reg_type		pc;
 	bool			carry;
 	t_op			*current_op;
+	bool			new_instr;
 	t_cycle_type	to_wait;
 	t_cycle_type	last_live;
 	t_id_type		last_living_champ;
