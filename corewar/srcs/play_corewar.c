@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/05 22:15:27 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:51:21 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	print_init_visu(t_visu *visu)
 	visu->board = subwin(stdscr, PRINT_WIDTH + 2, 3 * PRINT_WIDTH + 2, 0, 0);
 	visu->infos = subwin(stdscr, PRINT_WIDTH + 2, COLS - (3 * PRINT_WIDTH + 2),
 			0, 3 * PRINT_WIDTH + 2);
+	visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2), COLS, LINES - (PRINT_WIDTH + 2), 0);
 	keypad(stdscr, TRUE);
 	noecho();
 	cbreak();
@@ -43,11 +44,14 @@ static void print_round(t_visu *visu, t_corewar *corewar)
 {
 	werase(visu->board);
 	werase(visu->infos);
+	werase(visu->log);
 	box(visu->board, ACS_VLINE, ACS_HLINE);
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
+	box(visu->log, ACS_VLINE, ACS_HLINE);
 	print_corewar(corewar, visu);
 	wrefresh(visu->board);
 	wrefresh(visu->infos);
+	wrefresh(visu->log);
 	usleep(10000);
 }
 
