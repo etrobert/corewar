@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/06 18:06:24 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:29:14 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void				corewar_delete(t_corewar *corewar);
 
 int					corewar_advance(t_corewar *corewar);
 bool				corewar_end(const t_corewar *corewar);
+
+void				corewar_set_fd(t_corewar *corewar, int fd);
 unsigned char		corewar_get_byte(const t_corewar *corewar,
 		unsigned int pos);
 t_id_type			corewar_get_byte_id(t_corewar *corewar, unsigned int pos);

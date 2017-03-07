@@ -13,7 +13,7 @@ SRCNAM		=	main.c \
 				process_get_reg.c \
 				print_corewar.c play_corewar.c play_events.c\
 				corewar_new.c corewar_init.c corewar_delete.c \
-				corewar_advance.c corewar_end.c \
+				corewar_advance.c corewar_end.c corewar_set_fd.c \
 				corewar_get_byte.c corewar_get_byte_id.c \
 				corewar_update_process.c corewar_fork.c \
 				corewar_update_process_pc.c corewar_check.c \
