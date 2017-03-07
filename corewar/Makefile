@@ -6,19 +6,23 @@ COLOR_RESET	=	\033[0m
 SRCDIR		=	srcs
 INCDIR		=	includes
 
-SRCNAM		=	main.c champion_new.c champion_init.c champion_delete.c \
+SRCNAM		=	main.c \
+				champion_new.c champion_delete.c \
+				champion_init.c champion_clear.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
 				process_get_reg.c \
 				print_corewar.c play_corewar.c play_events.c\
 				corewar_new.c corewar_init.c corewar_delete.c \
-				corewar_advance.c corewar_end.c \
+				corewar_advance.c corewar_end.c corewar_set_fd.c \
 				corewar_get_byte.c corewar_get_byte_id.c \
 				corewar_update_process.c corewar_fork.c \
 				corewar_update_process_pc.c corewar_check.c \
 				corewar_kill_process.c corewar_add_process.c \
 				corewar_write.c \
 				corewar_parse_params.c corewar_extract_param.c \
-				apply_live.c apply_ld.c apply_st.c apply_zjmp.c apply_fork.c \
+				apply_live.c apply_ld.c apply_st.c apply_and.c \
+				apply_or.c apply_xor.c \
+				apply_zjmp.c apply_fork.c \
 				apply_aff.c apply_nothing.c \
 				ocp_get_type.c
 INCNAM		=	process.h corewar.h champion.h print.h
