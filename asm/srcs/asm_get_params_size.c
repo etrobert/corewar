@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 15:16:48 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 17:29:52 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:40:25 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int	asm_ind_size(char *param, t_op *op_tab, int i, unsigned int *size)
 			return (0);
 		}
 		size += 2;
+		ft_printf("|%s|\n", op_tab->name);
 	}
 	return (1);
 }
