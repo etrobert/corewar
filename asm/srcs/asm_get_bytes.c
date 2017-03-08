@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 19:05:48 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/08 15:55:08 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ static int		asm_go_to_instruct(char **split, int *n, t_bytes **bytes)
 	int		lab;
 
 	lab = 0;
+	if (!split[*n])
+	{
+		asm_free_split(split);
+		free(*bytes);
+		return (1);
+	}
 	if (split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
 	{
 		asm_free_split(split);

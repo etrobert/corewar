@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:22:53 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 19:10:58 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/08 15:15:26 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,14 @@ int			asm_get_params(char **split, int n, t_bytes **bytes_instruct,
 	while (split[n + i])
 	{
 		if (split[n + i][0] == COMMENT_CHAR || split[n + i][0] == ';')
+		{
+			while ((*bytes_instruct)->op_tab->ocp == true && i < 3)
+			{
+				(*bytes_instruct)->ocp <<= 2;
+				i++;
+			}
 			return (1);
+		}
 		if (split[n + i][0] == 'r')
 			asm_param_byte_reg(split[n + i], bytes_instruct, i);
 		else if (split[n + i][0] == DIRECT_CHAR)

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 15:16:48 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 20:35:12 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:06:42 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static int	asm_dir_size(char *param, t_op *op_tab, int i, unsigned int *size)
 static int	asm_ind_size(char *param, t_op *op_tab, int i, unsigned int *size)
 {
 	if (ft_str_test_chars(param, &ft_isdigit) != 0 ||
-			(param[0] == '-' && ft_str_test_chars(param + 1, &ft_isdigit) != 0))
+			(param[0] == '-' && ft_str_test_chars(param + 1, &ft_isdigit) != 0)
+			 || (param[0] == LABEL_CHAR))
 	{
 		if (!(op_tab->params[i] & T_IND))
 		{
@@ -88,7 +89,11 @@ int			asm_get_params_size(char **split, int n, t_op *op_tab)
 	while (split[n + i])
 	{
 		if (split[n + i][0] == COMMENT_CHAR || split[n + i][0] == ';')
-			return (size);
+		{
+			if (op_tab->ocp == true)
+				return (size + 2);
+			return (size + 1);
+		}
 		if (i > op_tab->nb_params)
 		{
 			ft_dprintf(2, "\'%s\' has too much params (max %d)\n",

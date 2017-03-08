@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 15:57:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/06 18:02:24 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/08 15:55:10 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,13 @@ static int	asm_get_file(char **line, t_asm *m_asm, int fd)
 	int		ret;
 
 	while ((ret = get_next_line(fd, line)))
-	{
-		if (ft_strlen(*line) > 0 && !ft_str_test_chars(*line, &ft_isspace))
-			if (ft_list_push_back(m_asm->file, *line) < 0)
-			{
-				ft_list_apply(m_asm->file, &free);
-				ft_list_delete(m_asm->file);
-				ft_dprintf(2, "Malloc error\n\n");
-				return (0);
-			}
-	}
+		if (ft_list_push_back(m_asm->file, *line) < 0)
+		{
+			ft_list_apply(m_asm->file, &free);
+			ft_list_delete(m_asm->file);
+			ft_dprintf(2, "Malloc error\n\n");
+			return (0);
+		}
 	if (ret < 0)
 	{
 		ft_list_apply(m_asm->file, &free);
