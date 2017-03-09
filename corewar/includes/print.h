@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/07 17:32:21 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/09 19:36:58 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,20 @@ typedef struct		s_visu
 	WINDOW			*log;
 	int				line;
 	int				col;
+
+	//Mes trucs sales
+	int				log_height;
 	int				fds[2];
+	int				log_col;
+	int				cur_log;
+	t_list			*log_lines;
 }					t_visu;
+
+typedef struct		s_line
+{
+	char			*line;
+	struct s_line	*next;
+}					t_line;
 
 int					play_corewar(t_corewar *corewar);
 void				print_corewar(t_corewar *cw, t_visu *visu);

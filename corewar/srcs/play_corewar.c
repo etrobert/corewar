@@ -6,12 +6,31 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 15:51:21 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/09 20:09:33 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 #include "libft.h"
+
+#include <unistd.h>
+#include <fcntl.h>
+int			init_visu_log(t_visu *visu)
+{
+	int		flags;
+
+	if (pipe(visu->fds) != 0)
+		return (-1);
+	flags = fcntl(visu->fds[0], F_GETFL, 0);
+	fcntl(visu->fds[0], F_SETFL, flags | O_NONBLOCK);
+	if ((visu->log_lines = ft_list_new()) == NULL)
+	{
+		close(fds[0]);
+		close(fds[1]);
+		return (-1)
+	}
+	return (0);
+}
 
 static void	print_init_visu(t_visu *visu)
 {
@@ -32,6 +51,9 @@ static void	print_init_visu(t_visu *visu)
 	visu->board = subwin(stdscr, PRINT_WIDTH + 2, 3 * PRINT_WIDTH + 2, 0, 0);
 	visu->infos = subwin(stdscr, PRINT_WIDTH + 2, COLS - (3 * PRINT_WIDTH + 2),
 			0, 3 * PRINT_WIDTH + 2);
+
+	visu->log_height = LINES - (PRINT_WIDTH + 2);
+
 	visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2), COLS, LINES - (PRINT_WIDTH + 2), 0);
 	keypad(stdscr, TRUE);
 	noecho();
@@ -71,6 +93,8 @@ int	play_corewar(t_corewar *corewar)
 	if (corewar == NULL)
 		return (0);
 	print_init_visu(&visu);
+	init_visu_log(&visu);
+	corewar_set_fd(corewar, visu->fds[1]);
 	while (!corewar_end(corewar))
 	{
 		print_round(&visu, corewar);
