@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/08 16:07:36 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/08 19:19:13 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ static int			asm_init_header_and_labels(t_asm *m_asm)
 	return (1);
 }
 
+static int			asm_check_max_size(t_asm *m_asm)
+{
+	if (((m_asm->header)->prog_size) > CHAMP_MAX_SIZE)
+	{
+		ft_dprintf(2, "Champion is too big (max : %d)\n",
+				CHAMP_MAX_SIZE);
+		return (0);
+	}
+	return (1);
+}
+
 static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 {
 	int				name;
@@ -47,16 +58,11 @@ static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 		{
 			ret = asm_get_line_size(line, &(m_asm->labels),
 					(m_asm->header)->prog_size);
-			if (ret == (unsigned int)(-1))
+			if (ret > CHAMP_MAX_SIZE)
 				return (0);
-//			ft_printf("%u (%u) | %s\n", (m_asm->header)->prog_size, ret, line);
 			(m_asm->header)->prog_size += ret;
-			if (((m_asm->header)->prog_size) > CHAMP_MAX_SIZE)
-			{
-				ft_dprintf(2, "Champion is too big (max : %d)\n",
-						CHAMP_MAX_SIZE);
+			if (!asm_check_max_size(m_asm))
 				return (0);
-			}
 		}
 		ft_list_it_inc(&it);
 	}

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/08 15:55:08 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:54:32 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,6 @@ static int		asm_init_bytes(t_bytes **bytes_struct)
 	bytes->param_size[1] = 0;
 	bytes->param_size[2] = 0;
 	return (1);
-}
-
-static int		asm_go_to_instruct(char **split, int *n, t_bytes **bytes)
-{
-	int		lab;
-
-	lab = 0;
-	if (!split[*n])
-	{
-		asm_free_split(split);
-		free(*bytes);
-		return (1);
-	}
-	if (split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
-	{
-		asm_free_split(split);
-		free(*bytes);
-		return (1);
-	}
-	if (split[*n] && split[*n][ft_strlen(split[*n]) - 1] == LABEL_CHAR)
-	{
-		lab = 1;
-		(*n)++;
-	}
-	if (!split[*n] || split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
-	{
-		asm_free_split(split);
-		free(*bytes);
-		if (lab == 1 || split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
-			return (1);
-		return (0);
-	}
-	return (2);
 }
 
 static int		asm_get_line(char **split, t_bytes **bytes, t_asm *m_asm)

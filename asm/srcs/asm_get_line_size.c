@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:05:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/08 15:53:09 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/09 20:27:31 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,29 @@ static int		asm_get_label(char *param, t_list **labels,
 	return (1);
 }
 
-static int		asm_go_to_instruct(char **split, int *n, t_list **labels,
+static int		asm_skip_comment_and_empty(char **split, int *n)
+{
+	if (!split[*n])
+	{
+		asm_free_split(split);
+		return (0);
+	}
+	if (split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
+	{
+		asm_free_split(split);
+		return (0);
+	}
+	return (1);
+}
+
+static int		asm_go_to_instruct_size(char **split, int *n, t_list **labels,
 		unsigned int big_size)
 {
 	int		lab;
 
 	lab = 0;
-	if (!split[*n])
+	if (!asm_skip_comment_and_empty(split, n))
 		return (0);
-	if (split[*n][0] == COMMENT_CHAR || split[*n][0] == ';')
-	{
-		free(split);
-		return (0);
-	}
 	if (split[*n] && split[*n][ft_strlen(split[*n]) - 1] == LABEL_CHAR)
 	{
 		lab = 1;
@@ -87,16 +97,15 @@ unsigned int	asm_get_line_size(char *line, t_list **labels,
 		return (-1);
 	}
 	n = 0;
-	if ((ret = asm_go_to_instruct(split, &n, labels, big_size)) < 1)
+	if ((ret = asm_go_to_instruct_size(split, &n, labels, big_size)) < 1)
 		return (ret);
 	if ((op_tab = get_op_by_name(split[n])) == NULL)
 	{
-		ft_dprintf(2, "Bad op [%s]\n", split[n]);
+		ft_dprintf(2, "Bad op \'%s\'\n", split[n]);
 		asm_free_split(split);
 		return (-1);
 	}
-	if ((size = asm_get_params_size(split, n + 1, op_tab))
-			== (unsigned int)(-1))
+	if ((size = asm_get_params_size(split, n + 1, op_tab)) > CHAMP_MAX_SIZE)
 		return (-1);
 	asm_free_split(split);
 	return (size);

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 20:35:18 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:31:50 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,20 @@ int			main(int ac, char **av)
 	if (!asm_init_asm(&m_asm))
 		return (-1);
 	if (!asm_read(&fd, &m_asm, av[1]))
+	{
+		asm_free_asm(&m_asm);
 		return (-1);
+	}
 	if (!asm_write(&fd, m_asm, av[1]))
+	{
+		asm_free_asm(&m_asm);
 		return (-1);
+	}
 	if (!asm_close(fd))
+	{
+		asm_free_asm(&m_asm);
 		return (-1);
+	}
+	asm_free_asm(&m_asm);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 20:35:14 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/09 13:28:33 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ unsigned int		asm_get_line_size(char *line, t_list **labels,
 int					asm_get_bytes(t_asm *m_asm);
 int					asm_get_params(char **split, int n,
 		t_bytes **bytes_instruct, t_asm *m_asm);
+int					asm_go_to_instruct(char **split, int *n, t_bytes **bytes);
+void				asm_complete_ocp(t_bytes **bytes, int i);
 unsigned int		asm_get_pos(t_list *instructs);
 int					asm_param_byte_label_dir(char *param,
 		t_bytes **bytes_instruct, t_asm *m_asm, int i);
@@ -125,6 +127,7 @@ void				asm_write_bytes(int fd, t_asm m_asm, char *filename);
 **	free functions
 */
 
+void				asm_free_asm(t_asm *m_asm);
 void				asm_free_split(char **split);
 
 #endif

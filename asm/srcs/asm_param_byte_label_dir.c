@@ -6,13 +6,35 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 15:16:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/07 20:35:16 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:42:27 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		asm_param_byte_label_dir(char *param, t_bytes **bytes_instruct,
+static void	asm_label_small(t_bytes **bytes_instruct, t_labels *label, int i,
+		unsigned int pos)
+{
+	t_bytes			*bytes;
+
+	bytes = *bytes_instruct;
+	bytes->param[i].s =
+		ft_ushort16_big_endian(label->position - pos);
+	bytes->param_size[i] = 2;
+}
+
+static void	asm_label_big(t_bytes **bytes_instruct, t_labels *label, int i,
+		unsigned int pos)
+{
+	t_bytes			*bytes;
+
+	bytes = *bytes_instruct;
+	bytes->param[i].i =
+		ft_uint32_big_endian(label->position - pos);
+	bytes->param_size[i] = 4;
+}
+
+int			asm_param_byte_label_dir(char *param, t_bytes **bytes_instruct,
 		t_asm *m_asm, int i)
 {
 	t_list_it		it;
@@ -28,16 +50,12 @@ int		asm_param_byte_label_dir(char *param, t_bytes **bytes_instruct,
 		label = ft_list_it_get(m_asm->labels, it);
 		if (!strcmp(param, label->name) && bytes->op_tab->small_direct == true)
 		{
-			bytes->param[i].s =
-				ft_ushort16_big_endian(label->position - pos);
-			bytes->param_size[i] = 2;
+			asm_label_small(bytes_instruct, label, i, pos);
 			return (1);
 		}
 		else if (!strcmp(param, label->name))
 		{
-			bytes->param[i].i =
-				ft_uint32_big_endian(label->position - pos);
-			bytes->param_size[i] = 4;
+			asm_label_big(bytes_instruct, label, i, pos);
 			return (1);
 		}
 		ft_list_it_inc(&it);
