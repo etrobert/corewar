@@ -52,6 +52,8 @@ Faire attention a big/small endian
 Compilateur de "Corewar ASM" .s vers du binaire .cor
 Inclus : Essentiellement du parsing
 
+ATTENTION : lors d'un depassement du la valeur 9223372036854775807 ou -9223372036854775808 l'asm de zaz cap respectivement a 2147483647 (FFFFFFFF) et 0, alors que nous on continue l'overflow. Faire comme lui ou non?
+
 ### Header
 
 Meme si la taille du nom donne est inferieure a PROG\_NAME\_LENGTH, PROG\_NAME\_LENGTH octets sont reserves pour l'ecriture du nom. Les octets supplementaires sont mis a 0.
