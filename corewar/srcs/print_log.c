@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/10 18:41:35 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/10 18:59:18 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,21 @@ static int	get_buf(char **log_buf, int fd)
 	size_t	len;
 	int		ret;
 
-	*log_buf = ft_strnew(0);
+	if ((*log_buf = ft_strnew(0)) == NULL)
+		return (-1);
 	len = 0;
-	ret = 1;
-	while (ret > 0)
+	while ((ret = read(fd, buf, 8)) > 0)
 	{
-		ret = read(fd, buf, 8);
-		if (ret == -1)
-			return ((errno == EAGAIN) ? 0 : -1);
-//		if (ret == 0)
-//			return (0);
-//		Should be useless
 		if (!(*log_buf = ft_nrealloc(*log_buf, len + 1, len + 1 + ret)))
 			return (-1);
 		ft_memcpy(*log_buf + len, buf, ret);
 		len += ret;
 		(*log_buf)[len] = '\0';
+	}
+	if (ret == -1 && (errno != EAGAIN))
+	{
+		free(*log_buf);
+		return (-1);
 	}
 	return (0);
 }
