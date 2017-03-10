@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/07 17:33:17 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/10 19:46:29 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void				corewar_set_fd(t_corewar *corewar, int fd);
 unsigned char		corewar_get_byte(const t_corewar *corewar,
 		unsigned int pos);
 t_id_type			corewar_get_byte_id(t_corewar *corewar, unsigned int pos);
+t_cycle_type		corewar_get_cycle(t_corewar *corewar);
+t_cycle_type		corewar_get_cycles_to_die(t_corewar *corewar);
+t_size_type			t_corewar_get_process_nb(t_corewar *corewar);
 
 /*
 ** private: ====================================================================
@@ -95,6 +98,9 @@ int					corewar_fork(t_corewar *corewar,
 		t_process *parent, t_reg_type pc);
 void				corewar_kill_process(t_corewar *corewar);
 
+void				corewar_print_log(t_corewar *corewar, char *str);
+void				corewar_print_tmp_log(t_corewar *corewar, char *str);
+
 /*
 ** op functions ================================================================
 */
@@ -109,6 +115,7 @@ int					apply_and(t_corewar *corewar, t_process *process);
 int					apply_or(t_corewar *corewar, t_process *process);
 int					apply_xor(t_corewar *corewar, t_process *process);
 int					apply_zjmp(t_corewar *corewar, t_process *process);
+int					apply_sti(t_corewar *corewar, t_process *process);
 int					apply_fork(t_corewar *corewar, t_process *process);
 int					apply_aff(t_corewar *corewar, t_process *process);
 

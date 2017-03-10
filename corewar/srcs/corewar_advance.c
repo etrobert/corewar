@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/09 17:39:21 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/10 18:35:21 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_f_cw_op	get_op_func(unsigned char op_code)
 	static t_f_cw_op	tab[17] = { &apply_nothing, &apply_live, &apply_ld,
 		&apply_st, NULL, NULL, &apply_and, &apply_or, &apply_xor,
 		&apply_zjmp,
-		NULL, NULL,
+		NULL, &apply_sti,
 		&apply_fork,
 		NULL, NULL, NULL,
 		&apply_aff };
