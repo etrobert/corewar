@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:50:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/07 15:57:42 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/09 16:55:52 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct		s_process
 	bool			new_instr;
 	t_cycle_type	to_wait;
 	t_cycle_type	last_live;
-	t_id_type		last_living_champ;
+//	t_id_type		last_living_champ;
 }					t_process;
 
 t_process			*process_new(void);

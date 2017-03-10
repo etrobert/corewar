@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 17:33:45 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/09 17:08:28 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ static int			add_fresh_process(t_corewar *corewar,
 }
 
 static int			load_one_champion(t_corewar *corewar,
-		const t_champion *champ, unsigned int pc)
+		const t_champion *champ, unsigned int pc, t_id_type id)
 {
 	corewar_write(corewar, (t_memory){champ->code, champ->header.prog_size},
-			pc, champ->id);
+			pc, id);
 //	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
-	if (add_fresh_process(corewar, champ->id, pc) == -1)
+	if (add_fresh_process(corewar, pc, id) == -1)
 		return (-1);
-	corewar->last_living_champ = champ->id;
+// ckwaca
+//	corewar->last_living_champ = champ->id;
 	return (FT_GOOD);
 }
 
@@ -49,13 +50,13 @@ static int			load_champions(t_corewar *corewar, const t_list *champions)
 	t_id_type		id;
 	int				ret;
 
-	id = 0;
+	id = 1;
 	it = ft_list_begin(champions);
 	while (!ft_list_it_end(champions, it))
 	{
 		champ = (t_champion *)(ft_list_it_get(champions, it));
 		if ((ret = load_one_champion(corewar, champ,
-						id * MEM_SIZE / ft_list_size(champions))) < 0)
+						(id - 1) * MEM_SIZE / ft_list_size(champions), id)) < 0)
 			return (ret);
 		ft_list_it_inc(&it);
 		++id;

@@ -6,11 +6,14 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/07 16:02:41 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/09 17:39:21 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+//todell
+#include "print.h"
 
 static t_f_cw_op	get_op_func(unsigned char op_code)
 {
@@ -32,6 +35,7 @@ static int			apply_op(t_corewar *corewar, t_process *process)
 	int				ret;
 	t_f_cw_op		func;
 
+	//ft_dprintf(corewar->fd, "looking to apply %d\n",  process->current_op->op_code);
 	func = get_op_func(process->current_op->op_code);
 	if ((ret = (*func)(corewar, process)) < 0)
 		return (ret);
@@ -44,6 +48,8 @@ static int			corewar_advance_one(t_corewar *corewar, t_process *proc)
 {
 	int				ret;
 
+	//ft_dprintf(corewar->fd, "advancing ");
+	print_process_fd(corewar->fd, proc);
 	if (proc->new_instr)
 		corewar_update_process(corewar, proc);
 	if (proc->to_wait > 0)

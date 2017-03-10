@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 22:09:14 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/09 16:46:45 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_visu
 
 int					play_corewar(t_corewar *corewar);
 void				print_corewar(t_corewar *cw, t_visu *visu);
+void				print_process_fd(int fd, const t_process *process);
 int					play_events(void);
 
 #endif
