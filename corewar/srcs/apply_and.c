@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 00:50:10 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/06 18:34:12 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/09 20:15:41 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ int					apply_and(t_corewar *corewar, t_process *process)
 		process->regs[params.params[2].c] =
 			corewar_extract_param(corewar, process, &params, 0) &
 			corewar_extract_param(corewar, process, &params, 1);
+		ft_dprintf(corewar->fd,
+				"[and] a process on pc %d has put %d in register %d\n",
+				process->pc, process->regs[params.params[2].c],
+				params.params[2].c);
+		//A verifier
+		if (process->regs[params.params[2].c] == 0)
+			process->carry = true;
 	}
 	corewar_update_process_pc(corewar, process, params.offset);
 	return (0);

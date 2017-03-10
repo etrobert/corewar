@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:37:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 20:11:11 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/09 20:04:12 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int			corewar_parse_one_param(t_corewar *corewar,
 	unsigned char	type;
 
 	type = ocp_get_type(params->ocp, id);
+//	ft_dprintf(corewar->fd, "ocp= %d; le type est %d\n",params->ocp, type);
 	if (type == REG_CODE)
 	{
 		corewar_parse_reg(corewar, process, params, id);
@@ -85,8 +86,10 @@ int					corewar_parse_params(t_corewar *corewar, t_process *process,
 	i = 0;
 	while (i < process->current_op->nb_params)
 	{
+		//ft_dprintf(corewar->fd, "pour linstant offset = %d\n", params->offset);
 		if ((tmp = corewar_parse_one_param(corewar, process, params, i)) != 0)
 			ret = tmp;
+		//ft_dprintf(corewar->fd, "et maintenant offset = %d\n", params->offset);
 		++i;
 	}
 	return (ret);
