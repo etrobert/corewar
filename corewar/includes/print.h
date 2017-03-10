@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/09 19:36:58 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/10 14:57:13 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "corewar.h"
 
 # include <ncurses.h>
+# include <errno.h>
 
 # define PRINT_WIDTH	64
 
@@ -44,5 +45,6 @@ typedef struct		s_line
 int					play_corewar(t_corewar *corewar);
 void				print_corewar(t_corewar *cw, t_visu *visu);
 int					play_events(void);
+int					print_log(t_visu *visu);
 
 #endif

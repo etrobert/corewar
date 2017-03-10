@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:13:06 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/02 22:04:13 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/10 17:34:12 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int					apply_aff(t_corewar *corewar, t_process *process)
 	t_op_params		params;
 	int				ret;
 
-	ft_dprintf(2, "Jaffiche\n");
 	if ((ret = corewar_parse_params(corewar, process, &params)) == 0)
 		ft_dprintf(corewar->fd, "Aff: %c\n", process_get_reg(process,
 					params.params[0].c));

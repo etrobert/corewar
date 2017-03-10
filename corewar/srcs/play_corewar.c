@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/09 20:09:33 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/10 15:26:27 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int			init_visu_log(t_visu *visu)
 	fcntl(visu->fds[0], F_SETFL, flags | O_NONBLOCK);
 	if ((visu->log_lines = ft_list_new()) == NULL)
 	{
-		close(fds[0]);
-		close(fds[1]);
-		return (-1)
+		close(visu->fds[0]);
+		close(visu->fds[1]);
+		return (-1);
 	}
 	return (0);
 }
@@ -54,7 +54,7 @@ static void	print_init_visu(t_visu *visu)
 
 	visu->log_height = LINES - (PRINT_WIDTH + 2);
 
-	visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2), COLS, LINES - (PRINT_WIDTH + 2), 0);
+	visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2), COLS, PRINT_WIDTH + 2, 0);
 	keypad(stdscr, TRUE);
 	noecho();
 	cbreak();
@@ -64,6 +64,9 @@ static void	print_init_visu(t_visu *visu)
 
 static void print_round(t_visu *visu, t_corewar *corewar)
 {
+	int fdlol = open("lol.log", O_WRONLY | O_CREAT | O_APPEND);
+
+
 	werase(visu->board);
 	werase(visu->infos);
 	werase(visu->log);
@@ -71,9 +74,14 @@ static void print_round(t_visu *visu, t_corewar *corewar)
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
 	box(visu->log, ACS_VLINE, ACS_HLINE);
 	print_corewar(corewar, visu);
+	ft_dprintf(fdlol, "calling print_log\n");
+	print_log(visu);
+	ft_dprintf(fdlol, "out of print_log\n");
 	wrefresh(visu->board);
 	wrefresh(visu->infos);
+	ft_dprintf(fdlol, "refreshing log\n");
 	wrefresh(visu->log);
+	ft_dprintf(fdlol, "log refreshed\n");
 	usleep(10000);
 }
 
@@ -94,7 +102,7 @@ int	play_corewar(t_corewar *corewar)
 		return (0);
 	print_init_visu(&visu);
 	init_visu_log(&visu);
-	corewar_set_fd(corewar, visu->fds[1]);
+	corewar_set_fd(corewar, visu.fds[1]);
 	while (!corewar_end(corewar))
 	{
 		print_round(&visu, corewar);

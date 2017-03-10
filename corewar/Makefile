@@ -24,7 +24,9 @@ SRCNAM		=	main.c \
 				apply_or.c apply_xor.c \
 				apply_zjmp.c apply_fork.c \
 				apply_aff.c apply_nothing.c \
-				ocp_get_type.c
+				ocp_get_type.c \
+				print_log.c
+
 INCNAM		=	process.h corewar.h champion.h print.h
 
 CC			=	clang
