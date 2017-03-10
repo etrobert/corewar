@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:41:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/09 18:14:57 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/10 17:58:05 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int					apply_ld(t_corewar *corewar, t_process *process)
 	{
 		process->regs[params.params[1].c] = corewar_extract_param(corewar,
 				process, &params, 0);
-		ft_dprintf(2, "a process on pc %d is loading %d in register %d\n",
+		ft_dprintf(corewar->fd, "a process on pc %d is loading %d in register %d\n",
 				process->pc,
 				corewar_extract_param(corewar, process, &params, 0),
 				params.params[1].c);
