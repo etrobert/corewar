@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/10 18:37:53 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/10 19:34:47 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ static void	print_init_visu(t_visu *visu)
 	init_pair(9, COLOR_MAGENTA, COLOR_CYAN);
 	init_pair(10, COLOR_MAGENTA, COLOR_BLACK);
 	visu->board = subwin(stdscr, PRINT_WIDTH + 2, 3 * PRINT_WIDTH + 2, 0, 0);
-	visu->infos = subwin(stdscr, PRINT_WIDTH + 2, COLS - (3 * PRINT_WIDTH + 2),
+	visu->infos = subwin(stdscr, PRINT_WIDTH + 2 - 17, COLS - (3 * PRINT_WIDTH + 2),
 			0, 3 * PRINT_WIDTH + 2);
 
-	visu->log_height = LINES - (PRINT_WIDTH + 4);
+	//visu->log_height = LINES - (PRINT_WIDTH + 4);
+	visu->log_height = 15;
 
-	visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2), COLS, PRINT_WIDTH + 2, 0);
+	//visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2), COLS, PRINT_WIDTH + 2, 0);
+	visu->log = subwin(stdscr, 17, COLS - (3 * PRINT_WIDTH + 2), PRINT_WIDTH + 2 - 17, 3 * PRINT_WIDTH + 2);
 	keypad(stdscr, TRUE);
 	noecho();
 	cbreak();
