@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:03:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/09 15:55:09 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/10 15:12:34 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int		asm_get_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
 	char	*temp;
 
 	temp = NULL;
-	if (!ft_strstr(str, COMMENT_CMD_STRING))
+	if (!ft_strstr(str, COMMENT_CMD_STRING) || (ft_strchr(str, COMMENT_CHAR) &&
+				ft_strchr(str, COMMENT_CHAR) <
+				ft_strstr(str, COMMENT_CMD_STRING)) || (ft_strchr(str, ';') &&
+				ft_strchr(str, ';') < ft_strstr(str, COMMENT_CMD_STRING)))
 		return (NOT_COMMENT);
 	if (!ft_strchr(str, '"') ||
 			ft_strstr(str, COMMENT_CMD_STRING) > ft_strchr(str, '"'))
@@ -44,6 +47,7 @@ int		asm_get_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
 		return (MAX_LEN);
 	}
 	ft_memmove(m_asm->header->comment, ft_strchr(str, '"') + 1, len);
+	m_asm->comment = !m_asm->comment;
 	free(temp);
 	return (COMMENT);
 }

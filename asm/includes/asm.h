@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/09 13:28:33 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/10 19:54:50 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct		s_asm
 	t_header		*header;
 	t_list			*labels;
 	t_list			*instructs;
+	bool			name;
+	bool			comment;
 }					t_asm;
 
 /*
@@ -104,7 +106,8 @@ int					asm_get_prog_name(char *str, t_asm *m_asm, t_list_it *it);
 int					asm_get_prog_comment(char *str, t_asm *m_asm,
 		t_list_it *it);
 unsigned int		asm_get_line_size(char *line, t_list **labels,
-		unsigned int big_size);
+		unsigned int big_size, t_asm *m_asm);
+int					asm_check_separators(char *line, t_op *op_tab);
 
 int					asm_get_bytes(t_asm *m_asm);
 int					asm_get_params(char **split, int n,

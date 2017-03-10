@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 15:57:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/08 15:55:10 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/10 18:28:21 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 static int	asm_get_file(char **line, t_asm *m_asm, int fd)
 {
 	int		ret;
+	char	*tmp;
 
 	while ((ret = get_next_line(fd, line)))
+	{
+		if ((tmp = ft_strchr(*line, COMMENT_CHAR)) ||
+				(tmp = ft_strchr(*line, ';')))
+			*tmp = '\0';
 		if (ft_list_push_back(m_asm->file, *line) < 0)
 		{
 			ft_list_apply(m_asm->file, &free);
@@ -24,6 +29,7 @@ static int	asm_get_file(char **line, t_asm *m_asm, int fd)
 			ft_dprintf(2, "Malloc error\n\n");
 			return (0);
 		}
+	}
 	if (ret < 0)
 	{
 		ft_list_apply(m_asm->file, &free);
