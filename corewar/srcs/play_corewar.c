@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/10 15:26:27 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/10 18:37:53 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	print_init_visu(t_visu *visu)
 	visu->infos = subwin(stdscr, PRINT_WIDTH + 2, COLS - (3 * PRINT_WIDTH + 2),
 			0, 3 * PRINT_WIDTH + 2);
 
-	visu->log_height = LINES - (PRINT_WIDTH + 2);
+	visu->log_height = LINES - (PRINT_WIDTH + 4);
 
 	visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2), COLS, PRINT_WIDTH + 2, 0);
 	keypad(stdscr, TRUE);
@@ -64,9 +64,6 @@ static void	print_init_visu(t_visu *visu)
 
 static void print_round(t_visu *visu, t_corewar *corewar)
 {
-	int fdlol = open("lol.log", O_WRONLY | O_CREAT | O_APPEND);
-
-
 	werase(visu->board);
 	werase(visu->infos);
 	werase(visu->log);
@@ -74,14 +71,10 @@ static void print_round(t_visu *visu, t_corewar *corewar)
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
 	box(visu->log, ACS_VLINE, ACS_HLINE);
 	print_corewar(corewar, visu);
-	ft_dprintf(fdlol, "calling print_log\n");
 	print_log(visu);
-	ft_dprintf(fdlol, "out of print_log\n");
 	wrefresh(visu->board);
 	wrefresh(visu->infos);
-	ft_dprintf(fdlol, "refreshing log\n");
 	wrefresh(visu->log);
-	ft_dprintf(fdlol, "log refreshed\n");
 	usleep(10000);
 }
 

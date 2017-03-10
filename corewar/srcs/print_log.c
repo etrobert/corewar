@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/10 17:44:49 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/10 18:41:35 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ static int	update_log(t_visu *visu)
 	t_list_it	it;
 	char		*line_str;
 
-	i = 0;
+	i = 1;
 	it = ft_list_begin(visu->log_lines);
 	while (!ft_list_it_end(visu->log_lines, it))
 	{
 		line_str = (char*)ft_list_it_get(visu->log_lines, it);
-		if (mvwprintw(visu->log, i, 0, "%s", line_str) == ERR)
+		if (mvwprintw(visu->log, i, 1, "%s", line_str) == ERR)
 			return (-1);
+		ft_list_it_inc(&it);
 		++i;
 	}
 	return (0);
@@ -32,7 +33,6 @@ static int	update_log(t_visu *visu)
 
 static int	get_buf(char **log_buf, int fd)
 {
-	//free log_buf
 	char	buf[8];
 	size_t	len;
 	int		ret;
@@ -45,8 +45,9 @@ static int	get_buf(char **log_buf, int fd)
 		ret = read(fd, buf, 8);
 		if (ret == -1)
 			return ((errno == EAGAIN) ? 0 : -1);
-		if (ret == 0)
-			return (0);
+//		if (ret == 0)
+//			return (0);
+//		Should be useless
 		if (!(*log_buf = ft_nrealloc(*log_buf, len + 1, len + 1 + ret)))
 			return (-1);
 		ft_memcpy(*log_buf + len, buf, ret);
@@ -56,19 +57,13 @@ static int	get_buf(char **log_buf, int fd)
 	return (0);
 }
 
-#include <fcntl.h>
 static int	add_log_lines(t_visu *visu, char **lines)
 {
 	int			i;
-	//
-	//shit
-	int fdlol = open("lol.log", O_WRONLY | O_CREAT | O_APPEND);
 
 	i = 0;
-	ft_dprintf(fdlol, "lignes");
 	while (lines[i] != NULL)
 	{
-		ft_dprintf(fdlol, "%d\n", i);
 		if ((int)ft_list_size(visu->log_lines) == visu->log_height)
 		{
 			free(ft_list_front(visu->log_lines));
@@ -96,6 +91,7 @@ int			print_log(t_visu *visu)
 
 	log_buf = NULL;
 	if (get_buf(&log_buf, visu->fds[0]) != 0)
+		//here free if failed
 		return (-1);
 	log_lines = ft_strsplit(log_buf, '\n');
 	free(log_buf);
