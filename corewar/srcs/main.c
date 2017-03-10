@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 19:25:47 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/07 16:45:05 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static bool	int_good_size(void)
 
 int main(int argc, char **argv)
 {
-	t_champion	*champ;
+	t_champion	champ;
 	t_list		*list;
 	t_corewar	*cw;
 	int			fd;
@@ -66,25 +66,19 @@ int main(int argc, char **argv)
 		ft_dprintf(2, "This system is not supported.\n");
 		return (0);
 	}
-	if ((champ = champion_new()) == NULL)
-	{
-		ft_dprintf(2, "ERROR CREATING CHAMPION\n");
-		return (-1);
-	}
-	if (champion_init(champ, 1, fd) < 0)
+	if (champion_init(&champ, 1, fd) < 0)
 	{
 		ft_dprintf(2, "ERROR LOADING FILE\n");
-		champion_delete(champ);
 		return (-1);
 	}
 	list = ft_list_new();
-	ft_list_push_back(list, champ);
+	ft_list_push_back(list, &champ);
 	cw = corewar_new(list, 2);
 
 	play_corewar(cw);
 
 	corewar_delete(cw);
-	champion_delete(champ);
+	champion_clear(&champ);
 	close(fd);
 	return (0);
 }

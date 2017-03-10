@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 20:16:13 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/04 14:28:00 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/07 16:38:59 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef struct			s_champion
 }						t_champion;
 
 t_champion				*champion_new(void);
-int						champion_init(t_champion *champ, t_id_type id, int fd);
 void					champion_delete(t_champion *champ);
+
+int						champion_init(t_champion *champ, t_id_type id, int fd);
+void					champion_clear(t_champion *champion);
 
 #endif

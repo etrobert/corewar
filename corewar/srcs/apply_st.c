@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 19:47:11 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/05 15:55:41 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/07 17:13:37 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int					apply_st(t_corewar *corewar, t_process *process)
 	unsigned int	val;
 	t_op_params		params;
 
+	ft_dprintf(corewar->fd, "a process is writing\n");
 	if (corewar_parse_params(corewar, process, &params) == 0)
 	{
 		val = corewar_extract_param(corewar, process, &params, 1);
