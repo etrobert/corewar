@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/05 22:15:27 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:39:48 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	print_init_visu(t_visu *visu)
 	noecho();
 	cbreak();
 	curs_set(0);
+	visu->speed = 10000;
+	visu->pause = true;
 	nodelay(stdscr, 1);
 }
 
@@ -48,7 +50,7 @@ static void print_round(t_visu *visu, t_corewar *corewar)
 	print_corewar(corewar, visu);
 	wrefresh(visu->board);
 	wrefresh(visu->infos);
-	usleep(10000);
+	usleep(visu->speed);
 }
 
 static void	print_end()
@@ -70,12 +72,12 @@ int	play_corewar(t_corewar *corewar)
 	while (!corewar_end(corewar))
 	{
 		print_round(&visu, corewar);
-		if ((ret = corewar_advance(corewar)) < 0)
+		if (!visu.pause && (ret = corewar_advance(corewar)) < 0)
 		{
 			print_end();
 			return (ret);
 		}
-		if (!play_events())
+		if (!play_events(&visu))
 			return (0);
 	}
 	print_end();

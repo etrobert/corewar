@@ -13,6 +13,7 @@
 
 #tmp files
 *.tmp
+tmp
 
 #exec files
 exec
