@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_fork.c                                       :+:      :+:    :+:   */
+/*   corewar_vprint_log.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/22 13:16:09 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 19:56:15 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/11 21:09:48 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/11 21:18:19 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					apply_fork(t_corewar *corewar, t_process *process)
+int					corewar_vprint_log(t_corewar *corewar, char *fmt,
+		va_list ap)
 {
-	short			dest;
-	int				ret;
+	int				n;
+	int				n2;
 
-	ft_cbuff_read(corewar->memory, &dest, process->pc + 1, sizeof(dest));
-	dest = ft_ushort16_big_endian(dest);
-	ret = (corewar_fork(corewar, process,
-				(process->pc + (dest % IDX_MOD)) % MEM_SIZE));
-	corewar_print_log(corewar, "pc %d: fork %hd\n", process->pc, dest);
-	corewar_update_process_pc(corewar, process, 3);
-	return (ret);
+	if ((n = ft_dprintf(corewar->fd, "[%6u] ", corewar->cycle)) < 0)
+		return (n);
+	if ((n2 = ft_vdprintf(corewar->fd, fmt, ap)) < 0)
+		return (n2);
+	return (n + n2);
 }

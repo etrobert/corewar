@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 11:48:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/09 17:39:42 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/11 17:50:14 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int					apply_live(t_corewar *corewar, t_process *process)
 
 	ft_cbuff_read(corewar->memory, &id, process->pc + 1, sizeof(unsigned int));
 	id = ft_uint32_big_endian(id);
-	//ft_dprintf(corewar->fd,
-	//		"un processus dit que le joueur %u(?) est en vie\n", id);
+	corewar_print_log(corewar,
+			"un processus dit que le joueur %u(?) est en vie\n", id);
 	++(corewar->nbr_live);
 	//corewar->last_living_champ = id;
 	process->last_live = corewar->cycle;

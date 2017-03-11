@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:37:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/09 20:04:12 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/11 20:39:18 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static int			corewar_parse_one_param(t_corewar *corewar,
 	if (type == REG_CODE)
 	{
 		corewar_parse_reg(corewar, process, params, id);
-		if (params->params[id].c >= REG_NUMBER)
+		if (!process_valid_reg(params->params[id].c))
+//		if (params->params[id].c >= REG_NUMBER)
 			return (-1);
 	}
 	else if (type == DIR_CODE)

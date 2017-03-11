@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 00:50:10 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/09 20:15:41 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/11 21:23:13 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 int					apply_and(t_corewar *corewar, t_process *process)
 {
 	t_op_params		params;
+	int				arg[2];
 
+	//INT OR UINT FOR ARG ??
 	if (corewar_parse_params(corewar, process, &params) == 0)
 	{
-		process->regs[params.params[2].c] =
-			corewar_extract_param(corewar, process, &params, 0) &
-			corewar_extract_param(corewar, process, &params, 1);
-		ft_dprintf(corewar->fd,
-				"[and] a process on pc %d has put %d in register %d\n",
-				process->pc, process->regs[params.params[2].c],
-				params.params[2].c);
+		arg[0] = corewar_extract_param(corewar, process, &params, 0);
+		arg[1] = corewar_extract_param(corewar, process, &params, 1);
+		process_set_reg(process, params.params[2].c, arg[0] & arg[1]);
+		corewar_print_op(corewar, process,
+				"and %d %d r%d -> %d\n",
+				arg[0], arg[1], params.params[2].c,
+				process_get_reg(process, params.params[2].c));
 		//A verifier
-		if (process->regs[params.params[2].c] == 0)
+		if (process_get_reg(process, params.params[2].c) == 0)
 			process->carry = true;
 	}
 	corewar_update_process_pc(corewar, process, params.offset);

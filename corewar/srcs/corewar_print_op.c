@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_fork.c                                       :+:      :+:    :+:   */
+/*   corewar_print_op.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/22 13:16:09 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 19:56:15 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/11 21:06:57 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/11 22:32:31 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					apply_fork(t_corewar *corewar, t_process *process)
+int				corewar_print_op(t_corewar *corewar, t_process *process,
+		char *fmt, ...)
 {
-	short			dest;
-	int				ret;
+	va_list			ap;
+	int				n;
+	char			*str;
 
-	ft_cbuff_read(corewar->memory, &dest, process->pc + 1, sizeof(dest));
-	dest = ft_ushort16_big_endian(dest);
-	ret = (corewar_fork(corewar, process,
-				(process->pc + (dest % IDX_MOD)) % MEM_SIZE));
-	corewar_print_log(corewar, "pc %d: fork %hd\n", process->pc, dest);
-	corewar_update_process_pc(corewar, process, 3);
-	return (ret);
+	va_start(ap, fmt);
+	n = ft_vasprintf(&str, fmt, ap);
+	va_end(ap);
+	if (n < 0)
+		return (n);
+	n = corewar_print_log(corewar, "pc %5u | P %5u | %s",
+					process_get_pc(process),
+					process_get_proc_id(process),
+					str);
+	free(str);
+	return (n);
 }

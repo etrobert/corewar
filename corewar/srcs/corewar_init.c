@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/09 17:08:28 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/11 21:03:38 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int					corewar_init(t_corewar *corewar, const t_list *champions,
 		return (-1);
 	if ((corewar->memory_id = ft_cbuff_new(MEM_SIZE)) == NULL)
 		return (-1);
+	corewar->last_proc_id = 1;
 	if ((ret = load_champions(corewar, champions)) != FT_GOOD)
 		return (ret);
 	corewar->cycle = 0;

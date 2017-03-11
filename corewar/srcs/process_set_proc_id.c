@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_print_tmp_log.c                            :+:      :+:    :+:   */
+/*   process_set_proc_id.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/10 19:45:14 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/10 19:46:29 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/11 21:04:58 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/11 21:17:32 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "process.h"
 
-void				corewar_print_tmp_log(t_corewar *corewar, char *str)
+void				process_set_proc_id(t_process *process,
+		unsigned int proc_id)
 {
-	corewar_print_log(corewar, str);
-	free(str);
+	if (process == NULL)
+		return ;
+	process->proc_id = proc_id;
 }
