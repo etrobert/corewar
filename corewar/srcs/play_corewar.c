@@ -6,15 +6,13 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/11 17:09:52 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/11 21:38:38 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 #include "libft.h"
 
-#include <unistd.h>
-#include <fcntl.h>
 int			init_visu_log(t_visu *visu)
 {
 	int		flags;
@@ -51,10 +49,8 @@ static void	print_init_visu(t_visu *visu)
 	visu->board = subwin(stdscr, PRINT_WIDTH + 2, 3 * PRINT_WIDTH + 2, 0, 0);
 	visu->infos = subwin(stdscr, PRINT_WIDTH + 2 - 17, COLS - (3 * PRINT_WIDTH + 2),
 			0, 3 * PRINT_WIDTH + 2);
-
 	//visu->log_height = LINES - (PRINT_WIDTH + 4);
 	visu->log_height = 15;
-
 	//visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2), COLS, PRINT_WIDTH + 2, 0);
 	visu->log = subwin(stdscr, 17, COLS - (3 * PRINT_WIDTH + 2), PRINT_WIDTH + 2 - 17, 3 * PRINT_WIDTH + 2);
 	keypad(stdscr, TRUE);
@@ -66,11 +62,11 @@ static void	print_init_visu(t_visu *visu)
 	nodelay(stdscr, 1);
 }
 
-static void print_round(t_visu *visu, t_corewar *corewar)
+static void	print_round(t_visu *visu, t_corewar *corewar)
 {
 	werase(visu->board);
 	werase(visu->infos);
-	werase(visu->log);
+	//werase(visu->log);
 	box(visu->board, ACS_VLINE, ACS_HLINE);
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
 	box(visu->log, ACS_VLINE, ACS_HLINE);
@@ -82,7 +78,7 @@ static void print_round(t_visu *visu, t_corewar *corewar)
 	usleep(visu->speed);
 }
 
-static void	print_end()
+static void	print_end(void)
 {
 	while (getch() != 27)
 	{

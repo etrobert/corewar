@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 17:11:17 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/11 21:34:15 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <ncurses.h>
 # include <errno.h>
+# include <fcntl.h>
 
 # define PRINT_WIDTH	64
 

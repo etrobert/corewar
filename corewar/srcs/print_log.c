@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/10 18:59:18 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/11 21:35:32 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,8 @@ int			print_log(t_visu *visu)
 	char	*log_buf;
 	char	**log_lines;
 
-
 	log_buf = NULL;
 	if (get_buf(&log_buf, visu->fds[0]) != 0)
-		//here free if failed
 		return (-1);
 	log_lines = ft_strsplit(log_buf, '\n');
 	free(log_buf);
