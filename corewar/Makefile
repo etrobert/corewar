@@ -16,14 +16,17 @@ SRCNAM		=	main.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
 				corewar_get_byte.c corewar_get_byte_id.c \
+				corewar_get_cycle.c corewar_get_cycles_to_die.c \
+				corewar_get_process_nb.c \
+				corewar_write.c \
+				corewar_parse_params.c corewar_extract_param.c \
 				corewar_update_process.c corewar_fork.c \
 				corewar_update_process_pc.c corewar_check.c \
 				corewar_kill_process.c corewar_add_process.c \
-				corewar_write.c \
-				corewar_parse_params.c corewar_extract_param.c \
+				corewar_print_log.c corewar_print_tmp_log.c \
 				apply_live.c apply_ld.c apply_st.c apply_and.c \
 				apply_or.c apply_xor.c \
-				apply_zjmp.c apply_fork.c \
+				apply_zjmp.c apply_sti.c apply_fork.c \
 				apply_aff.c apply_nothing.c \
 				ocp_get_type.c \
 				print_log.c

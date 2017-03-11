@@ -6,35 +6,12 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/08 18:33:47 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/11 17:09:17 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 
-/*static void			print_line(void)
-{
-	int				i;
-
-	i = 0;
-	while (i < PRINT_WIDTH)
-	{
-		ft_printf("-- ");
-		++i;
-	}
-	ft_putchar('\n');
-}
-
-static void			print_byte_color(t_corewar *corewar, unsigned int pos)
-{
-	t_id_type		id;
-
-	if ((id = corewar_get_byte_id(corewar, pos)) != 0)
-		ft_printf("%d", 30 + id);
-	else
-		ft_printf("39");
-}
-*/
 //Degueu parcours de la liste de process pour chaque case
 static int			print_process(t_corewar *corewar, unsigned int pos,
 		t_visu *visu, unsigned char byte)
@@ -71,10 +48,15 @@ static int			print_process(t_corewar *corewar, unsigned int pos,
 
 static void			print_infos(t_corewar *corewar, t_visu *visu)
 {
-	mvwprintw(visu->infos, 5, 10, "cycle : %u", corewar->cycle);
-	mvwprintw(visu->infos, 10, 10, "process : %d",
+	if (visu->pause)
+		mvwprintw(visu->infos, 2, 10, "PAUSED");
+	else
+		mvwprintw(visu->infos, 2, 10, "PLAY");
+	mvwprintw(visu->infos, 4, 10, "usleep(%u)", visu->speed);
+	mvwprintw(visu->infos, 6, 10, "cycle : %u", corewar->cycle);
+	mvwprintw(visu->infos, 8, 10, "process : %d",
 			ft_list_size(corewar->process));
-	mvwprintw(visu->infos, 15, 10, "cycle_to_die : %u", corewar->cycles_to_die);
+	mvwprintw(visu->infos, 10, 10, "cycle_to_die : %u", corewar->cycles_to_die);
 }
 
 static void			print_byte(t_corewar *corewar, unsigned int pos,

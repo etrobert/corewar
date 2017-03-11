@@ -2,5 +2,5 @@
 .comment "the king of the jungle"
 
 start:
-and r1,%0,r1
-zjmp %-1
+ld %2147483647, r2
+sti r1, r2, r2
