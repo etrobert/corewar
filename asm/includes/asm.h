@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/10 19:54:50 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/11 20:36:45 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,17 @@ int					asm_create(char *filename);
 int					asm_save_file(int fd, t_asm *m_asm);
 
 int					asm_get_size(t_asm *m_asm);
-int					asm_get_params_size(char **split, int n, t_op *op_tab);
 int					asm_get_prog_name(char *str, t_asm *m_asm, t_list_it *it);
 int					asm_get_prog_comment(char *str, t_asm *m_asm,
 		t_list_it *it);
+int					asm_get_params_size(char **split, int n, t_op *op_tab);
+int					asm_check_max_params(int i, t_op *op_tab, char **split,
+		int n);
+void				asm_add_ocp(t_bytes **bytes_instruct, unsigned char code);
 unsigned int		asm_get_line_size(char *line, t_list **labels,
 		unsigned int big_size, t_asm *m_asm);
+int					asm_get_label(char **param, t_list **labels,
+		unsigned int size, int *n);
 int					asm_check_separators(char *line, t_op *op_tab);
 
 int					asm_get_bytes(t_asm *m_asm);
@@ -124,7 +129,7 @@ int					asm_param_byte_label_ind(char *param,
 **	write in .cor
 */
 
-void				asm_write_bytes(int fd, t_asm m_asm, char *filename);
+void				asm_write_bytes(int fd, t_asm *m_asm, char *filename);
 
 /*
 **	free functions

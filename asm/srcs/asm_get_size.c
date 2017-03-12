@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/10 15:19:06 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/11 16:05:54 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,29 @@ static int			asm_check_max_size(t_asm *m_asm)
 	return (1);
 }
 
+static int			asm_no_name_or_comment(int name, int comment, char *line,
+		t_asm *m_asm)
+{
+	unsigned int		ret;
+
+	if (name != NAME && comment != COMMENT)
+	{
+		ret = asm_get_line_size(line, &(m_asm->labels),
+				(m_asm->header)->prog_size, m_asm);
+		if (ret > CHAMP_MAX_SIZE)
+			return (0);
+		(m_asm->header)->prog_size += ret;
+		if (!asm_check_max_size(m_asm))
+			return (0);
+	}
+	return (1);
+}
+
 static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 {
 	int				name;
 	int				comment;
 	char			*line;
-	unsigned int	ret;
 
 	while (!ft_list_it_end(m_asm->file, it))
 	{
@@ -60,16 +77,8 @@ static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 			ft_dprintf(2, "Champion must have only one name and comment.\n");
 			return (0);
 		}
-		if (name != NAME && comment != COMMENT)
-		{
-			ret = asm_get_line_size(line, &(m_asm->labels),
-					(m_asm->header)->prog_size, m_asm);
-			if (ret > CHAMP_MAX_SIZE)
-				return (0);
-			(m_asm->header)->prog_size += ret;
-			if (!asm_check_max_size(m_asm))
-				return (0);
-		}
+		if (!asm_no_name_or_comment(name, comment, line, m_asm))
+			return (0);
 		ft_list_it_inc(&it);
 	}
 	return (1);

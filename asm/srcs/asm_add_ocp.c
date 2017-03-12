@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_free_asm.c                                     :+:      :+:    :+:   */
+/*   asm_add_ocp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/09 13:20:56 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/11 20:34:38 by mverdier         ###   ########.fr       */
+/*   Created: 2017/03/11 16:30:16 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/11 16:30:54 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static void	asm_free_labels_name(void *label)
+void		asm_add_ocp(t_bytes **bytes_instruct, unsigned char code)
 {
-	t_labels	*tmp;
+	t_bytes		*bytes;
 
-	tmp = label;
-	free(tmp->name);
-	free(tmp);
-}
-
-void		asm_free_asm(t_asm *m_asm)
-{
-	ft_list_apply(m_asm->file, &free);
-	ft_list_delete(m_asm->file);
-	free(m_asm->header);
-	ft_list_apply(m_asm->labels, &asm_free_labels_name);
-	ft_list_delete(m_asm->labels);
-	ft_list_apply(m_asm->instructs, &free);
-	ft_list_delete(m_asm->instructs);
-	free(m_asm);
+	bytes = *bytes_instruct;
+	if (bytes->op_tab->ocp == true)
+	{
+		bytes->ocp += code;
+		bytes->ocp <<= 2;
+		bytes->ocp_size = 1;
+	}
 }

@@ -6,31 +6,19 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:22:53 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/10 18:29:16 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/12 16:12:53 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-static void		asm_add_ocp(t_bytes **bytes_instruct, unsigned char code)
-{
-	t_bytes		*bytes;
-
-	bytes = *bytes_instruct;
-	if (bytes->op_tab->ocp == true)
-	{
-		bytes->ocp += code;
-		bytes->ocp <<= 2;
-		bytes->ocp_size = 1;
-	}
-}
 
 static int		asm_param_byte_reg(char *param, t_bytes **bytes_instruct, int i)
 {
 	t_bytes		*bytes;
 	int			reg;
 
-	if (param[0] != 'r' || !ft_str_test_chars(param + 1, &ft_isdigit))
+	if (param[0] != 'r' || !ft_str_test_chars(param + 1, &ft_isdigit) ||
+			param[1] == '\0')
 	{
 		ft_dprintf(2, "Bad syntax for register \'%s\'\n", param);
 		return (0);
@@ -41,6 +29,25 @@ static int		asm_param_byte_reg(char *param, t_bytes **bytes_instruct, int i)
 	bytes->param[i].c = reg;
 	bytes->param_size[i] = 1;
 	return (1);
+}
+
+static void		asm_add_byte_ind(char *param, t_bytes **bytes_instruct, int i)
+{
+	t_bytes		*bytes;
+
+	bytes = *bytes_instruct;
+	if (bytes->op_tab->small_direct == true)
+	{
+		bytes->param[i].s =
+			ft_short16_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
+		bytes->param_size[i] = 2;
+	}
+	else
+	{
+		bytes->param[i].i =
+			ft_int32_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
+		bytes->param_size[i] = 4;
+	}
 }
 
 static int		asm_param_byte_dir(char *param, t_bytes **bytes_instruct,
@@ -63,18 +70,8 @@ static int		asm_param_byte_dir(char *param, t_bytes **bytes_instruct,
 		ft_dprintf(2, "Bad syntax for direct \'%s\'\n", param);
 		return (0);
 	}
-	else if (bytes->op_tab->small_direct == true)
-	{
-		bytes->param[i].s =
-			ft_short16_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
-		bytes->param_size[i] = 2;
-	}
 	else
-	{
-		bytes->param[i].i =
-			ft_int32_big_endian(ft_atoi(ft_strchr(param, DIRECT_CHAR) + 1));
-		bytes->param_size[i] = 4;
-	}
+		asm_add_byte_ind(param, bytes_instruct, i);
 	return (1);
 }
 
@@ -119,17 +116,14 @@ int				asm_get_params(char **split, int n, t_bytes **bytes_instruct,
 			return (1);
 		}
 		if (split[n + i][0] == 'r')
-		{
 			if (!asm_param_byte_reg(split[n + i], bytes_instruct, i))
 				return (0);
-		}
-		else if (split[n + i][0] == DIRECT_CHAR)
-		{
+		if (split[n + i][0] == DIRECT_CHAR)
 			if (!asm_param_byte_dir(split[n + i], bytes_instruct, i, m_asm))
 				return (0);
-		}
-		else if (!asm_param_byte_ind(split[n + i], bytes_instruct, i, m_asm))
-			return (0);
+		if (split[n + i][0] != 'r' && split[n + i][0] != DIRECT_CHAR)
+			if (!asm_param_byte_ind(split[n + i], bytes_instruct, i, m_asm))
+				return (0);
 		i++;
 	}
 	asm_complete_ocp(bytes_instruct, i);

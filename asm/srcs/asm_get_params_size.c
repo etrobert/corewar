@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 15:16:48 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/09 19:47:54 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/12 16:43:39 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,54 +79,44 @@ static int	asm_ind_size(char *param, t_op *op_tab, int i, unsigned int *size)
 	return (1);
 }
 
-static int	asm_check_max_params(int i, t_op *op_tab, char **split, int n)
+static int	asm_params_loop(char **split, int n, t_op *op_tab,
+		unsigned int *size)
 {
-	if (i >= op_tab->nb_params || (i + 1 > op_tab->nb_params && split[n + i + 1]
-				&& split[n + i + 1][0] != COMMENT_CHAR
-				&& split[n + i + 1][0] != ';'))
-	{
-		ft_dprintf(2, "\'%s\' has too much params (take %d)\n",
-				op_tab->name, op_tab->nb_params);
-		return (0);
-	}
-	else if ((!split[n + i + 1] || (split[n + i + 1][0] == COMMENT_CHAR ||
-				split[n + i + 1][0] == ';')) && i + 1 < op_tab->nb_params)
-	{
-		ft_dprintf(2, "\'%s\' has not enough params (take %d)\n",
-				op_tab->name, op_tab->nb_params);
-		return (0);
-	}
-	return (1);
-}
-
-int			asm_get_params_size(char **split, int n, t_op *op_tab)
-{
-	int				i;
-	unsigned int	size;
+	int		i;
 
 	i = 0;
-	size = 0;
-	if (!split[n + i])
-	{
-		ft_dprintf(2, "No params for \'%s\' (take %d)\n", op_tab->name,
-				op_tab->nb_params);
-		return (-1);
-	}
 	while (split[n + i])
 	{
 		if (split[n + i][0] == COMMENT_CHAR || split[n + i][0] == ';')
 		{
 			if (op_tab->ocp == true)
-				return (size + 2);
-			return (size + 1);
+				return (*size + 2);
+			return (*size + 1);
 		}
 		if (!asm_check_max_params(i, op_tab, split, n) ||
-				!asm_reg_size(split[n + i], op_tab, i, &size) ||
-				!asm_dir_size(split[n + i], op_tab, i, &size) ||
-				!asm_ind_size(split[n + i], op_tab, i, &size))
+				!asm_reg_size(split[n + i], op_tab, i, size) ||
+				!asm_dir_size(split[n + i], op_tab, i, size) ||
+				!asm_ind_size(split[n + i], op_tab, i, size))
 			return (-1);
 		i++;
 	}
+	return (0);
+}
+
+int			asm_get_params_size(char **split, int n, t_op *op_tab)
+{
+	unsigned int	size;
+	int				ret;
+
+	size = 0;
+	if (!split[n])
+	{
+		ft_dprintf(2, "No params for \'%s\' (take %d)\n", op_tab->name,
+				op_tab->nb_params);
+		return (-1);
+	}
+	if ((ret = asm_params_loop(split, n, op_tab, &size)) != 0)
+		return (ret);
 	if (op_tab->ocp == true)
 		return (size + 2);
 	return (size + 1);

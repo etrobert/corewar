@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 18:36:10 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/08 18:54:32 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/12 16:12:54 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ static int		asm_get_line(char **split, t_bytes **bytes, t_asm *m_asm)
 		return (0);
 	}
 	if (!asm_get_params(split, n + 1, bytes, m_asm))
+	{
+		asm_free_split(split);
+		free(*bytes);
 		return (0);
+	}
 	return (2);
 }
 
