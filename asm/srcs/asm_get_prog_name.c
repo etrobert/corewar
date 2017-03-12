@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:00:04 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/11 19:47:26 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/12 20:06:02 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,25 @@ int			asm_get_prog_name(char *str, t_asm *m_asm, t_list_it *it)
 {
 	int			len;
 	char		*temp;
+	char		**split;
 
 	temp = NULL;
 	if (!asm_is_name(str))
 		return (NOT_NAME);
-	if (!ft_strchr(str, '"') ||
-			ft_strstr(str, NAME_CMD_STRING) > ft_strchr(str, '"'))
+	if (!(split = ft_strsplit_str(str, " \t")))
 	{
-		ft_dprintf(2, "Syntax error in champion's name\n");
+		ft_dprintf(2, "Malloc error\n");
 		return (0);
 	}
+	if (!ft_strchr(str, '"') ||
+			ft_strstr(str, NAME_CMD_STRING) > ft_strchr(str, '"') ||
+			ft_strcmp(split[0], NAME_CMD_STRING) || split[1][0] != '"')
+	{
+		ft_dprintf(2, "Syntax error in champion's name\n");
+		asm_free_split(split);
+		return (0);
+	}
+	asm_free_split(split);
 	asm_multi_lines_name(&str, &temp, it, m_asm);
 	if (!asm_check_name_len(str, &temp, &len))
 		return (MAX_LEN);

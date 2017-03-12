@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 15:57:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/10 18:28:21 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/12 19:56:57 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ static int	asm_get_file(char **line, t_asm *m_asm, int fd)
 
 	while ((ret = get_next_line(fd, line)))
 	{
-		if ((tmp = ft_strchr(*line, COMMENT_CHAR)) ||
-				(tmp = ft_strchr(*line, ';')))
+		if ((tmp = ft_strchr(*line, COMMENT_CHAR)))
+			*tmp = '\0';
+		if ((tmp = ft_strchr(*line, ';')))
 			*tmp = '\0';
 		if (ft_list_push_back(m_asm->file, *line) < 0)
 		{

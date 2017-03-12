@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:03:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/11 19:47:19 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/12 20:07:26 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,25 @@ int			asm_get_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
 {
 	int		len;
 	char	*temp;
+	char	**split;
 
 	temp = NULL;
 	if (!asm_is_comment(str))
 		return (NOT_COMMENT);
-	if (!ft_strchr(str, '"') ||
-			ft_strstr(str, COMMENT_CMD_STRING) > ft_strchr(str, '"'))
+	if (!(split = ft_strsplit_str(str, " \t")))
 	{
-		ft_dprintf(2, "Syntax error in champion's comment\n");
+		ft_dprintf(2, "Malloc error\n");
 		return (0);
 	}
+	if (!ft_strchr(str, '"') ||
+			ft_strstr(str, COMMENT_CMD_STRING) > ft_strchr(str, '"') ||
+			ft_strcmp(split[0], COMMENT_CMD_STRING) || split[1][0] != '"')
+	{
+		ft_dprintf(2, "Syntax error in champion's comment\n");
+		asm_free_split(split);
+		return (0);
+	}
+	asm_free_split(split);
 	asm_multi_lines_comment(&str, &temp, it, m_asm);
 	if (!asm_check_comment_len(str, &temp, &len))
 		return (MAX_LEN);
