@@ -1,5 +1,8 @@
 NAME		=	asm
 
+COLOR		=	\033[33m
+COLOR_RESET	=	\033[0m
+
 SRCDIR		=	srcs
 INCDIR		=	includes
 OPDIR		=	../op
@@ -68,7 +71,9 @@ printf:
 check: no printf
 
 printname:
+	@printf "$(COLOR)"
 	@printf "[%-15s " "$(NAME)]"
+	@printf "$(COLOR_RESET)"
 
 clean:
 	@$(MAKE) printname
