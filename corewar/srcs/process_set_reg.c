@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_print_log.c                                :+:      :+:    :+:   */
+/*   process_set_reg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/10 19:03:41 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 21:16:18 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/11 20:18:53 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/11 20:36:00 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "process.h"
 
-int					corewar_print_log(t_corewar *corewar, char *fmt, ...)
+void				process_set_reg(t_process *proc, unsigned char reg,
+		unsigned int val)
 {
-	va_list			ap;
-	int				n;
-
-	va_start(ap, fmt);
-	n = corewar_vprint_log(corewar, fmt, ap);
-	va_end(ap);
-	return (n);
+	if (proc == NULL)
+		return ;
+	if (!process_valid_reg(reg))
+		return ;
+	proc->regs[reg - 1] = val;
 }

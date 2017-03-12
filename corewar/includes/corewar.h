@@ -6,13 +6,14 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 17:11:40 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/12 20:54:16 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
+# include <stdarg.h>
 # include "champion.h"
 # include "process.h"
 
@@ -20,13 +21,18 @@ typedef struct		s_corewar
 {
 	t_cbuff			*memory;
 	t_cbuff			*memory_id;
+
 	t_list			*process;
+	unsigned int	last_proc_id;
+
 	t_cycle_type	cycle;
 	t_cycle_type	last_check;
 	t_cycle_type	cycles_to_die;
 	t_cycle_type	clear_checks;
+
 	unsigned int	nbr_live;
 	t_id_type		last_living_champ;
+
 	int				fd;
 }					t_corewar;
 
@@ -60,7 +66,8 @@ bool				corewar_end(const t_corewar *corewar);
 
 void				corewar_set_fd(t_corewar *corewar, int fd);
 unsigned char		corewar_get_byte(const t_corewar *corewar,
-		unsigned int pos);
+		unsigned int pos);;
+
 t_id_type			corewar_get_byte_id(t_corewar *corewar, unsigned int pos);
 t_cycle_type		corewar_get_cycle(t_corewar *corewar);
 t_cycle_type		corewar_get_cycles_to_die(t_corewar *corewar);
@@ -98,8 +105,11 @@ int					corewar_fork(t_corewar *corewar,
 		t_process *parent, t_reg_type pc);
 void				corewar_kill_process(t_corewar *corewar);
 
-void				corewar_print_log(t_corewar *corewar, char *str);
-void				corewar_print_tmp_log(t_corewar *corewar, char *str);
+int					corewar_print_op(t_corewar *corewar, t_process *process,
+		char *fmt, ...);
+int					corewar_print_log(t_corewar *corewar, char *fmt, ...);
+int					corewar_vprint_log(t_corewar *corewar, char *fmt, va_list ap);
+
 
 /*
 ** op functions ================================================================

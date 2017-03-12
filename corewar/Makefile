@@ -10,7 +10,9 @@ SRCNAM		=	main.c \
 				champion_new.c champion_delete.c \
 				champion_init.c champion_clear.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
-				process_get_reg.c \
+				process_get_reg.c process_set_reg.c process_valid_reg.c \
+				process_get_proc_id.c process_set_proc_id.c \
+				process_get_pc.c \
 				print_corewar.c play_corewar.c play_events.c\
 				print_process_fd.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
@@ -23,7 +25,8 @@ SRCNAM		=	main.c \
 				corewar_update_process.c corewar_fork.c \
 				corewar_update_process_pc.c corewar_check.c \
 				corewar_kill_process.c corewar_add_process.c \
-				corewar_print_log.c corewar_print_tmp_log.c \
+				corewar_print_log.c corewar_vprint_log.c \
+				corewar_print_op.c \
 				apply_live.c apply_ld.c apply_st.c apply_and.c \
 				apply_or.c apply_xor.c \
 				apply_zjmp.c apply_sti.c apply_fork.c \

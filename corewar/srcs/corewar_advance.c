@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/10 18:35:21 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/11 17:44:28 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int			corewar_advance_one(t_corewar *corewar, t_process *proc)
 	int				ret;
 
 	//ft_dprintf(corewar->fd, "advancing ");
-	print_process_fd(corewar->fd, proc);
+	//print_process_fd(corewar->fd, proc);
 	if (proc->new_instr)
 		corewar_update_process(corewar, proc);
 	if (proc->to_wait > 0)

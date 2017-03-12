@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 19:40:42 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/03 20:12:15 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/11 18:58:48 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static unsigned int	corewar_extract_param_ind(const t_corewar *corewar,
 {
 	unsigned int	val;
 
+	//modulo ??
 	ft_cbuff_read(corewar->memory, &val,
-			process->pc + params->params[id].s, sizeof(unsigned int));
+			process->pc + (short)params->params[id].s, sizeof(unsigned int));
 	return (ft_uint32_big_endian(val));
 }
 
@@ -37,7 +38,7 @@ unsigned int		corewar_extract_param(const t_corewar *corewar,
 	else if (type == DIR_CODE)
 	{
 		if (process->current_op->small_direct)
-			return (params->params[id].s);
+			return ((short)params->params[id].s);
 		return (params->params[id].i);
 	}
 	else if (type == IND_CODE)
