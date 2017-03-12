@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/11 21:35:32 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/11 21:51:16 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static int	update_log(t_visu *visu)
 
 static int	get_buf(char **log_buf, int fd)
 {
-	char	buf[8];
+	char	buf[128];
 	size_t	len;
 	int		ret;
 
 	if ((*log_buf = ft_strnew(0)) == NULL)
 		return (-1);
 	len = 0;
-	while ((ret = read(fd, buf, 8)) > 0)
+	while ((ret = read(fd, buf, 128)) > 0)
 	{
 		if (!(*log_buf = ft_nrealloc(*log_buf, len + 1, len + 1 + ret)))
 			return (-1);

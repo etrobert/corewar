@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/11 21:38:38 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/11 21:54:30 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	print_round(t_visu *visu, t_corewar *corewar)
 {
 	werase(visu->board);
 	werase(visu->infos);
-	//werase(visu->log);
+	werase(visu->log);
 	box(visu->board, ACS_VLINE, ACS_HLINE);
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
 	box(visu->log, ACS_VLINE, ACS_HLINE);
