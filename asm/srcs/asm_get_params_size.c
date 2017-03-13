@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 15:16:48 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/12 16:43:39 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:16:03 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@ static int	asm_reg_size(char *param, t_op *op_tab, int i, unsigned int *size)
 					op_tab->name);
 			return (0);
 		}
-		if (reg < 0 || reg > REG_NUMBER)
-		{
-			ft_dprintf(2, "Bad reg number \'%d\' for \'%s\'\n", reg,
+		if (reg == 0 || reg > REG_NUMBER)
+			ft_printf("Warning : bad reg number \'%d\' for \'%s\'\n", reg,
 					op_tab->name);
-			return (0);
-		}
 		(*size) += 1;
 	}
 	return (1);
