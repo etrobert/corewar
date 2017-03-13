@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/07 16:45:05 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/13 18:35:29 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,54 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
+int	get_args(int ac, char **av, t_list **args)
+{
+	int		i;
+	int		j;
+	char	**tmp_args;
+
+	i = 1;
+	if ((*args = ft_list_new()) == NULL)
+		return (-1);
+	while (i < ac)
+	{
+		if ((tmp_args = ft_strsplit_str(av[i], "\t\n\v\f\r ")) == NULL)
+			return (-1);
+		j = 0;
+		while (tmp_args[j] != NULL)
+		{
+			if (ft_list_push_back(*args, tmp_args[j]) == -1)
+			{
+				//free list here
+				while (tmp_args[j] != NULL)
+				{
+					free(tmp_args[j]);
+					++j;
+				}
+				return (-1);
+			}
+			++j;
+		}
+		++i;
+	}
+	return (0);
+}
+
+
+int	parse_args(int ac, char **av)
+{
+	t_list	*args;
+
+	if (ac < 2)
+	{
+		ft_dprintf(2, "Not enough arguments, use -h for help");
+		return (-1);
+	}
+	if (get_args(ac, av, &args) == -1)
+		return (-1);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	t_champion	champ;
@@ -57,22 +105,24 @@ int main(int argc, char **argv)
 	t_corewar	*cw;
 	int			fd;
 
-	(void)argc;
+//	(void)argc;
 //	(void)argv;
 
-	fd = open(argv[1], O_RDONLY);
+	//fd = open(argv[1], O_RDONLY);
 	if (!int_good_size())
 	{
 		ft_dprintf(2, "This system is not supported.\n");
 		return (0);
 	}
-	if (champion_init(&champ, 1, fd) < 0)
-	{
-		ft_dprintf(2, "ERROR LOADING FILE\n");
-		return (-1);
-	}
-	list = ft_list_new();
-	ft_list_push_back(list, &champ);
+
+	//if (champion_init(&champ, 1, fd) < 0)
+	//{
+		//ft_dprintf(2, "ERROR LOADING FILE\n");
+		//return (-1);
+	//}
+	//list = ft_list_new();
+	//ft_list_push_back(list, &champ);
+
 	cw = corewar_new(list, 2);
 
 	play_corewar(cw);
