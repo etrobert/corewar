@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/13 18:35:29 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:38:59 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,32 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
+int	add_args_to_lst(char **tmp_args, t_list *args)
+{
+	int	i;
+
+	i = 0;
+	while (tmp_args[i] != NULL)
+	{
+		if (ft_list_push_back(args, tmp_args[i]) == -1)
+		{
+			ft_list_apply(args, &free);
+			ft_list_delete(args);
+			while (tmp_args[i] != NULL)
+			{
+				free(tmp_args[i]);
+				++i;
+			}
+			return (-1);
+		}
+		++i;
+	}
+	return (0);
+}
+
 int	get_args(int ac, char **av, t_list **args)
 {
 	int		i;
-	int		j;
 	char	**tmp_args;
 
 	i = 1;
@@ -63,38 +85,28 @@ int	get_args(int ac, char **av, t_list **args)
 	{
 		if ((tmp_args = ft_strsplit_str(av[i], "\t\n\v\f\r ")) == NULL)
 			return (-1);
-		j = 0;
-		while (tmp_args[j] != NULL)
+		if (add_args_to_lst(tmp_args, *args) == -1)
 		{
-			if (ft_list_push_back(*args, tmp_args[j]) == -1)
-			{
-				//free list here
-				while (tmp_args[j] != NULL)
-				{
-					free(tmp_args[j]);
-					++j;
-				}
-				return (-1);
-			}
-			++j;
+			free(tmp_args);
+			return (-1);
 		}
+		free(tmp_args);
 		++i;
 	}
 	return (0);
 }
 
 
-int	parse_args(int ac, char **av)
+int	parse_args(int ac, char **av, t_list **args)
 {
-	t_list	*args;
-
 	if (ac < 2)
 	{
 		ft_dprintf(2, "Not enough arguments, use -h for help");
 		return (-1);
 	}
-	if (get_args(ac, av, &args) == -1)
+	if (get_args(ac, av, args) == -1)
 		return (-1);
+
 	return (0);
 }
 
@@ -102,11 +114,9 @@ int main(int argc, char **argv)
 {
 	t_champion	champ;
 	t_list		*list;
+	t_list		*args;
 	t_corewar	*cw;
 	int			fd;
-
-//	(void)argc;
-//	(void)argv;
 
 	//fd = open(argv[1], O_RDONLY);
 	if (!int_good_size())
@@ -114,6 +124,7 @@ int main(int argc, char **argv)
 		ft_dprintf(2, "This system is not supported.\n");
 		return (0);
 	}
+	parse_args(argc, argv, &args);
 
 	//if (champion_init(&champ, 1, fd) < 0)
 	//{
