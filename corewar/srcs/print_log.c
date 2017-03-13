@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/11 21:51:16 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/13 18:41:26 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ int			print_log(t_visu *visu)
 	}
 	if (update_log(visu) == -1)
 		return (-1);
+	free(log_lines);
 	return (0);
 }
