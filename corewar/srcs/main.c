@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/13 19:38:59 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/13 20:50:00 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,46 @@ int	get_args(int ac, char **av, t_list **args)
 	return (0);
 }
 
-
-int	parse_args(int ac, char **av, t_list **args)
+int	process_option(t_list_it *it)
 {
+	
+	return (0);
+}
+
+int	process_args(t_list *args, t_list **champs)
+{
+	t_list_it	it;
+	char		*arg;
+
+	it = ft_list_begin(args);
+	while (!ft_list_end(args, it))
+	{
+		arg = (char*)ft_list_it_get(args, it);
+		if (arg[0] == '-')
+			process_option(&it);
+		else
+			process_file(&it);
+		ft_list_it_inc(&it);
+	}
+	return (0);
+}
+
+
+int	parse_args(int ac, char **av, t_list **champs)
+{
+	t_list	*args;
+
 	if (ac < 2)
 	{
 		ft_dprintf(2, "Not enough arguments, use -h for help");
 		return (-1);
 	}
-	if (get_args(ac, av, args) == -1)
+	if (get_args(ac, av, &args) == -1)
 		return (-1);
-
+	if (process_args(args, champs) == -1)
+		return (-1);
+	ft_list_apply(args, &free);
+	ft_list_delete(args);
 	return (0);
 }
 
@@ -114,7 +143,7 @@ int main(int argc, char **argv)
 {
 	t_champion	champ;
 	t_list		*list;
-	t_list		*args;
+	t_list		*champs;
 	t_corewar	*cw;
 	int			fd;
 
@@ -124,7 +153,7 @@ int main(int argc, char **argv)
 		ft_dprintf(2, "This system is not supported.\n");
 		return (0);
 	}
-	parse_args(argc, argv, &args);
+	parse_args(argc, argv, &champs);
 
 	//if (champion_init(&champ, 1, fd) < 0)
 	//{
