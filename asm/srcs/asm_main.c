@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/12 16:52:23 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:04:28 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ static int	asm_init_asm(t_asm **m_asm)
 	return (1);
 }
 
-static int	asm_close(t_fds fd)
+static int	asm_close(t_fds fd, t_asm *m_asm)
 {
 	if (close(fd.out) < 0 || close(fd.in) < 0)
 	{
 		ft_dprintf(2, "Error on closing files\n");
+		asm_free_asm(m_asm);
 		return (0);
 	}
 	return (1);
@@ -61,25 +62,28 @@ static int	asm_write(t_fds *fd, t_asm *m_asm, char *file)
 
 int			main(int ac, char **av)
 {
-	t_fds			fd;
-	t_asm			*m_asm;
+	t_fds		fd;
+	t_asm		*m_asm;
+	int			i;
 
 	m_asm = NULL;
 	if (!asm_usage(ac, av))
 		return (0);
-	if (!asm_init_asm(&m_asm))
-		return (-1);
-	if (!asm_read(&fd, m_asm, av[1]) || !asm_write(&fd, m_asm, av[1]))
+	i = 1;
+	while (i < ac)
 	{
-		close(fd.in);
+		if (!asm_init_asm(&m_asm))
+			return (-1);
+		if (!asm_read(&fd, m_asm, av[i]) || !asm_write(&fd, m_asm, av[i]))
+		{
+			close(fd.in);
+			asm_free_asm(m_asm);
+			return (-1);
+		}
+		if (!asm_close(fd, m_asm))
+			return (-1);
 		asm_free_asm(m_asm);
-		return (-1);
+		i++;
 	}
-	if (!asm_close(fd))
-	{
-		asm_free_asm(m_asm);
-		return (-1);
-	}
-	asm_free_asm(m_asm);
 	return (0);
 }
