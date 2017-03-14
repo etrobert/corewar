@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/14 16:10:58 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:05:25 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,86 +50,25 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
-int	add_args_to_lst(char **tmp_args, t_list *args)
-{
-	int	i;
-
-	i = 0;
-	while (tmp_args[i] != NULL)
-	{
-		if (ft_list_push_back(args, tmp_args[i]) == -1)
-		{
-			ft_list_apply(args, &free);
-			ft_list_delete(args);
-			while (tmp_args[i] != NULL)
-			{
-				free(tmp_args[i]);
-				++i;
-			}
-			return (-1);
-		}
-		++i;
-	}
-	return (0);
-}
-
-int	get_args(int ac, char **av, t_list **args)
+int	parse_args(int ac, char **av, t_list *champs)
 {
 	int		i;
-	char	**tmp_args;
 
 	i = 1;
-	if ((*args = ft_list_new()) == NULL)
-		return (-1);
 	while (i < ac)
 	{
-		if ((tmp_args = ft_strsplit_str(av[i], "\t\n\v\f\r ")) == NULL)
-			return (-1);
-		if (add_args_to_lst(tmp_args, *args) == -1)
+		if (av[i][0] == '-')
 		{
-			free(tmp_args);
-			return (-1);
+			if (process_options(ac, av, &i, champs) < 0)
+				return (-1);
 		}
-		free(tmp_args);
+		else
+		{
+			if (process_file(av[i], -1, champs) < 0)
+				return (-1);
+		}
 		++i;
 	}
-	return (0);
-}
-
-int	process_args(t_list *args, t_list **champs)
-{
-	t_list_it	it;
-	char		*arg;
-
-	it = ft_list_begin(args);
-	while (!ft_list_end(args, it))
-	{
-		arg = (char*)ft_list_it_get(args, it);
-		if (arg[0] == '-')
-			process_option(&it);
-		else
-			process_file(&it);
-		ft_list_it_inc(&it);
-	}
-	return (0);
-}
-
-
-int	parse_args(int ac, char **av, t_list **champs)
-{
-	t_list	*args;
-
-	if (ac < 2)
-	{
-		ft_dprintf(2, "Not enough arguments, use -h for help");
-		return (-1);
-	}
-	if (get_args(ac, av, &args) == -1)
-		return (-1);
-	if (process_args(args, champs) == -1)
-		return (-1);
-	ft_list_apply(args, &free);
-	ft_list_delete(args);
 	return (0);
 }
 
@@ -141,7 +80,6 @@ int main(int argc, char **argv)
 	t_corewar	*cw;
 	int			fd;
 
-	//fd = open(argv[1], O_RDONLY);
 	if (!int_good_size())
 	{
 		ft_dprintf(2, "This system is not supported.\n");
