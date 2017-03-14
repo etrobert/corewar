@@ -11,8 +11,8 @@ SRCNAM		=	main.c \
 				champion_init.c champion_clear.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
 				process_get_reg.c \
-				print_corewar.c play_corewar.c play_events.c\
-				print_process_fd.c \
+				print_corewar.c play_corewar.c play_events.c visu_end.c \
+				print_process_fd.c visu_init.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
 				corewar_get_byte.c corewar_get_byte_id.c \

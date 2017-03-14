@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:31:31 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 21:34:15 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:05:05 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void				print_corewar(t_corewar *cw, t_visu *visu);
 void				print_process_fd(int fd, const t_process *process);
 int					print_log(t_visu *visu);
 int					play_events(t_visu *visu);
+void				visu_init(t_visu *visu);
+void				visu_end(t_visu *visu);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 20:55:19 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/13 19:25:41 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,37 @@ static int			print_process(t_corewar *corewar, unsigned int pos,
 
 static void			print_infos(t_corewar *corewar, t_visu *visu)
 {
+	int		i;
+	int		p;
+	int		p_number;
+	char	name[] = "Vampire";
+
+	p_number = 4;
+	i = 1;
+	p = 0;
 	if (visu->pause)
-		mvwprintw(visu->infos, 2, 10, "PAUSED");
+		mvwprintw(visu->infos, i++, 2, "PAUSED");
 	else
-		mvwprintw(visu->infos, 2, 10, "PLAY");
-	mvwprintw(visu->infos, 4, 10, "usleep(%u)", visu->speed);
-	mvwprintw(visu->infos, 6, 10, "cycle : %u", corewar->cycle);
-	mvwprintw(visu->infos, 8, 10, "process : %d",
+		mvwprintw(visu->infos, i++, 2, "PLAY");
+	mvwprintw(visu->infos, i++, 2, "speed limit : %u cycles/s", visu->speed);
+	mvwprintw(visu->infos, i++, 2, "cycle : %u", corewar->cycle);
+	mvwprintw(visu->infos, i++, 2, "process : %d",
 			ft_list_size(corewar->process));
-	mvwprintw(visu->infos, 10, 10, "cycle_to_die : %u", corewar->cycles_to_die);
+	mvwprintw(visu->infos, i++, 2, "cycle_to_die : %u", corewar->cycles_to_die);
+	i++;
+	while (p < p_number)
+	{
+		mvwprintw(visu->infos, i, 2, "Player %d : ", p_number);
+		wattron(visu->infos, COLOR_PAIR(p_number));
+		mvwprintw(visu->infos, i++, 13, "%s", name);
+		wattroff(visu->infos, COLOR_PAIR(p_number));
+		mvwprintw(visu->infos, i++, 2, "Last live :               %d",
+				corewar->cycle);
+		mvwprintw(visu->infos, i++, 2, "Lives in current period : %d",
+				corewar->cycle);
+		i++;
+		p++;
+	}
 }
 
 static void			print_byte(t_corewar *corewar, unsigned int pos,
@@ -93,7 +115,7 @@ void				print_corewar(t_corewar *cw, t_visu *visu)
 	j = 0;
 	while (j * PRINT_WIDTH < MEM_SIZE)
 	{
-		visu->col = 1;
+		visu->col = 2;
 		i = 0;
 		while (i < PRINT_WIDTH && j * PRINT_WIDTH + i < MEM_SIZE)
 		{
