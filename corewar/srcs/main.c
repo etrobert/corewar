@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/14 21:05:25 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:36:00 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int main(int argc, char **argv)
 		ft_dprintf(2, "This system is not supported.\n");
 		return (0);
 	}
-	parse_args(argc, argv, &champs);
+	parse_args(argc, argv, champs);
 
 	//if (champion_init(&champ, 1, fd) < 0)
 	//{
