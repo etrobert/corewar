@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/13 20:50:00 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/14 16:10:58 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,6 @@ int	get_args(int ac, char **av, t_list **args)
 		free(tmp_args);
 		++i;
 	}
-	return (0);
-}
-
-int	process_option(t_list_it *it)
-{
-	
 	return (0);
 }
 
