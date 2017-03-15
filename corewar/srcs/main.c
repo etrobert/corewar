@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/14 21:36:00 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 16:35:23 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,17 @@ int	parse_args(int ac, char **av, t_list *champs)
 
 int main(int argc, char **argv)
 {
-	t_champion	champ;
 	t_list		*list;
 	t_list		*champs;
 	t_corewar	*cw;
-	int			fd;
+	t_parser	parser;
 
 	if (!int_good_size())
 	{
 		ft_dprintf(2, "This system is not supported.\n");
 		return (0);
 	}
+	parser = parser_new(argc, argv);
 	parse_args(argc, argv, champs);
 
 	//if (champion_init(&champ, 1, fd) < 0)
