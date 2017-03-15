@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:35:32 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/15 16:43:12 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 19:05:33 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_parser	*parser_new(int ac, char **av)
 {
 	t_parser	*parser;
 
-	if (!(t_parser = (t_parser*)malloc(sizeof(t_parser))))
+	if ((parser = (t_parser*)malloc(sizeof(t_parser))) == NULL)
 		return (NULL);
 	parser->graphical = false;
 	parser->verbose = -1;

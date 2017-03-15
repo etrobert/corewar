@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 18:22:53 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:45:06 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "champion.h"
 #include "corewar.h"
+#include "args_parser.h"
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -52,9 +53,9 @@ static bool	int_good_size(void)
 
 int	parse_args(t_parser *parser,  t_list *champs)
 {
-	while (parser->cur_args < ac)
+	while (parser->cur_arg < parser->ac)
 	{
-		if (av[i][0] == '-')
+		if (parser->av[parser->cur_arg][0] == '-')
 		{
 			if (process_options(parser, champs) < 0)
 				return (-1);
@@ -71,27 +72,26 @@ int	parse_args(t_parser *parser,  t_list *champs)
 
 int main(int argc, char **argv)
 {
-	t_list		*list;
 	t_list		*champs;
 	t_corewar	*cw;
-	t_parser	parser;
+	t_parser	*parser;
 
 	if (!int_good_size())
 	{
 		ft_dprintf(2, "This system is not supported.\n");
 		return (0);
 	}
+	champs = NULL;
 	parser = parser_new(argc, argv);
 	if (parse_args(parser, champs) < 0)
 		return (-1);
 
-	cw = corewar_new(list, 2);
-	corewar_set_verbosity(cw, parser->verbose);
+	cw = corewar_new(champs, 2);
+	//corewar_set_verbosity(cw, parser->verbose);
+	//does not exist yet
 
 	play_corewar(cw);
 
 	corewar_delete(cw);
-	champion_clear(&champ);
-	close(fd);
 	return (0);
 }

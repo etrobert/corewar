@@ -6,21 +6,21 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:06:24 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/15 18:06:24 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:29:48 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ARGS_PARSER_H
-# define ARGS_PARSER
+# define ARGS_PARSER_H
 
 # include "libft.h"
 
 # include <stdbool.h>
 # include <unistd.h>
 
-typedef strct	s_parser
+typedef struct	s_parser
 {
-	t_bool		graphical;
+	bool		graphical;
 	int			verbose;
 	int			dump_cycle;
 	int			latest_id;
