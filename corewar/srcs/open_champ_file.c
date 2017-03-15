@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/15 19:01:17 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 20:21:30 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,32 @@ static int	open_file(char *filename)
 	return (fd);
 }
 
-static int	add_champ(t_list *champs, t_champion *champ)
+static int	add_champ(t_list **champs, t_champion *champ)
 {
-	if (champs == NULL)
+	if (*champs == NULL)
 	{
-		if ((champs = ft_list_new()) == NULL)
+		if ((*champs = ft_list_new()) == NULL)
 		{
 			ft_dprintf(2, "Memory allocation failed\n");
 			return (-1);
 		}
 	}
-	if (ft_list_push_back(champs, champ) < 0)
+	if (ft_list_size(*champs) >= MAX_PLAYERS)
 	{
-		ft_list_apply(champs, (t_f_apply)(&champion_delete));
-		ft_list_delete(champs);
+		ft_dprintf(2, "Too many champions\n");
+		return (-1);
+	}
+	if (ft_list_push_back(*champs, champ) < 0)
+	{
+		ft_list_apply(*champs, (t_f_apply)(&champion_delete));
+		ft_list_delete(*champs);
 		ft_dprintf(2, "Champion initialization failed\n");
 		return (-1);
 	}
 	return (0);
 }
 
-int			open_champ_file(t_parser *parser, int champ_id, t_list *champs)
+int			open_champ_file(t_parser *parser, int champ_id, t_list **champs)
 {
 	int			fd;
 	int			id;

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 18:45:06 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 20:06:29 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
-int	parse_args(t_parser *parser,  t_list *champs)
+int	parse_args(t_parser *parser,  t_list **champs)
 {
 	while (parser->cur_arg < parser->ac)
 	{
@@ -82,9 +82,17 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	champs = NULL;
-	parser = parser_new(argc, argv);
-	if (parse_args(parser, champs) < 0)
+	if ((parser = parser_new(argc, argv)) == NULL)
 		return (-1);
+	if (parse_args(parser, &champs) < 0)
+		return (-1);
+	if (champs == NULL || ft_list_size(champs) < 1)
+	{
+		ft_dprintf(2, "No champions loaded\n");
+		return (-1);
+	}
+
+	ft_printf("%d champions loaded\n", ft_list_size(champs));
 
 	cw = corewar_new(champs, 2);
 	//corewar_set_verbosity(cw, parser->verbose);

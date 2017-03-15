@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:46:11 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/15 18:52:19 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 20:04:33 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	process_verbose(t_parser *parser)
 	return (0);
 }
 
-static int	process_champ_num(t_parser *parser, t_list *champs)
+static int	process_champ_num(t_parser *parser, t_list **champs)
 {
 	int	champ_id;
 
@@ -80,7 +80,7 @@ static int	process_dump(t_parser *parser)
 	return (0);
 }
 
-int			process_options(t_parser *parser, t_list *champs)
+int			process_options(t_parser *parser, t_list **champs)
 {
 	if (ft_strcmp("-v", parser->av[parser->cur_arg]) == 0)
 		return (process_verbose(parser));
@@ -92,8 +92,7 @@ int			process_options(t_parser *parser, t_list *champs)
 		parser->graphical = true;
 	else if (ft_strcmp("-h", parser->av[parser->cur_arg]) == 0)
 	{
-		//print_help();
-		//not implemented yet
+		print_help();
 		return (-1);
 	}
 	else
