@@ -17,6 +17,7 @@ SRCNAM		=	main.c \
 				print_process_fd.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
+				corewar_set_verbosity.c \
 				corewar_get_byte.c corewar_get_byte_id.c \
 				corewar_get_cycle.c corewar_get_cycles_to_die.c \
 				corewar_get_process_nb.c \
@@ -26,7 +27,8 @@ SRCNAM		=	main.c \
 				corewar_update_process_pc.c corewar_check.c \
 				corewar_kill_process.c corewar_add_process.c \
 				corewar_print_log.c corewar_vprint_log.c \
-				corewar_print_op.c \
+				corewar_print_op.c corewar_print_live.c corewar_print_cycle.c \
+				corewar_print_cycles_to_die.c corewar_print_death.c \
 				apply_live.c apply_ld.c apply_st.c apply_add.c apply_and.c \
 				apply_or.c apply_xor.c \
 				apply_zjmp.c apply_sti.c apply_fork.c apply_lld.c \
