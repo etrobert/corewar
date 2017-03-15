@@ -27,9 +27,9 @@ SRCNAM		=	main.c \
 				corewar_kill_process.c corewar_add_process.c \
 				corewar_print_log.c corewar_vprint_log.c \
 				corewar_print_op.c \
-				apply_live.c apply_ld.c apply_st.c apply_and.c \
+				apply_live.c apply_ld.c apply_st.c apply_add.c apply_and.c \
 				apply_or.c apply_xor.c \
-				apply_zjmp.c apply_sti.c apply_fork.c \
+				apply_zjmp.c apply_sti.c apply_fork.c apply_lld.c \
 				apply_aff.c apply_nothing.c \
 				ocp_get_type.c
 INCNAM		=	process.h corewar.h champion.h print.h

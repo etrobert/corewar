@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_aff.c                                        :+:      :+:    :+:   */
+/*   apply_lld.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 21:13:06 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/12 20:48:33 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/14 18:43:58 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/14 19:00:12 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					apply_aff(t_corewar *corewar, t_process *process)
+int					apply_lld(t_corewar *corewar, t_process *process)
 {
 	t_op_params		params;
-	int				ret;
-	int				val;
+	unsigned int	val;
 
-	if ((ret = corewar_parse_params(corewar, process, &params)) == 0)
+	if (corewar_parse_params(corewar, process, &params) == 0)
 	{
-		val = process_get_reg(process, params.params[0].c);
-		corewar_print_op(corewar, process, "aff %d\n", val);
-		corewar_print_log(corewar, "Aff: %c\n", val);
+		val = corewar_extract_param(corewar, process, &params, 0);
+		process_set_reg(process, params.params[1].c, val);
+		corewar_print_op(corewar, process, "lld %d r%d\n",
+				val, params.params[1].c);
+		if (val == 0)
+			process->carry = true;
 	}
 	corewar_update_process_pc(corewar, process, params.offset);
 	return (0);

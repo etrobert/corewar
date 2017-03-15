@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 12:24:22 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/22 13:55:21 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:54:35 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static void			dec_cycles_to_die(t_corewar *corewar)
 {
-	corewar->cycles_to_die -= CYCLE_DELTA;
+	if (corewar->cycles_to_die < CYCLE_DELTA)
+		corewar->cycles_to_die = 0;
+	else
+		corewar->cycles_to_die -= CYCLE_DELTA;
 	corewar->clear_checks = 0;
 }
 

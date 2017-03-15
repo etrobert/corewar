@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 21:19:35 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/14 21:45:03 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,14 @@ int					apply_nothing(t_corewar *corewar, t_process *process);
 int					apply_live(t_corewar *corewar, t_process *process);
 int					apply_ld(t_corewar *corewar, t_process *process);
 int					apply_st(t_corewar *corewar, t_process *process);
+int					apply_add(t_corewar *corewar, t_process *process);
 int					apply_and(t_corewar *corewar, t_process *process);
 int					apply_or(t_corewar *corewar, t_process *process);
 int					apply_xor(t_corewar *corewar, t_process *process);
 int					apply_zjmp(t_corewar *corewar, t_process *process);
 int					apply_sti(t_corewar *corewar, t_process *process);
 int					apply_fork(t_corewar *corewar, t_process *process);
+int					apply_lld(t_corewar *corewar, t_process *process);
 int					apply_aff(t_corewar *corewar, t_process *process);
 
 #endif
