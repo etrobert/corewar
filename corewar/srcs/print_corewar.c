@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/13 19:25:41 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/14 20:33:07 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ static void			print_infos(t_corewar *corewar, t_visu *visu)
 		mvwprintw(visu->infos, i++, 2, "PAUSED");
 	else
 		mvwprintw(visu->infos, i++, 2, "PLAY");
-	mvwprintw(visu->infos, i++, 2, "speed limit : %u cycles/s", visu->speed);
+	if (visu->speed == 0)
+		mvwprintw(visu->infos, i++, 2, "speed limit : %u cycles/s", 1000);
+	else
+		mvwprintw(visu->infos, i++, 2, "speed limit : %u cycles/s", 1000000 /
+				visu->speed);
 	mvwprintw(visu->infos, i++, 2, "cycle : %u", corewar->cycle);
 	mvwprintw(visu->infos, i++, 2, "process : %d",
 			ft_list_size(corewar->process));

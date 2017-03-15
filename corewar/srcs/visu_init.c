@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 19:02:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/13 19:19:48 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/14 19:53:05 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	visu_init_colors()
 	init_pair(8, COLOR_BLACK, COLOR_YELLOW);
 	init_color(COLOR_CYAN, 300, 300, 300);
 	init_color(COLOR_MAGENTA, 500, 500, 500);
+	init_color(COLOR_WHITE, 700, 700, 700);
 	init_pair(9, COLOR_MAGENTA, COLOR_CYAN);
 	init_pair(10, COLOR_MAGENTA, COLOR_BLACK);
 }

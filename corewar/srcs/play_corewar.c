@@ -6,12 +6,14 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/13 19:23:52 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/14 19:53:11 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 #include "libft.h"
+
+#include <sys/time.h>
 
 int			init_visu_log(t_visu *visu)
 {
@@ -43,25 +45,35 @@ static void	print_round(t_visu *visu, t_corewar *corewar)
 	wrefresh(visu->board);
 	wrefresh(visu->infos);
 	wrefresh(visu->log);
-	usleep(visu->speed);
 }
 
 static int	main_game(t_corewar *corewar, t_visu *visu)
 {
-	int		ret;
+	int				ret;
+	int				play;
+	unsigned int	time;
+	struct timeval	begin;
+	struct timeval	end;
 
-	while (!corewar_end(corewar))
+	while ((play = play_events(visu)) != 0)
 	{
+		gettimeofday(&begin, NULL);
 		print_round(visu, corewar);
-		if (!visu->pause && (ret = corewar_advance(corewar)) < 0)
+		if (!corewar_end(corewar) && !visu->pause &&
+				(ret = corewar_advance(corewar)) < 0)
 		{
 			visu_end(visu);
 			return (ret);
 		}
-		if (!play_events(visu))
-			return (0);
+		gettimeofday(&end, NULL);
+		if ((time = end.tv_usec - begin.tv_usec) > visu->speed)
+			usleep(0);
+		else
+			usleep(visu->speed);
 	}
-	return (1);
+	if (play == 0)
+		return (-1);
+	return (0);
 }
 
 int			play_corewar(t_corewar *corewar)
@@ -75,10 +87,7 @@ int			play_corewar(t_corewar *corewar)
 //	init_visu_log(&visu);
 //	corewar_set_fd(corewar, visu.fds[1]);
 	corewar_set_fd(corewar, 2);
-	if ((ret = main_game(corewar, &visu)) != 1)
+	if ((ret = main_game(corewar, &visu)) < 0)
 		return (ret);
-	while (play_events(&visu))
-	{
-	}
 	return (0);
 }
