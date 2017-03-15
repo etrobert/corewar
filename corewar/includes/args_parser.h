@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:06:24 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/15 16:39:01 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:06:24 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ typedef strct	s_parser
 	int			ac;
 	char		**av;
 }				t_parser;
+
+t_parser		*parser_new(int ac, char **av);
+int				open_champ_file(t_parser *parser, int champ_id, t_list *champs);
+int				process_options(t_parser *parser, t_list *champs);
 
 #endif

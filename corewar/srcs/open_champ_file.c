@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_file.c                                     :+:      :+:    :+:   */
+/*   open_champ_file.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/14 18:57:55 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/14 21:04:34 by tbeldame         ###   ########.fr       */
+/*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
+/*   Updated: 2017/03/15 18:06:54 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "champion.h"
 
-int	process_file(char *filename, int champ_id, t_list *champs)
+static int	open_file(char *filename)
 {
-	char		*dot;
-	t_champion	*champ;
-
 	if (ft_strlen(filename) < 4)
 	{
 		ft_dprintf(2, "Invalid file");
@@ -38,7 +35,27 @@ int	process_file(char *filename, int champ_id, t_list *champs)
 		ft_dprintf(2, "Failed to open file");
 		return (-1);
 	}
-	if (champion_init(champ, champ_id, fd) < 0)
+
+	return (0);
+}
+
+int	open_champ_file(t_parser *parser, int champ_id, t_list *champs)
+{
+	int			id;
+	int			fd;
+	char		*dot;
+	t_champion	*champ;
+
+	if ((fd = open_file(parser->av[parser->cur_arg])) < 0)
+		return (-1);
+	if (champ_id == -1)
+		id = ++parser->latest_id;
+	else
+	{
+		id = champ_id;
+		parser->latest_id = champ_id;
+	}
+	if (champion_init(champ, id, fd) < 0)
 	{
 		ft_dprintf(2, "Champion initialization failed");
 		return (-1);

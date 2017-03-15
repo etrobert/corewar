@@ -31,8 +31,9 @@ SRCNAM		=	main.c \
 				apply_or.c apply_xor.c \
 				apply_zjmp.c apply_sti.c apply_fork.c \
 				apply_aff.c apply_nothing.c \
-				ocp_get_type.c
-INCNAM		=	process.h corewar.h champion.h print.h
+				ocp_get_type.c \
+				parse_options.c open_champ_file.c
+INCNAM		=	process.h corewar.h champion.h print.h parser.h
 
 CC			=	clang
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/

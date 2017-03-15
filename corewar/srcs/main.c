@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 16:35:23 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:22:53 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,21 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
-int	parse_args(int ac, char **av, t_list *champs)
+int	parse_args(t_parser *parser,  t_list *champs)
 {
-	int		i;
-
-	i = 1;
-	while (i < ac)
+	while (parser->cur_args < ac)
 	{
 		if (av[i][0] == '-')
 		{
-			if (process_options(ac, av, &i, champs) < 0)
+			if (process_options(parser, champs) < 0)
 				return (-1);
 		}
 		else
 		{
-			if (process_file(av[i], -1, champs) < 0)
+			if (open_champ_file(parser, -1, champs) < 0)
 				return (-1);
 		}
-		++i;
+		++parser->cur_arg;
 	}
 	return (0);
 }
@@ -85,17 +82,11 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	parser = parser_new(argc, argv);
-	parse_args(argc, argv, champs);
-
-	//if (champion_init(&champ, 1, fd) < 0)
-	//{
-		//ft_dprintf(2, "ERROR LOADING FILE\n");
-		//return (-1);
-	//}
-	//list = ft_list_new();
-	//ft_list_push_back(list, &champ);
+	if (parse_args(parser, champs) < 0)
+		return (-1);
 
 	cw = corewar_new(list, 2);
+	corewar_set_verbosity(cw, parser->verbose);
 
 	play_corewar(cw);
 
