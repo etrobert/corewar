@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_print_log.c                                :+:      :+:    :+:   */
+/*   print_help.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/10 19:03:41 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 21:16:18 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/15 19:41:47 by tbeldame          #+#    #+#             */
+/*   Updated: 2017/03/15 19:47:27 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "libft.h"
 
-int					corewar_print_log(t_corewar *corewar, char *fmt, ...)
+void	print_help(void)
 {
-	va_list			ap;
-	int				n;
-
-	va_start(ap, fmt);
-	n = corewar_vprint_log(corewar, fmt, ap);
-	va_end(ap);
-	return (n);
+	ft_printf("lol tu sais pas utiliser corewar\n");
+	return ;
 }
