@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:06:24 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 07:16:57 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 08:25:02 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct	s_parser
 t_parser		*parser_new(int ac, char **av);
 int				parse_args(t_parser *parser, t_list **champs);
 int				open_champ_file(t_parser *parser, int champ_id, bool set_id, t_list **champs);
-int				process_options(t_parser *parser, t_list **champs);
+int				parse_options(t_parser *parser, t_list **champs);
 void			print_help(void);
 bool			ft_strnbrless(char *nbr1, char *nbr2);
 bool			ft_strnbrlesseq(char *nbr1, char *nbr2);

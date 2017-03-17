@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 07:30:05 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 08:22:22 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ static int	create_champ(int fd, int id, t_list **champs)
 	return (0);
 }
 
-int			open_champ_file(t_parser *parser, int champ_id, bool set_id, t_list **champs)
+int			open_champ_file
+	(t_parser *parser, int champ_id, bool set_id, t_list **champs)
 {
 	int			fd;
 	int			id;

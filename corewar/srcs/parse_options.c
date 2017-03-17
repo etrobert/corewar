@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_options.c                                  :+:      :+:    :+:   */
+/*   parse_options.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/14 18:46:11 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 07:15:12 by tbeldame         ###   ########.fr       */
+/*   Created: 2017/03/17 08:24:20 by tbeldame          #+#    #+#             */
+/*   Updated: 2017/03/17 08:24:24 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static int	process_champ_num(t_parser *parser, t_list **champs)
 	if (ft_isnumber(parser->av[parser->cur_arg]) &&
 		ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX) &&
 		!ft_strnbrless(parser->av[parser->cur_arg], INT32_STR_MIN))
-		{
-			champ_id = ft_atoi(parser->av[parser->cur_arg]);
-			++parser->cur_arg;
-			if (open_champ_file(parser, champ_id, true, champs) == -1)
-				return (-1);
-		}
+	{
+		champ_id = ft_atoi(parser->av[parser->cur_arg]);
+		++parser->cur_arg;
+		if (open_champ_file(parser, champ_id, true, champs) == -1)
+			return (-1);
+	}
 	else
 	{
 		ft_dprintf(2, "Invalid champion id, use -h for usage\n");
@@ -79,7 +79,7 @@ static int	process_dump(t_parser *parser)
 	return (0);
 }
 
-int			process_options(t_parser *parser, t_list **champs)
+int			parse_options(t_parser *parser, t_list **champs)
 {
 	if (ft_strcmp("-v", parser->av[parser->cur_arg]) == 0)
 		return (process_verbose(parser));
