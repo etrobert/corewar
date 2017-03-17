@@ -9,6 +9,7 @@ INCDIR		=	includes
 SRCNAM		=	main.c \
 				champion_new.c champion_delete.c \
 				champion_init.c champion_clear.c \
+				champion_get_id.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
 				process_get_reg.c process_set_reg.c process_valid_reg.c \
 				process_get_proc_id.c process_set_proc_id.c \
