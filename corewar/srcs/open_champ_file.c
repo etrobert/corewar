@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 15:15:58 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 16:51:28 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ static int	create_champ(int fd, int id, t_list **champs)
 		return (-1);
 	}
 	if (add_champ(champs, champ) < 0)
+	{
+		ft_dprintf(2, "Failed to add champion\n");
 		return (-1);
+	}
 	return (0);
 }
 
