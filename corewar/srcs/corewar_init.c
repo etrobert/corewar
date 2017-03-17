@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 19:46:00 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 21:09:52 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int			add_fresh_process(t_corewar *corewar,
 	if ((process = process_new()) == NULL)
 		return (-1);
 	process->pc = pc;
-	process->regs[1] = r1;
+	process_set_reg(process, 1, r1);
+//	process->regs[1] = r1;
 	if ((ret = corewar_add_process(corewar, process)) < 0)
 	{
 		process_delete(process);
@@ -31,18 +32,19 @@ static int			add_fresh_process(t_corewar *corewar,
 }
 
 static int			load_one_champion(t_corewar *corewar,
-		const t_champion *champ, unsigned int pc, t_id_type id)
+		t_champion *champ, unsigned int pc, t_id_type id)
 {
 	corewar_write(corewar, (t_memory){champ->code, champ->header.prog_size},
 			pc, id);
 //	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
 	if (add_fresh_process(corewar, pc, id) == -1)
 		return (-1);
-	corewar->last_living_champ = champ->id;
-	return (FT_GOOD);
+	champ->intern_id = id;
+	corewar->last_living_champ = champ;
+	return (0);
 }
 
-static int			load_champions(t_corewar *corewar, const t_list *champions)
+static int			load_champions(t_corewar *corewar, t_list *champions)
 {
 	t_list_it		it;
 	t_champion		*champ;
@@ -60,10 +62,10 @@ static int			load_champions(t_corewar *corewar, const t_list *champions)
 		ft_list_it_inc(&it);
 		++id;
 	}
-	return (FT_GOOD);
+	return (0);
 }
 
-int					corewar_init(t_corewar *corewar, const t_list *champions,
+int					corewar_init(t_corewar *corewar, t_list *champions,
 		int fd)
 {
 	int				ret;

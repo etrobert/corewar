@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 20:46:26 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 21:00:14 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ typedef struct		s_corewar
 	t_cycle_type	clear_checks;
 
 	unsigned int	nbr_live;
-	t_id_type		last_living_champ;
+	t_champion		*last_living_champ;
 
 	int				fd;
 	int				verbosity;
 	bool			print_aff;
 
-	const t_list	*champions;
+	t_list			*champions;
 }					t_corewar;
 
 typedef union		u_param
@@ -70,8 +70,8 @@ typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
 ** public: =====================================================================
 */
 
-t_corewar			*corewar_new(const t_list *champions, int fd);
-int					corewar_init(t_corewar *corewar, const t_list *champions,
+t_corewar			*corewar_new(t_list *champions, int fd);
+int					corewar_init(t_corewar *corewar, t_list *champions,
 		int fd);
 void				corewar_delete(t_corewar *corewar);
 

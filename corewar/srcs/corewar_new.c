@@ -6,13 +6,13 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 21:00:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/28 17:20:48 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:58:11 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_corewar			*corewar_new(const t_list *champions, int fd)
+t_corewar			*corewar_new(t_list *champions, int fd)
 {
 	t_corewar		*cw;
 

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 20:27:29 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 20:28:46 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 21:09:56 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ t_champion			*corewar_id_champ(t_corewar *corewar, t_id_type id)
 			return (champ);
 		ft_list_it_inc(&it);
 	}
+//	corewar_print_log(corewar, "BITE not found %d\n", id);
 	return (NULL);
 }
