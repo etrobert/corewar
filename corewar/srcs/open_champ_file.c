@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/15 20:21:30 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 07:18:37 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	add_champ(t_list **champs, t_champion *champ)
 			return (-1);
 		}
 	}
-	if (ft_list_size(*champs) >= MAX_PLAYERS)
+	if (ft_list_size(*champs) >= 1000000000)
 	{
 		ft_dprintf(2, "Too many champions\n");
 		return (-1);
@@ -68,21 +68,10 @@ static int	add_champ(t_list **champs, t_champion *champ)
 	return (0);
 }
 
-int			open_champ_file(t_parser *parser, int champ_id, t_list **champs)
+static int	create_champ(int fd, int id, t_list **champs)
 {
-	int			fd;
-	int			id;
 	t_champion	*champ;
 
-	if ((fd = open_file(parser->av[parser->cur_arg])) < 0)
-		return (-1);
-	if (champ_id == -1)
-		id = ++parser->latest_id;
-	else
-	{
-		id = champ_id;
-		parser->latest_id = champ_id;
-	}
 	if ((champ = champion_new()) == NULL)
 	{
 		ft_dprintf(2, "Failed to create champion\n");
@@ -96,4 +85,26 @@ int			open_champ_file(t_parser *parser, int champ_id, t_list **champs)
 	if (add_champ(champs, champ) < 0)
 		return (-1);
 	return (0);
+}
+
+int			open_champ_file(t_parser *parser, int champ_id, bool set_id, t_list **champs)
+{
+	int			fd;
+	int			id;
+
+	if (!set_id && parser->latest_id == INT32_MAX)
+	{
+		ft_dprintf(2, "Champion id id too damn high\n");
+		return (-1);
+	}
+	if ((fd = open_file(parser->av[parser->cur_arg])) < 0)
+		return (-1);
+	if (!set_id)
+		id = ++parser->latest_id;
+	else
+	{
+		id = champ_id;
+		parser->latest_id = champ_id;
+	}
+	return (create_champ(fd, id, champs));
 }

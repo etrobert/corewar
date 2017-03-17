@@ -32,7 +32,9 @@ SRCNAM		=	main.c \
 				apply_zjmp.c apply_sti.c apply_fork.c \
 				apply_aff.c apply_nothing.c \
 				ocp_get_type.c \
-				parse_options.c open_champ_file.c parser_new.c print_help.c
+				parse_options.c open_champ_file.c parser_new.c parse_args.c \
+				print_help.c \
+				ft_strnbrless.c ft_strnbrlesseq.c
 INCNAM		=	process.h corewar.h champion.h print.h args_parser.h
 
 CC			=	clang

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 20:06:29 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 07:15:51 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,18 @@ static bool	int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
-int	parse_args(t_parser *parser,  t_list **champs)
+
+
+char	*********************print_args_parser_struct_result_to_know_if_it_works_fine_cause_it_would_suck_if_it_does_not(t_parser *parser)
 {
-	while (parser->cur_arg < parser->ac)
-	{
-		if (parser->av[parser->cur_arg][0] == '-')
-		{
-			if (process_options(parser, champs) < 0)
-				return (-1);
-		}
-		else
-		{
-			if (open_champ_file(parser, -1, champs) < 0)
-				return (-1);
-		}
-		++parser->cur_arg;
-	}
-	return (0);
+	ft_printf("Heyyyy\n");
+	ft_printf("Graphical : %d\n", parser->graphical);
+	ft_printf("Display Aff : %d\n", parser->disp_aff);
+	ft_printf("Verbosity Level : %d\n", parser->verbose);
+	ft_printf("Dump Cycle : %d\n", parser->dump_cycle);
+	ft_printf("Latest Contestant id : %d\n", parser->latest_id);
+	ft_printf("And that's everything that you should needd\n");
+	return (NULL);
 }
 
 int main(int argc, char **argv)
@@ -93,6 +88,7 @@ int main(int argc, char **argv)
 	}
 
 	ft_printf("%d champions loaded\n", ft_list_size(champs));
+	print_args_parser_struct_result_to_know_if_it_works_fine_cause_it_would_suck_if_it_does_not(parser);
 
 	cw = corewar_new(champs, 2);
 	//corewar_set_verbosity(cw, parser->verbose);
