@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 15:33:54 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 19:46:02 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 18:05:51 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@
 # include <fcntl.h>
 
 # define PRINT_WIDTH	64
-
-# define DGREEN		257
-# define LGREEN		258
-# define DRED		259
-# define LRED		260
-# define DBLUE		261
-# define LBLUE		262
-# define DORANGE	263
-# define LORANGE	264
 
 typedef struct		s_visu
 {

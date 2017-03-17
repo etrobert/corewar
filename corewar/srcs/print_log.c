@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/11 21:51:16 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 18:00:30 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	update_log(t_visu *visu)
 	while (!ft_list_it_end(visu->log_lines, it))
 	{
 		line_str = (char*)ft_list_it_get(visu->log_lines, it);
-		if (mvwprintw(visu->log, i, 1, "%s", line_str) == ERR)
+		if (mvwprintw(visu->log, i, 2, "%s", line_str) == ERR)
 			return (-1);
 		ft_list_it_inc(&it);
 		++i;
@@ -42,9 +42,9 @@ static int	get_buf(char **log_buf, int fd)
 	len = 0;
 	while ((ret = read(fd, buf, 128)) > 0)
 	{
-		if (!(*log_buf = ft_nrealloc(*log_buf, len + 1, len + 1 + ret)))
+		if (!(*log_buf = ft_nrealloc(*log_buf, len, len + ret)))
 			return (-1);
-		ft_memcpy(*log_buf + len, buf, ret);
+		ft_memmove(*log_buf + len, buf, ret);
 		len += ret;
 		(*log_buf)[len] = '\0';
 	}
@@ -63,7 +63,7 @@ static int	add_log_lines(t_visu *visu, char **lines)
 	i = 0;
 	while (lines[i] != NULL)
 	{
-		if ((int)ft_list_size(visu->log_lines) == visu->log_height)
+		if ((int)ft_list_size(visu->log_lines) >= visu->log_height)
 		{
 			free(ft_list_front(visu->log_lines));
 			ft_list_pop_front(visu->log_lines);
