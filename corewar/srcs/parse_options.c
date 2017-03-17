@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 08:24:20 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 08:24:24 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 16:42:35 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	process_verbose(t_parser *parser)
 	{
 		if (!ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX) ||
 				(parser->verbose = ft_atoi(parser->av[parser->cur_arg])) >
-				(CW_VB_MAX * 2) - 1)
+				CW_VB_MAX_ADD)
 		{
 			ft_dprintf(2, "Invalid verbosity level, use -h for usage\n");
 			return (-1);
