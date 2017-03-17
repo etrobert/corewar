@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 20:16:13 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 18:06:15 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:17:03 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ typedef struct			s_champion
 {
 	t_header			header;
 	t_id_type			id;
+	t_id_type			intern_id;
 	unsigned char		*code;
+	int					color;
 }						t_champion;
 
 t_champion				*champion_new(void);

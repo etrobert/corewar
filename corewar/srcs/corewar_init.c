@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 19:01:26 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:46:00 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static int			load_one_champion(t_corewar *corewar,
 //	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
 	if (add_fresh_process(corewar, pc, id) == -1)
 		return (-1);
-//	ckwaca
-//	corewar->last_living_champ = champ->id;
+	corewar->last_living_champ = champ->id;
 	return (FT_GOOD);
 }
 
@@ -88,5 +87,6 @@ int					corewar_init(t_corewar *corewar, const t_list *champions,
 	corewar->fd = fd;
 	corewar->verbosity = CW_VB_LIVE | CW_VB_OP;// | CW_VB_CYCLES;
 	corewar->print_aff = true;
+	corewar->champions = champions;
 	return (FT_GOOD);
 }

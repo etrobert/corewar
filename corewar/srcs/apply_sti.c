@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 17:04:47 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 16:57:29 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:21:52 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int					apply_sti(t_corewar *corewar, t_process *process)
 	if (corewar_parse_params(corewar, process, &params) == 0)
 	{
 		val = corewar_extract_param(corewar, process, &params, 0);
-		//dest = (corewar_extract_param(corewar, process, &params, 1) % IDX_MOD) +
-		//	(corewar_extract_param(corewar, process, &params, 2) % IDX_MOD);
 		arg[0] = corewar_extract_param(corewar, process, &params, 1);
 		arg[1] = corewar_extract_param(corewar, process, &params, 2);
 		//OVERFLOW ???

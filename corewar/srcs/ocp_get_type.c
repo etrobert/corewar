@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:03:35 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/09 17:36:49 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:21:16 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,3 @@ char				ocp_get_type(unsigned char ocp, int id)
 {
 	return ((ocp >> ((3 - id) * 2)) & 0b11);
 }
-

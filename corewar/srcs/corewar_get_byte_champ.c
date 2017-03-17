@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_print_live.c                               :+:      :+:    :+:   */
+/*   corewar_get_byte_champ.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 17:22:23 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 20:32:31 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/17 20:17:41 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/17 20:31:18 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					corewar_print_live(t_corewar *corewar, unsigned int id)
+t_champion			*corewar_get_byte_champ(t_corewar *corewar,
+		unsigned int pos)
 {
-	t_champion		*champ;
-
-	if ((corewar->verbosity & CW_VB_LIVE) == 0)
-		return (0);
-	champ = corewar_id_champ(corewar, id);
-	return (corewar_print_log(corewar,
-				"un processus dit que le joueur %d(%s) est en vie\n",
-				champ->id, champ->header.prog_name));
+	if (corewar == NULL)
+		return (NULL);
+	return (corewar_id_champ(corewar, corewar_get_byte_id(corewar, pos)));
 }

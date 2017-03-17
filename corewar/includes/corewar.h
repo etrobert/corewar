@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 17:28:39 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:30:03 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct		s_corewar
 	int				fd;
 	int				verbosity;
 	bool			print_aff;
+
+	const t_list	*champions;
 }					t_corewar;
 
 typedef union		u_param
@@ -82,6 +84,8 @@ void				corewar_set_print_aff(t_corewar *corewar, bool print_aff);
 unsigned char		corewar_get_byte(const t_corewar *corewar,
 		unsigned int pos);;
 
+t_champion			*corewar_get_byte_champ(t_corewar *corewar,
+		unsigned int pos);
 t_id_type			corewar_get_byte_id(t_corewar *corewar, unsigned int pos);
 t_cycle_type		corewar_get_cycle(t_corewar *corewar);
 t_cycle_type		corewar_get_cycles_to_die(t_corewar *corewar);
@@ -90,6 +94,8 @@ t_size_type			t_corewar_get_process_nb(t_corewar *corewar);
 /*
 ** private: ====================================================================
 */
+
+t_champion			*corewar_id_champ(t_corewar *corewar, t_id_type id);
 
 /*
 ** corewar_parse_params checks if the register given is not correct

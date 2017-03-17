@@ -20,8 +20,10 @@ SRCNAM		=	main.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
 				corewar_set_verbosity.c corewar_set_print_aff.c \
 				corewar_get_byte.c corewar_get_byte_id.c \
+				corewar_get_byte_champ.c \
 				corewar_get_cycle.c corewar_get_cycles_to_die.c \
 				corewar_get_process_nb.c \
+				corewar_id_champ.c \
 				corewar_write.c corewar_read.c \
 				corewar_parse_params.c corewar_extract_param.c \
 				corewar_update_process.c corewar_fork.c \

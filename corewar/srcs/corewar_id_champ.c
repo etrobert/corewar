@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_print_live.c                               :+:      :+:    :+:   */
+/*   corewar_id_champ.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 17:22:23 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 20:32:31 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/17 20:27:29 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/17 20:28:46 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					corewar_print_live(t_corewar *corewar, unsigned int id)
+t_champion			*corewar_id_champ(t_corewar *corewar, t_id_type id)
 {
+	t_list_it		it;
 	t_champion		*champ;
 
-	if ((corewar->verbosity & CW_VB_LIVE) == 0)
-		return (0);
-	champ = corewar_id_champ(corewar, id);
-	return (corewar_print_log(corewar,
-				"un processus dit que le joueur %d(%s) est en vie\n",
-				champ->id, champ->header.prog_name));
+	it = ft_list_begin(corewar->champions);
+	while (!ft_list_it_end(corewar->champions, it))
+	{
+		champ = (t_champion *)ft_list_it_get(corewar->champions, it);
+		if (champ->intern_id == id)
+			return (champ);
+		ft_list_it_inc(&it);
+	}
+	return (NULL);
 }
