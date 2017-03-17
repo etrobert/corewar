@@ -6,80 +6,88 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/08 16:39:48 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:42:15 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
-#include "libft.h"
 
-static void	print_init_visu(t_visu *visu)
+int			init_visu_log(t_visu *visu)
 {
-	initscr();
-	start_color();
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_BLACK);
-	init_pair(3, COLOR_BLUE, COLOR_BLACK);
-	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(5, COLOR_BLACK, COLOR_GREEN);
-	init_pair(6, COLOR_BLACK, COLOR_RED);
-	init_pair(7, COLOR_BLACK, COLOR_BLUE);
-	init_pair(8, COLOR_BLACK, COLOR_YELLOW);
-	init_color(COLOR_CYAN, 300, 300, 300);
-	init_color(COLOR_MAGENTA, 500, 500, 500);
-	init_pair(9, COLOR_MAGENTA, COLOR_CYAN);
-	init_pair(10, COLOR_MAGENTA, COLOR_BLACK);
-	visu->board = subwin(stdscr, PRINT_WIDTH + 2, 3 * PRINT_WIDTH + 2, 0, 0);
-	visu->infos = subwin(stdscr, PRINT_WIDTH + 2, COLS - (3 * PRINT_WIDTH + 2),
-			0, 3 * PRINT_WIDTH + 2);
-	keypad(stdscr, TRUE);
-	noecho();
-	cbreak();
-	curs_set(0);
-	visu->speed = 10000;
-	visu->pause = true;
-	nodelay(stdscr, 1);
+	int		flags;
+
+	if (pipe(visu->fds) != 0)
+		return (-1);
+	flags = fcntl(visu->fds[0], F_GETFL, 0);
+	fcntl(visu->fds[0], F_SETFL, flags | O_NONBLOCK);
+	if ((visu->log_lines = ft_list_new()) == NULL)
+	{
+		close(visu->fds[0]);
+		close(visu->fds[1]);
+		return (-1);
+	}
+	return (0);
 }
 
-static void print_round(t_visu *visu, t_corewar *corewar)
+static void	print_round(t_visu *visu, t_corewar *corewar, t_list *champs)
 {
-	werase(visu->board);
-	werase(visu->infos);
+	erase();
 	box(visu->board, ACS_VLINE, ACS_HLINE);
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
-	print_corewar(corewar, visu);
-	wrefresh(visu->board);
-	wrefresh(visu->infos);
-	usleep(visu->speed);
+	box(visu->log, ACS_VLINE, ACS_HLINE);
+	print_corewar(corewar, visu, champs);
+//	print_log(visu);
+	refresh();
 }
 
-static void	print_end()
+static int	main_game(t_corewar *corewar, t_visu *visu, t_list *champs)
 {
-	while (getch() != 27)
+	int				ret;
+	int				play;
+	unsigned int	time;
+	struct timeval	begin;
+	struct timeval	end;
+
+	while ((play = play_events(visu)) != 0)
 	{
+		gettimeofday(&begin, NULL);
+		print_round(visu, corewar, champs);
+		if (!corewar_end(corewar) && !visu->pause &&
+				(ret = corewar_advance(corewar)) < 0)
+		{
+			visu_end(visu);
+			return (ret);
+		}
+		gettimeofday(&end, NULL);
+		if ((time = end.tv_usec - begin.tv_usec) > visu->speed)
+			usleep(0);
+		else
+			usleep(visu->speed);
 	}
-	endwin();
+	if (play == 0)
+		return (-1);
+	return (0);
 }
 
-int	play_corewar(t_corewar *corewar)
+int			play_corewar(t_corewar *corewar, t_list *champs, t_parser *parser)
 {
 	int				ret;
 	t_visu			visu;
 
 	if (corewar == NULL)
 		return (0);
-	print_init_visu(&visu);
-	while (!corewar_end(corewar))
+	if (parser->graphical)
 	{
-		print_round(&visu, corewar);
-		if (!visu.pause && (ret = corewar_advance(corewar)) < 0)
-		{
-			print_end();
+		visu_init(&visu, champs);
+//		init_visu_log(&visu);
+//		corewar_set_fd(corewar, visu.fds[1]);
+		corewar_set_fd(corewar, 2);
+		if ((ret = main_game(corewar, &visu, champs)) < 0)
 			return (ret);
-		}
-		if (!play_events(&visu))
-			return (0);
 	}
-	print_end();
+	else
+		while (!corewar_end(corewar))
+			if (corewar_advance(corewar) < 0)
+				return (-1);
 	return (0);
 }

@@ -13,7 +13,7 @@ SRCNAM		=	main.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
 				process_get_reg.c process_set_reg.c process_valid_reg.c \
 				process_get_proc_id.c process_set_proc_id.c \
-				process_get_pc.c \
+				process_get_pc.c visu_init.c visu_end.c \
 				print_corewar.c play_corewar.c play_events.c\
 				print_process_fd.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
@@ -36,10 +36,16 @@ SRCNAM		=	main.c \
 				apply_live.c apply_ld.c apply_st.c apply_add.c apply_sub.c \
 				apply_and.c \
 				apply_or.c apply_xor.c \
-				apply_zjmp.c apply_ldi.c apply_sti.c apply_fork.c apply_lld.c \
-				apply_lldi.c apply_lfork.c apply_aff.c apply_nothing.c \
-				ocp_get_type.c
-INCNAM		=	process.h corewar.h champion.h print.h
+				apply_zjmp.c apply_sti.c apply_fork.c apply_lld.c \
+				apply_aff.c apply_nothing.c apply_ldi.c apply_lldi.c \
+				apply_lfork.c \
+				ocp_get_type.c \
+				parse_options.c open_champ_file.c parser_new.c parse_args.c \
+				print_help.c \
+				ft_strnbrless.c ft_strnbrlesseq.c \
+				print_log.c
+
+INCNAM		=	process.h corewar.h champion.h print.h args_parser.h
 
 CC			=	clang
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/
