@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 19:02:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/16 19:50:13 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 15:20:56 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	visu_init_screens(t_visu *visu, int infos_height)
 	visu->infos = subwin(stdscr, infos_height, COLS - (3 * PRINT_WIDTH + 3),
 			0, 3 * PRINT_WIDTH + 3);
 	//visu->log_height = LINES - (PRINT_WIDTH + 4);
-	visu->log_height = 15;
+	visu->log_height = PRINT_WIDTH - infos_height;
 	//visu->log = subwin(stdscr, LINES - (PRINT_WIDTH + 2),
 	//COLS, PRINT_WIDTH + 2, 0);
 	visu->log = subwin(stdscr, PRINT_WIDTH + 2 - infos_height,

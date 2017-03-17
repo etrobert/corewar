@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 15:06:23 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 15:17:54 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
 	print_args_parser_struct_result_to_know_if_it_works_fine_cause_it_would_suck_if_it_does_not(parser);
 
 	cw = corewar_new(champs, 2);
-	//corewar_set_verbosity(cw, parser->verbose);
+	corewar_set_verbosity(cw, parser->verbose);
 	//does not exist yet
 
 	play_corewar(cw, champs);

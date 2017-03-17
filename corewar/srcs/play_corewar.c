@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/16 19:09:52 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 15:24:57 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	print_round(t_visu *visu, t_corewar *corewar, t_list *champs)
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
 	box(visu->log, ACS_VLINE, ACS_HLINE);
 	print_corewar(corewar, visu, champs);
-//	print_log(visu);
+	print_log(visu);
 	wrefresh(visu->board);
 	wrefresh(visu->infos);
 	wrefresh(visu->log);
@@ -84,9 +84,8 @@ int			play_corewar(t_corewar *corewar, t_list *champs)
 	if (corewar == NULL)
 		return (0);
 	visu_init(&visu, champs);
-//	init_visu_log(&visu);
-//	corewar_set_fd(corewar, visu.fds[1]);
-	corewar_set_fd(corewar, 2);
+	init_visu_log(&visu);
+	corewar_set_fd(corewar, visu.fds[1]);
 	if ((ret = main_game(corewar, &visu, champs)) < 0)
 		return (ret);
 	return (0);
