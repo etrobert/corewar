@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/02/17 17:35:49 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/14 19:01:19 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 t_op	g_op_tab[17] =
 {
-	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
-	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
-	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
-	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
+	{"live", 1, {T_DIR}, 1, 10, "alive", false, false, false},
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", true, false, false},
+	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", true, false, false},
+	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", true, false, false},
+	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", true, false, false},
 	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6,
-		"et (and  r1, r2, r3   r1&r2 -> r3", 1, 0},
+		"et (and  r1, r2, r3   r1&r2 -> r3", true, false, false},
 	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
-		"ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 0},
+		"ou  (or   r1, r2, r3   r1 | r2 -> r3", true, false, false},
 	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
-		"ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 0},
-	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1},
+		"ou (xor  r1, r2, r3   r1^r2 -> r3", true, false, false},
+	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", false, true, false},
 	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
-		"load index", 1, 1},
+		"load index", true, true, true},
 	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
-		"store index", 1, 1},
-	{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
-	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
+		"store index", true, true, false},
+	{"fork", 1, {T_DIR}, 12, 800, "fork", false, true, false},
+	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", true, false, true},
 	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
-		"long load index", 1, 1},
-	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
-	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
-	{NULL, 0, {0}, 0, 0, NULL, 0, 0}
+		"long load index", true, true, true},
+	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", false, true, true},
+	{"aff", 1, {T_REG}, 16, 2, "aff", true, false, false},
+	{NULL, 0, {0}, 0, 0, NULL, false, false, false}
 };

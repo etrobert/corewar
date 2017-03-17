@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/14 20:33:07 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/16 20:11:29 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,38 @@ static int			print_process(t_corewar *corewar, unsigned int pos,
 	return (0);
 }
 
-static void			print_infos(t_corewar *corewar, t_visu *visu)
+static void			print_players(t_corewar *corewar, t_visu *visu,
+		t_list *champs, int i)
 {
-	int		i;
-	int		p;
-	int		p_number;
-	char	name[] = "Vampire";
+	t_list_it	it;
+	t_champion	*champ;
+	int			p_number;
 
-	p_number = 4;
+	p_number = ft_list_size(champs);
+	it = ft_list_begin(champs);
+	while (p_number > 0)
+	{
+		champ = ft_list_it_get(champs, it);
+		mvwprintw(visu->infos, i, 2, "Player %d : ", champ->id);
+		wattron(visu->infos, COLOR_PAIR(p_number));
+		mvwprintw(visu->infos, i++, 13, "%s", champ->header.prog_name);
+		wattroff(visu->infos, COLOR_PAIR(p_number));
+		mvwprintw(visu->infos, i++, 2, "Last live :               %d",
+				corewar->cycle);
+		mvwprintw(visu->infos, i++, 2, "Lives in current period : %d",
+				corewar->cycle);
+		i++;
+		p_number--;
+		ft_list_it_inc(&it);
+	}
+}
+
+static void			print_infos(t_corewar *corewar, t_visu *visu,
+		t_list *champs)
+{
+	int			i;
+
 	i = 1;
-	p = 0;
 	if (visu->pause)
 		mvwprintw(visu->infos, i++, 2, "PAUSED");
 	else
@@ -70,27 +92,16 @@ static void			print_infos(t_corewar *corewar, t_visu *visu)
 			ft_list_size(corewar->process));
 	mvwprintw(visu->infos, i++, 2, "cycle_to_die : %u", corewar->cycles_to_die);
 	i++;
-	while (p < p_number)
-	{
-		mvwprintw(visu->infos, i, 2, "Player %d : ", p_number);
-		wattron(visu->infos, COLOR_PAIR(p_number));
-		mvwprintw(visu->infos, i++, 13, "%s", name);
-		wattroff(visu->infos, COLOR_PAIR(p_number));
-		mvwprintw(visu->infos, i++, 2, "Last live :               %d",
-				corewar->cycle);
-		mvwprintw(visu->infos, i++, 2, "Lives in current period : %d",
-				corewar->cycle);
-		i++;
-		p++;
-	}
+	print_players(corewar, visu, champs, i);
 }
 
 static void			print_byte(t_corewar *corewar, unsigned int pos,
-		t_visu *visu)
+		t_visu *visu, t_list *champs)
 {
 	unsigned char	byte;
 	t_id_type		id;
 
+	(void)champs;
 	byte = corewar_get_byte(corewar, pos);
 	if (!print_process(corewar, pos, visu, byte))
 	{
@@ -109,12 +120,12 @@ static void			print_byte(t_corewar *corewar, unsigned int pos,
 	}
 }
 
-void				print_corewar(t_corewar *cw, t_visu *visu)
+void				print_corewar(t_corewar *cw, t_visu *visu, t_list *champs)
 {
 	unsigned int	i;
 	unsigned int	j;
 
-	print_infos(cw, visu);
+	print_infos(cw, visu, champs);
 	visu->line = 1;
 	j = 0;
 	while (j * PRINT_WIDTH < MEM_SIZE)
@@ -123,7 +134,7 @@ void				print_corewar(t_corewar *cw, t_visu *visu)
 		i = 0;
 		while (i < PRINT_WIDTH && j * PRINT_WIDTH + i < MEM_SIZE)
 		{
-			print_byte(cw, j * PRINT_WIDTH + i, visu);
+			print_byte(cw, j * PRINT_WIDTH + i, visu, champs);
 			i++;
 			visu->col += 3;
 		}

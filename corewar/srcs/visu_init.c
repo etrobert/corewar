@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 19:02:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/14 19:53:05 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/16 19:50:13 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 static void	visu_init_colors()
 {
+/*	init_color(DGREEN, 0, 700, 0);
+	init_color(LGREEN, 0, 1000, 0);
+	init_color(DRED, 700, 0, 0);
+	init_color(LRED, 1000, 0, 0);
+	init_color(DBLUE, 0, 0, 700);
+	init_color(LBLUE, 0, 0, 1000);
+	init_color(DORANGE, 1000, 700, 0);
+	init_color(LORANGE, 1000, 500, 0);*/
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_RED, COLOR_BLACK);
 	init_pair(3, COLOR_BLUE, COLOR_BLACK);
@@ -42,15 +50,16 @@ static void	visu_init_screens(t_visu *visu, int infos_height)
 			COLS - (3 * PRINT_WIDTH + 3), infos_height, 3 * PRINT_WIDTH + 3);
 }
 
-void		visu_init(t_visu *visu)
+void		visu_init(t_visu *visu, t_list *champs)
 {
 	int		infos_height;
-	int		p_number;
+	size_t	p_number;
 
-	p_number = 4;
+	p_number = ft_list_size(champs);
 	infos_height = 7 + (p_number * 4);
 	initscr();
 	start_color();
+//	use_default_colors();
 	visu_init_colors();
 	visu_init_screens(visu, infos_height);
 	keypad(stdscr, TRUE);

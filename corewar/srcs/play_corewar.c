@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/14 19:53:11 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/16 19:09:52 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			init_visu_log(t_visu *visu)
 	return (0);
 }
 
-static void	print_round(t_visu *visu, t_corewar *corewar)
+static void	print_round(t_visu *visu, t_corewar *corewar, t_list *champs)
 {
 	werase(visu->board);
 	werase(visu->infos);
@@ -40,14 +40,14 @@ static void	print_round(t_visu *visu, t_corewar *corewar)
 	box(visu->board, ACS_VLINE, ACS_HLINE);
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
 	box(visu->log, ACS_VLINE, ACS_HLINE);
-	print_corewar(corewar, visu);
+	print_corewar(corewar, visu, champs);
 //	print_log(visu);
 	wrefresh(visu->board);
 	wrefresh(visu->infos);
 	wrefresh(visu->log);
 }
 
-static int	main_game(t_corewar *corewar, t_visu *visu)
+static int	main_game(t_corewar *corewar, t_visu *visu, t_list *champs)
 {
 	int				ret;
 	int				play;
@@ -58,7 +58,7 @@ static int	main_game(t_corewar *corewar, t_visu *visu)
 	while ((play = play_events(visu)) != 0)
 	{
 		gettimeofday(&begin, NULL);
-		print_round(visu, corewar);
+		print_round(visu, corewar, champs);
 		if (!corewar_end(corewar) && !visu->pause &&
 				(ret = corewar_advance(corewar)) < 0)
 		{
@@ -76,18 +76,18 @@ static int	main_game(t_corewar *corewar, t_visu *visu)
 	return (0);
 }
 
-int			play_corewar(t_corewar *corewar)
+int			play_corewar(t_corewar *corewar, t_list *champs)
 {
 	int				ret;
 	t_visu			visu;
 
 	if (corewar == NULL)
 		return (0);
-	visu_init(&visu);
+	visu_init(&visu, champs);
 //	init_visu_log(&visu);
 //	corewar_set_fd(corewar, visu.fds[1]);
 	corewar_set_fd(corewar, 2);
-	if ((ret = main_game(corewar, &visu)) < 0)
+	if ((ret = main_game(corewar, &visu, champs)) < 0)
 		return (ret);
 	return (0);
 }

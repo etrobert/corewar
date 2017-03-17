@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 21:06:57 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/12 20:34:35 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:12:30 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,22 @@ int				corewar_print_op(t_corewar *corewar, t_process *process,
 	int				n;
 	char			*str;
 
+	//On peut ne pas appeler va_arg ?
+	if ((corewar->verbosity & CW_VB_OP) == 0)
+		return (0);
 	va_start(ap, fmt);
 	n = ft_vasprintf(&str, fmt, ap);
 	va_end(ap);
 	if (n < 0)
 		return (n);
-	n = corewar_print_log(corewar, "pc %5u | P %5u | %s",
-					process_get_pc(process),
-					process_get_proc_id(process),
-					str);
+	if ((corewar->verbosity & CW_VB_OP_PC) == 0)
+		n = corewar_print_log(corewar, "P %5u | %s",
+				process_get_proc_id(process), str);
+	else
+		n = corewar_print_log(corewar, "pc %5u | P %5u | %s",
+				process_get_pc(process),
+				process_get_proc_id(process),
+				str);
 	free(str);
 	return (n);
 }

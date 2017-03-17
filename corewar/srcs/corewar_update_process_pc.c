@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:31:04 by etrobert          #+#    #+#             */
-/*   Updated: 2017/02/17 17:08:05 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/14 18:49:23 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void				corewar_update_process_pc(t_corewar *corewar,
 	(void)corewar;
 	if (proc == NULL)
 		return ;
-	proc->pc = (proc->pc + (value % IDX_MOD)) % MEM_SIZE;
+	proc->pc = (proc->pc + value) % MEM_SIZE;
 }
