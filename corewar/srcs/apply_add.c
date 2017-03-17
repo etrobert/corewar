@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 21:03:11 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/14 21:46:30 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 16:58:54 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int					apply_add(t_corewar *corewar, t_process *process)
 				"add %d %d r%d -> %d\n",
 				arg[0], arg[1], params.params[2].c,
 				process_get_reg(process, params.params[2].c));
-		if (process_get_reg(process, params.params[2].c) == 0)
-			process->carry = true;
+		process->carry = (process_get_reg(process, params.params[2].c) == 0);
 	}
 	corewar_update_process_pc(corewar, process, params.offset);
 	return (0);

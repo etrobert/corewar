@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:37:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 20:39:18 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/16 20:31:06 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,20 @@
 static void			corewar_parse_reg(t_corewar *corewar, t_process *process,
 		t_op_params *params, int id)
 {
-	ft_cbuff_read(corewar->memory, &((params->params[id]).c),
-			process->pc + params->offset, sizeof(unsigned char));
+	//ft_cbuff_read(corewar->memory, &((params->params[id]).c),
+	//		process->pc + params->offset, sizeof(unsigned char));
+	corewar_read(corewar, (t_memory){&((params->params[id]).c),
+			sizeof(unsigned char)}, process->pc + params->offset);
 	++(params->offset);
 }
 
 static void			corewar_parse_ind(t_corewar *corewar, t_process *process,
 		t_op_params *params, int id)
 {
-	ft_cbuff_read(corewar->memory, &(params->params[id].s),
-			process->pc + params->offset, sizeof(unsigned short));
+	corewar_read(corewar, (t_memory){&((params->params[id].s)),
+			sizeof(unsigned short)}, process->pc + params->offset);
+	//ft_cbuff_read(corewar->memory, &(params->params[id].s),
+	//		process->pc + params->offset, sizeof(unsigned short));
 	params->params[id].s = ft_ushort16_big_endian(params->params[id].s);
 	params->offset += 2;
 }
@@ -34,15 +38,19 @@ static void			corewar_parse_dir(t_corewar *corewar, t_process *process,
 {
 	if (process->current_op->small_direct)
 	{
-		ft_cbuff_read(corewar->memory, &(params->params[id].s),
-				process->pc + params->offset, sizeof(unsigned short));
+		corewar_read(corewar, (t_memory){&((params->params[id]).s),
+				sizeof(unsigned short)}, process->pc + params->offset);
+//		ft_cbuff_read(corewar->memory, &(params->params[id].s),
+//				process->pc + params->offset, sizeof(unsigned short));
 		params->params[id].s = ft_ushort16_big_endian(params->params[id].s);
 		params->offset += 2;
 	}
 	else
 	{
-		ft_cbuff_read(corewar->memory, &(params->params[id].i),
-				process->pc + params->offset, sizeof(unsigned int));
+		corewar_read(corewar, (t_memory){&((params->params[id]).i),
+				sizeof(unsigned int)}, process->pc + params->offset);
+//		ft_cbuff_read(corewar->memory, &(params->params[id].i),
+//				process->pc + params->offset, sizeof(unsigned int));
 		params->params[id].i = ft_uint32_big_endian(params->params[id].i);
 		params->offset += 4;
 	}
@@ -80,8 +88,10 @@ int					corewar_parse_params(t_corewar *corewar, t_process *process,
 	int				tmp;
 
 	params->offset = 1;
-	ft_cbuff_read(corewar->memory, &(params->ocp), process->pc + params->offset,
-			sizeof(unsigned char));
+	corewar_read(corewar, (t_memory){&(params->ocp), sizeof(unsigned char)},
+			process->pc + params->offset);
+//	ft_cbuff_read(corewar->memory, &(params->ocp), process->pc + params->offset,
+//			sizeof(unsigned char));
 	++(params->offset);
 	ret = 0;
 	i = 0;

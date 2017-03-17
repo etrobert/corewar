@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 11:48:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 17:26:19 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/16 19:31:37 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int					apply_live(t_corewar *corewar, t_process *process)
 {
 	unsigned int	id;
 
-	ft_cbuff_read(corewar->memory, &id, process->pc + 1, sizeof(unsigned int));
+	corewar_read(corewar, (t_memory){&id, sizeof(id)}, process->pc + 1);
 	id = ft_uint32_big_endian(id);
 	corewar_print_op(corewar, process, "live %u\n", id);
 	corewar_print_live(corewar, id);

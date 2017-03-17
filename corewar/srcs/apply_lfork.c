@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_aff.c                                        :+:      :+:    :+:   */
+/*   apply_lfork.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/02 21:13:06 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 15:49:29 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/17 17:25:56 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/17 17:27:47 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					apply_aff(t_corewar *corewar, t_process *process)
+int					apply_lfork(t_corewar *corewar, t_process *process)
 {
-	t_op_params		params;
+	short			dest;
 	int				ret;
-	int				val;
 
-	if ((ret = corewar_parse_params(corewar, process, &params)) == 0)
-	{
-		val = process_get_reg(process, params.params[0].c);
-		corewar_print_op(corewar, process, "aff %d\n", val);
-		corewar_print_aff(corewar, val);
-	}
-	corewar_update_process_pc(corewar, process, params.offset);
-	return (0);
+	corewar_read(corewar, (t_memory){&dest, sizeof(dest)}, process->pc + 1);
+	dest = ft_ushort16_big_endian(dest);
+	ret = (corewar_fork(corewar, process,
+				(process->pc + dest) % MEM_SIZE));
+	corewar_print_op(corewar, process, "lfork %hd\n", dest);
+	corewar_update_process_pc(corewar, process, 3);
+	return (ret);
 }

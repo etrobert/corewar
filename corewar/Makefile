@@ -17,11 +17,11 @@ SRCNAM		=	main.c \
 				print_process_fd.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
-				corewar_set_verbosity.c \
+				corewar_set_verbosity.c corewar_set_print_aff.c \
 				corewar_get_byte.c corewar_get_byte_id.c \
 				corewar_get_cycle.c corewar_get_cycles_to_die.c \
 				corewar_get_process_nb.c \
-				corewar_write.c \
+				corewar_write.c corewar_read.c \
 				corewar_parse_params.c corewar_extract_param.c \
 				corewar_update_process.c corewar_fork.c \
 				corewar_update_process_pc.c corewar_check.c \
@@ -29,10 +29,12 @@ SRCNAM		=	main.c \
 				corewar_print_log.c corewar_vprint_log.c \
 				corewar_print_op.c corewar_print_live.c corewar_print_cycle.c \
 				corewar_print_cycles_to_die.c corewar_print_death.c \
-				apply_live.c apply_ld.c apply_st.c apply_add.c apply_and.c \
+				corewar_print_aff.c \
+				apply_live.c apply_ld.c apply_st.c apply_add.c apply_sub.c \
+				apply_and.c \
 				apply_or.c apply_xor.c \
-				apply_zjmp.c apply_sti.c apply_fork.c apply_lld.c \
-				apply_aff.c apply_nothing.c \
+				apply_zjmp.c apply_ldi.c apply_sti.c apply_fork.c apply_lld.c \
+				apply_lldi.c apply_lfork.c apply_aff.c apply_nothing.c \
 				ocp_get_type.c
 INCNAM		=	process.h corewar.h champion.h print.h
 

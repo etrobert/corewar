@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:50:58 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 21:25:44 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 18:00:57 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "op.h"
 # include "champion.h"
 
-//TODO Choose type
 typedef unsigned int	t_reg_type;
 
 typedef struct		s_process
@@ -31,7 +30,6 @@ typedef struct		s_process
 
 	t_cycle_type	last_live;
 	unsigned int	proc_id;
-//	t_id_type		last_living_champ;
 }					t_process;
 
 t_process			*process_new(void);
