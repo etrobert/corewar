@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 16:51:28 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:38:17 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			open_champ_file
 
 	if (!set_id && parser->latest_id == INT32_MAX)
 	{
-		ft_dprintf(2, "Champion id id too damn high\n");
+		ft_dprintf(2, "Champion id is too damn high\n");
 		return (-1);
 	}
 	if ((fd = open_file(parser->av[parser->cur_arg])) < 0)
