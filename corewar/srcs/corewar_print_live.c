@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_zjmp.c                                       :+:      :+:    :+:   */
+/*   corewar_print_live.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 13:35:48 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 18:15:34 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/15 17:22:23 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/15 17:48:24 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					apply_zjmp(t_corewar *corewar, t_process *process)
+int					corewar_print_live(t_corewar *corewar, unsigned int id)
 {
-	short			value;
-
-	if (process->carry)
-	{
-		ft_cbuff_read(corewar->memory, &value, process->pc + 1, sizeof(short));
-		value = ft_short16_big_endian(value);
-		corewar_print_op(corewar, process, "zjmp %hd\n", value);
-		corewar_update_process_pc(corewar, process, (int)(value) % IDX_MOD);
-	}
-	else
-		corewar_update_process_pc(corewar, process, 3);
-	return (0);
+	if ((corewar->verbosity & CW_VB_LIVE) == 0)
+		return (0);
+	return (corewar_print_log(corewar,
+				"un processus dit que le joueur %u(?) est en vie\n", id));
 }

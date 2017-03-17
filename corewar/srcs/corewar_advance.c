@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 17:44:28 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/15 17:50:30 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 static t_f_cw_op	get_op_func(unsigned char op_code)
 {
 	static t_f_cw_op	tab[17] = { &apply_nothing, &apply_live, &apply_ld,
-		&apply_st, NULL, NULL, &apply_and, &apply_or, &apply_xor,
+		&apply_st, &apply_add, NULL, &apply_and, &apply_or, &apply_xor,
 		&apply_zjmp,
 		NULL, &apply_sti,
 		&apply_fork,
-		NULL, NULL, NULL,
+		&apply_lld, NULL, NULL,
 		&apply_aff };
 
 	if (op_code >= 17 || tab[op_code] == NULL)
@@ -69,6 +69,7 @@ int					corewar_advance(t_corewar *corewar)
 
 	if (corewar == NULL)
 		return (0);
+	corewar_print_cycle(corewar);
 	it = ft_list_begin(corewar->process);
 	while (!ft_list_it_end(corewar->process, it))
 	{
