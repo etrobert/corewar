@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_get_byte.c                                 :+:      :+:    :+:   */
+/*   champion_get_id.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/25 14:43:22 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 19:38:46 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/17 18:06:22 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/17 18:06:55 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "champion.h"
 
-unsigned char		corewar_get_byte(const t_corewar *corewar, unsigned int pos)
+t_id_type				champion_get_id(t_champion *champion)
 {
-	unsigned char	byte;
-
-	corewar_read(corewar, (t_memory){&byte, sizeof(byte)}, pos);
-//	ft_cbuff_read(corewar->memory, &byte, pos, sizeof(unsigned char));
-	return (byte);
+	if (champion == NULL)
+		return (-1);
+	return (champion->id);
 }

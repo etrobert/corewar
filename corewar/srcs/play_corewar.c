@@ -6,14 +6,11 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/17 17:20:39 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:42:15 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
-#include "libft.h"
-
-#include <sys/time.h>
 
 int			init_visu_log(t_visu *visu)
 {
@@ -39,7 +36,7 @@ static void	print_round(t_visu *visu, t_corewar *corewar, t_list *champs)
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
 	box(visu->log, ACS_VLINE, ACS_HLINE);
 	print_corewar(corewar, visu, champs);
-	print_log(visu);
+//	print_log(visu);
 	refresh();
 }
 
@@ -72,17 +69,25 @@ static int	main_game(t_corewar *corewar, t_visu *visu, t_list *champs)
 	return (0);
 }
 
-int			play_corewar(t_corewar *corewar, t_list *champs)
+int			play_corewar(t_corewar *corewar, t_list *champs, t_parser *parser)
 {
 	int				ret;
 	t_visu			visu;
 
 	if (corewar == NULL)
 		return (0);
-	visu_init(&visu, champs);
-	init_visu_log(&visu);
-	corewar_set_fd(corewar, visu.fds[1]);
-	if ((ret = main_game(corewar, &visu, champs)) < 0)
-		return (ret);
+	if (parser->graphical)
+	{
+		visu_init(&visu, champs);
+//		init_visu_log(&visu);
+//		corewar_set_fd(corewar, visu.fds[1]);
+		corewar_set_fd(corewar, 2);
+		if ((ret = main_game(corewar, &visu, champs)) < 0)
+			return (ret);
+	}
+	else
+		while (!corewar_end(corewar))
+			if (corewar_advance(corewar) < 0)
+				return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:13:06 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 16:56:01 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 18:58:10 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int					apply_aff(t_corewar *corewar, t_process *process)
 	{
 		val = process_get_reg(process, params.params[0].c);
 		corewar_print_op(corewar, process, "aff %d\n", val);
-		corewar_print_log(corewar, "Aff: %c\n", val);
+		corewar_print_aff(corewar, val);
 	}
 	corewar_update_process_pc(corewar, process, params.offset);
 	return (0);

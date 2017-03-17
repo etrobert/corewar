@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:06:24 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 08:25:02 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:00:22 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define INT32_STR_MAX "2147483647"
 # define INT32_STR_MIN "-2147483648"
 
-#define CW_VB_MAX 64 //This should not be here but it is needed right now
+//#define CW_VB_MAX 64 //This should not be here but it is needed right now
 
 typedef struct	s_parser
 {

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 15:17:54 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:17:18 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
 	corewar_set_verbosity(cw, parser->verbose);
 	//does not exist yet
 
-	play_corewar(cw, champs);
+	play_corewar(cw, champs, parser);
 
 	corewar_delete(cw);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 18:00:30 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:30:08 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	get_buf(char **log_buf, int fd)
 	len = 0;
 	while ((ret = read(fd, buf, 128)) > 0)
 	{
-		if (!(*log_buf = ft_nrealloc(*log_buf, len, len + ret)))
+		if (!(*log_buf = ft_nrealloc(*log_buf, len + 1, len + 1 + ret)))
 			return (-1);
 		ft_memmove(*log_buf + len, buf, ret);
 		len += ret;
