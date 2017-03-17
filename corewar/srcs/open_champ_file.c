@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 07:18:37 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/17 07:30:05 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	add_champ(t_list **champs, t_champion *champ)
 			return (-1);
 		}
 	}
-	if (ft_list_size(*champs) >= 1000000000)
+	if (ft_list_size(*champs) >= MAX_PLAYERS)
 	{
 		ft_dprintf(2, "Too many champions\n");
 		return (-1);
