@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_ld.c                                         :+:      :+:    :+:   */
+/*   apply_lld.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 16:41:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 17:08:12 by tbeldame         ###   ########.fr       */
+/*   Created: 2017/03/14 18:43:58 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/14 19:00:12 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					apply_ld(t_corewar *corewar, t_process *process)
+int					apply_lld(t_corewar *corewar, t_process *process)
 {
 	t_op_params		params;
 	unsigned int	val;
@@ -21,7 +21,7 @@ int					apply_ld(t_corewar *corewar, t_process *process)
 	{
 		val = corewar_extract_param(corewar, process, &params, 0);
 		process_set_reg(process, params.params[1].c, val);
-		corewar_print_op(corewar, process, "ld %d r%d\n",
+		corewar_print_op(corewar, process, "lld %d r%d\n",
 				val, params.params[1].c);
 		if (val == 0)
 			process->carry = true;

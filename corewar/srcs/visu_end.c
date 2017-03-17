@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_update_process_pc.c                        :+:      :+:    :+:   */
+/*   visu_end.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 15:31:04 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/14 18:49:23 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/13 14:58:58 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/13 15:00:02 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "print.h"
 
-void				corewar_update_process_pc(t_corewar *corewar,
-		t_process *proc, int value)
+void	visu_end(t_visu *visu)
 {
-	(void)corewar;
-	if (proc == NULL)
-		return ;
-	proc->pc = (proc->pc + value) % MEM_SIZE;
+	free(visu->board);
+	free(visu->infos);
+//	free(visu->logs);
+	endwin();
 }

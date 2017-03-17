@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_zjmp.c                                       :+:      :+:    :+:   */
+/*   corewar_set_verbosity.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 13:35:48 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 18:15:34 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/15 17:29:33 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/15 17:29:34 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					apply_zjmp(t_corewar *corewar, t_process *process)
+void				corewar_set_verbosity(t_corewar *corewar, int verbosity)
 {
-	short			value;
-
-	if (process->carry)
-	{
-		ft_cbuff_read(corewar->memory, &value, process->pc + 1, sizeof(short));
-		value = ft_short16_big_endian(value);
-		corewar_print_op(corewar, process, "zjmp %hd\n", value);
-		corewar_update_process_pc(corewar, process, (int)(value) % IDX_MOD);
-	}
-	else
-		corewar_update_process_pc(corewar, process, 3);
-	return (0);
+	if (corewar == NULL)
+		return ;
+	corewar->verbosity = verbosity;
 }
