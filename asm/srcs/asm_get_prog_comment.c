@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:03:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/12 20:07:26 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/18 18:47:35 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ static void	asm_multi_lines_comment(char **str, char **temp, t_list_it *it,
 	}
 }
 
+static int	asm_check_comment_syntax(char *str, char **split)
+{
+	if (!ft_strchr(str, '"') ||
+			ft_strstr(str, COMMENT_CMD_STRING) > ft_strchr(str, '"') ||
+			ft_strcmp(split[0], COMMENT_CMD_STRING) || split[1][0] != '"')
+	{
+		ft_dprintf(2, "Syntax error in champion's comment\n");
+		asm_free_split(split);
+		return (0);
+	}
+	return (1);
+}
+
 int			asm_get_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
 {
 	int		len;
@@ -64,14 +77,8 @@ int			asm_get_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
 		ft_dprintf(2, "Malloc error\n");
 		return (0);
 	}
-	if (!ft_strchr(str, '"') ||
-			ft_strstr(str, COMMENT_CMD_STRING) > ft_strchr(str, '"') ||
-			ft_strcmp(split[0], COMMENT_CMD_STRING) || split[1][0] != '"')
-	{
-		ft_dprintf(2, "Syntax error in champion's comment\n");
-		asm_free_split(split);
+	if (!asm_check_comment_syntax(str, split))
 		return (0);
-	}
 	asm_free_split(split);
 	asm_multi_lines_comment(&str, &temp, it, m_asm);
 	if (!asm_check_comment_len(str, &temp, &len))
