@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 19:45:47 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/18 16:08:51 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void			print_players(t_corewar *corewar, t_visu *visu,
 		champ = ft_list_it_get(champs, it);
 		mvwprintw(visu->infos, i, 2, "Player %d : ", champion_get_id(champ));
 		wattron(visu->infos, COLOR_PAIR(n + 1));
-		mvwprintw(visu->infos, i++, 21, "%s", champ->header.prog_name);
+		mvwprintw(visu->infos, i++, 28, "%s", champ->header.prog_name);
 		wattroff(visu->infos, COLOR_PAIR(n + 1));
 		mvwprintw(visu->infos, i++, 2, "Last live :               %d",
 				corewar->cycle);
