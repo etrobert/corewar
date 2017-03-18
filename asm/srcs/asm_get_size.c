@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/13 14:12:01 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/18 17:27:49 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,36 @@ static int			asm_no_name_or_comment(int name, int comment, char *line,
 	return (1);
 }
 
-static int			asm_line_loop(t_asm *m_asm, t_list_it it)
+static int			asm_line_loop_one(t_asm *m_asm, char *line)
 {
-	int				name;
 	int				comment;
-	char			*line;
+	int				name;
+	t_list_it		it;
 
+	if (!(name = asm_get_prog_name(line, m_asm, &it)) ||
+			!(comment = asm_get_prog_comment(line, m_asm, &it)))
+		return (0);
+	if ((name == NAME && !m_asm->name) ||
+			(comment == COMMENT && !m_asm->comment))
+	{
+		ft_dprintf(2, "Champion must have only one name and comment.\n");
+		return (0);
+	}
+	if (!asm_no_name_or_comment(name, comment, line, m_asm))
+		return (0);
+	return (1);
+}
+
+static int			asm_line_loop(t_asm *m_asm)
+{
+	char			*line;
+	t_list_it		it;
+
+	it = ft_list_begin(m_asm->file);
 	while (!ft_list_it_end(m_asm->file, it))
 	{
 		line = (char*)ft_list_it_get(m_asm->file, it);
-		if (!(name = asm_get_prog_name(line, m_asm, &it)) ||
-				!(comment = asm_get_prog_comment(line, m_asm, &it)))
-			return (0);
-		if ((name == NAME && !m_asm->name) ||
-				(comment == COMMENT && !m_asm->comment))
-		{
-			ft_dprintf(2, "Champion must have only one name and comment.\n");
-			return (0);
-		}
-		if (!asm_no_name_or_comment(name, comment, line, m_asm))
+		if (!asm_line_loop_one(m_asm, line))
 			return (0);
 		ft_list_it_inc(&it);
 	}
@@ -76,12 +87,9 @@ static int			asm_line_loop(t_asm *m_asm, t_list_it it)
 
 int					asm_get_size(t_asm *m_asm)
 {
-	t_list_it		it;
-
 	if (!asm_init_header_and_labels(m_asm))
 		return (0);
-	it = ft_list_begin(m_asm->file);
-	if (!asm_line_loop(m_asm, it))
+	if (!asm_line_loop(m_asm))
 		return (0);
 	(m_asm->header)->prog_size =
 		ft_uint32_big_endian((m_asm->header)->prog_size);

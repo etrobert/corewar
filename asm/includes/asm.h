@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/11 20:36:45 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/18 17:05:32 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void				asm_write_bytes(int fd, t_asm *m_asm, char *filename);
 */
 
 void				asm_free_asm(t_asm *m_asm);
+void				asm_free_file(t_list *file);
 void				asm_free_split(char **split);
 
 #endif

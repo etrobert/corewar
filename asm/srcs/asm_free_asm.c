@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 13:20:56 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/11 20:34:38 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/18 17:53:36 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ static void	asm_free_labels_name(void *label)
 
 void		asm_free_asm(t_asm *m_asm)
 {
-	ft_list_apply(m_asm->file, &free);
-	ft_list_delete(m_asm->file);
+	asm_free_file(m_asm->file);
 	free(m_asm->header);
 	ft_list_apply(m_asm->labels, &asm_free_labels_name);
 	ft_list_delete(m_asm->labels);
 	ft_list_apply(m_asm->instructs, &free);
 	ft_list_delete(m_asm->instructs);
-	free(m_asm);
 }

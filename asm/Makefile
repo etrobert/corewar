@@ -15,7 +15,7 @@ SRCNAM		=	asm_main.c asm_usage.c asm_open.c asm_create.c	\
 				asm_get_pos.c asm_param_byte_label_dir.c	\
 				asm_param_byte_label_ind.c asm_free_split.c	\
 				asm_complete_ocp.c asm_go_to_instruct.c	\
-				asm_write_bytes.c asm_free_asm.c	\
+				asm_write_bytes.c asm_free_asm.c asm_free_file.c \
 				asm_check_max_params.c asm_add_ocp.c asm_get_label.c
 INCNAM		=	asm.h
 
