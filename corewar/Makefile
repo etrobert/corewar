@@ -15,7 +15,7 @@ SRCNAM		=	main.c \
 				process_get_proc_id.c process_set_proc_id.c \
 				process_get_pc.c visu_init.c visu_end.c \
 				print_corewar.c play_corewar.c play_events.c\
-				print_process_fd.c \
+				print_process_fd.c print_champion.c print_args_parser.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
 				corewar_set_verbosity.c corewar_set_print_aff.c \
@@ -41,7 +41,7 @@ SRCNAM		=	main.c \
 				apply_lfork.c \
 				ocp_get_type.c \
 				parse_options.c open_champ_file.c parser_new.c parse_args.c \
-				print_help.c \
+				parser_delete.c print_help.c \
 				ft_strnbrless.c ft_strnbrlesseq.c \
 				print_log.c
 

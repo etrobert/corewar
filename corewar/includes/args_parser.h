@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:06:24 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 19:00:22 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/18 15:54:34 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_parser
 }				t_parser;
 
 t_parser		*parser_new(int ac, char **av);
+void			parser_delete(t_parser *parser);
 int				parse_args(t_parser *parser, t_list **champs);
 int				open_champ_file(t_parser *parser, int champ_id, bool set_id, t_list **champs);
 int				parse_options(t_parser *parser, t_list **champs);
