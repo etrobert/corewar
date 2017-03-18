@@ -6,7 +6,7 @@
 #    By: etrobert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 23:18:11 by etrobert          #+#    #+#              #
-#    Updated: 2017/02/18 23:18:14 by etrobert         ###   ########.fr        #
+#    Updated: 2017/03/04 17:14:33 by etrobert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,10 @@ clean:
 fclean:
 	@$(MAKE) fclean -C asm
 	@$(MAKE) fclean -C corewar
+
+cleansc:
+	@$(MAKE) cclean
+	@$(MAKE) sclean
 
 # $(MAKE) needed so that the cleaning is done before starting to create again \
 	# cf make -j 
