@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_get_pos.c                                      :+:      :+:    :+:   */
+/*   asm_free_asm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/28 14:40:35 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/02 19:09:55 by mverdier         ###   ########.fr       */
+/*   Created: 2017/03/09 13:20:56 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/11 20:34:38 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-unsigned int	asm_get_pos(t_list *instructs)
+static void	asm_free_labels_name(void *label)
 {
-	t_list_it		it;
-	unsigned int	pos;
-	int				i;
-	t_bytes			*bytes;
+	t_labels	*tmp;
 
-	pos = 0;
-	it = ft_list_begin(instructs);
-	while (!ft_list_it_end(instructs, it))
-	{
-		bytes = ft_list_it_get(instructs, it);
-		pos += 1;
-		pos += bytes->ocp_size;
-		i = 0;
-		while (i < 3)
-			pos += bytes->param_size[i++];
-		ft_list_it_inc(&it);
-	}
-	return (pos);
+	tmp = label;
+	free(tmp->name);
+	free(tmp);
+}
+
+void		asm_free_asm(t_asm *m_asm)
+{
+	ft_list_apply(m_asm->file, &free);
+	ft_list_delete(m_asm->file);
+	free(m_asm->header);
+	ft_list_apply(m_asm->labels, &asm_free_labels_name);
+	ft_list_delete(m_asm->labels);
+	ft_list_apply(m_asm->instructs, &free);
+	ft_list_delete(m_asm->instructs);
+	free(m_asm);
 }

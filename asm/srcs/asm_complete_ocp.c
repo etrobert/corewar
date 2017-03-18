@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_op_by_name.c                                   :+:      :+:    :+:   */
+/*   asm_complete_ocp.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 11:02:06 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/18 16:38:22 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/08 18:20:04 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/08 18:24:40 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "asm.h"
 
-t_op				*get_op_by_name(const char *name)
+void	asm_complete_ocp(t_bytes **bytes, int i)
 {
-	int		i;
-
-	i = 0;
-	while (g_op_tab[i].name != NULL)
+	while ((*bytes)->op_tab->ocp == true && i < 3)
 	{
-		if (ft_strcmp(g_op_tab[i].name, name) == 0)
-			return (g_op_tab + i);
-		++i;
+		(*bytes)->ocp <<= 2;
+		i++;
 	}
-	return (NULL);
 }

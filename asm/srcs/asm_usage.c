@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:00 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/28 17:41:03 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:04:07 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@
 int		asm_usage(int ac, char **av)
 {
 	char	*ret;
+	int		i;
 
-	if (ac != 2 || !(ret = ft_strrchr(av[1], '.')) || ft_strcmp(ret, ".s"))
+	i = 1;
+	while (i < ac)
 	{
-		ft_printf("Usage : %s [filename].s\n", av[0]);
-		return (0);
+		if (!(ret = ft_strrchr(av[i], '.')) || ft_strcmp(ret, ".s"))
+		{
+			ft_printf("Usage : %s [filename].s\n", av[0]);
+			return (0);
+		}
+		i++;
 	}
 	return (1);
 }
