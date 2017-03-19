@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/19 16:11:01 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 19:19:48 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int					asm_get_size(t_asm *m_asm)
 	(m_asm->header)->prog_size =
 		ft_uint32_big_endian((m_asm->header)->prog_size);
 	if (m_asm->too_big == true)
-		ft_printf("Warning : champion is too big (max : %d)\n",
-				CHAMP_MAX_SIZE);
+		ft_printf("Warning : champion is too big (max : %d)\n", CHAMP_MAX_SIZE);
 	return (1);
 }
