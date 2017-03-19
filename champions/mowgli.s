@@ -1,13 +1,21 @@
 .name "mowgli"
 .comment "the king of the jungle"
 
-start:
-ld %2147483640,r2
-ld %2147483640,r3
-add r2,r3,r4
-and r1,%2,r1
-#aff r4
-zjmp %:start
+init:
+ld		%-1, r4
+ld		%1, r5
+
+loopinit:
+ld		%2, r3		;
+
+loop:
+sub		r3, r5, r3	; r3--
+zjmp	%:end_loop	; if (r3 == 0) stop loop
+and		r1, %0, r9
+zjmp	%:loop		; 
+end_loop:
+live	%0
+
 #start:	aff r1
 #l2:     sti r1,%:live,%1
 #		and r1,%0,r1
