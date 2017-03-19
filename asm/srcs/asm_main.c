@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/18 18:42:19 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:10:06 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	asm_init_asm(t_asm *m_asm)
 	m_asm->instructs = NULL;
 	m_asm->name = false;
 	m_asm->comment = false;
+	m_asm->too_big = false;
 	return (1);
 }
 

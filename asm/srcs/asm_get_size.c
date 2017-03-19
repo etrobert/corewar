@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/19 16:04:32 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:11:01 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ static int			asm_no_name_or_comment(int name, int comment, char *line,
 			return (0);
 		(m_asm->header)->prog_size += ret;
 		if (((m_asm->header)->prog_size) > CHAMP_MAX_SIZE)
-			ft_printf("Warning : champion is too big (max : %d)\n",
-					CHAMP_MAX_SIZE);
+			m_asm->too_big = true;
 	}
 	return (1);
 }
@@ -92,5 +91,8 @@ int					asm_get_size(t_asm *m_asm)
 		return (0);
 	(m_asm->header)->prog_size =
 		ft_uint32_big_endian((m_asm->header)->prog_size);
+	if (m_asm->too_big == true)
+		ft_printf("Warning : champion is too big (max : %d)\n",
+				CHAMP_MAX_SIZE);
 	return (1);
 }

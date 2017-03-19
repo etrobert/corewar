@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:00:04 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/19 16:02:04 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 17:16:24 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,18 @@ static int	asm_multi_lines_name(char **str, char **temp, t_list_it *it,
 		t_asm *m_asm)
 {
 	char	*tmp;
+	char	*ret;
 
 	while (!ft_list_it_end(m_asm->file, *it) &&
 			ft_strchr(*str, '"') == ft_strrchr(*str, '"'))
 	{
 		ft_list_it_inc(it);
 		tmp = ft_strjoin("\n", ft_list_it_get(m_asm->file, *it));
-		*temp = ft_strjoin(*str, tmp);
+		ret = ft_strdup(*str);
+		free(*temp);
+		*temp = ft_strjoin(ret, tmp);
 		free(tmp);
+		free(ret);
 		*str = *temp;
 	}
 	if (ft_strchr(*str, '"') == ft_strrchr(*str, '"'))
