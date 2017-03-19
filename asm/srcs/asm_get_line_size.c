@@ -6,18 +6,17 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:05:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/18 19:32:43 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 15:29:28 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int		asm_check_name_and_comment(t_asm *m_asm, char **split)
+static int		asm_check_name_and_comment(t_asm *m_asm, char *line)
 {
-	if (!m_asm->name || !m_asm->comment)
+	if (ft_strlen(line) > 0 && (!m_asm->name || !m_asm->comment))
 	{
 		ft_dprintf(2, "Champion must begin by name and comment\n");
-		asm_free_split(split);
 		return (0);
 	}
 	return (1);
@@ -58,13 +57,13 @@ unsigned int	asm_get_line_size(char *line, t_list **labels,
 	int				n;
 	int				ret;
 
+	if (!asm_check_name_and_comment(m_asm, line))
+		return (-1);
 	if ((split = ft_strsplit_str(line, " \t,")) == NULL)
 	{
 		ft_dprintf(2, "Malloc error\n");
 		return (-1);
 	}
-	if (!asm_check_name_and_comment(m_asm, split))
-		return (-1);
 	n = 0;
 	if ((ret = asm_go_to_instruct_size(split, &n, labels, big_size)) < 1)
 		return (ret);

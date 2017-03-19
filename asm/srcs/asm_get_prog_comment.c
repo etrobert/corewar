@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:03:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/18 18:47:35 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:02:01 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	asm_is_comment(char *str)
 	return (1);
 }
 
-static void	asm_multi_lines_comment(char **str, char **temp, t_list_it *it,
+static int	asm_multi_lines_comment(char **str, char **temp, t_list_it *it,
 		t_asm *m_asm)
 {
 	char	*tmp;
@@ -48,6 +48,13 @@ static void	asm_multi_lines_comment(char **str, char **temp, t_list_it *it,
 		free(tmp);
 		*str = *temp;
 	}
+	if (ft_strchr(*str, '"') == ft_strrchr(*str, '"'))
+	{
+		ft_dprintf(2, "Missing closing `\"` in comment\n");
+		free(*temp);
+		return (0);
+	}
+	return (1);
 }
 
 static int	asm_check_comment_syntax(char *str, char **split)
@@ -80,7 +87,8 @@ int			asm_get_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
 	if (!asm_check_comment_syntax(str, split))
 		return (0);
 	asm_free_split(split);
-	asm_multi_lines_comment(&str, &temp, it, m_asm);
+	if (!asm_multi_lines_comment(&str, &temp, it, m_asm))
+		return (0);
 	if (!asm_check_comment_len(str, &temp, &len))
 		return (MAX_LEN);
 	ft_memmove(m_asm->header->comment, ft_strchr(str, '"') + 1, len);

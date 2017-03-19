@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 17:00:04 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/18 18:47:36 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:02:04 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ static int	asm_is_name(char *str)
 	return (1);
 }
 
-static void	asm_multi_lines_name(char **str, char **temp, t_list_it *it,
+static int	asm_multi_lines_name(char **str, char **temp, t_list_it *it,
 		t_asm *m_asm)
 {
 	char	*tmp;
 
-	while (ft_strchr(*str, '"') == ft_strrchr(*str, '"'))
+	while (!ft_list_it_end(m_asm->file, *it) &&
+			ft_strchr(*str, '"') == ft_strrchr(*str, '"'))
 	{
 		ft_list_it_inc(it);
 		tmp = ft_strjoin("\n", ft_list_it_get(m_asm->file, *it));
@@ -48,6 +49,13 @@ static void	asm_multi_lines_name(char **str, char **temp, t_list_it *it,
 		free(tmp);
 		*str = *temp;
 	}
+	if (ft_strchr(*str, '"') == ft_strrchr(*str, '"'))
+	{
+		ft_dprintf(2, "Missing closing `\"` in name\n");
+		free(*temp);
+		return (0);
+	}
+	return (1);
 }
 
 static int	asm_check_name_syntax(char *str, char **split)
@@ -80,7 +88,8 @@ int			asm_get_prog_name(char *str, t_asm *m_asm, t_list_it *it)
 	if (!asm_check_name_syntax(str, split))
 		return (0);
 	asm_free_split(split);
-	asm_multi_lines_name(&str, &temp, it, m_asm);
+	if (!asm_multi_lines_name(&str, &temp, it, m_asm))
+		return (0);
 	if (!asm_check_name_len(str, &temp, &len))
 		return (MAX_LEN);
 	ft_memmove(m_asm->header->prog_name, ft_strchr(str, '"') + 1, len);

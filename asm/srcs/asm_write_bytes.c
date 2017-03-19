@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:30:00 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/18 18:41:27 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 15:43:06 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static int	asm_write_champ(int fd, t_asm *m_asm)
 	while (!ft_list_it_end(m_asm->instructs, it))
 	{
 		bytes = ft_list_it_get(m_asm->instructs, it);
-		if (!write(fd, &(bytes->op_tab->op_code), 1) ||
-				!write(fd, &(bytes->ocp), bytes->ocp_size) ||
+		if (write(fd, &(bytes->op_tab->op_code), 1) < 0||
+				write(fd, &(bytes->ocp), bytes->ocp_size) < 0||
 				!asm_write_params_bytes(fd, bytes))
 			return (0);
 		ft_list_it_inc(&it);

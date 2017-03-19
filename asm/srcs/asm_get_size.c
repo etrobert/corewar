@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 19:43:11 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/18 17:27:49 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:04:32 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ static int			asm_no_name_or_comment(int name, int comment, char *line,
 	return (1);
 }
 
-static int			asm_line_loop_one(t_asm *m_asm, char *line)
+static int			asm_line_loop_one(t_asm *m_asm, char *line, t_list_it *it)
 {
 	int				comment;
 	int				name;
-	t_list_it		it;
 
-	if (!(name = asm_get_prog_name(line, m_asm, &it)) ||
-			!(comment = asm_get_prog_comment(line, m_asm, &it)))
+	if (!(name = asm_get_prog_name(line, m_asm, it)) ||
+			!(comment = asm_get_prog_comment(line, m_asm, it)))
 		return (0);
 	if ((name == NAME && !m_asm->name) ||
 			(comment == COMMENT && !m_asm->comment))
@@ -78,7 +77,7 @@ static int			asm_line_loop(t_asm *m_asm)
 	while (!ft_list_it_end(m_asm->file, it))
 	{
 		line = (char*)ft_list_it_get(m_asm->file, it);
-		if (!asm_line_loop_one(m_asm, line))
+		if (!asm_line_loop_one(m_asm, line, &it))
 			return (0);
 		ft_list_it_inc(&it);
 	}
