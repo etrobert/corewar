@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 16:54:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/18 17:05:32 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/19 17:20:36 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct		s_asm
 	t_list			*instructs;
 	bool			name;
 	bool			comment;
+	bool			too_big;
 }					t_asm;
 
 /*
@@ -110,11 +111,16 @@ int					asm_check_max_params(int i, t_op *op_tab, char **split,
 void				asm_add_ocp(t_bytes **bytes_instruct, unsigned char code);
 unsigned int		asm_get_line_size(char *line, t_list **labels,
 		unsigned int big_size, t_asm *m_asm);
+int					asm_go_to_instruct_size(char **split, int *n,
+		t_list **labels, unsigned int big_size);
 int					asm_get_label(char **param, t_list **labels,
 		unsigned int size, int *n);
 int					asm_check_separators(char *line, t_op *op_tab);
 
 int					asm_get_bytes(t_asm *m_asm);
+int					asm_check_prog_name(char *str, t_asm *m_asm, t_list_it *it);
+int					asm_check_prog_comment(char *str, t_asm *m_asm,
+		t_list_it *it);
 int					asm_get_params(char **split, int n,
 		t_bytes **bytes_instruct, t_asm *m_asm);
 int					asm_go_to_instruct(char **split, int *n, t_bytes **bytes);
@@ -129,7 +135,7 @@ int					asm_param_byte_label_ind(char *param,
 **	write in .cor
 */
 
-void				asm_write_bytes(int fd, t_asm *m_asm, char *filename);
+int					asm_write_bytes(int fd, t_asm *m_asm, char *filename);
 
 /*
 **	free functions
