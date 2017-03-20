@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:37:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 20:39:18 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:31:12 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static void			corewar_parse_reg(t_corewar *corewar, t_process *process,
 		t_op_params *params, int id)
 {
-	ft_cbuff_read(corewar->memory, &((params->params[id]).c),
-			process->pc + params->offset, sizeof(unsigned char));
+	corewar_read(corewar, (t_memory){&((params->params[id]).c),
+			sizeof(unsigned char)}, process->pc + params->offset);
 	++(params->offset);
 }
 
 static void			corewar_parse_ind(t_corewar *corewar, t_process *process,
 		t_op_params *params, int id)
 {
-	ft_cbuff_read(corewar->memory, &(params->params[id].s),
-			process->pc + params->offset, sizeof(unsigned short));
+	corewar_read(corewar, (t_memory){&((params->params[id].s)),
+			sizeof(unsigned short)}, process->pc + params->offset);
 	params->params[id].s = ft_ushort16_big_endian(params->params[id].s);
 	params->offset += 2;
 }
@@ -34,15 +34,15 @@ static void			corewar_parse_dir(t_corewar *corewar, t_process *process,
 {
 	if (process->current_op->small_direct)
 	{
-		ft_cbuff_read(corewar->memory, &(params->params[id].s),
-				process->pc + params->offset, sizeof(unsigned short));
+		corewar_read(corewar, (t_memory){&((params->params[id]).s),
+				sizeof(unsigned short)}, process->pc + params->offset);
 		params->params[id].s = ft_ushort16_big_endian(params->params[id].s);
 		params->offset += 2;
 	}
 	else
 	{
-		ft_cbuff_read(corewar->memory, &(params->params[id].i),
-				process->pc + params->offset, sizeof(unsigned int));
+		corewar_read(corewar, (t_memory){&((params->params[id]).i),
+				sizeof(unsigned int)}, process->pc + params->offset);
 		params->params[id].i = ft_uint32_big_endian(params->params[id].i);
 		params->offset += 4;
 	}
@@ -54,7 +54,6 @@ static int			corewar_parse_one_param(t_corewar *corewar,
 	unsigned char	type;
 
 	type = ocp_get_type(params->ocp, id);
-//	ft_dprintf(corewar->fd, "ocp= %d; le type est %d\n",params->ocp, type);
 	if (type == REG_CODE)
 	{
 		corewar_parse_reg(corewar, process, params, id);
@@ -80,17 +79,15 @@ int					corewar_parse_params(t_corewar *corewar, t_process *process,
 	int				tmp;
 
 	params->offset = 1;
-	ft_cbuff_read(corewar->memory, &(params->ocp), process->pc + params->offset,
-			sizeof(unsigned char));
+	corewar_read(corewar, (t_memory){&(params->ocp), sizeof(unsigned char)},
+			process->pc + params->offset);
 	++(params->offset);
 	ret = 0;
 	i = 0;
 	while (i < process->current_op->nb_params)
 	{
-		//ft_dprintf(corewar->fd, "pour linstant offset = %d\n", params->offset);
 		if ((tmp = corewar_parse_one_param(corewar, process, params, i)) != 0)
 			ret = tmp;
-		//ft_dprintf(corewar->fd, "et maintenant offset = %d\n", params->offset);
 		++i;
 	}
 	return (ret);

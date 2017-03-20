@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 19:27:09 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/01 17:37:44 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/19 16:10:06 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,26 @@
 
 static int	asm_init_asm(t_asm *m_asm)
 {
-	if ((m_asm = (t_asm*)malloc(sizeof(t_asm))) == NULL)
-	{
-		ft_dprintf(2, "Malloc error\n");
-		return (0);
-	}
 	m_asm->file = NULL;
 	m_asm->header = NULL;
 	m_asm->labels = NULL;
 	m_asm->instructs = NULL;
+	m_asm->name = false;
+	m_asm->comment = false;
+	m_asm->too_big = false;
 	return (1);
 }
 
-static int	asm_close(t_fds fd)
+static int	asm_read(t_asm *m_asm, char *file)
 {
-	if (close(fd.out) < 0 || close(fd.in) < 0)
-	{
-		ft_dprintf(2, "Error on closing files\n");
-		return (0);
-	}
-	return (1);
-}
+	int		fd_in;
+	int		ret;
 
-static int asm_read(t_fds *fd, t_asm *m_asm, char *file)
-{
-	if ((fd->in = asm_open(file)) < 0)
+	if ((fd_in = asm_open(file)) < 0)
 		return (0);
-	if (!asm_save_file(fd->in, m_asm))
+	ret = asm_save_file(fd_in, m_asm);
+	close(fd_in);
+	if (!ret)
 		return (0);
 	if (!asm_get_size(m_asm))
 		return (0);
@@ -49,28 +42,48 @@ static int asm_read(t_fds *fd, t_asm *m_asm, char *file)
 	return (1);
 }
 
-static int	asm_write(t_fds *fd, t_asm m_asm, char *file)
+static int	asm_write(t_asm *m_asm, char *file)
 {
-	if ((fd->out = asm_create(file)) < 0)
+	int		fd_out;
+
+	if ((fd_out = asm_create(file)) < 0)
 		return (0);
-	asm_write_bytes(fd->out, m_asm);
+	if (!asm_write_bytes(fd_out, m_asm, file))
+	{
+		close(fd_out);
+		return (0);
+	}
+	close(fd_out);
+	return (1);
+}
+
+int			asm_process_file(char *name)
+{
+	t_asm		m_asm;
+
+	if (!asm_init_asm(&m_asm))
+		return (0);
+	if (!asm_read(&m_asm, name) || !asm_write(&m_asm, name))
+	{
+		asm_free_asm(&m_asm);
+		return (0);
+	}
+	asm_free_asm(&m_asm);
 	return (1);
 }
 
 int			main(int ac, char **av)
 {
-	t_fds			fd;
-	t_asm			m_asm;
+	int			i;
 
 	if (!asm_usage(ac, av))
 		return (0);
-	if (!asm_init_asm(&m_asm))
-		return (-1);
-	if (!asm_read(&fd, &m_asm, av[1]))
-		return (-1);
-	if (!asm_write(&fd, m_asm, av[1]))
-		return (-1);
-	if (!asm_close(fd))
-		return (-1);
+	i = 1;
+	while (i < ac)
+	{
+		if (!asm_process_file(av[i]))
+			return (-1);
+		i++;
+	}
 	return (0);
 }

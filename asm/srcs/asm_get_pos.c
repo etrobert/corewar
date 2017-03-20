@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 14:40:35 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/28 14:41:26 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/02 19:09:55 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ unsigned int	asm_get_pos(t_list *instructs)
 	while (!ft_list_it_end(instructs, it))
 	{
 		bytes = ft_list_it_get(instructs, it);
-		pos += bytes->op_c_size;
+		pos += 1;
 		pos += bytes->ocp_size;
 		i = 0;
 		while (i < 3)

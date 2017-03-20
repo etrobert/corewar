@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 20:16:13 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/07 16:38:59 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:17:03 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-//TODO Choose type
-typedef unsigned char	t_id_type;
+typedef int				t_id_type;
 
 typedef struct			s_champion
 {
 	t_header			header;
 	t_id_type			id;
+	t_id_type			intern_id;
 	unsigned char		*code;
+	int					color;
 }						t_champion;
 
 t_champion				*champion_new(void);
@@ -35,5 +36,7 @@ void					champion_delete(t_champion *champ);
 
 int						champion_init(t_champion *champ, t_id_type id, int fd);
 void					champion_clear(t_champion *champion);
+
+t_id_type				champion_get_id(t_champion *champion);
 
 #endif

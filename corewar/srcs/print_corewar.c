@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 20:11:29 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 20:45:43 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,24 @@ static void			print_players(t_corewar *corewar, t_visu *visu,
 	t_list_it	it;
 	t_champion	*champ;
 	int			p_number;
+	int			n;
 
 	p_number = ft_list_size(champs);
 	it = ft_list_begin(champs);
-	while (p_number > 0)
+	n = 0;
+	while (n < p_number)
 	{
 		champ = ft_list_it_get(champs, it);
-		mvwprintw(visu->infos, i, 2, "Player %d : ", champ->id);
-		wattron(visu->infos, COLOR_PAIR(p_number));
-		mvwprintw(visu->infos, i++, 13, "%s", champ->header.prog_name);
-		wattroff(visu->infos, COLOR_PAIR(p_number));
+		mvwprintw(visu->infos, i, 2, "Player %d : ", champion_get_id(champ));
+		wattron(visu->infos, COLOR_PAIR(n + 1));
+		mvwprintw(visu->infos, i++, 21, "%s", champ->header.prog_name);
+		wattroff(visu->infos, COLOR_PAIR(n + 1));
 		mvwprintw(visu->infos, i++, 2, "Last live :               %d",
 				corewar->cycle);
 		mvwprintw(visu->infos, i++, 2, "Lives in current period : %d",
 				corewar->cycle);
 		i++;
-		p_number--;
+		n++;;
 		ft_list_it_inc(&it);
 	}
 }

@@ -9,19 +9,22 @@ INCDIR		=	includes
 SRCNAM		=	main.c \
 				champion_new.c champion_delete.c \
 				champion_init.c champion_clear.c \
+				champion_get_id.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
 				process_get_reg.c process_set_reg.c process_valid_reg.c \
 				process_get_proc_id.c process_set_proc_id.c \
 				process_get_pc.c visu_init.c visu_end.c \
 				print_corewar.c play_corewar.c play_events.c\
-				print_process_fd.c \
+				print_process_fd.c print_champion.c print_args_parser.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
-				corewar_set_verbosity.c \
+				corewar_set_verbosity.c corewar_set_print_aff.c \
 				corewar_get_byte.c corewar_get_byte_id.c \
+				corewar_get_byte_champ.c \
 				corewar_get_cycle.c corewar_get_cycles_to_die.c \
 				corewar_get_process_nb.c \
-				corewar_write.c \
+				corewar_id_champ.c \
+				corewar_write.c corewar_read.c \
 				corewar_parse_params.c corewar_extract_param.c \
 				corewar_update_process.c corewar_fork.c \
 				corewar_update_process_pc.c corewar_check.c \
@@ -29,13 +32,16 @@ SRCNAM		=	main.c \
 				corewar_print_log.c corewar_vprint_log.c \
 				corewar_print_op.c corewar_print_live.c corewar_print_cycle.c \
 				corewar_print_cycles_to_die.c corewar_print_death.c \
-				apply_live.c apply_ld.c apply_st.c apply_add.c apply_and.c \
+				corewar_print_aff.c \
+				apply_live.c apply_ld.c apply_st.c apply_add.c apply_sub.c \
+				apply_and.c \
 				apply_or.c apply_xor.c \
 				apply_zjmp.c apply_sti.c apply_fork.c apply_lld.c \
-				apply_aff.c apply_nothing.c \
+				apply_aff.c apply_nothing.c apply_ldi.c apply_lldi.c \
+				apply_lfork.c \
 				ocp_get_type.c \
 				parse_options.c open_champ_file.c parser_new.c parse_args.c \
-				print_help.c \
+				parser_delete.c print_help.c \
 				ft_strnbrless.c ft_strnbrlesseq.c \
 				print_log.c
 

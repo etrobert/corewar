@@ -6,13 +6,11 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 16:49:41 by mverdier          #+#    #+#             */
-/*   Updated: 2017/02/18 16:11:32 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/18 16:43:57 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-
-#include "libft.h"
+#include "asm.h"
 
 int		asm_open(char *filename)
 {

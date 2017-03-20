@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 00:50:10 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 21:23:13 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:22:18 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int					apply_and(t_corewar *corewar, t_process *process)
 	t_op_params		params;
 	int				arg[2];
 
-	//INT OR UINT FOR ARG ??
 	if (corewar_parse_params(corewar, process, &params) == 0)
 	{
 		arg[0] = corewar_extract_param(corewar, process, &params, 0);
@@ -28,8 +27,7 @@ int					apply_and(t_corewar *corewar, t_process *process)
 				arg[0], arg[1], params.params[2].c,
 				process_get_reg(process, params.params[2].c));
 		//A verifier
-		if (process_get_reg(process, params.params[2].c) == 0)
-			process->carry = true;
+		process->carry = (process_get_reg(process, params.params[2].c) == 0);
 	}
 	corewar_update_process_pc(corewar, process, params.offset);
 	return (0);
