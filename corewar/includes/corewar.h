@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 17:56:11 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:12:27 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void				corewar_set_fd(t_corewar *corewar, int fd);
 void				corewar_set_verbosity(t_corewar *corewar, int verbosity);
 void				corewar_set_print_aff(t_corewar *corewar, bool print_aff);
 unsigned char		corewar_get_byte(const t_corewar *corewar,
-		unsigned int pos);;
+		unsigned int pos);
 
 t_champion			*corewar_get_byte_champ(t_corewar *corewar,
 		unsigned int pos);
