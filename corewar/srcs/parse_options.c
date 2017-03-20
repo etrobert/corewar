@@ -6,10 +6,11 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 08:24:20 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 16:42:35 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:25:34 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
 #include "libft.h"
 #include "champion.h"
 #include "corewar.h"
@@ -79,6 +80,20 @@ static int	process_dump(t_parser *parser)
 	return (0);
 }
 
+static int	process_file(t_parser *parser)
+{
+	if (parser->cur_arg == (parser->ac - 1))
+		return (-1);
+	++parser->cur_arg;
+	if ((parser->log_file = 
+		open(parser->av[parser->cur_arg], O_RDWR, O_CREAT, O_TRUNC)) < 0)
+	{
+		ft_dprintf(2, "Failed to open the logfile");
+		return (-1);
+	}
+	return (0);
+}
+
 int			parse_options(t_parser *parser, t_list **champs)
 {
 	if (ft_strcmp("-v", parser->av[parser->cur_arg]) == 0)
@@ -91,15 +106,17 @@ int			parse_options(t_parser *parser, t_list **champs)
 		parser->graphical = true;
 	else if (ft_strcmp("-a", parser->av[parser->cur_arg]) == 0)
 		parser->disp_aff = true;
+	else if (ft_strcmp("-f", parser->av[parser->cur_arg]) == 0)
+		return (process_file(parser));
+	else if (ft_strcmp("-c", parser->av[parser->cur_arg]) == 0)
+		parser->console = true;
 	else if (ft_strcmp("-h", parser->av[parser->cur_arg]) == 0)
 	{
 		print_help();
 		return (-1);
 	}
-	else
-	{
-		if (open_champ_file(parser, 0, false, champs) < 0)
+	else if (open_champ_file(parser, 0, false, champs) < 0)
 			return (-1);
-	}
+	cleanup_options(parser);
 	return (0);
 }

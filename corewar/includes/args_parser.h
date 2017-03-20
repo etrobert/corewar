@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:06:24 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/20 14:03:44 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:11:12 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ARGS_PARSER_H
 
 # include "libft.h"
+# include "corewar.h"
 
 # include <stdbool.h>
 # include <unistd.h>
@@ -21,19 +22,20 @@
 # define INT32_STR_MAX "2147483647"
 # define INT32_STR_MIN "-2147483648"
 
-//#define CW_VB_MAX 64 //This should not be here but it is needed right now
-//#define CW_VB_MAX_ADD ((CW_VB_MAX * 2) - 1) //This should not be here but it is needed right now
+# define VB_DEFAULT (CW_VB_LIVE | CW_VB_DEATHS | CW_VB_PRE_CYCLES | CW_VB_OP_PC)
 
 typedef struct	s_parser
 {
 	bool		graphical;
 	bool		disp_aff;
+	bool		console;
+	char		**av;
+	int			ac;
+	int			log_file;
 	int			verbose;
 	int			dump_cycle;
 	int			latest_id;
 	int			cur_arg;
-	int			ac;
-	char		**av;
 }				t_parser;
 
 t_parser		*parser_new(int ac, char **av);
@@ -44,5 +46,6 @@ int				parse_options(t_parser *parser, t_list **champs);
 void			print_help(void);
 bool			ft_strnbrless(char *nbr1, char *nbr2);
 bool			ft_strnbrlesseq(char *nbr1, char *nbr2);
+void			cleanup_options(t_parser *parser);
 
 #endif

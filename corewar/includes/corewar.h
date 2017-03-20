@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 13:42:42 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:17:39 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define CW_VB_OP_PC		0b1000000 // 64
 
 # define CW_VB_MAX			0b1000000
+# define CW_VB_MAX_ADD		((CW_VB_MAX * 2) - 1)
 
 # include <stdarg.h>
 # include "champion.h"
