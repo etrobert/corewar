@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_fork.c                                     :+:      :+:    :+:   */
+/*   champion_get_period_lives.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 12:20:04 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 16:53:22 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/20 16:49:10 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/20 16:50:21 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					corewar_fork(t_corewar *corewar,
-		t_process *parent, t_reg_type pc)
+unsigned int			champion_get_period_lives(t_champion *champ)
 {
-	t_process		*new_proc;
-	int				ret;
-
-	if (corewar == NULL || parent == NULL)
+	if (champ == NULL)
 		return (0);
-	if ((new_proc = process_cpy(parent)) == NULL)
-		return (-1);
-	new_proc->pc = pc;
-	new_proc->new_instr = true;
-	if ((ret = corewar_add_process(corewar, new_proc)) < 0)
-	{
-		process_delete(new_proc);
-		return (ret);
-	}
-	return (0);
+	return (champ->period_lives);
 }
