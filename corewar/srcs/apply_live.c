@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 11:48:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 16:38:01 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:49:42 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		apply_live_update(t_corewar *corewar, t_process *process,
 	++(corewar->nbr_live);
 	if ((champion = corewar_id_champ(corewar, id)) == NULL)
 		return ;
-	++(champion->period_lives);
+	champion_live(champion, corewar->cycle);
 	corewar->last_living_champ = champion;
 	corewar_print_live(corewar, id);
 }

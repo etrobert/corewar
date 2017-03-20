@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 12:24:22 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 16:48:33 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:47:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void			new_period(t_corewar *corewar)
 	it = ft_list_begin(corewar->champions);
 	while (!ft_list_it_end(corewar->champions, it))
 	{
-		((t_champion *)ft_list_it_get(corewar->champions, it))->period_lives = 0;
+		champion_new_period(
+				(t_champion *)ft_list_it_get(corewar->champions, it));
 		ft_list_it_inc(&it);
 	}
 }

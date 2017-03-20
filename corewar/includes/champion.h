@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 20:16:13 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 16:50:21 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:53:48 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct			s_champion
 	unsigned char		*code;
 	int					color;
 
+	t_cycle_type		last_live;
 	unsigned int		period_lives;
 }						t_champion;
 
@@ -41,5 +42,10 @@ void					champion_clear(t_champion *champion);
 
 t_id_type				champion_get_id(t_champion *champion);
 unsigned int			champion_get_period_lives(t_champion *champ);
+
+void					champion_live(t_champion *champ,
+		t_cycle_type cycle);
+void					champion_new_period(t_champion *champ);
+t_cycle_type			champion_get_last_live(t_champion *champ);
 
 #endif
