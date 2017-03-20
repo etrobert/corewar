@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/19 19:12:46 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/20 16:46:05 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 	corewar_set_verbosity(cw, parser->verbose);
+	corewar_set_print_aff(cw, parser->disp_aff);
 	if (play_corewar(cw, champs, parser) != 0)
 	{
 		ft_dprintf(2, "An error occured during the game\n");
