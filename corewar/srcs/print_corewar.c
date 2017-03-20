@@ -6,13 +6,12 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 20:45:43 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/20 15:22:31 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 
-//Degueu parcours de la liste de process pour chaque case
 static int			print_process(t_corewar *corewar, unsigned int pos,
 		t_visu *visu, unsigned char byte)
 {
@@ -62,7 +61,7 @@ static void			print_players(t_corewar *corewar, t_visu *visu,
 		champ = ft_list_it_get(champs, it);
 		mvwprintw(visu->infos, i, 2, "Player %d : ", champion_get_id(champ));
 		wattron(visu->infos, COLOR_PAIR(n + 1));
-		mvwprintw(visu->infos, i++, 21, "%s", champ->header.prog_name);
+		mvwprintw(visu->infos, i++, 28, "%s", champ->header.prog_name);
 		wattroff(visu->infos, COLOR_PAIR(n + 1));
 		mvwprintw(visu->infos, i++, 2, "Last live :               %d",
 				corewar->cycle);
