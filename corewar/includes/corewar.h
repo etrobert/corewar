@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 18:22:11 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/20 21:51:42 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ t_champion			*corewar_get_byte_champ(t_corewar *corewar,
 t_id_type			corewar_get_byte_id(t_corewar *corewar, unsigned int pos);
 t_cycle_type		corewar_get_cycle(t_corewar *corewar);
 t_cycle_type		corewar_get_cycles_to_die(t_corewar *corewar);
-t_size_type			t_corewar_get_process_nb(t_corewar *corewar);
+t_champion			*corewar_get_winner(t_corewar *corewar);
+t_size_type			corewar_get_process_nb(t_corewar *corewar);
 
 /*
 ** private: ====================================================================

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 19:24:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/20 19:26:06 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/20 21:53:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			print_infos(t_corewar *corewar, t_visu *visu,
 				1000000 / visu->speed);
 	mvwprintw(visu->infos, i++, 2, "cycle : %u", corewar_get_cycle(corewar));
 	mvwprintw(visu->infos, i++, 2, "process : %u",
-			t_corewar_get_process_nb(corewar));
+			corewar_get_process_nb(corewar));
 	mvwprintw(visu->infos, i++, 2, "cycle_to_die : %u",
 			corewar_get_cycles_to_die(corewar));
 	i++;

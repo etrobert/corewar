@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_get_process_nb.c                           :+:      :+:    :+:   */
+/*   corewar_get_winner.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/10 19:22:49 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 21:51:14 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/20 21:45:35 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/20 21:51:58 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-t_size_type			corewar_get_process_nb(t_corewar *corewar)
+t_champion			*corewar_get_winner(t_corewar *corewar)
 {
-	return (ft_list_size(corewar->process));
+	if (corewar == NULL)
+		return (NULL);
+	return (corewar->last_living_champ);
 }
