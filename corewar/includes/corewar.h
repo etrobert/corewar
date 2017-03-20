@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 18:12:27 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:22:11 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define CW_VB_MAX			0b1000000
 
-# define DUMP_WIDTH		32
+# define DUMP_WIDTH			32
 
 # include <stdarg.h>
 # include "champion.h"
