@@ -44,7 +44,7 @@ SRCNAM		=	main.c \
 				parse_options.c open_champ_file.c parser_new.c parse_args.c \
 				parser_delete.c print_help.c \
 				ft_strnbrless.c ft_strnbrlesseq.c \
-				print_log.c corewar_dump.c
+				print_log.c corewar_dump.c print_infos.c
 
 INCNAM		=	process.h corewar.h champion.h print.h args_parser.h
 

@@ -6,22 +6,14 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 19:02:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/17 15:20:56 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:28:26 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 
-static void	visu_init_colors()
+static void	visu_init_colors(void)
 {
-/*	init_color(DGREEN, 0, 700, 0);
-	init_color(LGREEN, 0, 1000, 0);
-	init_color(DRED, 700, 0, 0);
-	init_color(LRED, 1000, 0, 0);
-	init_color(DBLUE, 0, 0, 700);
-	init_color(LBLUE, 0, 0, 1000);
-	init_color(DORANGE, 1000, 700, 0);
-	init_color(LORANGE, 1000, 500, 0);*/
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_RED, COLOR_BLACK);
 	init_pair(3, COLOR_BLUE, COLOR_BLACK);
@@ -66,7 +58,7 @@ void		visu_init(t_visu *visu, t_list *champs)
 	noecho();
 	cbreak();
 	curs_set(0);
-	visu->speed = 1000;
+	visu->speed = 20000;
 	visu->pause = true;
 	nodelay(stdscr, 1);
 }
