@@ -9,7 +9,8 @@ INCDIR		=	includes
 SRCNAM		=	main.c \
 				champion_new.c champion_delete.c \
 				champion_init.c champion_clear.c \
-				champion_get_id.c \
+				champion_get_id.c champion_get_period_lives.c \
+				champion_live.c champion_new_period.c champion_get_last_live.c \
 				process_new.c process_init.c process_cpy.c process_delete.c \
 				process_get_reg.c process_set_reg.c process_valid_reg.c \
 				process_get_proc_id.c process_set_proc_id.c \
@@ -43,7 +44,7 @@ SRCNAM		=	main.c \
 				parse_options.c open_champ_file.c parser_new.c parse_args.c \
 				parser_delete.c print_help.c cleanup_options.c \
 				ft_strnbrless.c ft_strnbrlesseq.c \
-				print_log.c
+				print_log.c corewar_dump.c print_infos.c
 
 INCNAM		=	process.h corewar.h champion.h print.h args_parser.h
 

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 15:33:54 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 13:42:32 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:48:11 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct		s_line
 int					play_corewar(t_corewar *corewar, t_list *champs,
 		t_parser *parser);
 void				print_corewar(t_corewar *cw, t_visu *visu, t_list *champs);
+void				print_infos(t_corewar *corewar, t_visu *visu,
+		t_list *champs);
 void				print_process_fd(int fd, const t_process *process);
 void				print_champion(t_champion *champion);
 void				print_args_parser(t_parser *parser);

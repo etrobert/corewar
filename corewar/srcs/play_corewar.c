@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/19 18:54:14 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:26:08 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,23 @@ static void	sleep_game(t_visu *visu, struct timeval begin)
 		usleep(visu->speed);
 }
 
-static int	main_game_visu(t_corewar *corewar, t_visu *visu, t_list *champs)
+static int	main_game_visu(t_corewar *corewar, t_visu *visu, t_list *champs,
+		t_parser *parser)
 {
 	int				ret;
+	int				cycle;
 	int				play;
 	struct timeval	begin;
 
+	cycle = 0;
 	while ((play = play_events(visu)) == 0)
 	{
+		if (parser->dump_cycle > -1 && cycle == parser->dump_cycle)
+		{
+			visu_end(visu);
+			corewar_dump(corewar);
+			return (0);
+		}
 		gettimeofday(&begin, NULL);
 		print_round(visu, corewar, champs);
 		if (!corewar_end(corewar) && !visu->pause &&
@@ -69,17 +78,29 @@ static int	main_game_visu(t_corewar *corewar, t_visu *visu, t_list *champs)
 			return (ret);
 		}
 		sleep_game(visu, begin);
+		if (!visu->pause)
+			cycle++;
 	}
 	return (0);
 }
 
-static int	main_game(t_corewar *corewar)
+static int	main_game(t_corewar *corewar, t_parser *parser)
 {
 	int		ret;
+	int		cycle;
 
+	cycle = 0;
 	while (!corewar_end(corewar))
+	{
+		if (parser->dump_cycle > -1 && cycle == parser->dump_cycle)
+		{
+			corewar_dump(corewar);
+			return (0);
+		}
 		if ((ret = corewar_advance(corewar) < 0))
 			return (-1);
+		cycle++;
+	}
 	return (0);
 }
 
@@ -95,8 +116,8 @@ int			play_corewar(t_corewar *corewar, t_list *champs, t_parser *parser)
 		//		init_visu_log(&visu);
 		//		corewar_set_fd(corewar, visu.fds[1]);
 		corewar_set_fd(corewar, 2);
-		return (main_game_visu(corewar, &visu, champs));
+		return (main_game_visu(corewar, &visu, champs, parser));
 	}
 	else
-		return (main_game(corewar));
+		return (main_game(corewar, parser));
 }

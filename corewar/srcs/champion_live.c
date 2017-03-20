@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_print_cycles_to_die.c                      :+:      :+:    :+:   */
+/*   champion_live.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 18:02:50 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 20:42:50 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/20 18:31:58 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/20 18:47:04 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "champion.h"
 
-int					corewar_print_cycles_to_die(t_corewar *corewar)
+void					champion_live(t_champion *champ,
+		t_cycle_type cycle)
 {
-	if ((corewar->verbosity & CW_VB_CYCLES) != 0)
-		return (0);
-	return (corewar_print_log(corewar, "Cycle to die is now %u\n",
-				corewar->cycles_to_die));
+	if (champ == NULL)
+		return ;
+	++(champ->period_lives);
+	champ->last_live = cycle;
 }

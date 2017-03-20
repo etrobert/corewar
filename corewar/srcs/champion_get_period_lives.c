@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_print_cycles_to_die.c                      :+:      :+:    :+:   */
+/*   champion_get_period_lives.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 18:02:50 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 20:42:50 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/20 16:49:10 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/20 16:50:21 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					corewar_print_cycles_to_die(t_corewar *corewar)
+unsigned int			champion_get_period_lives(t_champion *champ)
 {
-	if ((corewar->verbosity & CW_VB_CYCLES) != 0)
+	if (champ == NULL)
 		return (0);
-	return (corewar_print_log(corewar, "Cycle to die is now %u\n",
-				corewar->cycles_to_die));
+	return (champ->period_lives);
 }

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:58:58 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/13 15:00:02 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:57:27 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	visu_end(t_visu *visu)
 {
 	free(visu->board);
 	free(visu->infos);
-//	free(visu->logs);
+	free(visu->log);
 	endwin();
 }

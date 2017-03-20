@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 16:17:39 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/20 20:49:12 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define CW_VB_MAX			0b1000000
 # define CW_VB_MAX_ADD		((CW_VB_MAX * 2) - 1)
+
+# define DUMP_WIDTH			32
 
 # include <stdarg.h>
 # include "champion.h"
@@ -78,12 +80,13 @@ void				corewar_delete(t_corewar *corewar);
 
 int					corewar_advance(t_corewar *corewar);
 bool				corewar_end(const t_corewar *corewar);
+void				corewar_dump(const t_corewar *corewar);
 
 void				corewar_set_fd(t_corewar *corewar, int fd);
 void				corewar_set_verbosity(t_corewar *corewar, int verbosity);
 void				corewar_set_print_aff(t_corewar *corewar, bool print_aff);
 unsigned char		corewar_get_byte(const t_corewar *corewar,
-		unsigned int pos);;
+		unsigned int pos);
 
 t_champion			*corewar_get_byte_champ(t_corewar *corewar,
 		unsigned int pos);

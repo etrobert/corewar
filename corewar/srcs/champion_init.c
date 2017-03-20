@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 19:33:02 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/07 16:43:45 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/20 18:31:42 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int					champion_init(t_champion *champ, t_id_type id, int fd)
 	if ((ret = champion_init_header(champ, fd)) != 0)
 		return (ret);
 	champ->id = id;
+	champ->period_lives = 0;
+	champ->last_live = 0;
 	if ((champ->code = (unsigned char *)malloc(champ->header.prog_size))
 			== NULL)
 		return (-1);
