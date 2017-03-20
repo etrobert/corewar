@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 19:02:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/20 18:57:05 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:28:26 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		visu_init(t_visu *visu, t_list *champs)
 	noecho();
 	cbreak();
 	curs_set(0);
-	visu->speed = 1000;
+	visu->speed = 20000;
 	visu->pause = true;
 	nodelay(stdscr, 1);
 }
