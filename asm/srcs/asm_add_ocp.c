@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_op_by_name.c                                   :+:      :+:    :+:   */
+/*   asm_add_ocp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 11:02:06 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/18 16:38:22 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/11 16:30:16 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/11 16:30:54 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "asm.h"
 
-t_op				*get_op_by_name(const char *name)
+void		asm_add_ocp(t_bytes **bytes_instruct, unsigned char code)
 {
-	int		i;
+	t_bytes		*bytes;
 
-	i = 0;
-	while (g_op_tab[i].name != NULL)
+	bytes = *bytes_instruct;
+	if (bytes->op_tab->ocp == true)
 	{
-		if (ft_strcmp(g_op_tab[i].name, name) == 0)
-			return (g_op_tab + i);
-		++i;
+		bytes->ocp += code;
+		bytes->ocp <<= 2;
+		bytes->ocp_size = 1;
 	}
-	return (NULL);
 }

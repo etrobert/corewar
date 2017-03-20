@@ -6,13 +6,12 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/18 16:08:51 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/20 13:20:20 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 
-//Degueu parcours de la liste de process pour chaque case
 static int			print_process(t_corewar *corewar, unsigned int pos,
 		t_visu *visu, unsigned char byte)
 {

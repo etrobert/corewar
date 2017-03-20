@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_open.c                                         :+:      :+:    :+:   */
+/*   asm_free_asm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/13 16:49:41 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/18 16:43:57 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/09 13:20:56 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/18 17:53:36 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		asm_open(char *filename)
+static void	asm_free_labels_name(void *label)
 {
-	int		fd;
+	t_labels	*tmp;
 
-	if ((fd = open(filename, O_RDONLY)) < 0)
-	{
-		ft_dprintf(2, "Error while trying to open %s\n", filename);
-		return (-1);
-	}
-	return (fd);
+	tmp = label;
+	free(tmp->name);
+	free(tmp);
+}
+
+void		asm_free_asm(t_asm *m_asm)
+{
+	asm_free_file(m_asm->file);
+	free(m_asm->header);
+	ft_list_apply(m_asm->labels, &asm_free_labels_name);
+	ft_list_delete(m_asm->labels);
+	ft_list_apply(m_asm->instructs, &free);
+	ft_list_delete(m_asm->instructs);
 }

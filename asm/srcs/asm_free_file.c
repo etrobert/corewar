@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_op_by_name.c                                   :+:      :+:    :+:   */
+/*   asm_free_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 11:02:06 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/18 16:38:22 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/18 17:04:49 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/18 17:06:01 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "asm.h"
 
-t_op				*get_op_by_name(const char *name)
+void		asm_free_file(t_list *file)
 {
-	int		i;
-
-	i = 0;
-	while (g_op_tab[i].name != NULL)
-	{
-		if (ft_strcmp(g_op_tab[i].name, name) == 0)
-			return (g_op_tab + i);
-		++i;
-	}
-	return (NULL);
+	ft_list_apply(file, &free);
+	ft_list_delete(file);
 }

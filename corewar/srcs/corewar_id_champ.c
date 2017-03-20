@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_kill_process.c                             :+:      :+:    :+:   */
+/*   corewar_id_champ.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/21 16:16:52 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/18 16:02:03 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/17 20:27:29 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/17 21:09:56 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void				corewar_kill_process(t_corewar *corewar)
+t_champion			*corewar_id_champ(t_corewar *corewar, t_id_type id)
 {
 	t_list_it		it;
-	t_process		*process;
+	t_champion		*champ;
 
-	it = ft_list_begin(corewar->process);
-	while (!ft_list_it_end(corewar->process, it))
+	it = ft_list_begin(corewar->champions);
+	while (!ft_list_it_end(corewar->champions, it))
 	{
-		process = (t_process *)(ft_list_it_get(corewar->process, it));
-		if (process->last_live <= corewar->last_check)
-		{
-			corewar_print_death(corewar, process);
-			process_delete(process);
-			it = ft_list_erase(corewar->process, it);
-		}
+		champ = (t_champion *)ft_list_it_get(corewar->champions, it);
+		if (champ->intern_id == id)
+			return (champ);
 		ft_list_it_inc(&it);
 	}
+//	corewar_print_log(corewar, "BITE not found %d\n", id);
+	return (NULL);
 }

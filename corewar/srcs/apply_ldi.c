@@ -6,13 +6,12 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 16:46:08 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 19:04:59 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/17 19:22:04 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-//doesnt change carry
 int					apply_ldi(t_corewar *corewar, t_process *process)
 {
 	int				arg[2];

@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_op_by_name.c                                   :+:      :+:    :+:   */
+/*   corewar_get_byte_champ.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/17 11:02:06 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/18 16:38:22 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/17 20:17:41 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/17 20:31:18 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "corewar.h"
 
-t_op				*get_op_by_name(const char *name)
+t_champion			*corewar_get_byte_champ(t_corewar *corewar,
+		unsigned int pos)
 {
-	int		i;
-
-	i = 0;
-	while (g_op_tab[i].name != NULL)
-	{
-		if (ft_strcmp(g_op_tab[i].name, name) == 0)
-			return (g_op_tab + i);
-		++i;
-	}
-	return (NULL);
+	if (corewar == NULL)
+		return (NULL);
+	return (corewar_id_champ(corewar, corewar_get_byte_id(corewar, pos)));
 }

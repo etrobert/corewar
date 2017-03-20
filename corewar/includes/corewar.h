@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 18:58:27 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/17 21:00:14 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ typedef struct		s_corewar
 	t_cycle_type	clear_checks;
 
 	unsigned int	nbr_live;
-	t_id_type		last_living_champ;
+	t_champion		*last_living_champ;
 
 	int				fd;
 	int				verbosity;
 	bool			print_aff;
+
+	t_list			*champions;
 }					t_corewar;
 
 typedef union		u_param
@@ -68,8 +70,8 @@ typedef int			(*t_f_cw_op)(t_corewar *, t_process *);
 ** public: =====================================================================
 */
 
-t_corewar			*corewar_new(const t_list *champions, int fd);
-int					corewar_init(t_corewar *corewar, const t_list *champions,
+t_corewar			*corewar_new(t_list *champions, int fd);
+int					corewar_init(t_corewar *corewar, t_list *champions,
 		int fd);
 void				corewar_delete(t_corewar *corewar);
 
@@ -82,6 +84,8 @@ void				corewar_set_print_aff(t_corewar *corewar, bool print_aff);
 unsigned char		corewar_get_byte(const t_corewar *corewar,
 		unsigned int pos);;
 
+t_champion			*corewar_get_byte_champ(t_corewar *corewar,
+		unsigned int pos);
 t_id_type			corewar_get_byte_id(t_corewar *corewar, unsigned int pos);
 t_cycle_type		corewar_get_cycle(t_corewar *corewar);
 t_cycle_type		corewar_get_cycles_to_die(t_corewar *corewar);
@@ -90,6 +94,8 @@ t_size_type			t_corewar_get_process_nb(t_corewar *corewar);
 /*
 ** private: ====================================================================
 */
+
+t_champion			*corewar_id_champ(t_corewar *corewar, t_id_type id);
 
 /*
 ** corewar_parse_params checks if the register given is not correct

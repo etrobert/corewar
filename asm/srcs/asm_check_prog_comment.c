@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_get_prog_comment.c                             :+:      :+:    :+:   */
+/*   asm_check_prog_comment.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/14 17:03:29 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/19 17:17:53 by mverdier         ###   ########.fr       */
+/*   Created: 2017/03/19 17:19:49 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/19 17:20:23 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	asm_check_comment_syntax(char *str, char **split)
 	return (1);
 }
 
-int			asm_get_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
+int			asm_check_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
 {
 	int		len;
 	char	*temp;
@@ -96,8 +96,6 @@ int			asm_get_prog_comment(char *str, t_asm *m_asm, t_list_it *it)
 		return (0);
 	if (!asm_check_comment_len(str, &temp, &len))
 		return (MAX_LEN);
-	ft_memmove(m_asm->header->comment, ft_strchr(str, '"') + 1, len);
-	m_asm->comment = !m_asm->comment;
 	free(temp);
 	return (COMMENT);
 }

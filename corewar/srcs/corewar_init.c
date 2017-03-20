@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/16 19:01:26 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/18 16:23:40 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int			add_fresh_process(t_corewar *corewar,
 	if ((process = process_new()) == NULL)
 		return (-1);
 	process->pc = pc;
-	process->regs[1] = r1;
+	process_set_reg(process, 1, r1);
+//	process->regs[1] = r1;
 	if ((ret = corewar_add_process(corewar, process)) < 0)
 	{
 		process_delete(process);
@@ -31,19 +32,19 @@ static int			add_fresh_process(t_corewar *corewar,
 }
 
 static int			load_one_champion(t_corewar *corewar,
-		const t_champion *champ, unsigned int pc, t_id_type id)
+		t_champion *champ, unsigned int pc, t_id_type id)
 {
 	corewar_write(corewar, (t_memory){champ->code, champ->header.prog_size},
 			pc, id);
 //	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
 	if (add_fresh_process(corewar, pc, id) == -1)
 		return (-1);
-//	ckwaca
-//	corewar->last_living_champ = champ->id;
-	return (FT_GOOD);
+	champ->intern_id = id;
+	corewar->last_living_champ = champ;
+	return (0);
 }
 
-static int			load_champions(t_corewar *corewar, const t_list *champions)
+static int			load_champions(t_corewar *corewar, t_list *champions)
 {
 	t_list_it		it;
 	t_champion		*champ;
@@ -61,10 +62,10 @@ static int			load_champions(t_corewar *corewar, const t_list *champions)
 		ft_list_it_inc(&it);
 		++id;
 	}
-	return (FT_GOOD);
+	return (0);
 }
 
-int					corewar_init(t_corewar *corewar, const t_list *champions,
+int					corewar_init(t_corewar *corewar, t_list *champions,
 		int fd)
 {
 	int				ret;
@@ -75,8 +76,10 @@ int					corewar_init(t_corewar *corewar, const t_list *champions,
 		return (-1);
 	if ((corewar->memory = ft_cbuff_new(MEM_SIZE)) == NULL)
 		return (-1);
+	ft_cbuff_clean(corewar->memory);
 	if ((corewar->memory_id = ft_cbuff_new(MEM_SIZE)) == NULL)
 		return (-1);
+	ft_cbuff_clean(corewar->memory_id);
 	corewar->last_proc_id = 1;
 	if ((ret = load_champions(corewar, champions)) != FT_GOOD)
 		return (ret);
@@ -88,5 +91,6 @@ int					corewar_init(t_corewar *corewar, const t_list *champions,
 	corewar->fd = fd;
 	corewar->verbosity = CW_VB_LIVE | CW_VB_OP;// | CW_VB_CYCLES;
 	corewar->print_aff = true;
+	corewar->champions = champions;
 	return (FT_GOOD);
 }
