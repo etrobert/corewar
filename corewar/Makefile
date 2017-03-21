@@ -6,7 +6,7 @@
 #    By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 12:08:06 by etrobert          #+#    #+#              #
-#    Updated: 2017/03/21 14:44:45 by mverdier         ###   ########.fr        #
+#    Updated: 2017/03/21 15:11:19 by mverdier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ SRCNAM		=	main.c \
 				print_log.c corewar_dump.c print_infos.c init_visu_log.c \
 				main_game_visu.c
 
-INCNAM		=	process.h corewar.h champion.h print.h args_parser.h
+INCNAM		=	process.h corewar.h champion.h print.h args_parser.h play.h
 
 CC			=	clang
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/
