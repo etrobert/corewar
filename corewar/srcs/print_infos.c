@@ -6,11 +6,11 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 19:24:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/20 21:53:25 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:01:28 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
+#include "play.h"
 
 static void		print_name(t_visu *visu, t_champion *champ, int *i)
 {
