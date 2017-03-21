@@ -6,11 +6,11 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:58:58 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/20 18:57:27 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:01:03 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
+#include "play.h"
 
 void	visu_end(t_visu *visu)
 {

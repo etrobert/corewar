@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   apply_lfork.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 17:25:56 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/17 17:27:47 by etrobert         ###   ########.fr       */

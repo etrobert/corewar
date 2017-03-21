@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_print_cycle.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 17:50:39 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 18:37:37 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 11:22:59 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					corewar_print_cycle(t_corewar *corewar)
+int					corewar_print_cycle(const t_corewar *corewar)
 {
 	if ((corewar->verbosity & CW_VB_CYCLES) == 0)
 		return (0);

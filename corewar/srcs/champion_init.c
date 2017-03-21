@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   champion_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 19:33:02 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/20 18:31:42 by etrobert         ###   ########.fr       */

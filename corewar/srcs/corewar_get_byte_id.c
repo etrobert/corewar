@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_get_byte_id.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 14:26:10 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/09 17:08:36 by etrobert         ###   ########.fr       */

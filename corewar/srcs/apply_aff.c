@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   apply_aff.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 21:13:06 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/20 13:41:30 by tbeldame         ###   ########.fr       */

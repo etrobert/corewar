@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   apply_lldi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 16:46:00 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/17 16:58:23 by etrobert         ###   ########.fr       */

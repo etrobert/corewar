@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_print_live.c                               :+:      :+:    :+:   */
+/*   print_champs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 17:22:23 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/21 11:22:43 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/21 15:05:34 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/21 16:14:53 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "print.h"
 
-int					corewar_print_live(const t_corewar *corewar,
-		unsigned int id)
+void				print_champs(t_list *champs)
 {
+	t_list_it		it;
 	t_champion		*champ;
 
-	if ((corewar->verbosity & CW_VB_LIVE) == 0)
-		return (0);
-	champ = corewar_id_champ(corewar, id);
-	if (champ == NULL)
-		return (0);
-	return (corewar_print_log(corewar,
-				"un processus dit que le joueur %d(%s) est en vie\n",
-				champ->id, champ->header.prog_name));
+	it = ft_list_begin(champs);
+	ft_printf("%d champions loaded : \n", ft_list_size(champs));
+	while (!ft_list_it_end(champs, it))
+	{
+		champ = ft_list_it_get(champs, it);
+		ft_printf("  - Player %u, \"%s\", (\"%s\"), weighs %u\n", champ->id,
+				champ->header.prog_name, champ->header.comment,
+				champ->header.prog_size);
+		ft_list_it_inc(&it);
+	}
 }

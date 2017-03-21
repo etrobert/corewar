@@ -85,3 +85,5 @@ ATTENTION COMPLEXE : Si un processus effectue une instrucion et que dans un meme
 Reponse : apres
 
 le carry aussi est copie lors dun fork
+
+apply_sti : verifier overflow

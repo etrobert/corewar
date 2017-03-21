@@ -6,30 +6,11 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 16:41:48 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:48:35 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
-
-/*static int	update_log(t_visu *visu)
-{
-	int			i;
-	t_list_it	it;
-	char		*line_str;
-
-	i = 1;
-	it = ft_list_begin(visu->log_lines);
-	while (!ft_list_it_end(visu->log_lines, it))
-	{
-		line_str = (char*)ft_list_it_get(visu->log_lines, it);
-		if (mvwprintw(visu->log, i, 2, "%s", line_str) == ERR)
-			return (-1);
-		ft_list_it_inc(&it);
-		++i;
-	}
-	return (0);
-}*/
+#include "play.h"
 
 static int	update_log(t_visu *visu, char **lines)
 {
@@ -78,32 +59,6 @@ static int	get_buf(char **log_buf, int fd)
 	return (0);
 }
 
-/*static int	add_log_lines(t_visu *visu, char **lines)
-{
-	int			i;
-
-	i = 0;
-	while (lines[i] != NULL)
-	{
-		if ((int)ft_list_size(visu->log_lines) >= visu->log_height)
-		{
-			free(ft_list_front(visu->log_lines));
-			ft_list_pop_front(visu->log_lines);
-		}
-		if (ft_list_push_back(visu->log_lines, lines[i]) == -1)
-		{
-			while (lines[i] != NULL)
-			{
-				free(lines[i]);
-				++i;
-			}
-			return (-1);
-		}
-		++i;
-	}
-	return (0);
-}*/
-
 int			print_log(t_visu *visu)
 {
 	char	*log_buf;
@@ -114,11 +69,6 @@ int			print_log(t_visu *visu)
 		return (-1);
 	log_lines = ft_strsplit(log_buf, '\n');
 	free(log_buf);
-/*	if (add_log_lines(visu, log_lines) == -1)
-	{
-		ft_list_apply(visu->log_lines, &free);
-		return (-1);
-	}*/
 	if (update_log(visu, log_lines) == -1)
 		return (-1);
 	free(log_lines);

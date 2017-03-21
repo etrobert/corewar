@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_kill_process.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 16:16:52 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/20 17:03:13 by etrobert         ###   ########.fr       */

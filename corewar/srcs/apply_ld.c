@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   apply_ld.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:41:20 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/20 13:39:53 by tbeldame         ###   ########.fr       */

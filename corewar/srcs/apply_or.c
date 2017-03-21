@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   apply_or.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 14:51:21 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/17 17:11:53 by etrobert         ###   ########.fr       */

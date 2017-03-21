@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_write.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 22:13:49 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/14 21:32:49 by etrobert         ###   ########.fr       */

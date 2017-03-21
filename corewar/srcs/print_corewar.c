@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_corewar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:26:00 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 19:26:09 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:05:33 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
+#include "play.h"
 
 static int		print_process(t_corewar *corewar, unsigned int pos,
 		t_visu *visu, unsigned char byte)
@@ -38,8 +38,6 @@ static int		print_process(t_corewar *corewar, unsigned int pos,
 	}
 	return (0);
 }
-
-
 
 static void		print_byte(t_corewar *corewar, unsigned int pos,
 		t_visu *visu)

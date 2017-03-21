@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar_dump.c                                     :+:      :+:    :+:   */
+/*   dump_corewar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/20 16:46:18 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/20 18:11:01 by mverdier         ###   ########.fr       */
+/*   Created: 2017/03/21 15:24:38 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/21 15:24:43 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "print.h"
 
 static void	print_byte(const t_corewar *corewar, unsigned int pos)
 {
@@ -20,7 +20,7 @@ static void	print_byte(const t_corewar *corewar, unsigned int pos)
 	ft_printf(" %.2x", byte);
 }
 
-void		corewar_dump(const t_corewar *corewar)
+void		dump_corewar(const t_corewar *corewar)
 {
 	unsigned int	i;
 	unsigned int	j;

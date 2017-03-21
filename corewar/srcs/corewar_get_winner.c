@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_valid_reg.c                                :+:      :+:    :+:   */
+/*   corewar_get_winner.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/11 20:30:34 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/11 20:35:29 by etrobert         ###   ########.fr       */
+/*   Created: 2017/03/20 21:45:35 by etrobert          #+#    #+#             */
+/*   Updated: 2017/03/20 21:51:58 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include "corewar.h"
 
-bool				process_valid_reg(unsigned char reg)
+t_champion			*corewar_get_winner(t_corewar *corewar)
 {
-	return (reg >= 1 && reg <= REG_NUMBER);
+	if (corewar == NULL)
+		return (NULL);
+	return (corewar->last_living_champ);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_extract_params.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 19:40:42 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 19:22:51 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:14:29 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static unsigned int	corewar_extract_param_ind(const t_corewar *corewar,
 	unsigned int	val;
 	size_t			pos;
 
-	//modulo ??
 	if (process->current_op->long_op)
 		pos = process->pc + (short)(params->params[id].s);
 	else

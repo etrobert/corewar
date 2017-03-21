@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/03/21 12:08:06 by etrobert          #+#    #+#              #
+#    Updated: 2017/03/21 15:40:01 by mverdier         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		=	corewar
 
 COLOR		=	\033[32m
@@ -6,7 +18,7 @@ COLOR_RESET	=	\033[0m
 SRCDIR		=	srcs
 INCDIR		=	includes
 
-SRCNAM		=	main.c \
+SRCNAM		=	main.c main_corewar.c \
 				champion_new.c champion_delete.c \
 				champion_init.c champion_clear.c \
 				champion_get_id.c champion_get_period_lives.c \
@@ -15,15 +27,15 @@ SRCNAM		=	main.c \
 				process_get_reg.c process_set_reg.c process_valid_reg.c \
 				process_get_proc_id.c process_set_proc_id.c \
 				process_get_pc.c visu_init.c visu_end.c \
-				print_corewar.c play_corewar.c play_events.c\
-				print_process_fd.c print_champion.c print_args_parser.c \
+				print_corewar.c play_corewar.c play_events.c \
+				print_process_fd.c print_champion.c print_champs.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
 				corewar_set_verbosity.c corewar_set_print_aff.c \
 				corewar_get_byte.c corewar_get_byte_id.c \
 				corewar_get_byte_champ.c \
 				corewar_get_cycle.c corewar_get_cycles_to_die.c \
-				corewar_get_process_nb.c \
+				corewar_get_process_nb.c corewar_get_winner.c \
 				corewar_id_champ.c \
 				corewar_write.c corewar_read.c \
 				corewar_parse_params.c corewar_extract_param.c \
@@ -44,9 +56,10 @@ SRCNAM		=	main.c \
 				parse_options.c open_champ_file.c parser_new.c parse_args.c \
 				parser_delete.c print_help.c cleanup_options.c \
 				ft_strnbrless.c ft_strnbrlesseq.c \
-				print_log.c corewar_dump.c print_infos.c
+				print_log.c dump_corewar.c print_infos.c init_visu_log.c \
+				main_game_visu.c
 
-INCNAM		=	process.h corewar.h champion.h print.h args_parser.h
+INCNAM		=	process.h corewar.h champion.h print.h args_parser.h play.h
 
 CC			=	clang
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -I ../op/

@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_print_op.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 21:06:57 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 18:12:30 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 11:22:15 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int				corewar_print_op(t_corewar *corewar, t_process *process,
-		char *fmt, ...)
+int				corewar_print_op(const t_corewar *corewar,
+		const t_process *process, char *fmt, ...)
 {
 	va_list			ap;
 	int				n;
 	char			*str;
 
-	//On peut ne pas appeler va_arg ?
 	if ((corewar->verbosity & CW_VB_OP) == 0)
 		return (0);
 	va_start(ap, fmt);

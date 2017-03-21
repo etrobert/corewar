@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   apply_live.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 11:48:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 18:49:42 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:10:46 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		apply_live_update(t_corewar *corewar, t_process *process,
+static void			apply_live_update(t_corewar *corewar, t_process *process,
 		unsigned int id)
 {
 	t_champion		*champion;

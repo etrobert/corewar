@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   champion_get_last_live.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 18:51:47 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/20 18:53:48 by etrobert         ###   ########.fr       */
