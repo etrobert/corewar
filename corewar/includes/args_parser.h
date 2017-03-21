@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:06:24 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/20 20:11:12 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/20 21:54:44 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct	s_parser
 	bool		disp_aff;
 	bool		console;
 	char		**av;
+	char		*log_file;
 	int			ac;
-	int			log_file;
 	int			verbose;
 	int			dump_cycle;
 	int			latest_id;

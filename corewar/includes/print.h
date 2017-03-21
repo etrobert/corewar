@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 15:33:54 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 20:48:11 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:23:19 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_visu
 	WINDOW			*board;
 	WINDOW			*infos;
 	WINDOW			*log;
+	WINDOW			*log_border;
 	int				line;
 	int				col;
 	bool			pause;
@@ -39,7 +40,7 @@ typedef struct		s_visu
 	int				fds[2];
 	int				log_col;
 	int				cur_log;
-	t_list			*log_lines;
+	//t_list			*log_lines;
 }					t_visu;
 
 typedef struct		s_line

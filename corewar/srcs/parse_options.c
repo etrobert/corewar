@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 08:24:20 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/20 20:25:34 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:08:37 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ static int	process_champ_num(t_parser *parser, t_list **champs)
 static int	process_dump(t_parser *parser)
 {
 	if (parser->cur_arg == (parser->ac - 1))
+	{
+		ft_dprintf(2, "Invalid cycle number, use -h for usage\n");
 		return (-1);
+	}
 	++parser->cur_arg;
 	if (ft_str_test_chars(parser->av[parser->cur_arg], &ft_isdigit) &&
 			ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX))
@@ -85,12 +88,7 @@ static int	process_file(t_parser *parser)
 	if (parser->cur_arg == (parser->ac - 1))
 		return (-1);
 	++parser->cur_arg;
-	if ((parser->log_file = 
-		open(parser->av[parser->cur_arg], O_RDWR, O_CREAT, O_TRUNC)) < 0)
-	{
-		ft_dprintf(2, "Failed to open the logfile");
-		return (-1);
-	}
+	parser->log_file = parser->av[parser->cur_arg];
 	return (0);
 }
 

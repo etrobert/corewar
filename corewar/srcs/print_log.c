@@ -6,13 +6,13 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/20 13:39:25 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:41:48 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 
-static int	update_log(t_visu *visu)
+/*static int	update_log(t_visu *visu)
 {
 	int			i;
 	t_list_it	it;
@@ -26,6 +26,28 @@ static int	update_log(t_visu *visu)
 		if (mvwprintw(visu->log, i, 2, "%s", line_str) == ERR)
 			return (-1);
 		ft_list_it_inc(&it);
+		++i;
+	}
+	return (0);
+}*/
+
+static int	update_log(t_visu *visu, char **lines)
+{
+	int			i;
+
+	i = 0;
+	while (lines[i] != NULL)
+	{
+		if (visu->cur_log > visu->log_height)
+		{
+			wscrl(visu->log, 1);
+			//scroll
+		}
+		else
+			++visu->cur_log;
+		if (mvwprintw(visu->log, visu->cur_log, 0, "%s", lines[i]) == ERR)
+			return (-1);
+		free(lines[i]);
 		++i;
 	}
 	return (0);
@@ -56,7 +78,7 @@ static int	get_buf(char **log_buf, int fd)
 	return (0);
 }
 
-static int	add_log_lines(t_visu *visu, char **lines)
+/*static int	add_log_lines(t_visu *visu, char **lines)
 {
 	int			i;
 
@@ -80,7 +102,7 @@ static int	add_log_lines(t_visu *visu, char **lines)
 		++i;
 	}
 	return (0);
-}
+}*/
 
 int			print_log(t_visu *visu)
 {
@@ -92,12 +114,12 @@ int			print_log(t_visu *visu)
 		return (-1);
 	log_lines = ft_strsplit(log_buf, '\n');
 	free(log_buf);
-	if (add_log_lines(visu, log_lines) == -1)
+/*	if (add_log_lines(visu, log_lines) == -1)
 	{
 		ft_list_apply(visu->log_lines, &free);
 		return (-1);
-	}
-	if (update_log(visu) == -1)
+	}*/
+	if (update_log(visu, log_lines) == -1)
 		return (-1);
 	free(log_lines);
 	return (0);

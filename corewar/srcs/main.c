@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 18:50:20 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 16:46:05 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/20 21:38:06 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,11 @@ int main(int argc, char **argv)
 	if (parse_args(parser, &champs) < 0)
 	{
 		free_params(champs, cw, parser);
-		//		parser_delete(parser);
 		return (-1);
 	}
 	if (champs == NULL || ft_list_size(champs) < 1)
 	{
 		ft_dprintf(2, "No champions loaded\n");
-		/*		parser_delete(parser);
-				ft_list_apply(champs, (t_f_apply)&champion_delete);
-				ft_list_delete(champs); */
 		free_params(champs, cw, parser);
 		return (-1);
 	}
@@ -67,11 +63,6 @@ int main(int argc, char **argv)
 	if ((cw = corewar_new(champs, 2)) == NULL)
 	{
 		ft_dprintf(2, "Error creating corewar\n");
-		/*
-		   parser_delete(parser);
-		   ft_list_apply(champs, (t_f_apply)&champion_delete);
-		   ft_list_delete(champs);
-		   */
 		free_params(champs, cw, parser);
 		return (-1);
 	}
@@ -80,18 +71,9 @@ int main(int argc, char **argv)
 	if (play_corewar(cw, champs, parser) != 0)
 	{
 		ft_dprintf(2, "An error occured during the game\n");
-		/*		parser_delete(parser);
-				ft_list_apply(champs, (t_f_apply)&champion_delete);
-				ft_list_delete(champs); */
 		free_params(champs, cw, parser);
 		return (-1);
 	}
 	free_params(champs, cw, parser);
-	/*
-	   parser_delete(parser);
-	   ft_list_apply(champs, (t_f_apply)&champion_delete);
-	   ft_list_delete(champs);
-	   corewar_delete(cw);
-	   */
 	return (0);
 }

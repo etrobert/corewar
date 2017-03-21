@@ -6,38 +6,53 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/20 19:26:08 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:42:39 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 
-int			init_visu_log(t_visu *visu)
+int			init_visu_log(t_visu *visu, t_parser *parser)
 {
 	int		flags;
 
-	if (pipe(visu->fds) != 0)
-		return (-1);
-	flags = fcntl(visu->fds[0], F_GETFL, 0);
-	fcntl(visu->fds[0], F_SETFL, flags | O_NONBLOCK);
-	if ((visu->log_lines = ft_list_new()) == NULL)
+	visu->cur_log = -1;
+	if (parser->log_file != NULL)
+	{
+		if ((visu->fds[1] = open(parser->av[parser->cur_arg],
+			O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) < 0)
+			return (-1);
+		if ((visu->fds[0] = open(parser->av[parser->cur_arg], O_RDONLY)) < 0)
+			return (-1);
+	}
+	else
+	{
+		if (pipe(visu->fds) != 0)
+			return (-1);
+		flags = fcntl(visu->fds[0], F_GETFL, 0);
+		fcntl(visu->fds[0], F_SETFL, flags | O_NONBLOCK);
+	}
+	/*if ((visu->log_lines = ft_list_new()) == NULL)
 	{
 		close(visu->fds[0]);
 		close(visu->fds[1]);
 		return (-1);
-	}
+	}*/
 	return (0);
 }
 
 static void	print_round(t_visu *visu, t_corewar *corewar, t_list *champs)
 {
-	erase();
+	werase(visu->board);
+	werase(visu->infos);
 	box(visu->board, ACS_VLINE, ACS_HLINE);
 	box(visu->infos, ACS_VLINE, ACS_HLINE);
-	box(visu->log, ACS_VLINE, ACS_HLINE);
 	print_corewar(corewar, visu, champs);
-//	print_log(visu);
-	refresh();
+	print_log(visu);
+	wrefresh(visu->board);
+	wrefresh(visu->infos);
+	wrefresh(visu->log);
 }
 
 static void	sleep_game(t_visu *visu, struct timeval begin)
@@ -113,9 +128,9 @@ int			play_corewar(t_corewar *corewar, t_list *champs, t_parser *parser)
 	if (parser->graphical)
 	{
 		visu_init(&visu, champs);
-		//		init_visu_log(&visu);
-		//		corewar_set_fd(corewar, visu.fds[1]);
-		corewar_set_fd(corewar, 2);
+		init_visu_log(&visu, parser);
+		corewar_set_fd(corewar, visu.fds[1]);
+		//corewar_set_fd(corewar, 2);
 		return (main_game_visu(corewar, &visu, champs, parser));
 	}
 	else
