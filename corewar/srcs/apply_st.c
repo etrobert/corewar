@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   apply_st.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 19:47:11 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/11 22:11:20 by etrobert         ###   ########.fr       */

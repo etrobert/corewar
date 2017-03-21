@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   champion_new_period.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 18:43:52 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/20 18:47:43 by etrobert         ###   ########.fr       */

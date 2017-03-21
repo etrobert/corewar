@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_set_print_aff.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 15:44:30 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/16 15:45:35 by etrobert         ###   ########.fr       */

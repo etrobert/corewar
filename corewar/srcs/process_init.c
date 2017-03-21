@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   process_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 19:44:33 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/07 16:42:27 by etrobert         ###   ########.fr       */

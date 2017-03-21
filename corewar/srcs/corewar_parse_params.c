@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_parse_params.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:37:16 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/21 11:07:12 by etrobert         ###   ########.fr       */

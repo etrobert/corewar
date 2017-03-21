@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   process_get_proc_id.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 21:24:44 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/11 21:25:30 by etrobert         ###   ########.fr       */

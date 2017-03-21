@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   champion_get_period_lives.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 16:49:10 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/20 16:50:21 by etrobert         ###   ########.fr       */

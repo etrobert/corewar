@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_print_cycle.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 17:50:39 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/21 11:22:59 by etrobert         ###   ########.fr       */

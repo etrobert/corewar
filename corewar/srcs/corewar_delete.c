@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_delete.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 20:37:57 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/21 10:45:31 by etrobert         ###   ########.fr       */

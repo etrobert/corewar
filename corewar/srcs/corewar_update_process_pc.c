@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_update_process_pc.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:31:04 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/21 11:19:36 by etrobert         ###   ########.fr       */

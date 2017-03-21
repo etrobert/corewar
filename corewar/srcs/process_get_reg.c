@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   process_get_reg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 20:31:04 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/11 20:36:24 by etrobert         ###   ########.fr       */

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   print_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 17:05:43 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/09 16:46:12 by etrobert         ###   ########.fr       */

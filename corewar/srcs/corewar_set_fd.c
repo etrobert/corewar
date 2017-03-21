@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   corewar_set_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 17:27:31 by etrobert          #+#    #+#             */
 /*   Updated: 2017/03/07 17:28:23 by etrobert         ###   ########.fr       */
