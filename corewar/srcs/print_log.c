@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 16:48:35 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:54:13 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ static int	update_log(t_visu *visu, char **lines)
 	while (lines[i] != NULL)
 	{
 		if (visu->cur_log > visu->log_height)
-		{
 			wscrl(visu->log, 1);
-			//scroll
-		}
 		else
 			++visu->cur_log;
 		if (mvwprintw(visu->log, visu->cur_log, 0, "%s", lines[i]) == ERR)

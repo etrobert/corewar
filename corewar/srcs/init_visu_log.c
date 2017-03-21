@@ -6,13 +6,13 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:43:36 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 17:01:36 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:54:01 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "play.h"
 
-int         init_visu_log(t_visu *visu, t_parser *parser)
+int		init_visu_log(t_visu *visu, t_parser *parser)
 {
 	int     flags;
 
@@ -35,4 +35,3 @@ int         init_visu_log(t_visu *visu, t_parser *parser)
 	}
 	return (0);
 }
-

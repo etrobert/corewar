@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 08:24:20 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 16:08:37 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:54:48 by tbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int			parse_options(t_parser *parser, t_list **champs)
 		return (-1);
 	}
 	else if (open_champ_file(parser, 0, false, champs) < 0)
-			return (-1);
+		return (-1);
 	cleanup_options(parser);
 	return (0);
 }
