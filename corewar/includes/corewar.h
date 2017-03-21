@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:03:03 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/21 16:55:59 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:19:26 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define CW_VB_PC_MOV 		16
 # define CW_VB_PRE_CYCLES	32
 # define CW_VB_OP_PC		64
-
 
 # define CW_VB_MAX			64
 # define CW_VB_MAX_ADD		((CW_VB_MAX * 2) - 1)

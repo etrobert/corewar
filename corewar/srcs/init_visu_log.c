@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:43:36 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 18:27:24 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:18:08 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		init_visu_log(t_visu *visu, t_parser *parser)
 {
-	int     flags;
+	int		flags;
 
 	visu->cur_log = -1;
 	if (parser->log_file != NULL)

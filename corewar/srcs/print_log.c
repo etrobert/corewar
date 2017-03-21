@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 20:05:58 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:18:34 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	update_log(t_visu *visu, char **lines)
 			++visu->cur_log;
 		if (ft_strlen(lines[i]) - 3 > (unsigned long)INFOS_WIDTH - 1)
 			mvwprintw(visu->log, visu->cur_log, 0, "%.*s...",
-					INFOS_WIDTH - 5 ,lines[i]);
+					INFOS_WIDTH - 5, lines[i]);
 		else
 			mvwprintw(visu->log, visu->cur_log, 0, "%s", lines[i]);
 		free(lines[i]);

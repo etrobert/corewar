@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:40:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/21 19:14:45 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:17:33 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void			free_params(t_list *champs, t_corewar *cw, t_parser *parser)
 {
 	parser_delete(parser);
-	ft_list_apply(champs, (t_f_apply)&champion_delete);
+	ft_list_apply(champs, (t_f_apply)(&champion_delete));
 	ft_list_delete(champs);
 	corewar_delete(cw);
 }
@@ -25,7 +25,7 @@ static bool			int_good_size(void)
 	return (sizeof(unsigned int) == 4);
 }
 
-int 				main_corewar(int argc, char **argv)
+int					main_corewar(int argc, char **argv)
 {
 	t_list		*champs;
 	t_corewar	*cw;

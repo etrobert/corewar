@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 08:24:20 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 18:48:17 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:19:03 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static int	process_verbose(t_parser *parser)
 		return (-1);
 	++parser->cur_arg;
 	if (!ft_str_test_chars(parser->av[parser->cur_arg], &ft_isdigit) ||
-		!ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX) ||
-				(parser->verbose = ft_atoi(parser->av[parser->cur_arg])) >
-				CW_VB_MAX_ADD)
-		{
-			ft_dprintf(2, "Invalid verbosity level, use -h for usage\n");
-			return (-1);
-		}
+			!ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX) ||
+			(parser->verbose = ft_atoi(parser->av[parser->cur_arg])) >
+			CW_VB_MAX_ADD)
+	{
+		ft_dprintf(2, "Invalid verbosity level, use -h for usage\n");
+		return (-1);
+	}
 	return (0);
 }
 
@@ -37,8 +37,8 @@ static int	process_champ_num(t_parser *parser, t_list **champs)
 		return (-1);
 	++parser->cur_arg;
 	if (ft_isnumber(parser->av[parser->cur_arg]) &&
-		ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX) &&
-		!ft_strnbrless(parser->av[parser->cur_arg], INT32_STR_MIN))
+			ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX) &&
+			!ft_strnbrless(parser->av[parser->cur_arg], INT32_STR_MIN))
 	{
 		champ_id = ft_atoi(parser->av[parser->cur_arg]);
 		++parser->cur_arg;
