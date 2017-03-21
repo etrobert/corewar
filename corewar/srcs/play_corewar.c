@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 15:00:23 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:35:52 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	main_game(t_corewar *corewar, t_parser *parser)
 	{
 		if (parser->dump_cycle > -1 && cycle == parser->dump_cycle)
 		{
-			corewar_dump(corewar);
+			dump_corewar(corewar);
 			return (0);
 		}
 		if ((ret = corewar_advance(corewar) < 0))
