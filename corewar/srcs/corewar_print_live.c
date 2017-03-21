@@ -6,13 +6,14 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 17:22:23 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 21:15:32 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 11:22:43 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					corewar_print_live(t_corewar *corewar, unsigned int id)
+int					corewar_print_live(const t_corewar *corewar,
+		unsigned int id)
 {
 	t_champion		*champ;
 

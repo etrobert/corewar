@@ -6,13 +6,13 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 21:09:48 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/15 18:07:53 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 11:21:53 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int					corewar_vprint_log(t_corewar *corewar, char *fmt,
+int					corewar_vprint_log(const t_corewar *corewar, char *fmt,
 		va_list ap)
 {
 	int				n;

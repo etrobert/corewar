@@ -6,16 +6,17 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 15:15:58 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 10:49:27 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//TODO dell
 #include "libft.h"
 #include "champion.h"
 #include "args_parser.h"
 #include <fcntl.h>
 
-static int	open_file(char *filename)
+static int		open_file(char *filename)
 {
 	int			fd;
 	char		*dot;
@@ -43,7 +44,7 @@ static int	open_file(char *filename)
 	return (fd);
 }
 
-static int	add_champ(t_list **champs, t_champion *champ)
+static int		add_champ(t_list **champs, t_champion *champ)
 {
 	if (*champs == NULL)
 	{
@@ -68,7 +69,7 @@ static int	add_champ(t_list **champs, t_champion *champ)
 	return (0);
 }
 
-static int	create_champ(int fd, int id, t_list **champs)
+static int		create_champ(int fd, int id, t_list **champs)
 {
 	t_champion	*champ;
 
@@ -87,7 +88,7 @@ static int	create_champ(int fd, int id, t_list **champs)
 	return (0);
 }
 
-int			open_champ_file
+int				open_champ_file
 	(t_parser *parser, int champ_id, bool set_id, t_list **champs)
 {
 	int			fd;

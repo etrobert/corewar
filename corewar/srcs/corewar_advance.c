@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 00:44:12 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 18:57:46 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 10:39:02 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int					corewar_advance(t_corewar *corewar)
 
 	if (corewar == NULL)
 		return (0);
-//	corewar_print_cycle(corewar);
+	corewar_print_cycle(corewar);
 	it = ft_list_begin(corewar->process);
 	while (!ft_list_it_end(corewar->process, it))
 	{

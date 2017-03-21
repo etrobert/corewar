@@ -6,13 +6,13 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:31:04 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/20 20:28:12 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 11:19:36 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void				corewar_update_process_pc(t_corewar *corewar,
+void				corewar_update_process_pc(const t_corewar *corewar,
 		t_process *proc, int value)
 {
 	unsigned int	new_pc;

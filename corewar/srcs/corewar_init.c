@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 23:36:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/18 16:23:40 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 10:44:55 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int			add_fresh_process(t_corewar *corewar,
 		return (-1);
 	process->pc = pc;
 	process_set_reg(process, 1, r1);
-//	process->regs[1] = r1;
 	if ((ret = corewar_add_process(corewar, process)) < 0)
 	{
 		process_delete(process);
@@ -36,7 +35,6 @@ static int			load_one_champion(t_corewar *corewar,
 {
 	corewar_write(corewar, (t_memory){champ->code, champ->header.prog_size},
 			pc, id);
-//	ft_cbuff_write(corewar->memory, champ->code, pc, champ->header.prog_size);
 	if (add_fresh_process(corewar, pc, id) == -1)
 		return (-1);
 	champ->intern_id = id;
@@ -89,7 +87,7 @@ int					corewar_init(t_corewar *corewar, t_list *champions,
 	corewar->clear_checks = 0;
 	corewar->nbr_live = 0;
 	corewar->fd = fd;
-	corewar->verbosity = CW_VB_LIVE | CW_VB_OP;// | CW_VB_CYCLES;
+	corewar->verbosity = CW_VB_INIT;
 	corewar->print_aff = true;
 	corewar->champions = champions;
 	return (FT_GOOD);
