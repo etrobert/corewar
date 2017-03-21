@@ -6,7 +6,7 @@
 #    By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 12:08:06 by etrobert          #+#    #+#              #
-#    Updated: 2017/03/21 15:11:19 by mverdier         ###   ########.fr        #
+#    Updated: 2017/03/21 15:25:07 by etrobert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ COLOR_RESET	=	\033[0m
 SRCDIR		=	srcs
 INCDIR		=	includes
 
-SRCNAM		=	main.c \
+SRCNAM		=	main.c main_corewar.c \
 				champion_new.c champion_delete.c \
 				champion_init.c champion_clear.c \
 				champion_get_id.c champion_get_period_lives.c \
@@ -27,8 +27,8 @@ SRCNAM		=	main.c \
 				process_get_reg.c process_set_reg.c process_valid_reg.c \
 				process_get_proc_id.c process_set_proc_id.c \
 				process_get_pc.c visu_init.c visu_end.c \
-				print_corewar.c play_corewar.c play_events.c\
-				print_process_fd.c print_champion.c print_args_parser.c \
+				print_corewar.c play_corewar.c play_events.c \
+				print_process_fd.c print_champion.c print_champs.c \
 				corewar_new.c corewar_init.c corewar_delete.c \
 				corewar_advance.c corewar_end.c corewar_set_fd.c \
 				corewar_set_verbosity.c corewar_set_print_aff.c \

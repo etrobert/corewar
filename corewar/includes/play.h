@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:48:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 15:03:06 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:24:39 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "corewar.h"
 # include "args_parser.h"
+# include "print.h"
 
 # include <ncurses.h>
 # include <errno.h>
@@ -38,6 +39,8 @@ typedef struct		s_visu
 	int				cur_log;
 	t_list			*log_lines;
 }					t_visu;
+
+int 				main_corewar(int argc, char **argv);
 
 int					play_corewar(t_corewar *corewar, t_list *champs,
 		t_parser *parser);
