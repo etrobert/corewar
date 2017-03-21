@@ -6,11 +6,11 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 19:30:08 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:01:17 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
+#include "play.h"
 
 static int	update_log(t_visu *visu)
 {
