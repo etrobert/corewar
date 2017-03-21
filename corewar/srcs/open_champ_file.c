@@ -6,15 +6,11 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 18:06:31 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 10:49:27 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:26:13 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//TODO dell
-#include "libft.h"
-#include "champion.h"
 #include "args_parser.h"
-#include <fcntl.h>
 
 static int		open_file(char *filename)
 {

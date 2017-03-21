@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 17:04:47 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/17 21:10:39 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:23:12 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void			apply_sti_write(t_corewar *corewar, t_process *process,
 		unsigned int val, int dest)
 {
 	val = ft_uint32_big_endian(val);
-	// % here ? to prevent overflow
 	corewar_write(corewar, (t_memory){&val, sizeof(unsigned int)},
 			process->pc + (dest % IDX_MOD),
 			corewar_get_byte_id(corewar, process->pc));
@@ -34,7 +33,6 @@ int					apply_sti(t_corewar *corewar, t_process *process)
 		val = corewar_extract_param(corewar, process, &params, 0);
 		arg[0] = corewar_extract_param(corewar, process, &params, 1);
 		arg[1] = corewar_extract_param(corewar, process, &params, 2);
-		//OVERFLOW ???
 		dest = arg[0] + arg[1];
 		corewar_print_op(corewar, process,
 				"sti r%d(%d) %d %d -> store to %d\n",

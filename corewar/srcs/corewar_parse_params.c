@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 15:37:16 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/21 11:07:12 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:10:15 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,12 @@ static int			corewar_parse_one_param(const t_corewar *corewar,
 	{
 		corewar_parse_reg(corewar, process, params, id);
 		if (!process_valid_reg(params->params[id].c))
-//		if (params->params[id].c >= REG_NUMBER)
 			return (-1);
 	}
 	else if (type == DIR_CODE)
 		corewar_parse_dir(corewar, process, params, id);
 	else if (type == IND_CODE)
 		corewar_parse_ind(corewar, process, params, id);
-	// Actuellement il ne se passe rien si le code est 00
 	if ((process->current_op->params[id] & type) == 0)
 		return (-1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:48:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 15:41:25 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:23:35 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ typedef struct		s_visu
 	WINDOW			*board;
 	WINDOW			*infos;
 	WINDOW			*log;
+
 	int				line;
 	int				col;
 	bool			pause;
 	unsigned int	speed;
+
 	int				log_height;
 	int				fds[2];
 	int				log_col;
@@ -40,7 +42,7 @@ typedef struct		s_visu
 	t_list			*log_lines;
 }					t_visu;
 
-int 				main_corewar(int argc, char **argv);
+int					main_corewar(int argc, char **argv);
 
 int					play_corewar(t_corewar *corewar, t_list *champs,
 		t_parser *parser);

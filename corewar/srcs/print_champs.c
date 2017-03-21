@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:05:34 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/21 15:06:02 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:14:53 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ void				print_champs(t_list *champs)
 		ft_list_it_inc(&it);
 	}
 }
-
