@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:48:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 15:24:39 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:41:25 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int 				main_corewar(int argc, char **argv);
 int					play_corewar(t_corewar *corewar, t_list *champs,
 		t_parser *parser);
 int					main_game_visu(t_corewar *corewar, t_visu *visu,
-		t_list *champs, t_parser *parser);
+		t_list *champs);
 int					play_events(t_visu *visu);
 int					init_visu_log(t_visu *visu);
 void				visu_init(t_visu *visu, t_list *champs);

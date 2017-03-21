@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:40:06 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 15:33:11 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/21 15:40:27 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	sleep_game(t_visu *visu, struct timeval begin)
 		usleep(visu->speed);
 }
 
-int			main_game_visu(t_corewar *corewar, t_visu *visu, t_list *champs,
-		t_parser *parser)
+int			main_game_visu(t_corewar *corewar, t_visu *visu, t_list *champs)
 {
 	int				ret;
 	int				play;
