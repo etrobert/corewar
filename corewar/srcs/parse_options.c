@@ -6,14 +6,10 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 08:24:20 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 17:54:48 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:48:17 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "libft.h"
-#include "champion.h"
-#include "corewar.h"
 #include "args_parser.h"
 
 static int	process_verbose(t_parser *parser)
@@ -21,21 +17,14 @@ static int	process_verbose(t_parser *parser)
 	if (parser->cur_arg == (parser->ac - 1))
 		return (-1);
 	++parser->cur_arg;
-	if (ft_str_test_chars(parser->av[parser->cur_arg], &ft_isdigit))
-	{
-		if (!ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX) ||
+	if (!ft_str_test_chars(parser->av[parser->cur_arg], &ft_isdigit) ||
+		!ft_strnbrlesseq(parser->av[parser->cur_arg], INT32_STR_MAX) ||
 				(parser->verbose = ft_atoi(parser->av[parser->cur_arg])) >
 				CW_VB_MAX_ADD)
 		{
 			ft_dprintf(2, "Invalid verbosity level, use -h for usage\n");
 			return (-1);
 		}
-	}
-	else
-	{
-		parser->verbose = 1;
-		--parser->cur_arg;
-	}
 	return (0);
 }
 
@@ -86,7 +75,10 @@ static int	process_dump(t_parser *parser)
 static int	process_file(t_parser *parser)
 {
 	if (parser->cur_arg == (parser->ac - 1))
+	{
+		ft_dprintf(2, "Missing log file name, use -h for usage\n");
 		return (-1);
+	}
 	++parser->cur_arg;
 	parser->log_file = parser->av[parser->cur_arg];
 	return (0);

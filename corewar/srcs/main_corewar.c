@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:40:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/21 15:18:27 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/21 19:14:45 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int 				main_corewar(int argc, char **argv)
 		free_params(champs, cw, parser);
 		return (-1);
 	}
-	print_champs(champs);
+	if (!parser->graphical)
+		print_champs(champs);
 	if ((cw = corewar_new(champs, 2)) == NULL)
 	{
 		ft_dprintf(2, "Error creating corewar\n");
@@ -68,7 +69,7 @@ int 				main_corewar(int argc, char **argv)
 		free_params(champs, cw, parser);
 		return (-1);
 	}
-	if (parser->dump_cycle == -1)
+	if (corewar_end(cw) && parser->dump_cycle == -1 && !parser->graphical)
 	{
 		winner = corewar_get_winner(cw);
 		ft_printf("Player %u, \"%s\", has won !\n", winner->id,

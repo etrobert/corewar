@@ -6,13 +6,13 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 18:33:57 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 17:54:13 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:05:58 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "play.h"
 
-static int	update_log(t_visu *visu, char **lines)
+static void	update_log(t_visu *visu, char **lines)
 {
 	int			i;
 
@@ -23,12 +23,14 @@ static int	update_log(t_visu *visu, char **lines)
 			wscrl(visu->log, 1);
 		else
 			++visu->cur_log;
-		if (mvwprintw(visu->log, visu->cur_log, 0, "%s", lines[i]) == ERR)
-			return (-1);
+		if (ft_strlen(lines[i]) - 3 > (unsigned long)INFOS_WIDTH - 1)
+			mvwprintw(visu->log, visu->cur_log, 0, "%.*s...",
+					INFOS_WIDTH - 5 ,lines[i]);
+		else
+			mvwprintw(visu->log, visu->cur_log, 0, "%s", lines[i]);
 		free(lines[i]);
 		++i;
 	}
-	return (0);
 }
 
 static int	get_buf(char **log_buf, int fd)
@@ -66,8 +68,7 @@ int			print_log(t_visu *visu)
 		return (-1);
 	log_lines = ft_strsplit(log_buf, '\n');
 	free(log_buf);
-	if (update_log(visu, log_lines) == -1)
-		return (-1);
+	update_log(visu, log_lines);
 	free(log_lines);
 	return (0);
 }

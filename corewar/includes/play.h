@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:48:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 16:58:49 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/21 19:50:50 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <sys/time.h>
 
 # define PRINT_WIDTH	64
+# define BOARD_HEIGHT	PRINT_WIDTH + 2
+# define BOARD_WIDTH	3 * PRINT_WIDTH + 3
+# define INFOS_WIDTH	COLS - (3 * PRINT_WIDTH + 3)
+# define INFOS_X		3 * PRINT_WIDTH + 3
 
 typedef struct		s_visu
 {
