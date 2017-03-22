@@ -6,13 +6,13 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 20:02:25 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 15:01:57 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:19:13 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "play.h"
 
-int		play_events(t_visu *visu)
+int		play_events(t_visu *visu, t_parser *parser)
 {
 	int		ch;
 
@@ -20,7 +20,7 @@ int		play_events(t_visu *visu)
 		visu->pause = !visu->pause;
 	else if (ch == 27)
 	{
-		visu_end(visu);
+		visu_end(visu, parser);
 		return (1);
 	}
 	else if (ch == 'r' && 1000000 / visu->speed <= 990)

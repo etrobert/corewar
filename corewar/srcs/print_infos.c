@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 19:24:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/22 14:51:30 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:45:39 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void		print_name(t_visu *visu, t_champion *champ, int *i)
 	name = champ->header.prog_name;
 	if (ft_strchr(name, '\n') &&
 			ft_strchr(name, '\n') - name - 3 < INFOS_WIDTH - 13)
-		mvwprintw(visu->infos, (*i)++, 2, "Player %u : %.*s...",
+		mvwprintw(visu->infos, (*i)++, 2, "Player %d : %.*s...",
 				champion_get_id(champ), ft_strchr(name, '\n') - name, name);
 	else if (ft_strlen(name) - 3 > (unsigned long)INFOS_WIDTH - 13)
-		mvwprintw(visu->infos, (*i)++, 2, "Player %u : %.*s...",
+		mvwprintw(visu->infos, (*i)++, 2, "Player %d : %.*s...",
 				champion_get_id(champ), INFOS_WIDTH - 17, name);
 	else
-		mvwprintw(visu->infos, (*i)++, 2, "Player %u : %s",
+		mvwprintw(visu->infos, (*i)++, 2, "Player %d : %s",
 				champion_get_id(champ), name);
 }
 
@@ -62,7 +62,7 @@ static void		print_winner_visu(t_corewar *corewar, t_visu *visu, int *i)
 
 	winner = corewar_get_winner(corewar);
 	wattron(visu->infos, COLOR_PAIR(winner->id));
-	mvwprintw(visu->infos, (*i)++, 2, "Player %u has won !", winner->id);
+	mvwprintw(visu->infos, (*i)++, 2, "Player %d has won !", winner->id);
 	wattroff(visu->infos, COLOR_PAIR(winner->id));
 }
 

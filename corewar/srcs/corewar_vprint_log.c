@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 21:09:48 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/21 11:21:53 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:34:47 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int					corewar_vprint_log(const t_corewar *corewar, char *fmt,
 		n = 0;
 	else
 	{
-		if ((n = ft_dprintf(corewar->fd, "[%6u] ", corewar->cycle)) < 0)
+		if ((n = ft_dprintf(corewar->fd, "[%6u] ", corewar->cycle + 1)) < 0)
 			return (n);
 	}
 	if ((n2 = ft_vdprintf(corewar->fd, fmt, ap)) < 0)

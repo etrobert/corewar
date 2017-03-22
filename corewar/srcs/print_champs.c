@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 15:05:34 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/21 16:14:53 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:45:06 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void				print_champs(t_list *champs)
 	while (!ft_list_it_end(champs, it))
 	{
 		champ = ft_list_it_get(champs, it);
-		ft_printf("  - Player %u, \"%s\", (\"%s\"), weighs %u\n", champ->id,
+		ft_printf("  - Player %d, \"%s\", (\"%s\"), weighs %u\n", champ->id,
 				champ->header.prog_name, champ->header.comment,
 				champ->header.prog_size);
 		ft_list_it_inc(&it);

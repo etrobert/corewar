@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 19:02:23 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 19:50:47 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:22:02 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,28 @@ static void	visu_init_colors(void)
 	init_pair(10, COLOR_MAGENTA, COLOR_BLACK);
 }
 
-static void	visu_init_screens(t_visu *visu, int infos_height)
+static void	visu_init_screens(t_visu *visu, int infos_height, t_parser *parser)
 {
 	visu->board = subwin(stdscr, BOARD_HEIGHT, BOARD_WIDTH, 0, 0);
-	visu->infos = subwin(stdscr, infos_height, INFOS_WIDTH,
-			0, INFOS_X);
-	visu->log_height = PRINT_WIDTH - infos_height - 2;
-	visu->log_border = subwin(stdscr, BOARD_HEIGHT - infos_height,
-			INFOS_WIDTH, infos_height, INFOS_X);
-	box(visu->log_border, ACS_VLINE, ACS_HLINE);
-	visu->log = subwin(stdscr, BOARD_HEIGHT - 2 - infos_height,
-		INFOS_WIDTH - 2, infos_height + 1, INFOS_X + 1);
-	scrollok(visu->log, TRUE);
+	if (parser->console)
+	{
+		visu->infos = subwin(stdscr, infos_height, INFOS_WIDTH,
+				0, INFOS_X);
+		visu->log_height = PRINT_WIDTH - infos_height - 2;
+		visu->log_border = subwin(stdscr, BOARD_HEIGHT - infos_height,
+				INFOS_WIDTH, infos_height, INFOS_X);
+		box(visu->log_border, ACS_VLINE, ACS_HLINE);
+		visu->log = subwin(stdscr, BOARD_HEIGHT - 2 - infos_height,
+				INFOS_WIDTH - 2, infos_height + 1, INFOS_X + 1);
+		scrollok(visu->log, TRUE);
+	}
+	else
+		visu->infos = subwin(stdscr, BOARD_HEIGHT, INFOS_WIDTH,
+				0, INFOS_X);
 	return ;
 }
 
-void		visu_init(t_visu *visu, t_list *champs)
+void		visu_init(t_visu *visu, t_list *champs, t_parser *parser)
 {
 	int		infos_height;
 	size_t	p_number;
@@ -54,7 +60,7 @@ void		visu_init(t_visu *visu, t_list *champs)
 	initscr();
 	start_color();
 	visu_init_colors();
-	visu_init_screens(visu, infos_height);
+	visu_init_screens(visu, infos_height, parser);
 	keypad(stdscr, TRUE);
 	noecho();
 	cbreak();

@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 07:15:59 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/22 15:29:15 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:40:38 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ int	parse_args(t_parser *parser, t_list **champs)
 				return (-1);
 		}
 		else if (open_champ_file(parser, 0, false, champs) < 0)
-		{
-			ft_dprintf(2, "Invalid champion file\n");
 			return (-1);
-		}
 		++parser->cur_arg;
 	}
 	cleanup_options(parser);

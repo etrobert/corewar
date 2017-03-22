@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 11:09:37 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/22 15:22:28 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:15:20 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int			play_corewar(t_corewar *corewar, t_list *champs, t_parser *parser)
 		return (0);
 	if (parser->graphical)
 	{
-		visu_init(&visu, champs);
+		visu_init(&visu, champs, parser);
 		if (init_visu_log(&visu, parser) < 0)
 			return (-1);
 		corewar_set_fd(corewar, visu.fds[1]);
-		return (main_game_visu(corewar, &visu, champs));
+		return (main_game_visu(corewar, &visu, champs, parser));
 	}
 	else
 	{

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visu_end.c                                         :+:      :+:    :+:   */
+/*   init_params.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/13 14:58:58 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/22 17:18:21 by mverdier         ###   ########.fr       */
+/*   Created: 2017/03/22 17:39:36 by mverdier          #+#    #+#             */
+/*   Updated: 2017/03/22 17:39:59 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "play.h"
 
-void	visu_end(t_visu *visu, t_parser *parser)
+void		init_params(t_list **champs, t_corewar **cw, t_parser **parser)
 {
-	delwin(visu->board);
-	delwin(visu->infos);
-	if (parser->console)
-	{
-		delwin(visu->log);
-		delwin(visu->log_border);
-	}
-	endwin();
+	*champs = NULL;
+	*parser = NULL;
+	*cw = NULL;
 }

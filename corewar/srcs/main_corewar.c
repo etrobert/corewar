@@ -6,7 +6,7 @@
 /*   By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:40:53 by etrobert          #+#    #+#             */
-/*   Updated: 2017/03/22 14:29:23 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 17:27:30 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ int					main_corewar(int argc, char **argv)
 	cw = NULL;
 	if ((parser = parser_new(argc, argv)) == NULL)
 		return (-1);
-	if ((ret = init_game(&cw, &parser, &champs)) < 0)
+	if ((ret = init_game(&cw, parser, &champs)) < 0)
+	{
+		free_params(champs, cw, parser);
 		return (ret);
+	}
 	corewar_set_verbosity(cw, parser->verbose);
 	corewar_set_print_aff(cw, parser->disp_aff);
 	if (play_corewar(cw, champs, parser) != 0)
