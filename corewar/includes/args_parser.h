@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:06:24 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/21 18:48:54 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:06:23 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_parser
 	bool		graphical;
 	bool		disp_aff;
 	bool		console;
+	bool		v_set;
 	char		**av;
 	char		*log_file;
 	int			ac;

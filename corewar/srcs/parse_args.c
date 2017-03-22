@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 07:15:59 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/17 16:48:55 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:29:15 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int	parse_args(t_parser *parser, t_list **champs)
 		}
 		++parser->cur_arg;
 	}
+	cleanup_options(parser);
 	return (0);
 }

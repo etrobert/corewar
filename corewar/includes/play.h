@@ -6,7 +6,7 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:48:05 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 19:50:50 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 14:20:21 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,9 @@ void				print_corewar(t_corewar *cw, t_visu *visu, t_list *champs);
 void				print_infos(t_corewar *corewar, t_visu *visu,
 		t_list *champs);
 int					print_log(t_visu *visu);
+int					init_game(t_corewar **cw, t_parser **parser,
+		t_list **champs);
+void				free_params(t_list *champs, t_corewar *cw,
+		t_parser *parser);
 
 #endif

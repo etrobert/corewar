@@ -6,7 +6,7 @@
 /*   By: tbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:35:32 by tbeldame          #+#    #+#             */
-/*   Updated: 2017/03/20 21:56:50 by tbeldame         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:07:09 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ t_parser	*parser_new(int ac, char **av)
 	parser->graphical = false;
 	parser->disp_aff = false;
 	parser->console = false;
+	parser->v_set = false;
 	parser->log_file = NULL;
 	parser->av = av;
 	parser->ac = ac;
-	parser->verbose = -1;
+	parser->verbose = 0;
 	parser->dump_cycle = -1;
 	parser->latest_id = 0;
 	parser->cur_arg = 1;

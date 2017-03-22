@@ -6,7 +6,7 @@
 #    By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 12:08:06 by etrobert          #+#    #+#              #
-#    Updated: 2017/03/21 15:40:01 by mverdier         ###   ########.fr        #
+#    Updated: 2017/03/22 14:12:33 by mverdier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ SRCNAM		=	main.c main_corewar.c \
 				parser_delete.c print_help.c cleanup_options.c \
 				ft_strnbrless.c ft_strnbrlesseq.c \
 				print_log.c dump_corewar.c print_infos.c init_visu_log.c \
-				main_game_visu.c
+				main_game_visu.c print_winner.c init_game.c free_params.c
 
 INCNAM		=	process.h corewar.h champion.h print.h args_parser.h play.h
 

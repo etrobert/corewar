@@ -6,13 +6,13 @@
 /*   By: mverdier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:40:06 by mverdier          #+#    #+#             */
-/*   Updated: 2017/03/21 20:13:56 by mverdier         ###   ########.fr       */
+/*   Updated: 2017/03/22 14:40:04 by mverdier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "play.h"
 
-static void	print_round(t_visu *visu, t_corewar *corewar, t_list *champs)
+static void	visu_resize(t_visu *visu, t_list *champs)
 {
 	int		infos_height;
 	size_t	p_number;
@@ -26,8 +26,11 @@ static void	print_round(t_visu *visu, t_corewar *corewar, t_list *champs)
 	visu->log_border = subwin(stdscr, BOARD_HEIGHT - infos_height,
 			INFOS_WIDTH, infos_height, INFOS_X);
 	box(visu->log_border, ACS_VLINE, ACS_HLINE);
-	visu->log = subwin(stdscr, BOARD_HEIGHT - 2 - infos_height,
-		INFOS_WIDTH - 2, infos_height + 1, INFOS_X + 1);
+}
+
+static void	print_round(t_visu *visu, t_corewar *corewar, t_list *champs)
+{
+	visu_resize(visu, champs);
 	werase(visu->board);
 	werase(visu->infos);
 	box(visu->board, ACS_VLINE, ACS_HLINE);
