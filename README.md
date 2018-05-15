@@ -1,5 +1,11 @@
 # corewar
 
+## Compiling
+
+```make setup && make```
+
+## General infos
+
 Tableau regroupant toutes les infos sur l'encodage :
 ```
 https://docs.google.com/spreadsheets/d/1pFwSCne-mh-u5ZLsjZS8VI9QvecYk-gWTyNaPstjpLE/edit#gid=0'

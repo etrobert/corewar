@@ -6,7 +6,7 @@
 #    By: etrobert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 23:18:11 by etrobert          #+#    #+#              #
-#    Updated: 2017/03/18 16:38:42 by etrobert         ###   ########.fr        #
+#    Updated: 2018/05/15 19:55:54 by etrobert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,11 @@ GIT			=	README.md Makefile \
 				op/op.h op/op.c champions/mowgli.s champions/long_name.s
 
 all: asm/asm corewar/corewar
+
+setup:
+	@$(MAKE) -s printname
+	@echo "Initialising submodules"
+	@git submodule update --init --recursive
 
 asm/asm:
 	@$(MAKE) -C asm/

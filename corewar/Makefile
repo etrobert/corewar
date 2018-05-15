@@ -6,7 +6,7 @@
 #    By: etrobert <etrobert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 12:08:06 by etrobert          #+#    #+#              #
-#    Updated: 2017/03/22 17:40:44 by mverdier         ###   ########.fr        #
+#    Updated: 2018/05/15 19:56:59 by etrobert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%) -lncurses
 
 GIT			=	Makefile
 
-LIBFTDIR	=	~/work/libft
+LIBFTDIR	=	../libft
 LIBFTNAM	=	libft.a
 
 SRC			=	$(SRCNAM:%=$(SRCDIR)/%) ../op/op.c ../op/get_op_by_name.c \

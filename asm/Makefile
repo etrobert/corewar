@@ -28,7 +28,7 @@ LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	Makefile
 
-LIBFTDIR	=	~/work/libft
+LIBFTDIR	=	../libft
 LIBFTNAM	=	libft.a
 
 SRC			=	$(SRCNAM:%=$(SRCDIR)/%)	\
