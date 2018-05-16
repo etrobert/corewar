@@ -33,6 +33,21 @@ to scare the bejesus out of a neurasthenic hedgehog.
 
 ```make setup && make```
 
+## Usage
+
+### corewar
+```./corewar/corewar [-v N] [-dump N] [-g] [-a] [-h] [-c][-f <filename>] [[-n N] <champion>.cor] ...```
+
+### asm
+```./asm/asm <champion>.s```
+
+## Example
+```
+./asm/asm champions/mowgli.s &&
+./asm/asm champions/vampire.s &&
+./corewar/corewar champions/mowgli.cor champions/vampire.cor
+```
+
 ## General infos (French)
 
 Tableau regroupant toutes les infos sur l'encodage :
