@@ -6,7 +6,7 @@
 #    By: etrobert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/18 23:18:11 by etrobert          #+#    #+#              #
-#    Updated: 2018/05/15 19:55:54 by etrobert         ###   ########.fr        #
+#    Updated: 2018/05/16 18:37:16 by etrobert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ GIT			=	README.md Makefile \
 all: asm/asm corewar/corewar
 
 setup:
-	@$(MAKE) -s printname
 	@echo "Initialising submodules"
 	@git submodule update --init --recursive
 
